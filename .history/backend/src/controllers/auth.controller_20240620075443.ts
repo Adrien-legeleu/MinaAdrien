@@ -62,6 +62,7 @@ export class AuthController {
       res.status(500).send({
         error: err?.message,
       });
+      return;
     }
   }
 
@@ -98,11 +99,6 @@ export class AuthController {
 
   async loginUser(req: Request, res: Response): Promise<void> {
     try {
-    } catch (err: any) {
-      console.log(err);
-      res.status(500).send({
-        error: err?.message,
-      });
-    }
+    } catch (error) {}
   }
 }

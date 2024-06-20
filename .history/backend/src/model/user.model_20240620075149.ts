@@ -23,6 +23,7 @@ const Userschema = new mongoose.Schema<IUser>({
   },
   profilPhoto: {
     type: String,
+    required: true,
   },
 });
 
