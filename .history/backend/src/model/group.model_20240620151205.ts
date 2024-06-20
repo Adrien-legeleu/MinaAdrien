@@ -7,7 +7,7 @@ export interface IGroup {
   profilPhoto: string;
   members: {
     pseudoUser: string;
-    userId: string;
+    userid: mongoose.Schema.Types.ObjectId;
   }[];
 }
 
@@ -30,8 +30,8 @@ const GroupSchema = new mongoose.Schema<IGroup>({
           type: String,
           required: true,
         },
-        userId: {
-          type: String,
+        userid: {
+          type: mongoose.Schema.Types.ObjectId,
           ref: "users",
           required: true,
         },

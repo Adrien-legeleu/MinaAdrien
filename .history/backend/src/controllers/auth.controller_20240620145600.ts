@@ -21,7 +21,6 @@ export class AuthController {
       }
     );
   }
-
   static getTokenUser(user: IUser) {
     const jwtSecret = process.env.JWT_KEY ?? "";
     if (!jwtSecret) {
@@ -45,11 +44,11 @@ export class AuthController {
 
   async login(req: Request, res: Response): Promise<void> {
     try {
-      const { groupname, password, userId } = req.body;
+      const { groupname, password } = req.body;
 
-      if (!groupname || !password || !userId) {
+      if (!groupname || !password) {
         res.status(401).send({
-          error: "Groupname, password are incorrect",
+          error: "groupname or password are incorrect",
         });
         return;
       }
@@ -58,7 +57,7 @@ export class AuthController {
 
       if (!group) {
         res.status(401).send({
-          error: "Groupname or password are incorrect",
+          error: "groupname or password are incorrect",
         });
         return;
       }
@@ -66,20 +65,15 @@ export class AuthController {
       const isCorrectedPassword = bcrypt.compareSync(password, group.password);
       if (!isCorrectedPassword) {
         res.status(401).send({
-          error: "Groupname or password are incorrect",
+          error: "groupname or password are incorrect",
         });
         return;
       }
 
-      const isMember = group.members.some(
-        (member) => member.userId.toString() === userId
-      );
-      if (isMember) {
-        const authToken = AuthController.getTokenGroup(group);
-        res.status(200).send({ group, authToken, redirect: "groupPage" });
-      } else {
-        res.status(200).send({ redirect: "choosePseudoPage" });
-      }
+      group.password = "";
+      const authToken = AuthController.getTokenGroup(group);
+
+      res.status(200).send({ group, authToken });
     } catch (err: any) {
       console.log(err);
       res.status(500).send({
@@ -90,24 +84,22 @@ export class AuthController {
 
   async register(req: Request, res: Response): Promise<void> {
     try {
-      const { groupname, password, userId } = req.body;
+      const { groupname, password } = req.body;
 
-      if (!groupname || !password || !userId) {
+      if (!groupname || !password) {
         res.status(404).send({
           error: "Missing properties",
         });
         return;
       }
-
       const salt = bcrypt.genSaltSync(10);
+
       const hashPassword = bcrypt.hashSync(password, salt);
 
       const group = await GroupModel.create({
         groupname,
         password: hashPassword,
-        members: [{ pseudoUser: "", userId }], // Ajoute l'utilisateur comme membre lors de la création
       });
-
       group.password = "";
 
       const authToken = AuthController.getTokenGroup(group);
@@ -129,14 +121,12 @@ export class AuthController {
         res.status(401).send({
           error: "Password or username are incorrects",
         });
-        return;
       }
-
       const user = await UserModel.findOne({ username });
 
       if (!user) {
         res.status(401).send({
-          error: "Username or password are incorrect",
+          error: "username or password are incorrect",
         });
         return;
       }
@@ -144,7 +134,7 @@ export class AuthController {
       const isCorrectedPassword = bcrypt.compareSync(password, user.password);
       if (!isCorrectedPassword) {
         res.status(401).send({
-          error: "Username or password are incorrect",
+          error: "username or password are incorrect",
         });
         return;
       }
@@ -160,7 +150,6 @@ export class AuthController {
       });
     }
   }
-
   async registerUser(req: Request, res: Response): Promise<void> {
     try {
       const { username, password, email } = req.body;
@@ -169,20 +158,25 @@ export class AuthController {
         res.status(404).send({
           error: "Properties not found",
         });
+      }
+      const user = await UserModel.findOne({ username });
+
+      if (!user) {
+        res.status(401).send({
+          error: "username or password are incorrect",
+        });
         return;
       }
 
-      const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync(password, salt);
-
-      const user = await UserModel.create({
-        email,
-        username,
-        password: hashedPassword,
-      });
+      const isCorrectedPassword = bcrypt.compareSync(password, user.password);
+      if (!isCorrectedPassword) {
+        res.status(401).send({
+          error: "username or password are incorrect",
+        });
+        return;
+      }
 
       user.password = "";
-
       const authToken = AuthController.getTokenUser(user);
 
       res.status(200).send({ user, authToken });
@@ -190,42 +184,6 @@ export class AuthController {
       console.log(err);
       res.status(500).send({
         error: err?.message,
-      });
-    }
-  }
-
-  async choosePseudo(req: Request, res: Response): Promise<void> {
-    try {
-      const { pseudoUser, userId, groupId } = req.body;
-      console.log(pseudoUser, groupId, userId);
-
-      if (!userId || !groupId || !pseudoUser) {
-        res.status(404).send({
-          error: "Properties not found",
-        });
-        return;
-      }
-
-      const group = await GroupModel.findById(groupId);
-      if (!group) {
-        res.status(404).send({
-          error: "Group not found",
-        });
-        return;
-      }
-
-      group.members.push({
-        pseudoUser,
-        userId,
-      });
-
-      await group.save(); // Sauvegarder les modifications
-
-      res.status(200).send(group);
-    } catch (error: any) {
-      console.log(error);
-      res.status(500).send({
-        error: error?.message,
       });
     }
   }

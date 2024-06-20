@@ -9,7 +9,6 @@ authRouter
   .post("/register", authController.register)
   .post("/login-user", authController.loginUser)
   .post("/register-user", authController.registerUser)
-  .post("/choose-pseudo", authController.choosePseudo)
   .get(
     "check-token",
     isConnectedMiddleware.execute,

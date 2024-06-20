@@ -45,9 +45,9 @@ export class AuthController {
 
   async login(req: Request, res: Response): Promise<void> {
     try {
-      const { groupname, password, userId } = req.body;
+      const { groupname, password } = req.body;
 
-      if (!groupname || !password || !userId) {
+      if (!groupname || !password) {
         res.status(401).send({
           error: "Groupname, password are incorrect",
         });
@@ -75,9 +75,11 @@ export class AuthController {
         (member) => member.userId.toString() === userId
       );
       if (isMember) {
+        // User is already a member
         const authToken = AuthController.getTokenGroup(group);
         res.status(200).send({ group, authToken, redirect: "groupPage" });
       } else {
+        // User is not a member, needs to choose a pseudo
         res.status(200).send({ redirect: "choosePseudoPage" });
       }
     } catch (err: any) {

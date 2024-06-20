@@ -75,6 +75,7 @@ export class AuthController {
         (member) => member.userId.toString() === userId
       );
       if (isMember) {
+        // User is already a member
         const authToken = AuthController.getTokenGroup(group);
         res.status(200).send({ group, authToken, redirect: "groupPage" });
       } else {

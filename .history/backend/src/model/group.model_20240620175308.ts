@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
 export interface IGroup {
-  _id: string;
+  _id: mongoose.Schema.Types.ObjectId;
   groupname: string;
   password: string;
   profilPhoto: string;
   members: {
     pseudoUser: string;
-    userId: string;
+    userId: mongoose.Schema.Types.ObjectId;
   }[];
 }
 
@@ -31,7 +31,7 @@ const GroupSchema = new mongoose.Schema<IGroup>({
           required: true,
         },
         userId: {
-          type: String,
+          type: mongoose.Schema.Types.ObjectId,
           ref: "users",
           required: true,
         },

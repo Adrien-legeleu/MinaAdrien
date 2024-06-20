@@ -45,9 +45,9 @@ export class AuthController {
 
   async login(req: Request, res: Response): Promise<void> {
     try {
-      const { groupname, password, userId } = req.body;
+      const { groupname, password } = req.body;
 
-      if (!groupname || !password || !userId) {
+      if (!groupname || !password) {
         res.status(401).send({
           error: "Groupname, password are incorrect",
         });
@@ -71,15 +71,10 @@ export class AuthController {
         return;
       }
 
-      const isMember = group.members.some(
-        (member) => member.userId.toString() === userId
-      );
-      if (isMember) {
-        const authToken = AuthController.getTokenGroup(group);
-        res.status(200).send({ group, authToken, redirect: "groupPage" });
-      } else {
-        res.status(200).send({ redirect: "choosePseudoPage" });
-      }
+      group.password = "";
+      const authToken = AuthController.getTokenGroup(group);
+
+      res.status(200).send({ group, authToken });
     } catch (err: any) {
       console.log(err);
       res.status(500).send({
@@ -214,10 +209,19 @@ export class AuthController {
         return;
       }
 
-      group.members.push({
-        pseudoUser,
-        userId,
-      });
+      // Vérifier si l'utilisateur est déjà membre du groupe
+      const memberIndex = group.members.findIndex(
+        (member) => member.userId.toString() === userId
+      );
+      if (memberIndex === -1) {
+        res.status(403).send({
+          error: "User is not a member of this group",
+        });
+        return;
+      }
+
+      // Mettre à jour le pseudo de l'utilisateur
+      group.members[memberIndex].pseudoUser = pseudoUser;
 
       await group.save(); // Sauvegarder les modifications
 

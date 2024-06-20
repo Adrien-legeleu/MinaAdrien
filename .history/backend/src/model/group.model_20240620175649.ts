@@ -31,7 +31,7 @@ const GroupSchema = new mongoose.Schema<IGroup>({
           required: true,
         },
         userId: {
-          type: String,
+          type: string,
           ref: "users",
           required: true,
         },

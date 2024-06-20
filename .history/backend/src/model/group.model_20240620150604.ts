@@ -5,10 +5,7 @@ export interface IGroup {
   groupname: string;
   password: string;
   profilPhoto: string;
-  members: {
-    pseudoUser: string;
-    userId: string;
-  }[];
+  members: [];
 }
 
 const GroupSchema = new mongoose.Schema<IGroup>({
@@ -22,22 +19,6 @@ const GroupSchema = new mongoose.Schema<IGroup>({
   },
   profilPhoto: {
     type: String,
-  },
-  members: {
-    type: [
-      {
-        pseudoUser: {
-          type: String,
-          required: true,
-        },
-        userId: {
-          type: String,
-          ref: "users",
-          required: true,
-        },
-      },
-    ],
-    required: true,
   },
 });
 
