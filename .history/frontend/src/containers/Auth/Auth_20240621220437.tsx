@@ -17,7 +17,7 @@ export const Auth = () => {
               <input
                 type="text"
                 placeholder="Username"
-                className="border-none rounded-3xl py-4 px-5 bg-gradient-to-b from-white/80 to-white/20 text-gray-500 outline-none"
+                className="border-none rounded-3xl py-4 px-5   bg-white text-gray-500 outline-none"
               />
             </div>
             <div className="relative  w-full min-w-[200px]">
@@ -25,7 +25,7 @@ export const Auth = () => {
                 <input
                   type="password"
                   placeholder="Password"
-                  className="border-none rounded-3xl py-4 px-5  bg-gradient-to-b from-white/80 to-white/20 text-gray-500 outline-none"
+                  className="border-none rounded-3xl py-4 px-5   bg-white text-gray-500 outline-none"
                 />
               </div>
             </div>
@@ -42,10 +42,9 @@ export const Auth = () => {
             </div>
           </div>
         </div>
-
-        <p className="absolute right-5 bottom-5  bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
-          ✨ Pas encore de compte ? Créez en un dès maintenant !
-        </p>
+        <AnimatedShinyText className=" absolute right-5 bottom-5 inline-flex text-sm items-center justify-center px-4 py-1 transition shadow-sm ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+          <span>✨ Pas encore de compte ? Créez en un dès maintenant !</span>
+        </AnimatedShinyText>
       </div>
     </BackgroundGradientAnimation>
   );

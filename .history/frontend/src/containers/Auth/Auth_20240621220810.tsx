@@ -25,7 +25,7 @@ export const Auth = () => {
                 <input
                   type="password"
                   placeholder="Password"
-                  className="border-none rounded-3xl py-4 px-5  bg-gradient-to-b from-white/80 to-white/20 text-gray-500 outline-none"
+                  className="border-none rounded-3xl py-4 px-5  bg-gradient-to-b from-white/80 to-white/2 text-gray-500 outline-none"
                 />
               </div>
             </div>

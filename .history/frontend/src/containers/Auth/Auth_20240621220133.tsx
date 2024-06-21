@@ -11,21 +11,21 @@ export const Auth = () => {
         <h1 className="text-5xl font-bold bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
           Découvrez Lovna maintenant !
         </h1>
-        <div className="space-y-12">
+        <div className="space-y-8">
           <div className="space-y-4">
-            <div className="relative w-full min-w-[200px]">
+            <div className="relative h-11 w-full min-w-[200px]">
               <input
                 type="text"
                 placeholder="Username"
-                className="border-none rounded-3xl py-4 px-5 bg-gradient-to-b from-white/80 to-white/20 text-gray-500 outline-none"
+                className="border-none rounded-3xl py-4 px-5  text-lg bg-white text-gray-500 outline-none"
               />
             </div>
-            <div className="relative  w-full min-w-[200px]">
+            <div className="relative h-11 w-full min-w-[200px]">
               <div className="relative h-11 w-full min-w-[200px]">
                 <input
                   type="password"
                   placeholder="Password"
-                  className="border-none rounded-3xl py-4 px-5  bg-gradient-to-b from-white/80 to-white/20 text-gray-500 outline-none"
+                  className="border-none rounded-3xl py-4 px-5  text-lg bg-white text-gray-500 outline-none"
                 />
               </div>
             </div>
@@ -43,9 +43,15 @@ export const Auth = () => {
           </div>
         </div>
 
-        <p className="absolute right-5 bottom-5  bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
-          ✨ Pas encore de compte ? Créez en un dès maintenant !
-        </p>
+        <div
+          className={cn(
+            " absolute right-5 bottom-5  group rounded-full p-1 border border-black/5 bg-[#ffffffd5] text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
+          )}
+        >
+          <AnimatedShinyText className="  inline-flex text-sm items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+            <span>✨ Pas encore de compte ? Créez en un dès maintenant !</span>
+          </AnimatedShinyText>
+        </div>
       </div>
     </BackgroundGradientAnimation>
   );
