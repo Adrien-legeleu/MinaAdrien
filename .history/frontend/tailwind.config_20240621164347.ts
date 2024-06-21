@@ -28,17 +28,8 @@ const config: Config = {
         third: "moveInCircle 40s linear infinite",
         fourth: "moveHorizontal 40s ease infinite",
         fifth: "moveInCircle 20s ease infinite",
-        shimmer: "shimmer 8s infinite",
       },
       keyframes: {
-        shimmer: {
-          "0%, 90%, 100%": {
-            "background-position": "calc(-100% - var(--shimmer-width)) 0",
-          },
-          "30%, 60%": {
-            "background-position": "calc(100% + var(--shimmer-width)) 0",
-          },
-        },
         moveHorizontal: {
           "0%": {
             transform: "translateX(-50%) translateY(-10%)",
