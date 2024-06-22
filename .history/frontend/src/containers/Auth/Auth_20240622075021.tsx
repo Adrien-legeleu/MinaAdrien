@@ -8,7 +8,7 @@ export const Auth = () => {
   return (
     <BackgroundGradientAnimation>
       <div className="absolute inset-0 z-50 flex gap-16  flex-col items-center justify-center text-white">
-        <h1 className="text-5xl font-bold bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
+        <h1 className="text-5xl font-bold bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-r from-indigo-500 ">
           Découvrez Lovna maintenant !
         </h1>
         <div className="space-y-12">
@@ -17,7 +17,7 @@ export const Auth = () => {
               <input
                 type="text"
                 placeholder="Username"
-                className="border-none rounded-3xl py-4 px-5 bg-gradient-to-b from-[#d8d6e0] to-[#beb9d4] text-gray-500 outline-none"
+                className="border-none rounded-3xl py-4 px-5 bg-gradient from-white/80 to-white/20 text-gray-500 outline-none"
               />
             </div>
 
@@ -26,7 +26,7 @@ export const Auth = () => {
                 <input
                   type="password"
                   placeholder="Password"
-                  className="border-none rounded-3xl py-4 px-5 bg-gradient-to-b from-[#d8d6e0] to-[#beb9d4] text-gray-500 outline-none"
+                  className="border-none rounded-3xl py-4 px-5  bg-gradient-to-b from-white/80 to-white/20 text-gray-500 outline-none"
                 />
               </div>
             </div>
@@ -34,7 +34,7 @@ export const Auth = () => {
           <div className="flex items-center justify-center">
             <div
               className={cn(
-                "group rounded-full p-1 border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
+                "group rounded-full p-1 border border-black/5 bg-gradient-to-r from-indigo-500  text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
               )}
             >
               <AnimatedShinyText className="inline-flex text-xl items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">

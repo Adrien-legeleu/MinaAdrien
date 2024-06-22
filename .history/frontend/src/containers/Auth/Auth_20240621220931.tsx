@@ -17,16 +17,15 @@ export const Auth = () => {
               <input
                 type="text"
                 placeholder="Username"
-                className="border-none rounded-3xl py-4 px-5 bg-gradient-to-b from-[#d8d6e0] to-[#beb9d4] text-gray-500 outline-none"
+                className="border-none rounded-3xl py-4 px-5 bg-gradient-to-b from-white/80 to-white/20 text-gray-500 outline-none"
               />
             </div>
-
             <div className="relative  w-full min-w-[200px]">
               <div className="relative h-11 w-full min-w-[200px]">
                 <input
                   type="password"
                   placeholder="Password"
-                  className="border-none rounded-3xl py-4 px-5 bg-gradient-to-b from-[#d8d6e0] to-[#beb9d4] text-gray-500 outline-none"
+                  className="border-none rounded-3xl py-4 px-5  bg-gradient-to-b from-white/80 to-white/20 text-gray-500 outline-none"
                 />
               </div>
             </div>
