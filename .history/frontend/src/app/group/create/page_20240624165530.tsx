@@ -11,7 +11,7 @@ export default function page() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push("/group/choose-pseudo");
+      router.push("/choose-pseudo");
     }
   }, [isAuthenticated]);
   return (

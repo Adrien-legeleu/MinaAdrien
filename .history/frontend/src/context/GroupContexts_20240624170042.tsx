@@ -13,31 +13,23 @@ export interface IGroupFormsValues {
   password: string;
   userId: string | undefined;
 }
-export interface IPseudoFormValues {
-  userId: string | undefined;
-  groupId: string | undefined;
-  pseudoUser: string;
-}
 export const GroupContext = createContext({
   isAuthenticated: false,
-  isHome: false,
   groupId: undefined,
   onLogin: async (values: IGroupFormsValues) => {},
   onRegister: async (values: IGroupFormsValues) => {},
-  chosePseudo: async (values: IPseudoFormValues) => {},
   onLogout: () => {},
 });
 
 export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isHome, setIsHome] = useState(false);
 
   const [groupId, setGroupId] = useState(undefined);
 
   const onLogout = useCallback(() => {
     localStorage.removeItem("authToken-group");
     setIsAuthenticated(false);
-    console.log("logout");
+    console.log("login");
   }, []);
 
   const onLogin = async (values: IGroupFormsValues) => {
@@ -46,7 +38,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log(response);
       localStorage.setItem("authToken-group", response?.data?.auuthToken);
       setIsAuthenticated(true);
-      setGroupId(response.data.group._id);
     } catch (error: any) {
       console.log("Login error" + error);
     }
@@ -56,18 +47,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       const response = await api.post("/auth/register", values);
       console.log(response);
       localStorage.setItem("authToken-group", response?.data?.auuthToken);
-      setGroupId(response.data.group._id);
       setIsAuthenticated(true);
-    } catch (error: any) {
-      console.log("Register error" + error);
-    }
-  };
-  const chosePseudo = async (values: IPseudoFormValues) => {
-    try {
-      const response = await api.post("/auth/choose-pseudo", values);
-      console.log(response);
-
-      setIsHome(true);
     } catch (error: any) {
       console.log("Register error" + error);
     }
@@ -75,15 +55,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <GroupContext.Provider
-      value={{
-        isAuthenticated,
-        onLogin,
-        onRegister,
-        onLogout,
-        groupId,
-        chosePseudo,
-        isHome,
-      }}
+      value={{ isAuthenticated, onLogin, onRegister, onLogout }}
     >
       {children}
     </GroupContext.Provider>

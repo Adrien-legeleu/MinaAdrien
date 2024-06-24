@@ -216,21 +216,20 @@ export class AuthController {
         return;
       }
 
-      group.members.map((member) => {
-        if (member.userId === userId) {
-          res.status(409).send({
-            error: "userId even existed",
-          });
+      group.members.map((member)=> {
+        if (member.userId === ) {
+            res.status(409).send({
+          error: "userId even existed",
+        });
         }
-        return;
-      });
+      })
 
       group.members.push({
         pseudoUser,
         userId,
       });
 
-      await group.save();
+      await group.save(); // Sauvegarder les modifications
 
       res.status(200).send(group);
     } catch (error: any) {

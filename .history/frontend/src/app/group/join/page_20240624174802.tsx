@@ -1,5 +1,6 @@
 "use client";
-import { Create } from "@/containers/AuthGroup";
+
+import { Join } from "@/containers/AuthGroup";
 import { useGroupContext } from "@/context/GroupContexts";
 
 import { useRouter } from "next/navigation";
@@ -11,12 +12,12 @@ export default function page() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push("/group/choose-pseudo");
+      router.push("/home");
     }
   }, [isAuthenticated]);
   return (
     <main>
-      <Create />
+      <Join />
     </main>
   );
 }

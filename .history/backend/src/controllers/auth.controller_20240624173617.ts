@@ -217,12 +217,11 @@ export class AuthController {
       }
 
       group.members.map((member) => {
-        if (member.userId === userId) {
+        if (member.userId === uerid) {
           res.status(409).send({
             error: "userId even existed",
           });
         }
-        return;
       });
 
       group.members.push({
@@ -230,7 +229,7 @@ export class AuthController {
         userId,
       });
 
-      await group.save();
+      await group.save(); // Sauvegarder les modifications
 
       res.status(200).send(group);
     } catch (error: any) {

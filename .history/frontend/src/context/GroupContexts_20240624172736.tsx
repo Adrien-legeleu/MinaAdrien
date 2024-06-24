@@ -13,24 +13,16 @@ export interface IGroupFormsValues {
   password: string;
   userId: string | undefined;
 }
-export interface IPseudoFormValues {
-  userId: string | undefined;
-  groupId: string | undefined;
-  pseudoUser: string;
-}
 export const GroupContext = createContext({
   isAuthenticated: false,
-  isHome: false,
   groupId: undefined,
   onLogin: async (values: IGroupFormsValues) => {},
   onRegister: async (values: IGroupFormsValues) => {},
-  chosePseudo: async (values: IPseudoFormValues) => {},
   onLogout: () => {},
 });
 
 export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isHome, setIsHome] = useState(false);
 
   const [groupId, setGroupId] = useState(undefined);
 
@@ -62,28 +54,10 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log("Register error" + error);
     }
   };
-  const chosePseudo = async (values: IPseudoFormValues) => {
-    try {
-      const response = await api.post("/auth/choose-pseudo", values);
-      console.log(response);
-
-      setIsHome(true);
-    } catch (error: any) {
-      console.log("Register error" + error);
-    }
-  };
 
   return (
     <GroupContext.Provider
-      value={{
-        isAuthenticated,
-        onLogin,
-        onRegister,
-        onLogout,
-        groupId,
-        chosePseudo,
-        isHome,
-      }}
+      value={{ isAuthenticated, onLogin, onRegister, onLogout, groupId }}
     >
       {children}
     </GroupContext.Provider>

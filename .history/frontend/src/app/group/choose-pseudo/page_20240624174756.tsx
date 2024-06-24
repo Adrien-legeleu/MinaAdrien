@@ -1,22 +1,21 @@
-"use client";
-import { Create } from "@/containers/AuthGroup";
+import { ChoosePseudo } from "@/containers/ChoosePseudo";
 import { useGroupContext } from "@/context/GroupContexts";
-
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function page() {
-  const { isAuthenticated } = useGroupContext();
+  const { isHome } = useGroupContext();
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      router.push("/group/choose-pseudo");
+    if (isHome) {
+      router.push("/home");
     }
-  }, [isAuthenticated]);
+  }, []);
+
   return (
     <main>
-      <Create />
+      <ChoosePseudo />
     </main>
   );
 }

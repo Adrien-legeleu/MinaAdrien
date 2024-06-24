@@ -105,6 +105,7 @@ export class AuthController {
       const group = await GroupModel.create({
         groupname,
         password: hashPassword,
+        members: [{ pseudoUser: "", userId: "" }], // Ajoute l'utilisateur comme membre lors de la création
       });
 
       group.password = "";
@@ -216,21 +217,12 @@ export class AuthController {
         return;
       }
 
-      group.members.map((member) => {
-        if (member.userId === userId) {
-          res.status(409).send({
-            error: "userId even existed",
-          });
-        }
-        return;
-      });
-
       group.members.push({
         pseudoUser,
         userId,
       });
 
-      await group.save();
+      await group.save(); // Sauvegarder les modifications
 
       res.status(200).send(group);
     } catch (error: any) {

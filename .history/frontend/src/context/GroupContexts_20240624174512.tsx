@@ -24,7 +24,8 @@ export const GroupContext = createContext({
   groupId: undefined,
   onLogin: async (values: IGroupFormsValues) => {},
   onRegister: async (values: IGroupFormsValues) => {},
-  chosePseudo: async (values: IPseudoFormValues) => {},
+  choo
+  sePseudo: async (values: IPseudoFormValues) => {},
   onLogout: () => {},
 });
 

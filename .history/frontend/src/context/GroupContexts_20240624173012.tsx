@@ -14,23 +14,21 @@ export interface IGroupFormsValues {
   userId: string | undefined;
 }
 export interface IPseudoFormValues {
-  userId: string | undefined;
-  groupId: string | undefined;
-  pseudoUser: string;
+  userId: string;
+  groupId: string;
+  pseudoUser: string | undefined;
 }
 export const GroupContext = createContext({
   isAuthenticated: false,
-  isHome: false,
   groupId: undefined,
   onLogin: async (values: IGroupFormsValues) => {},
   onRegister: async (values: IGroupFormsValues) => {},
-  chosePseudo: async (values: IPseudoFormValues) => {},
+  choosePseudo: async (values: IPseudoFormValues) => {},
   onLogout: () => {},
 });
 
 export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isHome, setIsHome] = useState(false);
 
   const [groupId, setGroupId] = useState(undefined);
 
@@ -62,12 +60,13 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log("Register error" + error);
     }
   };
-  const chosePseudo = async (values: IPseudoFormValues) => {
+  const choosePseudo = async (values: IGroupFormsValues) => {
     try {
       const response = await api.post("/auth/choose-pseudo", values);
       console.log(response);
 
-      setIsHome(true);
+      setGroupId(response.data.group._id);
+      setIsAuthenticated(true);
     } catch (error: any) {
       console.log("Register error" + error);
     }
@@ -81,8 +80,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         onRegister,
         onLogout,
         groupId,
-        chosePseudo,
-        isHome,
+        choosePseudo,
       }}
     >
       {children}
