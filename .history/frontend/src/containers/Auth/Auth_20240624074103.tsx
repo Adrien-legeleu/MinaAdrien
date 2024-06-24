@@ -12,14 +12,22 @@ import { Register } from "./Register";
 import AnimatedShinyText from "@/components/UI/ShinyText";
 import { cn } from "@/utils/cn";
 import { ArrowRight } from "@/components/icons";
+import { useRouter } from "next/router"; // Importer useRouter de next/router
 
 export const Auth = () => {
-  const { onLogin, onRegister } = useUserContext();
+  const { onLogin, onRegister, isAuthenticated } = useUserContext();
   const [isLogin, setIsLogin] = useState(true);
+  const router = useRouter(); // Initialiser le hook useRouter
 
   const handleIsLogin = () => {
     setIsLogin(!isLogin);
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/group"); // Rediriger vers la page "/group"
+    }
+  }, [isAuthenticated, router]); // Ajouter router dans les dépendances
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

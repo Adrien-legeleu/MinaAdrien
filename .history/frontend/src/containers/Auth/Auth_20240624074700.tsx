@@ -14,7 +14,7 @@ import { cn } from "@/utils/cn";
 import { ArrowRight } from "@/components/icons";
 
 export const Auth = () => {
-  const { onLogin, onRegister } = useUserContext();
+  const { onLogin, onRegister, isAuthenticated } = useUserContext();
   const [isLogin, setIsLogin] = useState(true);
 
   const handleIsLogin = () => {

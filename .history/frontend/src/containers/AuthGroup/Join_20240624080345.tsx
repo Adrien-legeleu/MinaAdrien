@@ -20,7 +20,7 @@ export const Join = () => {
     const data = new FormData(e.currentTarget);
     const values = {
       userId: userId,
-      groupname: data.get("groupname"),
+      username: data.get("username"),
       password: data.get("password"),
     };
     console.log(values);
@@ -61,10 +61,7 @@ export const Join = () => {
             )}
           >
             <AnimatedShinyText className=" text-xl  px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-              <button
-                className="flex items-center justify-center gap-3 "
-                type="submit"
-              >
+              <button className="flex items-center justify-center gap-3 ">
                 <span>Rejoindre</span> <ArrowRight />
               </button>
             </AnimatedShinyText>

@@ -12,14 +12,22 @@ import { Register } from "./Register";
 import AnimatedShinyText from "@/components/UI/ShinyText";
 import { cn } from "@/utils/cn";
 import { ArrowRight } from "@/components/icons";
+import { useRouter } from "next/router";
 
 export const Auth = () => {
-  const { onLogin, onRegister } = useUserContext();
+  const router = useRouter();
+  const { onLogin, onRegister, isAuthenticated } = useUserContext();
   const [isLogin, setIsLogin] = useState(true);
 
   const handleIsLogin = () => {
     setIsLogin(!isLogin);
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/home");
+    }
+  }, []);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

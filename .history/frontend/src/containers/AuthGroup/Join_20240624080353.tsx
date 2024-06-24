@@ -20,7 +20,7 @@ export const Join = () => {
     const data = new FormData(e.currentTarget);
     const values = {
       userId: userId,
-      groupname: data.get("groupname"),
+      username: data.get("username"),
       password: data.get("password"),
     };
     console.log(values);

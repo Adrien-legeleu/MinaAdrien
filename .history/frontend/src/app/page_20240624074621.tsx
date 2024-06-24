@@ -1,20 +1,17 @@
-"use client";
-
 import { Auth } from "@/containers/Auth";
 import { useUserContext } from "@/context/UserContexts";
-
-import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useEffect } from "react";
 
-export default function page() {
+export default function Home() {
   const { isAuthenticated } = useUserContext();
   const router = useRouter();
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push("/group");
+      router.push("/home");
     }
-  }, [isAuthenticated]);
+  }, []);
 
   return (
     <main>

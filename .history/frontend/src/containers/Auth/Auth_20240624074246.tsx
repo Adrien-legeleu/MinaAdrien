@@ -14,12 +14,18 @@ import { cn } from "@/utils/cn";
 import { ArrowRight } from "@/components/icons";
 
 export const Auth = () => {
-  const { onLogin, onRegister } = useUserContext();
+  const { onLogin, onRegister, isAuthenticated } = useUserContext();
   const [isLogin, setIsLogin] = useState(true);
+  const router = useRouter(); // Initialiser le hook useRouter
 
   const handleIsLogin = () => {
     setIsLogin(!isLogin);
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+    }
+  }, [isAuthenticated]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

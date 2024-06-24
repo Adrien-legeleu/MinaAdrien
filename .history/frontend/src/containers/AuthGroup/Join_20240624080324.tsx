@@ -12,7 +12,7 @@ import { cn } from "@/utils/cn";
 
 export const Join = () => {
   const { onLogin } = useGroupContext();
-  const { userId } = useUserContext();
+  const {userId} = useUserContext(
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ export const Join = () => {
     const data = new FormData(e.currentTarget);
     const values = {
       userId: userId,
-      groupname: data.get("groupname"),
+      username: data.get("username"),
       password: data.get("password"),
     };
     console.log(values);
@@ -34,7 +34,7 @@ export const Join = () => {
         className="-top-40 left-0 md:left-60 md:-top-20"
         fill="white"
       />
-      <form className="flex flex-col gap-12" onClick={onSubmit}>
+      <div className="flex flex-col gap-12">
         <TextGenerateEffect
           words="Rejoingez votre groupe maintenant !"
           delay={0.2}
@@ -61,16 +61,13 @@ export const Join = () => {
             )}
           >
             <AnimatedShinyText className=" text-xl  px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-              <button
-                className="flex items-center justify-center gap-3 "
-                type="submit"
-              >
+              <button className="flex items-center justify-center gap-3 ">
                 <span>Rejoindre</span> <ArrowRight />
               </button>
             </AnimatedShinyText>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

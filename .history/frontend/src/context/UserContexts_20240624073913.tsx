@@ -1,10 +1,12 @@
 "use client";
 import { api } from "@/config/api";
+import { useRouter } from "next/router";
 import {
   createContext,
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from "react";
 
@@ -30,6 +32,7 @@ export const UserContext = createContext({
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userId, setUserId] = useState(undefined);
+  const router = useRouter(); // Initialiser le hook useRouter
 
   const onLogout = useCallback(() => {
     localStorage.removeItem("authToken");
@@ -45,6 +48,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem("authToken", response?.data?.authToken);
       setIsAuthenticated(true);
       console.log("login");
+
+      router.push("/group"); // Rediriger vers la page "/group"
     } catch (error: any) {
       console.log("Login error" + error);
     }
@@ -58,6 +63,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem("authToken", response?.data?.authToken);
       setIsAuthenticated(true);
       console.log("register");
+      router.push("/group"); // Rediriger vers la page "/group"
     } catch (error: any) {
       console.log("Register error" + error);
     }

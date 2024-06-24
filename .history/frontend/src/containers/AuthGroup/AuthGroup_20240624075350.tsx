@@ -1,6 +1,6 @@
 "use client";
 
-import { BackButton, DescriptionAuthGroup } from "@/components/Auth";
+import { DescriptionAuthGroup } from "@/components/Auth";
 import { ArrowRight } from "@/components/icons";
 import { TextGenerateEffect } from "@/components/UI/GenerateEffect";
 import AnimatedShinyText from "@/components/UI/ShinyText";
@@ -21,7 +21,6 @@ export const AuthGroup = () => {
 
   return (
     <div className="h-screen w-full flex flex-col gap-28  items-center justify-center bg-black/[0.96] overflow-y-hidden">
-      <BackButton />
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
         fill="white"

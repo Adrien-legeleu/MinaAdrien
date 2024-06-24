@@ -1,4 +1,3 @@
-"use client";
 import { Create } from "@/containers/AuthGroup";
 import { useGroupContext } from "@/context/GroupContexts";
 

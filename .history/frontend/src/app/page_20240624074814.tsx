@@ -1,22 +1,24 @@
 "use client";
-import { Create } from "@/containers/AuthGroup";
-import { useGroupContext } from "@/context/GroupContexts";
+
+import { Auth } from "@/containers/Auth";
+import { useUserContext } from "@/context/UserContexts";
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function page() {
-  const { isAuthenticated } = useGroupContext();
+export default function Home() {
+  const { isAuthenticated } = useUserContext();
   const router = useRouter();
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push("/home");
+      router.push("/group");
     }
   }, [isAuthenticated]);
+
   return (
     <main>
-      <Create />
+      <Auth />
     </main>
   );
 }

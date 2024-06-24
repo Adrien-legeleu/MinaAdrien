@@ -1,10 +1,13 @@
 "use client";
 import { api } from "@/config/api";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/router";
 import {
   createContext,
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from "react";
 
@@ -42,9 +45,11 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       const response = await api.post("/auth/login-user", values);
       setUserId(response.data.user._id);
       console.log(response);
-      localStorage.setItem("authToken", response?.data?.authToken);
+      localStorage.setItem("authToken", response?.data?.auuthToken);
       setIsAuthenticated(true);
       console.log("login");
+
+      redirect("/group");
     } catch (error: any) {
       console.log("Login error" + error);
     }
@@ -55,9 +60,9 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       const response = await api.post("/auth/register-user", values);
       console.log(response);
       setUserId(response.data.user._id);
-      localStorage.setItem("authToken", response?.data?.authToken);
+      localStorage.setItem("authToken", response?.data?.auuthToken);
       setIsAuthenticated(true);
-      console.log("register");
+      redirect("/group");
     } catch (error: any) {
       console.log("Register error" + error);
     }

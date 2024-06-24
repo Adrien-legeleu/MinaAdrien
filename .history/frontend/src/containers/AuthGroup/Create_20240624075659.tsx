@@ -9,8 +9,9 @@ import { Spotlight } from "@/components/UI/SpotLight";
 import { IGroupFormsValues, useGroupContext } from "@/context/GroupContexts";
 import { useUserContext } from "@/context/UserContexts";
 import { cn } from "@/utils/cn";
+import Link from "next/link";
 
-export const Join = () => {
+export const Create = () => {
   const { onLogin } = useGroupContext();
   const { userId } = useUserContext();
 
@@ -36,9 +37,9 @@ export const Join = () => {
       />
       <form className="flex flex-col gap-12" onClick={onSubmit}>
         <TextGenerateEffect
-          words="Rejoingez votre groupe maintenant !"
+          words="Céer votre groupe maintenant !"
           delay={0.2}
-          className="text-[#ffffff60] text-3xl text-center  tracking-wider mb-12"
+          className="text-[#ffffff60] text-3xl text-center  tracking-wider mb-10"
         />
         <div className="flex flex-col gap-4 text-lg items-center justify-center">
           <Input
@@ -65,7 +66,7 @@ export const Join = () => {
                 className="flex items-center justify-center gap-3 "
                 type="submit"
               >
-                <span>Rejoindre</span> <ArrowRight />
+                <span>Créer</span> <ArrowRight />
               </button>
             </AnimatedShinyText>
           </div>
