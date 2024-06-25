@@ -64,7 +64,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const checkToken = async () => {
+  const checkTokn = async () => {
     try {
       await api.get("/auth/check-token");
       setIsAuthenticated(true);
@@ -78,8 +78,6 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     const authToken = localStorage.getItem("authToken");
     if (!authToken) {
       setIsAuthenticated(false);
-    } else {
-      checkToken();
     }
   }, []);
 

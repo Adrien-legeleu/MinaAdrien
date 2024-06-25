@@ -5,7 +5,6 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useState,
 } from "react";
 
@@ -64,24 +63,13 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const checkToken = async () => {
+  const checkTokn = () => {
     try {
-      await api.get("/auth/check-token");
-      setIsAuthenticated(true);
     } catch (error: any) {
       onLogout();
-      console.log(error);
+      console.log(error?.response?.data?.error);
     }
   };
-
-  useEffect(() => {
-    const authToken = localStorage.getItem("authToken");
-    if (!authToken) {
-      setIsAuthenticated(false);
-    } else {
-      checkToken();
-    }
-  }, []);
 
   return (
     <UserContext.Provider

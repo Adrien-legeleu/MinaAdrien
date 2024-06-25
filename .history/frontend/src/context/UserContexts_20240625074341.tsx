@@ -80,6 +80,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       setIsAuthenticated(false);
     } else {
       checkToken();
+      setIsAuthenticated(true);
     }
   }, []);
 
