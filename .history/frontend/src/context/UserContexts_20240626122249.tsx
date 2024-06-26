@@ -39,39 +39,31 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
   const onLogin = async (values: ISignInFormValues) => {
     try {
-      console.log("Sending login request with values:", values);
-      const response = await api.post("/auth/login-user", values, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
-      console.log("Response from login request:", response);
+      const response = await api.post("/auth/login-user", values);
+
+      console.log(response);
       localStorage.setItem("userId", response.data.user._id);
       localStorage.setItem("authToken", response?.data?.authToken);
       setIsAuthenticated(true);
-      console.log("login successful");
+      console.log("login");
     } catch (error: any) {
-      console.error("Login error:", error);
+      console.log("Login error" + error);
     }
   };
 
   const onRegister = async (values: ISignUpFormValues) => {
     try {
-      console.log("Sending register request with values:", values);
       const response = await api.post("/auth/register-user", values, {
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: true,
       });
-      console.log("Response from register request:", response);
       localStorage.setItem("userId", response.data.user._id);
       localStorage.setItem("authToken", response?.data?.authToken);
       setIsAuthenticated(true);
-      console.log("register successful");
+      console.log("register");
     } catch (error: any) {
-      console.error("Register error:", error);
+      console.log("Register error" + error);
     }
   };
 
@@ -81,7 +73,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       setIsAuthenticated(true);
     } catch (error: any) {
       onLogout();
-      console.error(error);
+      console.log(error);
     }
   };
 

@@ -13,11 +13,7 @@ export default function page() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      if (joinPageRedirect === "choosePseudoPage") {
-        router.push("/group/choose-pseudo");
-      } else if (joinPageRedirect === "HomePage") {
-        router.push("/group/home");
-      }
+      router.push("/home");
     }
   }, [isAuthenticated]);
   return (

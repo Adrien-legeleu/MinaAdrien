@@ -33,7 +33,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isHome, setIsHome] = useState(false);
 
-  const [joinPageRedirect, setJoinPageRedicrect] = useState(undefined);
+  const [joinPageRedicrect, setJinPageRedicrect] = useState(undefined);
 
   const onLogout = useCallback(() => {
     localStorage.removeItem("authToken-group");
@@ -48,7 +48,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log(response);
       localStorage.setItem("groupId", response.data.group._id);
       localStorage.setItem("authToken-group", response?.data?.auuthToken);
-      setJoinPageRedicrect(response.data.redirect);
       setIsAuthenticated(true);
     } catch (error: any) {
       console.log("Login error" + error);
@@ -60,7 +59,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log(response);
       localStorage.setItem("authToken-group", response?.data?.auuthToken);
       localStorage.setItem("groupId", response?.data.group._id);
-
+      setJinPageRedicrect(response.data.redirect);
       setIsAuthenticated(true);
     } catch (error: any) {
       console.log("Register error" + error);
@@ -104,7 +103,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         onLogin,
         onRegister,
         onLogout,
-        joinPageRedirect,
+        joinPageRedicrect,
         chosePseudo,
         isHome,
       }}

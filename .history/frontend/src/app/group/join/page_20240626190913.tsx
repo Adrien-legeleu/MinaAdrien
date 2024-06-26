@@ -15,7 +15,7 @@ export default function page() {
     if (isAuthenticated) {
       if (joinPageRedirect === "choosePseudoPage") {
         router.push("/group/choose-pseudo");
-      } else if (joinPageRedirect === "HomePage") {
+      } else if (joinPageRedirect === "groupPage") {
         router.push("/group/home");
       }
     }

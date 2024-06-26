@@ -33,7 +33,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isHome, setIsHome] = useState(false);
 
-  const [joinPageRedirect, setJoinPageRedicrect] = useState(undefined);
+  const [joinPageRedicrect, setJoinPageRedicrect] = useState(undefined);
 
   const onLogout = useCallback(() => {
     localStorage.removeItem("authToken-group");
