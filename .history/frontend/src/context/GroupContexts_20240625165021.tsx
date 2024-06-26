@@ -21,7 +21,6 @@ export interface IPseudoFormValues {
 }
 export const GroupContext = createContext({
   isAuthenticated: false,
-  joinPageRedirect: undefined,
   isHome: false,
   onLogin: async (values: IGroupFormsValues) => {},
   onRegister: async (values: IGroupFormsValues) => {},
@@ -32,8 +31,6 @@ export const GroupContext = createContext({
 export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isHome, setIsHome] = useState(false);
-
-  const [joinPageRedicrect, setJinPageRedicrect] = useState(undefined);
 
   const onLogout = useCallback(() => {
     localStorage.removeItem("authToken-group");
@@ -59,7 +56,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log(response);
       localStorage.setItem("authToken-group", response?.data?.auuthToken);
       localStorage.setItem("groupId", response?.data.group._id);
-      setJinPageRedicrect(response.data.redirect);
+
       setIsAuthenticated(true);
     } catch (error: any) {
       console.log("Register error" + error);
@@ -103,7 +100,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         onLogin,
         onRegister,
         onLogout,
-
+        groupId,
         chosePseudo,
         isHome,
       }}

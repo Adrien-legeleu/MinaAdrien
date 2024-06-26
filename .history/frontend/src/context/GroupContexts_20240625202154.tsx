@@ -59,7 +59,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log(response);
       localStorage.setItem("authToken-group", response?.data?.auuthToken);
       localStorage.setItem("groupId", response?.data.group._id);
-      setJinPageRedicrect(response.data.redirect);
+
       setIsAuthenticated(true);
     } catch (error: any) {
       console.log("Register error" + error);

@@ -52,6 +52,10 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const onRegister = async (values: ISignUpFormValues) => {
+    console.log("ezeze");
+
+    console.log(values);
+
     try {
       const response = await api.post("/auth/register-user", values);
       localStorage.setItem("userId", response.data.user._id);

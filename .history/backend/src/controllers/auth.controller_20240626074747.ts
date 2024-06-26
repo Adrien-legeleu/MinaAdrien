@@ -71,7 +71,7 @@ export class AuthController {
         return;
       }
 
-      const isMember = group.members.some(
+      const isMember = group.members[à].some(
         (member) => member.userId.toString() === userId
       );
       const authToken = AuthController.getTokenGroup(group);

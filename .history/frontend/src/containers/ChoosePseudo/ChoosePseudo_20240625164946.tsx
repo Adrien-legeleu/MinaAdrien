@@ -1,30 +1,30 @@
 "use client";
 
 import { BackButton } from "@/components/Auth";
-import { ArrowRight } from "@/components/icons";
 import { Input } from "@/components/UI";
 import { TextGenerateEffect } from "@/components/UI/GenerateEffect";
 import AnimatedShinyText from "@/components/UI/ShinyText";
 import { Spotlight } from "@/components/UI/SpotLight";
-import { IGroupFormsValues, useGroupContext } from "@/context/GroupContexts";
-import { useUserContext } from "@/context/UserContexts";
+import { IPseudoFormValues, useGroupContext } from "@/context/GroupContexts";
+
 import { cn } from "@/utils/cn";
 
-export const Join = () => {
-  const { onLogin } = useGroupContext();
-  const userId = localStorage.getItem("userId");
+export const ChoosePseudo = () => {
+  const { chosePseudo } = useGroupContext();
+  const userId = localStorage.getItem("userId") || undefined;
+  const groupId = localStorage.getItem("groupId") || undefined;
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
-    const values = {
-      userId: userId,
-      groupname: data.get("groupname"),
-      password: data.get("password"),
+    const values: IPseudoFormValues = {
+      groupId,
+      userId,
+      pseudoUser: data.get("pseudoUser") as string,
     };
     console.log(values);
-    await onLogin(values as IGroupFormsValues);
+    await chosePseudo(values);
   };
 
   return (
@@ -34,24 +34,18 @@ export const Join = () => {
         className="-top-40 left-0 md:left-60 md:-top-20"
         fill="white"
       />
-      <form className="flex flex-col gap-12" onClick={onSubmit}>
+      <form className="flex flex-col gap-12" onSubmit={onSubmit}>
         <TextGenerateEffect
-          words="Rejoingez votre groupe maintenant !"
+          words="Choissiser votre nom et c'est parti !"
           delay={0.2}
-          className="text-[#ffffff60] text-3xl text-center  tracking-wider mb-12"
+          className="text-[#ffffff60] text-3xl text-center  tracking-wider mb-10"
         />
-        <div className="flex flex-col gap-4 text-lg items-center justify-center">
+        <div className="flex text-lg items-center justify-center">
           <Input
-            placeholder="groupname"
-            id="groupname"
-            name="groupname"
+            placeholder="Pseudo"
+            id="pseudoUser"
+            name="pseudoUser"
             type="text"
-          />
-          <Input
-            placeholder="password"
-            id="password"
-            name="password"
-            type="password"
           />
         </div>
         <div className="flex items-center justify-center">
@@ -65,7 +59,7 @@ export const Join = () => {
                 className="flex items-center justify-center gap-3 "
                 type="submit"
               >
-                <span>Rejoindre</span> <ArrowRight />
+                Terminer
               </button>
             </AnimatedShinyText>
           </div>
