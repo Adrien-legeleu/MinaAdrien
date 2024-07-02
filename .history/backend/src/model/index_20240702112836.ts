@@ -1,5 +1,4 @@
 export * from "./group.model";
 export * from "./image.model";
 export * from "./user.model";
-export * from "./letter.model";
-export * from "./description.model";
+eport * from "./description.model.ts"

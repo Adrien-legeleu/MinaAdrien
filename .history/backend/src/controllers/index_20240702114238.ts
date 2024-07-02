@@ -8,9 +8,4 @@ const imageController = new ImageController();
 const letterController = new LetterController();
 const descriptionController = new DescriptionController();
 
-export {
-  authController,
-  imageController,
-  letterController,
-  descriptionController,
-};
+export { authController, imageController, letterController };

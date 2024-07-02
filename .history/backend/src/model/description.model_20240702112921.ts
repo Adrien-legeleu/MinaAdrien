@@ -1,17 +1,17 @@
 import mongoose from "mongoose";
 
-export interface ILetter {
+export interface IDescription {
   _id: string;
   groupId: string;
-  title: string;
-  text: string;
-  url_image: string;
+  url: string;
+  legend: string;
+  datePhoto: Date;
   isLiked: boolean;
 }
 
-export const LetterSchema = new mongoose.Schema<ILetter>(
+export const DescriptionSchema = new mongoose.Schema<IDescription>(
   {
-    title: {
+    url: {
       type: String,
       required: true,
     },
@@ -20,13 +20,11 @@ export const LetterSchema = new mongoose.Schema<ILetter>(
       required: true,
       ref: "groups",
     },
-    text: {
+    legend: {
       type: String,
-      required: true,
     },
-    url_image: {
-      type: String,
-      required: true,
+    datePhoto: {
+      type: Date,
     },
     isLiked: {
       type: Boolean,
@@ -39,4 +37,4 @@ export const LetterSchema = new mongoose.Schema<ILetter>(
   }
 );
 
-export const LetterModel = mongoose.model("letters", LetterSchema);
+export const DescriptionModel = mongoose.model("images", DescriptionSchema);
