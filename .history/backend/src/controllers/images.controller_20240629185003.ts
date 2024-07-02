@@ -32,7 +32,7 @@ export class ImageController {
         return;
       }
       const { imageId } = req.params;
-      const image = await ImageModel.findOne({ _id: imageId, groupId });
+      const image = await ImageModel.findOne({ imageId, groupId });
       if (!image) {
         res.status(404).send({
           error: "image not found : " + imageId,
@@ -48,6 +48,7 @@ export class ImageController {
   async create(req: any, res: Response): Promise<void> {
     try {
       const { groupId, url, legend, photoDate, isLiked } = req.body;
+      const { imageId } = req.params;
 
       if (!groupId || !url || !legend || !photoDate || !isLiked) {
         res.status(404).send({
@@ -56,6 +57,7 @@ export class ImageController {
         return;
       }
       const image = await ImageModel.create({
+        imageId,
         groupId,
         url,
         legend,

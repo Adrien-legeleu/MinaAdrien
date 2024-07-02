@@ -1,30 +1,26 @@
 import mongoose from "mongoose";
 
-export interface IImage {
+export interface ILetter {
   _id: string;
-  groupId: string;
-  url: string;
-  legend: string;
-  datePhoto: Date;
+  title: string;
+  text: string;
+  url_image: string;
   isLiked: boolean;
 }
 
-export const ImageSchema = new mongoose.Schema<IImage>(
+export const LetterSchema = new mongoose.Schema<ILetter>(
   {
-    url: {
+    title: {
       type: String,
       required: true,
     },
-    groupId: {
+    text: {
       type: String,
       required: true,
-      ref: "groups",
     },
-    legend: {
+    url_image: {
       type: String,
-    },
-    datePhoto: {
-      type: Date,
+      required: true,
     },
     isLiked: {
       type: Boolean,
@@ -36,5 +32,3 @@ export const ImageSchema = new mongoose.Schema<IImage>(
     timestamps: true,
   }
 );
-
-export const ImageModel = mongoose.model("images", ImageSchema);

@@ -6,4 +6,4 @@ const authController = new AuthController();
 const imageController = new ImageController();
 const letterController = new LetterController();
 
-export { authController, imageController, letterController };
+export { authController, imageController };
