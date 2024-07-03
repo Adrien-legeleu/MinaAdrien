@@ -12,7 +12,7 @@ import { useCreateJoinContext } from "@/context/CreateJoinContexts";
 export const AuthGroup = () => {
   const [isGroup, setIsGroup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setUser, user } = useCreateJoinContext();
+  const { user } = useCreateJoinContext();
 
   const modalClose = () => {
     setIsModalOpen(false);

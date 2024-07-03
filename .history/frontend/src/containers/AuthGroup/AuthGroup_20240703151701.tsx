@@ -7,12 +7,11 @@ import { api } from "@/config/api";
 import { IUser } from "@/types/user";
 import { useEffect, useState } from "react";
 import { ModalAuthGroup } from "./ModalAuthGroup";
-import { useCreateJoinContext } from "@/context/CreateJoinContexts";
 
 export const AuthGroup = () => {
   const [isGroup, setIsGroup] = useState(false);
+  const [user, setUser] = useState<IUser | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setUser, user } = useCreateJoinContext();
 
   const modalClose = () => {
     setIsModalOpen(false);

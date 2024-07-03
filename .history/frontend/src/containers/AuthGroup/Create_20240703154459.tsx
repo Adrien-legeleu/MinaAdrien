@@ -12,11 +12,17 @@ import { cn } from "@/utils/cn";
 
 interface ICreateProps {
   isCreateFalse: () => void;
+  modalClose: () => void;
 }
 
-export const Create: React.FC<ICreateProps> = ({ isCreateFalse }) => {
+export const Create: React.FC<ICreateProps> = ({
+  isCreateFalse,
+  modalClose,
+}) => {
   const { onRegister } = useGroupContext();
   const userId = localStorage.getItem("userId");
+
+  const { setUser } = useCreateJoinContext();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,8 +34,22 @@ export const Create: React.FC<ICreateProps> = ({ isCreateFalse }) => {
       pseudo: data.get("pseudo"),
     };
     console.log(values);
-
     await onRegister(values as IGroupFormsValues);
+    modalClose();
+    changeUser(values)
+  };
+
+  const changeUser = ({values
+   }) => {
+    setUser((prevUser)=> {
+      if (!prevUser) {
+        return prevUser
+      }
+      return{
+        ...prevUser,
+        groups : 
+      }
+    })
   };
 
   return (

@@ -12,9 +12,13 @@ import { cn } from "@/utils/cn";
 
 interface ICreateProps {
   isCreateFalse: () => void;
+  modalClose: () => void;
 }
 
-export const Create: React.FC<ICreateProps> = ({ isCreateFalse }) => {
+export const Create: React.FC<ICreateProps> = ({
+  isCreateFalse,
+  modalClose,
+}) => {
   const { onRegister } = useGroupContext();
   const userId = localStorage.getItem("userId");
 
