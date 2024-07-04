@@ -66,7 +66,7 @@ export const AuthGroup = () => {
               {user?.groups.map((group: any) => (
                 <div
                   key={group.groupCode}
-                  className="bg-white/90 py-5 px-2 flex flex-col items-center jusitfy-between rounded-3xl  gap-6  cursor-pointer hover:bg-white/80 hover:scale-105 duration-300 ease-in-out"
+                  className="bg-white/90 py-5 px-2 flex flex-col items-center jusitfy-between rounded-3xl  gap-6  cursor-pointer hover:bg-white-80 scale-105 duration-300 ease-in-out"
                 >
                   {group.urlProfil ? (
                     <img src={group.urlProfil} alt={group.groupName} />
@@ -82,7 +82,7 @@ export const AuthGroup = () => {
                 </div>
               ))}
               <div
-                className="rounded-3xl py-10 px-10 border-[1px] bg-white/80 text-black/75 cursor-pointer hover:scale-95 hover:bg-white/70 ease-in-out duration-300 flex items-center justify-center"
+                className="rounded-3xl py-10 px-10 border-[1px] bg-white/80 text-black/75 cursor-pointer hover:bg-white/70 ease-in-out duration-300 flex items-center justify-center"
                 onClick={() => setIsModalOpen(true)}
               >
                 <IconPlusGroup />

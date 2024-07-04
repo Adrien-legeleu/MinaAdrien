@@ -39,29 +39,17 @@ export const ModalAuthGroup: React.FC<IModalProps> = ({
       ></div>
 
       <div
-        className={`bg-white/95  rounded-3xl shadow-xl shadow-slate-600 z-20 flex items-center justify-center py-16 px-16 gap-16 ${
+        className={`bg-white/95  rounded-3xl shadow-xl shadow-slate-600 z-20 flex items-center justify-center py-20 px-16 gap-16 ${
           isModalOpen
             ? "viible opacity-100 scale-100"
             : "scale-0 opacity-0 invisible"
         } duration-500 `}
       >
-        <div
-          className=" w-48 h-48 flex flex-col cursor-pointer text-black/80 items-center justify-center gap-3"
-          onClick={() => setIsCreate(true)}
-        >
+        <div className="bg-white" onClick={() => setIsCreate(true)}>
           <IconNewGroup />
-          <h3 className="text-gray-400 uppercase text-center cursor-pointer">
-            nouveau{" "}
-          </h3>
         </div>
-        <div
-          onClick={() => setIsJoin(true)}
-          className="h-48 w-48 flex flex-col  text-black/80 cursor-pointer items-center justify-center gap-3"
-        >
+        <div onClick={() => setIsJoin(true)} className="bg-white">
           <IconJoinGroup />
-          <h3 className="text-gray-400 uppercase text-center cursor-pointer">
-            rejoindre{" "}
-          </h3>
         </div>
       </div>
       {isCreate && <Create isCreateFalse={isCreateFalse} />}

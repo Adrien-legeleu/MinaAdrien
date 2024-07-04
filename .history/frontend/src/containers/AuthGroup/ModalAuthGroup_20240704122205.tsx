@@ -46,22 +46,18 @@ export const ModalAuthGroup: React.FC<IModalProps> = ({
         } duration-500 `}
       >
         <div
-          className=" w-48 h-48 flex flex-col cursor-pointer text-black/80 items-center justify-center gap-3"
+          className=" w-48 h-48 flex flex-col text-black/80 items-center justify-center gap-3"
           onClick={() => setIsCreate(true)}
         >
           <IconNewGroup />
-          <h3 className="text-gray-400 uppercase text-center cursor-pointer">
-            nouveau{" "}
-          </h3>
+          <h3 className="text-gray-400 uppercase text-center">nouveau </h3>
         </div>
         <div
           onClick={() => setIsJoin(true)}
-          className="h-48 w-48 flex flex-col  text-black/80 cursor-pointer items-center justify-center gap-3"
+          className="h-48 w-48 flex flex-col  text-black/70 items-center justify-center gap-3"
         >
           <IconJoinGroup />
-          <h3 className="text-gray-400 uppercase text-center cursor-pointer">
-            rejoindre{" "}
-          </h3>
+          <h3 className="text-gray-400 uppercase text-center">rejoindre </h3>
         </div>
       </div>
       {isCreate && <Create isCreateFalse={isCreateFalse} />}
