@@ -274,7 +274,6 @@ export class AuthController {
         (member) => member.userId === userId
       );
       console.log(group);
-      console.log(memberExists);
 
       if (memberExists) {
         res.status(409).send({

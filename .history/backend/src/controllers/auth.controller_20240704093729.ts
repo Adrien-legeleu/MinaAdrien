@@ -273,14 +273,10 @@ export class AuthController {
       const memberExists = group.members.some(
         (member) => member.userId === userId
       );
-      console.log(group);
-      console.log(memberExists);
-
       if (memberExists) {
         res.status(409).send({
           error: "userId already exists",
         });
-        console.log("oieozieozieoi");
         return; // Arrêter l'exécution de la fonction
       }
 

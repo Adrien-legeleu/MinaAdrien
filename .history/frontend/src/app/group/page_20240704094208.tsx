@@ -1,5 +1,3 @@
-"use client";
-
 import { AuthGroup } from "@/containers/AuthGroup";
 import { useGroupContext } from "@/context/GroupContexts";
 import { useRouter } from "next/navigation";

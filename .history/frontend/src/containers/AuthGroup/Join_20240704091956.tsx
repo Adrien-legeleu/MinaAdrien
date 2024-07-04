@@ -5,18 +5,19 @@ import { ArrowRight } from "@/components/icons";
 import { Input } from "@/components/UI";
 import { TextGenerateEffect } from "@/components/UI/GenerateEffect";
 import AnimatedShinyText from "@/components/UI/ShinyText";
+import { Spotlight } from "@/components/UI/SpotLight";
 import { useCreateJoinContext } from "@/context/CreateJoinContexts";
-import { IGroupFormsValues, useGroupContext } from "@/context/GroupContexts";
+import { IJoinFormsValues, useGroupContext } from "@/context/GroupContexts";
+import { useUserContext } from "@/context/UserContexts";
 
 import { cn } from "@/utils/cn";
+import { useEffect } from "react";
 
-interface ICreateProps {
-  isCreateFalse: () => void;
-}
-
-export const Create: React.FC<ICreateProps> = ({ isCreateFalse }) => {
-  const { onRegister } = useGroupContext();
+export const Join = () => {
+  const { onLogin, joinPageRedirect } = useGroupContext();
   const { user } = useCreateJoinContext();
+
+  const groupId = localStorage.get("groupId");
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,16 +25,14 @@ export const Create: React.FC<ICreateProps> = ({ isCreateFalse }) => {
     const data = new FormData(e.currentTarget);
     const values = {
       userId: user?._id,
-      groupname: data.get("groupname"),
-      pseudo: data.get("pseudo"),
+      password: data.get("password"),
     };
     console.log(values);
-
-    await onRegister(values as IGroupFormsValues);
+    await onLogin(values as IJoinFormsValues);
   };
 
   return (
-    <div className=" z-50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bg-black/[0.96]  shadow-white shadow-2xl flex items-center justify-center">
+    <div className="z-50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bg-black/[0.96]  shadow-white shadow-2xl flex items-center justify-center">
       <form className="flex flex-col gap-12" onClick={onSubmit}>
         <TextGenerateEffect
           words="Céer votre groupe maintenant !"
@@ -42,12 +41,11 @@ export const Create: React.FC<ICreateProps> = ({ isCreateFalse }) => {
         />
         <div className="flex flex-col gap-4 text-lg items-center justify-center">
           <Input
-            placeholder="groupname"
-            id="groupname"
-            name="groupname"
+            placeholder="password"
+            id="password"
+            name="password"
             type="text"
           />
-          <Input placeholder="pseudo" id="pseudo" name="pseudo" type="text" />
         </div>
         <div className="flex items-center justify-center">
           <div

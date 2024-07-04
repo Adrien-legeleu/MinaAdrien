@@ -48,7 +48,7 @@ export const ModalAuthGroup: React.FC<IModalProps> = ({
         <div className="bg-white" onClick={() => setIsCreate(true)}>
           créer
         </div>
-        <div onClick={() => setIsJoin(true)} className="bg-white">
+        <div onClick={() => setIsCreate(false)} className="bg-white">
           login
         </div>
       </div>

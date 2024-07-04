@@ -1,8 +1,6 @@
-"use client";
-
 import { AuthGroup } from "@/containers/AuthGroup";
 import { useGroupContext } from "@/context/GroupContexts";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
 export default function page() {

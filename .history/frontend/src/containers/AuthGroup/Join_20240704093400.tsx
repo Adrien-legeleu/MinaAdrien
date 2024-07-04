@@ -75,7 +75,7 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse }) => {
                   className="flex items-center justify-center gap-3 "
                   type="submit"
                 >
-                  <span>c'est parti !</span> <ArrowRight />
+                  <span>Créer</span> <ArrowRight />
                 </button>
               </AnimatedShinyText>
             </div>

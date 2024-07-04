@@ -57,7 +57,7 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse }) => {
       {joinPageRedirect === "choosePseudoPage" ? (
         <form className="flex flex-col gap-12" onClick={onSubmitPseudo}>
           <TextGenerateEffect
-            words="Céer votre pseudo!"
+            words="Céer votre groupe maintenant !"
             delay={0.2}
             className="text-[#ffffff60] text-3xl text-center  tracking-wider mb-10"
           />
@@ -75,7 +75,7 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse }) => {
                   className="flex items-center justify-center gap-3 "
                   type="submit"
                 >
-                  <span>c'est parti !</span> <ArrowRight />
+                  <span>Créer</span> <ArrowRight />
                 </button>
               </AnimatedShinyText>
             </div>

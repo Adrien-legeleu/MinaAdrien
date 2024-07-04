@@ -43,7 +43,7 @@ export const GroupContext = createContext<{
   isAuthenticated: boolean;
   joinPageRedirect: string | undefined;
   isHome: boolean;
-  onLogin: (values: IJoinFormsValues) => Promise<void>;
+  onLogin: (values: IGroupFormsValues) => Promise<void>;
   onRegister: (values: IGroupFormsValues) => Promise<void>;
   chosePseudo: (values: IPseudoFormValues) => Promise<void>;
   onLogout: () => void;

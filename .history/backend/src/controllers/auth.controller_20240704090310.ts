@@ -73,15 +73,12 @@ export class AuthController {
         if (!isGroupsUser) {
           user.groups.push({
             groupId: group._id,
-            groupCode: password,
+            groupCode: group.password,
             groupName: group.groupname,
             urlProfil: group.profilPhoto,
           });
-          await user.save();
         }
       }
-
-      console.log(user);
 
       const isMember = group.members.some(
         (member) => member.userId.toString() === userId
@@ -258,7 +255,7 @@ export class AuthController {
         res.status(404).send({
           error: "Properties not found",
         });
-        return; // Arrêter l'exécution de la fonction
+        return;
       }
 
       const group = await GroupModel.findById(groupId);
@@ -266,23 +263,17 @@ export class AuthController {
         res.status(404).send({
           error: "Group not found",
         });
-        return; // Arrêter l'exécution de la fonction
+        return;
       }
 
-      // Vérifier si le membre existe déjà
-      const memberExists = group.members.some(
-        (member) => member.userId === userId
-      );
-      console.log(group);
-      console.log(memberExists);
-
-      if (memberExists) {
-        res.status(409).send({
-          error: "userId already exists",
-        });
-        console.log("oieozieozieoi");
-        return; // Arrêter l'exécution de la fonction
-      }
+      group.members.map((member) => {
+        if (member.userId === userId) {
+          res.status(409).send({
+            error: "userId even existed",
+          });
+        }
+        return;
+      });
 
       group.members.push({
         pseudoUser,

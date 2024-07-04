@@ -51,13 +51,14 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse }) => {
     console.log(values);
     await chosePseudo(values as IPseudoFormValues);
   };
+  const router = useRouter();
 
   return (
     <div className="z-50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bg-black/[0.96]  shadow-white shadow-2xl flex items-center justify-center">
       {joinPageRedirect === "choosePseudoPage" ? (
         <form className="flex flex-col gap-12" onClick={onSubmitPseudo}>
           <TextGenerateEffect
-            words="Céer votre pseudo!"
+            words="Céer votre groupe maintenant !"
             delay={0.2}
             className="text-[#ffffff60] text-3xl text-center  tracking-wider mb-10"
           />
@@ -75,16 +76,14 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse }) => {
                   className="flex items-center justify-center gap-3 "
                   type="submit"
                 >
-                  <span>c'est parti !</span> <ArrowRight />
+                  <span>Créer</span> <ArrowRight />
                 </button>
               </AnimatedShinyText>
             </div>
           </div>
         </form>
       ) : joinPageRedirect === "HomePage" ? (
-        <div className="bg-white p-32">
-          iezoeizoeiozieozieozieozieozieoziiiiiiiiiiiiiiii
-        </div>
+        router.push("/home")
       ) : (
         <form className="flex flex-col gap-12" onClick={onSubmit}>
           <TextGenerateEffect
@@ -111,7 +110,7 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse }) => {
                   className="flex items-center justify-center gap-3 "
                   type="submit"
                 >
-                  <span>login</span> <ArrowRight />
+                  <span>Créer</span> <ArrowRight />
                 </button>
               </AnimatedShinyText>
             </div>

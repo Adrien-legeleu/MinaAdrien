@@ -16,14 +16,14 @@ interface ICreateProps {
 
 export const Create: React.FC<ICreateProps> = ({ isCreateFalse }) => {
   const { onRegister } = useGroupContext();
-  const { user } = useCreateJoinContext();
+  const {user} = useCreateJoinContext()
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
     const values = {
-      userId: user?._id,
+      userId: user._id
       groupname: data.get("groupname"),
       pseudo: data.get("pseudo"),
     };
