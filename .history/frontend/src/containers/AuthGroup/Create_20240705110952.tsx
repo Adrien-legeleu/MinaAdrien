@@ -33,12 +33,12 @@ export const Create: React.FC<ICreateProps> = ({ isCreateFalse }) => {
   };
 
   return (
-    <div className=" z-50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-3xl  bg-white  py-12 px-20  shadow-white/70 shadow-2xl flex items-center justify-center">
+    <div className=" z-50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bgwhite/80   shadow-white shadow-2xl flex items-center justify-center">
       <form className="flex flex-col gap-12" onClick={onSubmit}>
         <TextGenerateEffect
           words="Céer votre groupe maintenant !"
           delay={0.2}
-          className="text-black/70 text-3xl text-center  tracking-wider mb-10"
+          className="text-[#ffffff60] text-3xl text-center  tracking-wider mb-10"
         />
         <div className="flex flex-col gap-4 text-lg items-center justify-center">
           <Input

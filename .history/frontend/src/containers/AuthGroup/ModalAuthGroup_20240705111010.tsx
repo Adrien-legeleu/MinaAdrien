@@ -27,7 +27,7 @@ export const ModalAuthGroup: React.FC<IModalProps> = ({
 
   return (
     <div
-      className={`h-screen w-full  fixed top-0 left-0 z-50 flex items-center justify-center ${
+      className={`h-screen w-full relative fixed top-0 left-0 z-50 flex items-center justify-center ${
         isModalOpen ? "visible" : "hidden"
       }`}
     >
