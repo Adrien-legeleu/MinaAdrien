@@ -28,12 +28,13 @@ export const Create: React.FC<ICreateProps> = ({ isCreateFalse, isCreate }) => {
       groupname: data.get("groupname"),
       pseudo: data.get("pseudo"),
     };
+    console.log(values);
 
     await onRegister(values as IGroupFormsValues);
   };
 
   return (
-    <div className="z-50">
+    <div>
       {" "}
       <div
         className={`h-screen w-full  backdrop-blur-sm  absolute top-0 left-0${
@@ -42,13 +43,10 @@ export const Create: React.FC<ICreateProps> = ({ isCreateFalse, isCreate }) => {
         onClick={isCreateFalse}
       ></div>
       <div className=" z-50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-3xl  bg-white  py-12 px-20  shadow-white/70 shadow-2xl flex items-center justify-center">
-        <div
-          className="absolute top-4 right-4 h-12 w-12 text-black/80 cursor-pointer hover:scale-105 duration-500 ease-in-out"
-          onClick={isCreateFalse}
-        >
-          <IconClose />
-        </div>
-        <form className="flex flex-col gap-12 " onClick={onSubmit}>
+        <form className="flex flex-col gap-12 z-50" onClick={onSubmit}>
+          <div className="absolute top-4 right-4 h-12 w-12 text-black/80">
+            <IconClose />
+          </div>
           <TextGenerateEffect
             words="Céer votre groupe maintenant !"
             delay={0.2}

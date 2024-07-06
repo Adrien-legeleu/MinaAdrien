@@ -42,23 +42,24 @@ export interface IUser {
 export const GroupContext = createContext<{
   isAuthenticated: boolean;
   joinPageRedirect: string | undefined;
-
+  isHome: boolean;
   onLogin: (values: IJoinFormsValues) => Promise<void>;
   onRegister: (values: IGroupFormsValues) => Promise<void>;
   chosePseudo: (values: IPseudoFormValues) => Promise<void>;
-  // onLogout: () => void;
+  onLogout: () => void;
 }>({
   isAuthenticated: false,
   joinPageRedirect: undefined,
+  isHome: false,
   onLogin: async () => {},
   onRegister: async () => {},
   chosePseudo: async () => {},
-  // onLogout: () => {},
+  onLogout: () => {},
 });
 
 export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  const [isHome, setIsHome] = useState(false);
   const { setUser } = useCreateJoinContext();
 
   const [joinPageRedirect, setJoinPageRedicrect] = useState<string | undefined>(
@@ -110,6 +111,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem("groupId", response.data.group._id);
       localStorage.setItem("authToken-group", response?.data?.authToken);
       setJoinPageRedicrect(response.data.redirect);
+      setIsAuthenticated(true);
     } catch (error: any) {
       console.log("Login error" + error);
     }
@@ -133,7 +135,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       const response = await api.post("/auth/choose-pseudo", values);
       console.log(response);
 
-      setIsAuthenticated(true);
+      setIsHome(true);
     } catch (error: any) {
       console.log("Register error" + error);
     }
@@ -144,16 +146,10 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       await api.get("/check-token-group");
       setIsAuthenticated(true);
     } catch (error: any) {
-      // onLogout();
+      onLogout();
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    if (joinPageRedirect === "HomePage") {
-      setIsAuthenticated(true);
-    }
-  }, [joinPageRedirect]);
 
   useEffect(() => {
     const authTokenGroup = localStorage.getItem("authToken-group");
@@ -171,9 +167,10 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         isAuthenticated,
         onLogin,
         onRegister,
-
+        ,
         joinPageRedirect,
         chosePseudo,
+        isHome,
       }}
     >
       {children}

@@ -7,15 +7,15 @@ import React, { useEffect } from "react";
 
 export default function page() {
   const router = useRouter();
-  const { isAuthenticated } = useGroupContext();
+  const { isHome } = useGroupContext();
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isHome) {
       router.push("/home");
     }
-  }, [isAuthenticated]);
+  }, [isHome]);
   return (
     <main>
-      <AuthGroup />
+      <div>dsdsdsdsdsd</div>
     </main>
   );
 }

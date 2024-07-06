@@ -150,12 +150,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    if (joinPageRedirect === "HomePage") {
-      setIsAuthenticated(true);
-    }
-  }, [joinPageRedirect]);
-
-  useEffect(() => {
     const authTokenGroup = localStorage.getItem("authToken-group");
 
     if (!authTokenGroup) {

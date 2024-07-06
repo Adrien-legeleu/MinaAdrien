@@ -65,7 +65,7 @@ export const ModalAuthGroup: React.FC<IModalProps> = ({
         </div>
       </div>
       {isCreate && <Create isCreateFalse={isCreateFalse} isCreate={isCreate} />}
-      {isJoin && <Join isJoinFalse={isJoinFalse} isJoin={isJoin} />}
+      {isJoin && <Join isJoinFalse={isJoinFalse} />}
     </div>
   );
 };

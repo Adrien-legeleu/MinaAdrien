@@ -80,7 +80,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       await api.get("/auth/check-token-user");
       setIsAuthenticated(true);
     } catch (error: any) {
-      // onLogout();
+      onLogout();
       console.error(error);
     }
   };

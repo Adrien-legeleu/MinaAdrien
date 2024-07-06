@@ -24,7 +24,7 @@ export const UserContext = createContext({
   isAuthenticated: false,
   onLogin: async (values: ISignInFormValues) => {},
   onRegister: async (values: ISignUpFormValues) => {},
-  // onLogout: () => {},
+  onLogout: () => {},
 });
 
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
@@ -80,7 +80,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       await api.get("/auth/check-token-user");
       setIsAuthenticated(true);
     } catch (error: any) {
-      // onLogout();
+      onLogout();
       console.error(error);
     }
   };
