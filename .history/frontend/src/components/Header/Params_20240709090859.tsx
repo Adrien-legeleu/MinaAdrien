@@ -67,7 +67,7 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
   return (
     <div
       className={`grid grid-cols-40/60 fixed w-full h-screen bg-white px-32 top-0 left-0 z-50 ${
-        isParams ? "visible opacity-100" : "opacity-0 invisible"
+        isParams ? "visible opacity-95" : "opacity-0 invisible"
       }  duration-300 `}
     >
       <div

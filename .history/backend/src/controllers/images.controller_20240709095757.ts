@@ -80,7 +80,7 @@ export class ImageController {
       if (uploadedImageUrls.length > 0) {
         const image = await ImageModel.create({
           groupId,
-          url: uploadedImageUrls,
+          url,
           legend,
           photoDate,
           isLiked,

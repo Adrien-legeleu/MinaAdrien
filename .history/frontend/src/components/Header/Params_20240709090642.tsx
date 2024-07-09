@@ -65,15 +65,8 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
   };
 
   return (
-    <div
-      className={`grid grid-cols-40/60 fixed w-full h-screen bg-white px-32 top-0 left-0 z-50 ${
-        isParams ? "visible opacity-100" : "opacity-0 invisible"
-      }  duration-300 `}
-    >
-      <div
-        className="h-12 w-12 fixed top-5 right-8 hover:scale-105 ease-in-out duration-300 cursor-pointer"
-        onClick={closeParams}
-      >
+    <div className="grid grid-cols-40/60 fixed w-full h-screen bg-white px-32 top-0 left-0 z-50">
+      <div className="h-12 w-12 fixed top-5 right-5" onClick={closeParams}>
         <IconClose />
       </div>
       <ul className="py-20">

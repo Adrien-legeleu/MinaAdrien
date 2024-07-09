@@ -3,9 +3,7 @@
 import { IGroupDetailsProps } from "@/app/home/[id]/page";
 import { FileImages } from "@/components/File";
 import { HeaderParams } from "@/components/Header";
-import { useDescriptionContext } from "@/context/DescriptionContext";
 import { useImageContext } from "@/context/ImageContexts";
-import { UploadFile } from "antd";
 import { useState } from "react";
 
 type GroupContainerDetailsProps = IGroupDetailsProps;
@@ -14,7 +12,6 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
   params,
 }) => {
   const { images } = useImageContext();
-  const { description } = useDescriptionContext();
   const [newImages, setNewImages] = useState<string[]>([]);
 
   const [dataImage, setDataImage] = useState<any>({
@@ -24,8 +21,8 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
     isLiked: false,
   });
 
-  const handleImageUpload = (key: string, fileList: UploadFile[]) => {
-    const uploadedImages: string[] = fileList.map((file) => file.url || "");
+  const handleImageUpload = (key: string, fileList: []) => {
+    const uploadedImages: string[] = fileList.map((file) => file?.url || "");
     setNewImages(uploadedImages);
     changeImageValue(key, uploadedImages);
   };
@@ -41,13 +38,6 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
   return (
     <div className="py-8 px-12">
       <HeaderParams />
-      {
-        <div className="w-1/2 mx-auto">
-          <p className="text-3xl text-[#d83c3c]  leading-loose tracking-wider">
-            {description[0]?.description}
-          </p>
-        </div>
-      }
       <div className="w-1/2 mx-auto">
         <p className="text-3xl text-[#e04040] text-center tracking-widest leading-loose">
           {/* You can use other data from images array if needed */}

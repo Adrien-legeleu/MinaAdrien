@@ -60,8 +60,8 @@ export class ImageController {
       let uploadedImageUrls: string[] = [];
 
       if (Array.isArray(url)) {
-        for (const urlImage of url) {
-          const uploadRes = await cloudinary.uploader.upload(urlImage, {
+        for (const url of url) {
+          const uploadRes = await cloudinary.uploader.upload(url, {
             upload_preset: "app-ecommerce",
           });
           if (uploadRes) {
@@ -80,7 +80,7 @@ export class ImageController {
       if (uploadedImageUrls.length > 0) {
         const image = await ImageModel.create({
           groupId,
-          url: uploadedImageUrls,
+          url,
           legend,
           photoDate,
           isLiked,
