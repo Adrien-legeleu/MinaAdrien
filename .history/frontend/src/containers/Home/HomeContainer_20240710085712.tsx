@@ -38,7 +38,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
     const values: IImageForm = {
       legend: data.get("legend") as string,
       url: dataImage,
-      datePhoto: data.get("datePhoto") as string,
+      datePhoto: data.get("datePhoto"),
       isLiked: false,
       groupId: groupId,
     };

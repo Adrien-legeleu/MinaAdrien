@@ -12,17 +12,17 @@ import {
 } from "react";
 
 export interface IImageForm {
-  url: string[];
+  url: string;
   legend: string;
-  groupId: string | null;
-  datePhoto: string;
+  groupId: string;
+  datePhoto: Date;
   isLiked: boolean;
 }
 export interface IImageFormUpdate {
   url?: string;
   legend?: string;
   groupId?: string;
-  datePhoto?: string;
+  datePhoto?: Date;
   isLiked?: boolean;
   imageId: string;
 }
@@ -31,7 +31,7 @@ export interface IImage {
   groupId: string;
   url: string;
   legend: string;
-  datePhoto: string;
+  datePhoto: Date;
   isLiked: boolean;
 }
 
@@ -53,7 +53,6 @@ export const ImageContext = createContext<ImageContextType>({
 
 export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
   const [images, setImages] = useState<any>([]);
-  const groupId = localStorage.getItem("groupId");
 
   const createImage = async (values: IImageForm) => {
     try {
@@ -95,7 +94,7 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
 
   const getImages = async () => {
     try {
-      const response = await api.get(`/image/${groupId}`);
+      const response = await api.get("/image");
       setImages(response.data);
     } catch (error: any) {
       console.log(error);

@@ -29,7 +29,6 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
 
   const changeImageValue = (values: string[]) => {
     setDataImage(values);
-    console.log(values);
   };
 
   const submitImage = (e: any) => {
@@ -38,12 +37,10 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
     const values: IImageForm = {
       legend: data.get("legend") as string,
       url: dataImage,
-      datePhoto: data.get("datePhoto") as string,
+      datePhoto: new Date(data.get("datePhoto") as string),
       isLiked: false,
       groupId: groupId,
     };
-    console.log(values);
-
     createImage(values);
   };
 

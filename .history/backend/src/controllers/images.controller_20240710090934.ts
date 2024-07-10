@@ -12,7 +12,7 @@ export class ImageController {
         });
         return;
       }
-      const images = await ImageModel.find({groupId});
+      const images = await ImageModel.find(groupId);
 
       res.status(200).send(images);
     } catch (err: any) {

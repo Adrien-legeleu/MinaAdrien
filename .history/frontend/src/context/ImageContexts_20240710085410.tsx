@@ -53,7 +53,6 @@ export const ImageContext = createContext<ImageContextType>({
 
 export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
   const [images, setImages] = useState<any>([]);
-  const groupId = localStorage.getItem("groupId");
 
   const createImage = async (values: IImageForm) => {
     try {
@@ -95,7 +94,7 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
 
   const getImages = async () => {
     try {
-      const response = await api.get(`/image/${groupId}`);
+      const response = await api.get("/image");
       setImages(response.data);
     } catch (error: any) {
       console.log(error);

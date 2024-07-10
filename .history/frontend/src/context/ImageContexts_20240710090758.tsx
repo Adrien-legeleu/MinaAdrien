@@ -95,7 +95,7 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
 
   const getImages = async () => {
     try {
-      const response = await api.get(`/image/${groupId}`);
+      const response = await api.get("/image", groupId);
       setImages(response.data);
     } catch (error: any) {
       console.log(error);

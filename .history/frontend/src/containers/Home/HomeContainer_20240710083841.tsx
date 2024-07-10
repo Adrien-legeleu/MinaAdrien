@@ -4,7 +4,7 @@ import { IGroupDetailsProps } from "@/app/home/[id]/page";
 import { FileImages } from "@/components/File";
 import { HeaderParams } from "@/components/Header";
 import { useDescriptionContext } from "@/context/DescriptionContext";
-import { IImage, IImageForm, useImageContext } from "@/context/ImageContexts";
+import { useImageContext } from "@/context/ImageContexts";
 import { UploadFile } from "antd";
 import { useState } from "react";
 
@@ -19,32 +19,33 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
 
   const groupId = localStorage.getItem("groupId");
 
-  const [dataImage, setDataImage] = useState<string[]>([]);
+  const [dataImage, setDataImage] = useState<any>("");
 
-  const handleImageUpload = (imgUrlKey: string, fileList: UploadFile[]) => {
+  const handleImageUpload = (key: string, fileList: UploadFile[]) => {
     const uploadedImages: string[] = fileList.map((file) => file.url || "");
     setNewImages(uploadedImages);
-    changeImageValue(uploadedImages);
+    changeImageValue(key, uploadedImages);
   };
 
-  const changeImageValue = (values: string[]) => {
-    setDataImage(values);
-    console.log(values);
+  const changeImageValue = (key: keyof any | string, value: any) => {
+    setDataImage((prev: any) => ({
+      ...prev,
+      [key]: value,
+    }));
+    console.log(dataImage);
   };
 
   const submitImage = (e: any) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const values: IImageForm = {
-      legend: data.get("legend") as string,
-      url: dataImage,
-      datePhoto: data.get("datePhoto") as string,
-      isLiked: false,
-      groupId: groupId,
+    const values = {
+      legend : data.get("fate-photo")
+      url,
+      datePhoto : data.get("date-phoyo")
+      isLiked :false
+      groupId
     };
-    console.log(values);
-
-    createImage(values);
+    createImage();
   };
 
   return (
@@ -65,7 +66,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
       </div>
       <form onSubmit={submitImage}>
         <input type="text" name="legend" placeholder="legend" />
-        <input type="text" name="legend" placeholder="date-photo" />
+        <input type="date" name="legend" placeholder="date-photo" />
 
         <FileImages
           handleImageUpload={handleImageUpload}
