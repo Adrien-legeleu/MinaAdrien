@@ -1,15 +1,22 @@
 import mongoose from "mongoose";
 
-export interface IImage {
-  _id?: string;
-  groupId: string;
-  url: string[];
-  legend?: string;
-  datePhoto: Date;
-  isLiked: boolean;
+interface ITheme {
+  _id: string;
+  title: string;
+  bio: string;
+  images: [
+    {
+      _id: string;
+      groupId: string;
+      url: string[];
+      legend?: string;
+      datePhoto: Date;
+      isLiked: boolean;
+    }
+  ];
 }
 
-export const ImageSchema = new mongoose.Schema<IImage>(
+export const ThemeSchema = new mongoose.Schema<ITheme>(
   {
     url: {
       type: [String],
@@ -37,4 +44,4 @@ export const ImageSchema = new mongoose.Schema<IImage>(
   }
 );
 
-export const ImageModel = mongoose.model("images", ImageSchema);
+export const ImageModel = mongoose.model("images", ThemeSchema);
