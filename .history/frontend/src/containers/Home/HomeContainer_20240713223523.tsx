@@ -8,7 +8,6 @@ import { ModalProvider } from "@/components/UI/AnimatedModal";
 import AnimatedShinyText from "@/components/UI/ShinyText";
 import { useDescriptionContext } from "@/context/DescriptionContext";
 import { cn } from "@/utils/cn";
-import { useState } from "react";
 
 type GroupContainerDetailsProps = IGroupDetailsProps;
 
@@ -17,22 +16,9 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
 }) => {
   const { description } = useDescriptionContext();
 
-  const [isParams, setIsParams] = useState(false);
-
-  const closeParams = () => {
-    setIsParams(false);
-  };
-  const openParams = () => {
-    setIsParams(true);
-  };
   return (
     <div className="py-8 ">
-      <HeaderParams
-        isParams={isParams}
-        closeParams={closeParams}
-        openParams={openParams}
-      />
-      ;
+      <HeaderParams />
       {
         <div className="w-1/2 mx-auto">
           {description[0] ? (
@@ -52,7 +38,6 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
                 className={cn(
                   "group rounded-full p-1 border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
                 )}
-                onClick={() => setIsParams(true)}
               >
                 <AnimatedShinyText className="text-xl px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
                   <button
@@ -68,6 +53,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
         </div>
       }
       <ImageHome />
+
       <ModalProvider>
         <ThemeHome />
       </ModalProvider>

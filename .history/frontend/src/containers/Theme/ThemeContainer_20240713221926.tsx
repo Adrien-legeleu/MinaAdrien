@@ -128,7 +128,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                           <IconEllipsis />
                         </div>
                         <div
-                          className={`absolute -top-24 z-20 right-0 flex items-end justify-center flex-col gap-2 ${
+                          className={`absolute -top-20 z-20 right-0 flex items-end justify-center flex-col gap-2 ${
                             updateDeleteOpen && img._id === imgId
                               ? "visible opacity-100 "
                               : "invisible opacity-0"
@@ -174,7 +174,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                           translateX={-30}
                           className="px-4 py-2 rounded-xl   text-black/80  tracking-wider font-semibold"
                         >
-                          {img.datePhoto ? img.datePhoto : "../../.."}
+                          {img.photoDate ? img.photoDate : "../../.."}
                         </CardItem>
 
                         <CardItem

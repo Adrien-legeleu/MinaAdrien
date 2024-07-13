@@ -31,13 +31,13 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
   const handleImageUpload = (imgUrlKey: string, fileList: UploadFile[]) => {
     const uploadedImages: string[] = fileList.map((file) => file.url || "");
     setNewImages(uploadedImages);
-    // changeImageValue(uploadedImages);
+    changeImageValue(uploadedImages);
   };
 
-  //   const changeImageValue = (values: string[]) => {
-  //     setDataImage(values);
-  //     console.log(values);
-  //   };
+  const changeImageValue = (values: string[]) => {
+    setDataImage(values);
+    console.log(values);
+  };
 
   useEffect(() => {
     if (data?.url) {
@@ -55,9 +55,9 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
     const updatedImages = theme?.images.map((img: any) =>
       img._id === imgId
         ? {
-            url: newImages,
+            url: dataImage ? dataImage : newImages,
             legend: formData.get("legend") as string,
-            photoDate: formData.get("dataPhoto") as string,
+            dataPhoto: formData.get("dataPhoto") as string,
             groupId: groupId,
           }
         : img

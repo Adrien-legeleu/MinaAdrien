@@ -57,7 +57,7 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
         ? {
             url: newImages,
             legend: formData.get("legend") as string,
-            photoDate: formData.get("dataPhoto") as string,
+            dataPhoto: formData.get("dataPhoto") as string,
             groupId: groupId,
           }
         : img
@@ -98,10 +98,7 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
       />
 
       <DatePicker
-        defaultValue={dayjs(
-          data?.dataPhoto ? data?.dataPhoto : "07/02/2024",
-          dateFormatList[0]
-        )}
+        defaultValue={dayjs(data?.dataPhoto, dateFormatList[0])}
         name="dataPhoto"
         format={dateFormatList}
       />

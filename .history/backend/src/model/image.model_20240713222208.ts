@@ -5,7 +5,7 @@ export interface IImage {
   groupId: string;
   url: string[];
   legend?: string;
-  datePhoto?: string;
+  datePhoto?: String;
   isLiked: boolean;
 }
 

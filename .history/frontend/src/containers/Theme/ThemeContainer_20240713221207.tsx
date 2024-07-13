@@ -67,7 +67,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
     getTheme();
   }, [themes]);
 
-  const groupId = localStorage.getItem("groupId") || "";
+  const groupId = localStorage.getItem("groupId");
 
   const onDeleteImage = (imgId: string) => {
     const updatedImages = theme?.images.filter((img) => img._id !== imgId);
@@ -128,27 +128,24 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                           <IconEllipsis />
                         </div>
                         <div
-                          className={`absolute -top-24 z-20 right-0 flex items-end justify-center flex-col gap-2 ${
+                          className={`absolute -top-32 z-20 right-0 flex items-end justify-center flex-col gap-4 ${
                             updateDeleteOpen && img._id === imgId
                               ? "visible opacity-100 "
                               : "invisible opacity-0"
                           } duration-200 ease-in-out`}
                         >
-                          <p
-                            onClick={() => onDeleteImage(img._id)}
-                            className="flex cursor-pointer gap-4 items-center justify-center text-sm px-4 py-2 rounded-full text-black/80 bg-white/95 border-[1px] border-black/20"
-                          >
+                          <p className="flex cursor-pointer gap-4 items-center justify-center px-4 py-2 rounded-full text-black/80 bg-white/95 border-[1px] border-black/20">
                             supprimer{" "}
-                            <div className="h-4 w-4">
+                            <div className="h-6 w-6">
                               <IconDelete />
                             </div>{" "}
                           </p>
                           <p
                             onClick={() => themeUpdateOpen(img)}
-                            className="flex gap-4 cursor-pointer text-sm items-center justify-center px-4 py-2 rounded-full text-black/80 bg-white/95 border-[1px] border-black/20"
+                            className="flex gap-4 cursor-pointer items-center justify-center px-4 py-2 rounded-full text-black/80 bg-white/95 border-[1px] border-black/20"
                           >
                             modifier{" "}
-                            <div className="h-4 w-4">
+                            <div className="h-6 w-6">
                               <IconUpdate />
                             </div>{" "}
                           </p>
@@ -174,7 +171,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                           translateX={-30}
                           className="px-4 py-2 rounded-xl   text-black/80  tracking-wider font-semibold"
                         >
-                          {img.datePhoto ? img.datePhoto : "../../.."}
+                          {img.dataPhoto ? img.dataPhoto : "../../.."}
                         </CardItem>
 
                         <CardItem

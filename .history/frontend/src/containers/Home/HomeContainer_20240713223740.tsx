@@ -16,23 +16,16 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
   params,
 }) => {
   const { description } = useDescriptionContext();
-
   const [isParams, setIsParams] = useState(false);
 
   const closeParams = () => {
     setIsParams(false);
   };
-  const openParams = () => {
-    setIsParams(true);
-  };
+
   return (
     <div className="py-8 ">
-      <HeaderParams
-        isParams={isParams}
-        closeParams={closeParams}
-        openParams={openParams}
-      />
-      ;
+  const closeParams = () => {
+      <HeaderParams isParams={isParams}  closeParams={closeParams} />
       {
         <div className="w-1/2 mx-auto">
           {description[0] ? (
@@ -68,6 +61,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
         </div>
       }
       <ImageHome />
+
       <ModalProvider>
         <ThemeHome />
       </ModalProvider>

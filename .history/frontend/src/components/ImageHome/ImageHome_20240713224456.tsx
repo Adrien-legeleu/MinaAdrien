@@ -56,7 +56,7 @@ export const ImageHome = () => {
       ) : (
         <p
           className={cn(
-            `text-4xl w-1/2 py-40 mx-auto tracking-widest text-center leading-loose font-semibold  animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
+            `text-4xl w-1/2 mx-auto tracking-widest text-center leading-loose font-semibold  animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
           )}
         >
           Ajoutez des photos pour donner plus de vie à votre groupe ! 📸

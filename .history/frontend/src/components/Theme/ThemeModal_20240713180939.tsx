@@ -53,7 +53,7 @@ export function ThemeModal() {
     const formDataImages: IImageTheme[] = dataImages.map((img) => ({
       legend: "",
       dataPhoto: "",
-      url: img,
+      url: [img],
       groupId: groupId,
     }));
 
@@ -66,7 +66,6 @@ export function ThemeModal() {
     };
 
     console.log(values);
-    console.log("ezezzezzzezezezeze");
     openModalFalse();
     createTheme(values);
   };
