@@ -1,7 +1,7 @@
 import { type Response } from "express";
 import jwt from "jsonwebtoken";
 
-export class IsUserConnectedMiddleware {
+export class IsConnectedMiddleware {
   execute(req: any, res: Response, next: any): void {
     try {
       const authToken = req.headers.authorization?.split(" ")?.[1] || "";

@@ -35,7 +35,7 @@ export default function GroupPage() {
           <lord-icon
             src="https://cdn.lordicon.com/sjxamlmf.json"
             trigger="loop"
-            colors="primary:#ffffff,secondary:#000000"
+            colors="primary:#ffffff0,secondary:#000000"
             style={{ width: "150px", height: "150px" }}
           ></lord-icon>
         </BackgroundGradientAnimation>

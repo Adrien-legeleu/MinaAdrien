@@ -149,8 +149,8 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const chosePseudo = async (values: IPseudoFormValues) => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       const response = await api.post("/auth/choose-pseudo", values);
       console.log(response);
 

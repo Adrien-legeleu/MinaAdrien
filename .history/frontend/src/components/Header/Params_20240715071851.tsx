@@ -76,25 +76,17 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
       >
         <IconClose />
       </div>
-      <ul className="my-20 flex items-start justify-center gap-10 flex-col border-r-2 border-black/30">
-        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
+      <ul className="py-20 flex items-start justify-center gap-10 flex-col">
+        <li className="pb-2 border-b-[2px] border-black/80 text-xl">
           Votre Groupe
         </li>
-        <li className="pb-2 border-b-[2px]  border-black/80 text-xl tracking-wider text-black/80 cursor-pointer">
-          Vos Descriptions
-        </li>
-        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
-          Thèmes d'affichage
-        </li>
-        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
-          Sortir du groupe
-        </li>
-        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
-          Se Déconnecter
-        </li>
+        <li>Vos Descriptions</li>
+        <li>Thèmes d'affichage</li>
+        <li>Sortir du groupe</li>
+        <li>Se Déconnecter</li>
       </ul>
       <div
-        className="space-y-12 py-20 px-12 overflow-y-scroll h-screen "
+        className="space-y-12 py-20 px-12 overflow-y-scroll h-screen"
         style={{ scrollbarWidth: "none" }}
       >
         <h2 className="text-4xl tracking-wider text-center mb-8">

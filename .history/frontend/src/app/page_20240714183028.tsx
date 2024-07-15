@@ -16,6 +16,8 @@ export default function Page() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log("ezeze");
+    console.log(isAuthentificatedUser);
     if (isAuthentificatedUser) {
       router.push("/group");
     }
@@ -28,8 +30,8 @@ export default function Page() {
           <lord-icon
             src="https://cdn.lordicon.com/sjxamlmf.json"
             trigger="loop"
-            colors="primary:#ffffff,secondary:#000000"
-            style={{ width: "150px", height: "150px" }}
+            colors="primary:#ffffff00,secondary:#000000"
+            className="w-60 h-60"
           ></lord-icon>
         </BackgroundGradientAnimation>
       )}

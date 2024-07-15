@@ -90,6 +90,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       console.log("Token valid");
     } catch (error: any) {
       console.error(error);
+      // Only logout if the error is specifically due to an invalid or expired token
 
       onLogout();
     }

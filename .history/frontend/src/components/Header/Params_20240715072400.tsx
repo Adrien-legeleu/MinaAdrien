@@ -77,24 +77,24 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
         <IconClose />
       </div>
       <ul className="my-20 flex items-start justify-center gap-10 flex-col border-r-2 border-black/30">
-        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
+        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50">
           Votre Groupe
         </li>
-        <li className="pb-2 border-b-[2px]  border-black/80 text-xl tracking-wider text-black/80 cursor-pointer">
+        <li className="pb-2 border-b-[2px]  border-black/80 text-xl tracking-wider text-black/80">
           Vos Descriptions
         </li>
-        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
+        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50">
           Thèmes d'affichage
         </li>
-        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
+        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50">
           Sortir du groupe
         </li>
-        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
+        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50">
           Se Déconnecter
         </li>
       </ul>
       <div
-        className="space-y-12 py-20 px-12 overflow-y-scroll h-screen "
+        className="space-y-12 py-20 px-12 overflow-y-scroll h-screen w-full items-center justify-center"
         style={{ scrollbarWidth: "none" }}
       >
         <h2 className="text-4xl tracking-wider text-center mb-8">

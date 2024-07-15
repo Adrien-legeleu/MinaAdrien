@@ -25,7 +25,7 @@ const config: Config = {
         block: "0 0 50px 30px rgb(0,0,0) ",
       },
       gridTemplateColumns: {
-        "40/60": "35% 65%",
+        "40/60": "45% 55%",
       },
       animation: {
         first: "moveVertical 30s ease infinite",

@@ -23,20 +23,20 @@ export default function GroupPage() {
       if (isAuthenticated) {
         router.push(`/home/${group?._id}`);
       }
-    } else {
-      router.push("/");
+    }else {
+      router.push("/")
     }
   }, [isAuthenticated, group, router]);
 
   return (
     <main>
       {isLoading && (
-        <BackgroundGradientAnimation className="items-center justify-center flex w-screen h-screen">
+        <BackgroundGradientAnimation className="items-center justify-center flex">
           <lord-icon
             src="https://cdn.lordicon.com/sjxamlmf.json"
             trigger="loop"
-            colors="primary:#ffffff,secondary:#000000"
-            style={{ width: "150px", height: "150px" }}
+            colors="primary:#ffffff0,secondary:#000000"
+            className="w-32 h-32"
           ></lord-icon>
         </BackgroundGradientAnimation>
       )}

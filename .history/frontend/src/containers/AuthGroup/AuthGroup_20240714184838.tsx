@@ -75,7 +75,7 @@ export const AuthGroup = () => {
     <BackgroundGradientAnimation>
       <div className="absolute inset-0 z-50 flex gap-16  flex-col pt-10 items-center justify-center">
         <BackButton isGroupFalse={isGroupFalse} />
-        <div className="absolute top-10 right-20 z-50 text-white/80 h-16 w-16 ">
+        <div className="absolute top-10 right-20 z-50 text-white/80 h-16 w-16 relative">
           <Logout />
         </div>
         <h1 className="text-5xl tracking-wider font-bold bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">

@@ -5,7 +5,7 @@ import { IconLogout } from "../icons";
 export const Logout = () => {
   const { onLogout } = useUserContext();
   return (
-    <div className="cursor-pointer" onClick={onLogout}>
+    <div className="cursor-pointer w-full h-full" onClick={onLogout}>
       <IconLogout />
     </div>
   );

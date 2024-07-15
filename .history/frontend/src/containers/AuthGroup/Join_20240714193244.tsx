@@ -99,7 +99,7 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
         ) : (
           <form
             className="flex flex-col items-center justify-center gap-12"
-            onSubmit={onSubmit}
+            onClick={onSubmit}
           >
             <TextGenerateEffect
               words="Rejoignez un groupe maintenant!"
