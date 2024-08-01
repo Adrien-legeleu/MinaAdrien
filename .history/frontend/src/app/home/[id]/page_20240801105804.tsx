@@ -13,11 +13,11 @@ export interface IGroupDetailsProps {
 
 export default function page({ params }: IGroupDetailsProps) {
   const router = useRouter();
-  const { isAuthenticated, group } = useGroupContext();
+  const { isAuthenticated, group, isLoading } = useGroupContext();
   const { isAuthentificatedUser } = useUserContext();
+  console.log(group);
   useEffect(() => {
     console.log("euizueizueiu");
-    console.log(isAuthenticated , group);
 
     console.log(isAuthentificatedUser);
 

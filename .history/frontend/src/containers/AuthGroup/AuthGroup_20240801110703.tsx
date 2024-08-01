@@ -99,7 +99,7 @@ export const AuthGroup = () => {
                     {isModalDeleteOpen && groupId === group.groupId ? (
                       <div
                         onClick={() => deleteGroup(group.groupId)}
-                        className=" top-0 right-2 absolute h-full w-full p-1 z-10 text-black/80 bg-white/90 rounded-full flex items-center justify-center"
+                        className=" px-1 top-0 left-0 py-2 z-10 text-black/80 bg-white/80 rounded-full flex items-center justify-center"
                       >
                         <IconDelete />
                       </div>

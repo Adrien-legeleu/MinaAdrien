@@ -19,10 +19,6 @@ export default function GroupPage() {
   console.log(group);
 
   useEffect(() => {
-    console.log("euizueizueiu");
-
-    console.log(isAuthentificatedUser);
-
     if (isAuthentificatedUser) {
       if (isAuthenticated) {
         router.push(`/home/${group?._id}`);
@@ -32,9 +28,6 @@ export default function GroupPage() {
     }
   }, [isAuthenticated, group, router]);
   useEffect(() => {
-    console.log("euizueizueiu");
-
-    console.log(isAuthentificatedUser);
     if (isAuthentificatedUser) {
       if (isAuthenticated) {
         router.push(`/home/${group?._id}`);
