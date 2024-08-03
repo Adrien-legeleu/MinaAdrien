@@ -9,7 +9,6 @@ import AnimatedShinyText from "../UI/ShinyText";
 import { cn } from "@/utils/cn";
 import { Input } from "../UI";
 import { Modal, ModalTrigger } from "../UI/AnimatedModal";
-import Link from "next/link";
 
 export const ImageHome = () => {
   const [newImages, setNewImages] = useState<string[]>([]);
@@ -52,7 +51,7 @@ export const ImageHome = () => {
     setIsCreateOpen(!isCreateOpen);
   };
   return (
-    <div className="h-full relative w-full ">
+    <div className="h-full relative w-full items-center justify-center flex flex-col">
       {images[0] ? (
         <ParallaxScrollSecond images={images} />
       ) : (
@@ -65,7 +64,7 @@ export const ImageHome = () => {
         </p>
       )}
       <Modal>
-        <Link href="/gallery" className="w-full h-full flex  justify-center ">
+        <div className="w-full h-full flex items-center ">
           <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
             <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
               Voir votre LovniaGallery
@@ -74,7 +73,7 @@ export const ImageHome = () => {
               🎥
             </div>
           </ModalTrigger>
-        </Link>
+        </div>
       </Modal>
       <div className="absolute top-1/2 right-10">
         <div

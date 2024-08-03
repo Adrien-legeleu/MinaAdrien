@@ -9,7 +9,6 @@ import AnimatedShinyText from "../UI/ShinyText";
 import { cn } from "@/utils/cn";
 import { Input } from "../UI";
 import { Modal, ModalTrigger } from "../UI/AnimatedModal";
-import Link from "next/link";
 
 export const ImageHome = () => {
   const [newImages, setNewImages] = useState<string[]>([]);
@@ -52,7 +51,7 @@ export const ImageHome = () => {
     setIsCreateOpen(!isCreateOpen);
   };
   return (
-    <div className="h-full relative w-full ">
+    <div className="h-full relative w-full">
       {images[0] ? (
         <ParallaxScrollSecond images={images} />
       ) : (
@@ -64,18 +63,16 @@ export const ImageHome = () => {
           Ajoutez des photos pour donner plus de vie à votre groupe ! 📸
         </p>
       )}
-      <Modal>
-        <Link href="/gallery" className="w-full h-full flex  justify-center ">
-          <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
-            <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
-              Voir votre LovniaGallery
-            </span>
-            <div className="-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
-              🎥
-            </div>
-          </ModalTrigger>
-        </Link>
-      </Modal>
+       <Modal>
+        <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
+          <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
+            Créer votre Inspire
+          </span>
+          <div className="-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
+            🌟
+          </div>
+        </ModalTrigger>
+        <Modal/>
       <div className="absolute top-1/2 right-10">
         <div
           className="p-3 flex absolute cursor-pointer top-0 right-0 z-10 items-center justify-center shadow-xl shadow-black/60 bg-gray-50 rounded-full h-16 w-16"
