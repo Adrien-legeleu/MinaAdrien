@@ -36,21 +36,26 @@ export const GalleryContainer = () => {
       />
       <div className="grid grid-cols-4 gap-7 px-7 pt-10">
         {images.map((image: IImage) => {
+          // Vérifiez que image.url est défini
           if (!image.url) return null;
 
           const isSelected = selectedImages.includes(image.url);
           return (
-            <div key={image.url} className="group relative">
-              {isSelected && (
-                <div
-                  className="absolute z-20 top-2 right-2  w-7 h-7 text-white/80 rounded-full"
-                  onClick={() => selectImage(image.url!)}
-                >
-                  <IconSelect />
-                </div>
-              )}
+            <div
+              key={image.url}
+              className={`group relative ${
+                isSelected ? "border-4 border-blue-500" : ""
+              }`}
+            >
               <div className="group-hover:opacity-100 opacity-0 duration-200 ease-in-out w-full h-full absolute top-0 left-0 bg-black/30 rounded-3xl z-10">
-                {!isSelected && (
+                {isSelected ? (
+                  <div
+                    className="absolute top-2 right-2  bg-white w-6 h-6 text-black"
+                    onClick={() => selectImage(image.url!)}
+                  >
+                    <IconSelect />
+                  </div>
+                ) : (
                   <div
                     onClick={() => selectImage(image.url!)}
                     className="absolute top-2 right-2 w-6 h-6 rounded-full bg-transparent border-[1px] border-white/60"

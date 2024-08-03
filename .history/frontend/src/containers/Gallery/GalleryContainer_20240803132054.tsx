@@ -43,14 +43,14 @@ export const GalleryContainer = () => {
             <div key={image.url} className="group relative">
               {isSelected && (
                 <div
-                  className="absolute z-20 top-2 right-2  w-7 h-7 text-white/80 rounded-full"
+                  className="absolute top-2 right-2  w-7 h-7 text-white rounded-full"
                   onClick={() => selectImage(image.url!)}
                 >
                   <IconSelect />
                 </div>
               )}
               <div className="group-hover:opacity-100 opacity-0 duration-200 ease-in-out w-full h-full absolute top-0 left-0 bg-black/30 rounded-3xl z-10">
-                {!isSelected && (
+                {isSelected && (
                   <div
                     onClick={() => selectImage(image.url!)}
                     className="absolute top-2 right-2 w-6 h-6 rounded-full bg-transparent border-[1px] border-white/60"

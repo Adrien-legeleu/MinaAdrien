@@ -43,7 +43,7 @@ export const GalleryContainer = () => {
             <div key={image.url} className="group relative">
               {isSelected && (
                 <div
-                  className="absolute z-20 top-2 right-2  w-7 h-7 text-white/80 rounded-full"
+                  className="absolute top-2 right-2  w-7 h-7 text-white rounded-full"
                   onClick={() => selectImage(image.url!)}
                 >
                   <IconSelect />
