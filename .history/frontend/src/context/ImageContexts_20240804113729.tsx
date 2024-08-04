@@ -33,7 +33,7 @@ export interface IImage {
   url?: string;
   groupId: string | null;
   isLiked: boolean;
-  _id?: string;
+  _id: string;
 }
 
 interface ImageContextType {

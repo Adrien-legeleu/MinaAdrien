@@ -72,17 +72,18 @@ export const GalleryContainer = () => {
         })}
       </div>
       {selectedImages && (
-        <div className="fixed bottom-10 right-7 flex items-center justify-center gap-4 ">
-          <button
-            className="p-2  bg-white text-black rounded-full w-10 h-10 flex items-center justify-center"
-            onClick={() => deleteOneImage(selectedImages)}
-          >
-            <IconDelete />
-          </button>
-          <button className="p-2 w-10 h-10 bg-white text-black rounded-full flex items-center justify-center">
-            <IconDeleteAll />
-          </button>
-
+        <div className="fixed bottom-10 right-7 grid grid-cols-2 items-center justify-center gap-5 ">
+          <div className="space-x-3">
+            <button
+              className="p-2 l bg-white text-black rounded-full w-7 h-7"
+              onClick={() => deleteOneImage(selectedImages)}
+            >
+              <IconDelete />
+            </button>
+            <button className="p-2 w-7 h-7 bg-white text-black rounded-full">
+              <IconDeleteAll />
+            </button>
+          </div>
           <button className="bg-black text-white rounded-full py-3 px-5">
             annuler
           </button>

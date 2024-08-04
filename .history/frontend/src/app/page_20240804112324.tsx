@@ -14,7 +14,7 @@ export default function AuthPage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthentificatedUser) {
+    if ( isAuthentificatedUser) {
       router.push("/group");
     }
   }, [isAuthentificatedUser, isLoading, router]);

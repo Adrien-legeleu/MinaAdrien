@@ -1,4 +1,5 @@
 "use client";
+
 import { BackgroundGradientAnimation } from "@/components/UI/GradientBackground";
 import { Auth } from "@/containers/Auth";
 import { useUserContext } from "@/context/UserContexts";
@@ -7,9 +8,10 @@ import { useEffect } from "react";
 import lottie from "lottie-web";
 import { defineElement } from "@lordicon/element";
 
+// define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
 
-export default function AuthPage() {
+export default function Page() {
   const { isAuthentificatedUser, isLoading } = useUserContext();
   const router = useRouter();
 
@@ -17,7 +19,7 @@ export default function AuthPage() {
     if (isAuthentificatedUser) {
       router.push("/group");
     }
-  }, [isAuthentificatedUser, isLoading, router]);
+  }, [isAuthentificatedUser]);
 
   return (
     <main>

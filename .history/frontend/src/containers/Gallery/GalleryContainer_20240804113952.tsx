@@ -71,23 +71,22 @@ export const GalleryContainer = () => {
           );
         })}
       </div>
-      {selectedImages && (
-        <div className="fixed bottom-10 right-7 flex items-center justify-center gap-4 ">
+      <div className="fixed bottom-10 right-7 grid grid-cols-2 items-center justify-center gap-5 w-full h-10">
+        <div className="space-x-3">
           <button
-            className="p-2  bg-white text-black rounded-full w-10 h-10 flex items-center justify-center"
+            className="p-5 w-full h-full bg-white text-black rounded-full"
             onClick={() => deleteOneImage(selectedImages)}
           >
             <IconDelete />
           </button>
-          <button className="p-2 w-10 h-10 bg-white text-black rounded-full flex items-center justify-center">
+          <button className="p-5 w-full h-full bg-white text-black rounded-full">
             <IconDeleteAll />
           </button>
-
-          <button className="bg-black text-white rounded-full py-3 px-5">
-            annuler
-          </button>
         </div>
-      )}
+        <button className="bg-black text-white rounded-full py-3 px-5">
+          annuler
+        </button>
+      </div>
     </div>
   );
 };
