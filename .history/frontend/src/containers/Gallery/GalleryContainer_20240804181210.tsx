@@ -30,15 +30,15 @@ export const GalleryContainer = () => {
 
   const deleteOneImage = (imagesId: any) => {
     imagesId.map((imageId: any) => {
+      console.log(imageId);
       deleteImage(imageId);
     });
-    cancel();
   };
   const deleteAll = (imagesId: any) => {
     imagesId.map((imageId: any) => {
+      console.log(imageId);
       deleteImage(imageId);
     });
-    cancel();
   };
   const cancel = () => {
     setSelectedImages([]);

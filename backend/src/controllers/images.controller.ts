@@ -25,15 +25,8 @@ export class ImageController {
 
   async findById(req: any, res: Response): Promise<void> {
     try {
-      const { groupId } = req.body;
-      if (!groupId) {
-        res.status(404).send({
-          error: "groupId not found",
-        });
-        return;
-      }
       const { imageId } = req.params;
-      const image = await ImageModel.findOne({ _id: imageId, groupId });
+      const image = await ImageModel.findOne({ _id: imageId });
       if (!image) {
         res.status(404).send({
           error: "image not found : " + imageId,
@@ -127,12 +120,11 @@ export class ImageController {
   }
   async delete(req: any, res: Response): Promise<void> {
     try {
-      const { groupId } = req.body;
       const { imageId } = req.params;
+      console.log(imageId);
 
       const image = await ImageModel.findOneAndDelete({
         _id: imageId,
-        groupId,
       });
 
       if (!image) {
@@ -140,6 +132,7 @@ export class ImageController {
           error: "product not found :" + imageId,
         });
       }
+      console.log(image);
 
       res.status(200).send(image);
     } catch (err: any) {

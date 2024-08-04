@@ -30,18 +30,9 @@ export const GalleryContainer = () => {
 
   const deleteOneImage = (imagesId: any) => {
     imagesId.map((imageId: any) => {
+      console.log(imageId);
       deleteImage(imageId);
     });
-    cancel();
-  };
-  const deleteAll = (imagesId: any) => {
-    imagesId.map((imageId: any) => {
-      deleteImage(imageId);
-    });
-    cancel();
-  };
-  const cancel = () => {
-    setSelectedImages([]);
   };
 
   return (
@@ -91,17 +82,11 @@ export const GalleryContainer = () => {
           >
             <IconDelete />
           </button>
-          <button
-            className="p-2 w-10 h-10 bg-white text-black rounded-full flex items-center justify-center"
-            onClick={() => deleteAll(images)}
-          >
+          <button className="p-2 w-10 h-10 bg-white text-black rounded-full flex items-center justify-center">
             <IconDeleteAll />
           </button>
 
-          <button
-            className="bg-black text-white rounded-full py-3 px-5"
-            onClick={cancel}
-          >
+          <button className="bg-black text-white rounded-full py-3 px-5">
             annuler
           </button>
         </div>
