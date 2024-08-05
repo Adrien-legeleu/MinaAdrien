@@ -23,7 +23,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
 }) => {
   const { updateImage, deleteImage } = useImageContext();
   const groupId = localStorage.getItem("groupId");
-  const [newImage, setNewImage] = useState<string[]>([]);
+  const [newImage, setNewImage] = useState<string>([]);
   const handleImageUpload = (imgUrlKey: string, fileList: UploadFile[]) => {
     const uploadedImages: string[] = fileList.map((file) => file.url || "");
     setNewImage(uploadedImages);
@@ -33,14 +33,13 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
     const data = new FormData(e.currentTarget);
 
     const values: IImageFormUpdate = {
-      legend: data.get("legend") as string,
-      url: newImage,
-      photoDate: data.get("dataPhoto")
-        ? new Date(data.get("date-photo") as string)
-        : undefined,
-      groupId: groupId || "",
+      legend: data.get("legend"),
+      url: newImage.url || "",
+      imageId: newImage._id,
+
+      groupId: groupId,
       isLiked: image?.isLiked,
-      imageId: image?._id || "",
+      dataPhoto: data.get("dataPhoto"),
     };
 
     console.log(values);

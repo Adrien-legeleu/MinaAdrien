@@ -22,7 +22,6 @@ export const GalleryContainer = () => {
   const modalOpen = (image: IImage) => {
     setImageToGalleryImage(image);
     setIsOpenModal(true);
-    console.log(image);
   };
 
   const closeParams = () => {

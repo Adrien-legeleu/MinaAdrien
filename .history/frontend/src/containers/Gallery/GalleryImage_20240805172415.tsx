@@ -1,5 +1,4 @@
 import { FileImages } from "@/components/File";
-import { IconDelete } from "@/components/icons";
 import { Input } from "@/components/UI";
 import {
   IImage,
@@ -28,28 +27,29 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
     const uploadedImages: string[] = fileList.map((file) => file.url || "");
     setNewImage(uploadedImages);
   };
-  const submitImage = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitTheme = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    // const formDataImages: IImageTheme[] = dataImages.map((img) => ({
+    //   legend: "",
+    //   dataPhoto: "",
+    //   url: img,
+    //   groupId: groupId,
+    // }));
 
     const values: IImageFormUpdate = {
-      legend: data.get("legend") as string,
-      url: newImage,
-      photoDate: data.get("dataPhoto")
-        ? new Date(data.get("date-photo") as string)
-        : undefined,
-      groupId: groupId || "",
+      legend: data.get("legend"),
+      url: newImage.url,
+      imageId: newImage._id,
+
+      groupId: groupId,
       isLiked: image?.isLiked,
-      imageId: image?._id || "",
+      dataPhoto: data.get("dataPhoto"),
     };
 
     console.log(values);
     updateImage(values);
     modalClose();
-  };
-
-  const deleteImageGallery = () => {
-    deleteImage(newImage._id);
   };
 
   return (
@@ -64,23 +64,14 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
         className="absolute h-full w-full top-0 left-0 bg-black/30 backdrop-blur-sm"
         onClick={modalClose}
       ></div>
-      <div className="relative w-full h-full">
+      <div>
         <img
-          className="rounded-3xl object-cover w-full h-full"
+          className="rounded-3xl object-cover "
           src={image?.url}
           alt={`ìmg de lovnia src: ${image?.url}`}
         />
-        <div
-          className="absolute text-black bg-white/80 p-2 w-8 h-8 rounde-3xl flex items-center justify-center top-4 right-4"
-          onClick={deleteImageGallery}
-        >
-          <IconDelete />
-        </div>
       </div>
-      <form
-        className="flex flex-col items-end justify-center gap-8"
-        onSubmit={submitImage}
-      >
+      <form className="flex flex-col items-end justify-center gap-8">
         <div>
           <FileImages
             handleImageUpload={handleImageUpload}
@@ -99,18 +90,8 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
           <Input type="date" name="dataPhoto" />
         </div>
         <div className="space-x-6 mt-10">
-          <button
-            type="submit"
-            className="rounded-full py-2 px-4 bg-black/90 text-white"
-          >
-            sauvegarder
-          </button>
-          <div
-            className="rounded-full py-2 px-4 bg-gray-400 text-white"
-            onClick={modalClose}
-          >
-            Annuler
-          </div>
+          <button>sauvegarder</button>
+          <button onClick={modalClose}>Annuler</button>
         </div>
       </form>
     </div>

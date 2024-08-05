@@ -28,7 +28,7 @@ export interface IImageFormUpdate {
 }
 
 export interface IImage {
-  legend?: string;
+  legend?: string | undefined;
   dataPhoto?: string;
   url?: string;
   groupId?: string;

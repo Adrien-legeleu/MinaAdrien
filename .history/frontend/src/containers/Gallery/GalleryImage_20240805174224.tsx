@@ -23,7 +23,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
 }) => {
   const { updateImage, deleteImage } = useImageContext();
   const groupId = localStorage.getItem("groupId");
-  const [newImage, setNewImage] = useState<string[]>([]);
+  const [newImage, setNewImage] = useState();
   const handleImageUpload = (imgUrlKey: string, fileList: UploadFile[]) => {
     const uploadedImages: string[] = fileList.map((file) => file.url || "");
     setNewImage(uploadedImages);

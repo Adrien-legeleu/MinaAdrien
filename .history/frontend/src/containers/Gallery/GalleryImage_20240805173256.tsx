@@ -33,14 +33,13 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
     const data = new FormData(e.currentTarget);
 
     const values: IImageFormUpdate = {
-      legend: data.get("legend") as string,
-      url: newImage,
-      photoDate: data.get("dataPhoto")
-        ? new Date(data.get("date-photo") as string)
-        : undefined,
-      groupId: groupId || "",
+      legend: data.get("legend"),
+      url: newImage.url,
+      imageId: newImage._id,
+
+      groupId: groupId,
       isLiked: image?.isLiked,
-      imageId: image?._id || "",
+      dataPhoto: data.get("dataPhoto"),
     };
 
     console.log(values);
@@ -49,7 +48,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
   };
 
   const deleteImageGallery = () => {
-    deleteImage(newImage._id);
+    deleteImage(image?._id);
   };
 
   return (
@@ -72,7 +71,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
         />
         <div
           className="absolute text-black bg-white/80 p-2 w-8 h-8 rounde-3xl flex items-center justify-center top-4 right-4"
-          onClick={deleteImageGallery}
+          onClick={deleImageGallery}
         >
           <IconDelete />
         </div>

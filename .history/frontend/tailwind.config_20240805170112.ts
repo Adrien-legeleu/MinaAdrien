@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const colors = require("tailwindcss/colors");
+const svgToDataUri = require("mini-svg-data-uri");
 const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
@@ -21,6 +22,11 @@ const config: Config = {
       },
       boxShadow: {
         input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
+        block: "0 0 50px 30px rgb(0,0,0) ",
+      },
+      gridTemplateColumns: {
+        "40/60": "35% 65%",
+        "60/40": "60% 40%",
       },
       animation: {
         first: "moveVertical 30s ease infinite",
@@ -30,6 +36,7 @@ const config: Config = {
         fifth: "moveInCircle 20s ease infinite",
         shimmer: "shimmer 8s infinite",
         spotlight: "spotlight 2s ease .75s 1 forwards",
+        gradient: "gradient 8s linear infinite",
       },
       keyframes: {
         shimmer: {
@@ -83,10 +90,35 @@ const config: Config = {
             transform: "translateY(-50%)",
           },
         },
+        gradient: {
+          to: {
+            backgroundPosition: "var(--bg-size) 0",
+          },
+        },
       },
     },
   },
-  plugins: [addVariablesForColors],
+  plugins: [
+    addVariablesForColors,
+    function ({ matchUtilities, theme }: any) {
+      matchUtilities(
+        {
+          "bg-dot-thick": (value: any) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="2.5"></circle></svg>`
+            )}")`,
+          }),
+          "bg-dot": (value: any) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="1.6257413380501518"></circle></svg>`
+            )}")`,
+          }),
+        },
+        { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
+      );
+    },
+    require("flowbite/plugin"),
+  ],
 };
 
 function addVariablesForColors({ addBase, theme }: any) {

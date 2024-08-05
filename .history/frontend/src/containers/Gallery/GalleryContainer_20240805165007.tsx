@@ -19,10 +19,8 @@ export const GalleryContainer = () => {
   const modalClose = () => {
     setIsOpenModal(false);
   };
-  const modalOpen = (image: IImage) => {
-    setImageToGalleryImage(image);
+  const modalOpen = () => {
     setIsOpenModal(true);
-    console.log(image);
   };
 
   const closeParams = () => {
@@ -85,15 +83,14 @@ export const GalleryContainer = () => {
               {!isSelected && (
                 <div
                   onClick={() => selectImage(image._id!)}
-                  className="absolute top-2 right-2 w-6 h-6 z-20 rounded-full bg-transparent border-[1px] border-white/60"
+                  className="absolute top-2 right-2 w-6 h-6 z-10 rounded-full bg-transparent border-[1px] border-white/60"
                 ></div>
               )}
 
               <img
-                className="rounded-3xl object-cover group-hover:brightness-75 duration-300 ease-in-out cursor-pointer"
+                className="rounded-3xl object-cover group-hover:brightness-90 duration-300 ease-in-out"
                 src={image.url}
                 alt="LovniaGallery de Lovnia"
-                onClick={() => modalOpen(image)}
               />
             </div>
           );

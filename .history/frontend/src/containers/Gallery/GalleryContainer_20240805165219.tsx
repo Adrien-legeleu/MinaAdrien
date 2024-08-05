@@ -22,7 +22,6 @@ export const GalleryContainer = () => {
   const modalOpen = (image: IImage) => {
     setImageToGalleryImage(image);
     setIsOpenModal(true);
-    console.log(image);
   };
 
   const closeParams = () => {
@@ -90,7 +89,7 @@ export const GalleryContainer = () => {
               )}
 
               <img
-                className="rounded-3xl object-cover group-hover:brightness-75 duration-300 ease-in-out cursor-pointer"
+                className="rounded-3xl object-cover group-hover:brightness-75 duration-300 ease-in-out"
                 src={image.url}
                 alt="LovniaGallery de Lovnia"
                 onClick={() => modalOpen(image)}
