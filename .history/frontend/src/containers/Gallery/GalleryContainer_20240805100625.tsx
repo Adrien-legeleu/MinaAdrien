@@ -5,20 +5,11 @@ import { IImage, useImageContext } from "@/context/ImageContexts";
 import { IconSelect } from "@tabler/icons-react";
 import { useState } from "react";
 import { ModalProvider } from "@/components/UI/AnimatedModal";
-import { GalleryImage } from "./GalleryImage";
 
 export const GalleryContainer = () => {
   const { images, deleteImage } = useImageContext();
   const [isParams, setIsParams] = useState(false);
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const [imageToGalleryImage, setImageToGalleryImage] = useState<
-    IImage | undefined
-  >();
-
-  const modalClose = () => {
-    setIsOpenModal(false);
-  };
 
   const closeParams = () => {
     setIsParams(false);
@@ -61,7 +52,8 @@ export const GalleryContainer = () => {
         closeParams={closeParams}
         openParams={openParams}
       />
-      <div className="grid grid-cols-4 gap-7 px-7 pt-20">
+    <ModalProvider>
+         <div className="grid grid-cols-4 gap-7 px-7 pt-20">
         {images.map((image: IImage) => {
           if (!image._id) return null;
 
@@ -115,12 +107,8 @@ export const GalleryContainer = () => {
             annuler
           </button>
         </div>
-      )}
-      <GalleryImage
-        isOpenModal={isOpenModal}
-        modalClose={modalClose}
-        image={imageToGalleryImage}
-      />
+      )
+    </ModalProvider>
     </div>
   );
 };

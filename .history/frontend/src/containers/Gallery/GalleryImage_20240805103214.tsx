@@ -6,7 +6,7 @@ import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
 
 interface ImageGalleryProps {
-  image: IImage | undefined;
+  image: IImage;
   isOpenModal: boolean;
   modalClose: () => void;
 }
@@ -23,13 +23,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
   };
 
   return (
-    <div
-      className={`fixed inset-0 top-0 left-0 h-full w-screen z-50 ${
-        isOpenModal
-          ? "visible opacity-100 scale-100"
-          : "invisible opacity-0 scale-50"
-      } duration-500 ease-in-out`}
-    >
+    <div className={`fixed inset-0 top-0 left-0 h-full w-screen z-50 ${isOpenModal ? "visible opacity-100 scale-100" : "invisible opacity-0 scale-50" } duration-500 ease-in-out`}>
       <div
         className="absolute h-full w-full top-0 left-0 bg-black/30 backdrop-blur-sm"
         onClick={modalClose}

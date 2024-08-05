@@ -12,9 +12,7 @@ export const GalleryContainer = () => {
   const [isParams, setIsParams] = useState(false);
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [imageToGalleryImage, setImageToGalleryImage] = useState<
-    IImage | undefined
-  >();
+  const [imageToGalleryImage, setImageToGalleryImage] = useState<IImage>();
 
   const modalClose = () => {
     setIsOpenModal(false);
@@ -116,11 +114,7 @@ export const GalleryContainer = () => {
           </button>
         </div>
       )}
-      <GalleryImage
-        isOpenModal={isOpenModal}
-        modalClose={modalClose}
-        image={imageToGalleryImage}
-      />
+      <GalleryImage isOpenModal={isOpenModal} modalClose={modalClose} />
     </div>
   );
 };

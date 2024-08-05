@@ -6,15 +6,13 @@ import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
 
 interface ImageGalleryProps {
-  image: IImage | undefined;
-  isOpenModal: boolean;
+  image: IImage;
   modalClose: () => void;
 }
 
 export const GalleryImage: React.FC<ImageGalleryProps> = ({
   image,
   modalClose,
-  isOpenModal,
 }) => {
   const [newImage, setNewImage] = useState<string[]>([]);
   const handleImageUpload = (imgUrlKey: string, fileList: UploadFile[]) => {
@@ -23,19 +21,13 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
   };
 
   return (
-    <div
-      className={`fixed inset-0 top-0 left-0 h-full w-screen z-50 ${
-        isOpenModal
-          ? "visible opacity-100 scale-100"
-          : "invisible opacity-0 scale-50"
-      } duration-500 ease-in-out`}
-    >
+    <div className="fixed inset-0 top-0 left-0 h-full w-screen z-50">
       <div
         className="absolute h-full w-full top-0 left-0 bg-black/30 backdrop-blur-sm"
         onClick={modalClose}
       ></div>
       <div>
-        <img src={image.url} alt={`ìmg de lovina src: ${image.url}`} />
+        <img src={image.src} alt={`ìmg de lovina src: ${image.url}`} />
       </div>
       <form>
         <div>
