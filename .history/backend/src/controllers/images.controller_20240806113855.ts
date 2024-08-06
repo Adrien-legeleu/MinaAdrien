@@ -78,7 +78,6 @@ export class ImageController {
           photoDate,
           isLiked,
         });
-        console.log(image);
 
         res.status(200).send(image);
       }

@@ -108,7 +108,7 @@ export const ImageHome = () => {
               placeholder="Votre legend"
               style={{ height: 100, resize: "none" }}
             />
-            <Input type="date" name="dataPhoto" />
+            <Input type="date" name="date-photo" />
 
             <FileImages
               handleImageUpload={handleImageUpload}

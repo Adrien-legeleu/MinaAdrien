@@ -26,7 +26,7 @@ const config: Config = {
       },
       gridTemplateColumns: {
         "40/60": "35% 65%",
-        "70/30": "65% 35%",
+        "70/30": "70% 30%",
       },
       animation: {
         first: "moveVertical 30s ease infinite",

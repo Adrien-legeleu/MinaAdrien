@@ -78,7 +78,6 @@ export class ImageController {
           photoDate,
           isLiked,
         });
-        console.log(image);
 
         res.status(200).send(image);
       }
@@ -112,8 +111,6 @@ export class ImageController {
           error: "image not found" + imageId,
         });
       }
-
-      console.log(image);
 
       res.status(200).send(image);
     } catch (err: any) {

@@ -5,7 +5,7 @@ export interface IImage {
   groupId: string;
   url: string[];
   legend?: string;
-  photoDate?: string;
+  PhotoDate?: string;
   isLiked: boolean;
 }
 
@@ -23,7 +23,7 @@ export const ImageSchema = new mongoose.Schema<IImage>(
     legend: {
       type: String,
     },
-    photoDate: {
+    PhotoDate: {
       type: String,
     },
     isLiked: {

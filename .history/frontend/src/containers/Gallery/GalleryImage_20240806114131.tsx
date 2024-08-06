@@ -70,7 +70,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
       } duration-500 ease-in-out`}
     >
       <div
-        className="z-10 absolute text-white/70 top-5 right-5 w-10 h-10 cursor-pointer hover:scale-110 duration-300 ease-in-out"
+        className="z-10 absolute text-white/70 top-5 right-5 w-1à h-10 cursor-pointer hover:scale-110 duration-300 ease-in-out"
         onClick={handleUpdateModal}
       >
         <IconClose />
@@ -111,7 +111,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
               type="date"
               name="dataPhoto"
               onChange={(e) => console.log(e)}
-              defaultValue={image?.photoDate}
+              defaultValue={image?.dataPhoto}
             />
           </div>
           <div className=" mt-4 flex gap-6">
@@ -135,7 +135,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
             {image?.legend}
           </p>
           <p className="text-white/80 text-center text-lg tracking-wider">
-            Le {image?.photoDate}
+            Le {image?.dataPhoto}
           </p>
           <button
             onClick={handleUpdateModal}

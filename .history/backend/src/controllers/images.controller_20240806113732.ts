@@ -78,7 +78,6 @@ export class ImageController {
           photoDate,
           isLiked,
         });
-        console.log(image);
 
         res.status(200).send(image);
       }
@@ -91,6 +90,7 @@ export class ImageController {
     try {
       const { groupId, url, legend, photoDate, isLiked } = req.body;
       const { imageId } = req.params;
+      console.log(groupId);
 
       if (!groupId || !url) {
         res.status(404).send({
@@ -112,8 +112,6 @@ export class ImageController {
           error: "image not found" + imageId,
         });
       }
-
-      console.log(image);
 
       res.status(200).send(image);
     } catch (err: any) {

@@ -15,11 +15,11 @@ export interface IImageForm {
   url: string[];
   legend?: string;
   groupId: string | null;
-  photoDate?: string;
+  photoDate?: Date;
   isLiked: boolean;
 }
 export interface IImageFormUpdate {
-  url?: string;
+  url?: string[];
   legend?: string;
   groupId?: string;
   photoDate?: string;
@@ -29,7 +29,7 @@ export interface IImageFormUpdate {
 
 export interface IImage {
   legend?: string;
-  photoDate?: string;
+  dataPhoto?: string;
   url?: string;
   groupId?: string;
   isLiked?: boolean;

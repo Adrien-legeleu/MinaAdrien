@@ -1,5 +1,5 @@
 import { FileImages } from "@/components/File";
-import { IconClose, IconDelete } from "@/components/icons";
+import { IconDelete } from "@/components/icons";
 import { Input } from "@/components/UI";
 import {
   IImage,
@@ -23,25 +23,22 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
 }) => {
   const { updateImage, deleteImage } = useImageContext();
   const groupId = localStorage.getItem("groupId");
-
+  const [newImage, setNewImage] = useState<string[]>([image?.url!]);
   const [updateOpen, setUpdateOpen] = useState(false);
 
+  const handleImageUpload = (imgUrlKey: string, fileList: UploadFile[]) => {
+    const uploadedImages: string[] = fileList.map((file) => file.url || "");
+    setNewImage(uploadedImages);
+  };
   const submitImage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
 
     const values: IImageFormUpdate = {
       legend: data.get("legend") as string,
-      url: image?.url,
+      url: newImage,
       photoDate: data.get("dataPhoto")
-        ? new Date(data.get("dataPhoto") as string).toLocaleDateString(
-            "fr-FR",
-            {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            }
-          )
+        ? new Date(data.get("date-photo") as string)
         : undefined,
       groupId: groupId || "",
       isLiked: image?.isLiked,
@@ -49,8 +46,8 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
     };
 
     console.log(values);
-    handleUpdateModal();
     updateImage(values);
+    handleUpdateModal();
   };
 
   const deleteImageGallery = () => {
@@ -69,12 +66,6 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
           : "invisible opacity-0 scale-50"
       } duration-500 ease-in-out`}
     >
-      <div
-        className="z-10 absolute text-white/70 top-5 right-5 w-10 h-10 cursor-pointer hover:scale-110 duration-300 ease-in-out"
-        onClick={handleUpdateModal}
-      >
-        <IconClose />
-      </div>
       <div
         className="absolute h-full w-full top-0 left-0 bg-black/30 backdrop-blur-sm"
         onClick={modalClose}
@@ -95,10 +86,16 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
       </div>
       {updateOpen ? (
         <form
-          className="flex flex-col items-center justify-center gap-12 z-10"
+          className="flex flex-col items-center justify-center gap-10 z-10"
           onSubmit={submitImage}
         >
-          <div className="space-y-10">
+          <div className="space-y-8">
+            <FileImages
+              handleImageUpload={handleImageUpload}
+              imgUrlKey="url"
+              initialImages={newImage}
+              multipleImage={false}
+            />
             <TextArea
               showCount
               maxLength={150}
@@ -110,8 +107,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
             <Input
               type="date"
               name="dataPhoto"
-              onChange={(e) => console.log(e)}
-              defaultValue={image?.photoDate}
+              defaultValue={image?.dataPhoto}
             />
           </div>
           <div className=" mt-4 flex gap-6">
@@ -130,12 +126,12 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
           </div>
         </form>
       ) : (
-        <div className="flex flex-col items-center justify-center gap-5 z-10">
+        <div className="flex flex-col items-center justify-center gap-5">
           <p className="text-white/80 text-center text-xl tracking-wider leading-relaxed">
             {image?.legend}
           </p>
           <p className="text-white/80 text-center text-lg tracking-wider">
-            Le {image?.photoDate}
+            Le {image?.dataPhoto}
           </p>
           <button
             onClick={handleUpdateModal}

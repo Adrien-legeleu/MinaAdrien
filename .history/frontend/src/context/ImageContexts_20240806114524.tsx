@@ -29,7 +29,7 @@ export interface IImageFormUpdate {
 
 export interface IImage {
   legend?: string;
-  photoDate?: string;
+  dataPhoto?: string;
   url?: string;
   groupId?: string;
   isLiked?: boolean;
