@@ -49,12 +49,12 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
     };
 
     console.log(values);
-    setUpdateOpen(false);
+    handleUpdateModal();
     updateImage(values);
   };
 
   const deleteImageGallery = () => {
-    setUpdateOpen(false);
+    handleUpdateModal();
     deleteImage(image?._id || "");
   };
 
@@ -70,12 +70,12 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
           : "invisible opacity-0 scale-50"
       } duration-500 ease-in-out`}
     >
-      <div
+      {/* <div
         className="z-10 absolute text-white/70 top-5 right-5 w-10 h-10 cursor-pointer hover:scale-110 duration-300 ease-in-out"
         onClick={handleUpdateModal}
       >
         <IconClose />
-      </div>
+      </div> */}
       <div
         className="absolute h-full w-full top-0 left-0 bg-black/30 backdrop-blur-sm"
         onClick={modalClose}
@@ -96,7 +96,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
       </div>
       {updateOpen ? (
         <form
-          className="flex flex-col justify-center-center px-16 gap-12 z-10"
+          className="flex flex-col items-center justify-center gap-12 z-10"
           onSubmit={submitImage}
         >
           <div className="space-y-10">
@@ -106,12 +106,11 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
               name="legend"
               defaultValue={image?.legend}
               placeholder="Votre legend"
-              style={{ height: 120, resize: "none", scrollbarWidth: "none" }}
+              style={{ height: 100, resize: "none" }}
             />
             <Input
               type="date"
               name="dataPhoto"
-              className="w-1/2"
               onChange={(e) => console.log(e)}
               defaultValue={image?.photoDate}
             />
@@ -119,12 +118,12 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
           <div className=" mt-4 flex gap-6">
             <button
               type="submit"
-              className="rounded-full py-2 px-4 cursor-pointer bg-black/90 text-white text-center"
+              className="rounded-full py-2 px-4 bg-black/90 text-white text-center"
             >
               sauvegarder
             </button>
             <div
-              className="rounded-full py-2 cursor-pointer px-4 bg-gray-400 text-white text-center"
+              className="rounded-full py-2 px-4 bg-gray-400 text-white text-center"
               onClick={handleUpdateModal}
             >
               Annuler
@@ -132,7 +131,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
           </div>
         </form>
       ) : (
-        <div className="flex flex-col items-center justify-center gap-5 z-10 p-5 mr-2">
+        <div className="flex flex-col items-center justify-center gap-5 z-10">
           <p className="text-white/80 text-center text-xl tracking-wider leading-relaxed">
             {image?.legend}
           </p>

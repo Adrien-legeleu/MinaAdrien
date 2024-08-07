@@ -100,7 +100,7 @@ export const ImageHome = () => {
             isCreateOpen ? "visible opacity-100" : "invisible  opacity-0"
           }  duration-300 ease-in-out absolute shadow-2xl shadow-black/30 -top-16 right-20 py-8 rounded-2xl w-[500px] z-10 flex items-center justify-center flex-col backdrop-blur-sm border-[1px] border-black/30 gap-8`}
         >
-          <div className="space-y-6">
+          <div className="space-y-4">
             <TextArea
               showCount
               maxLength={150}
@@ -114,7 +114,7 @@ export const ImageHome = () => {
                 scrollbarWidth: "none",
               }}
             />
-            <div className="flex gap-4 items-center justify-center">
+            <div className="flex gap-4">
               <Input type="date" name="dataPhoto" />
 
               <FileImages

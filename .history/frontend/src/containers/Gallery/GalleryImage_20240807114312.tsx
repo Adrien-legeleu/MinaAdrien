@@ -70,12 +70,12 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
           : "invisible opacity-0 scale-50"
       } duration-500 ease-in-out`}
     >
-      <div
+      {/* <div
         className="z-10 absolute text-white/70 top-5 right-5 w-10 h-10 cursor-pointer hover:scale-110 duration-300 ease-in-out"
         onClick={handleUpdateModal}
       >
         <IconClose />
-      </div>
+      </div> */}
       <div
         className="absolute h-full w-full top-0 left-0 bg-black/30 backdrop-blur-sm"
         onClick={modalClose}
@@ -96,7 +96,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
       </div>
       {updateOpen ? (
         <form
-          className="flex flex-col justify-center-center px-16 gap-12 z-10"
+          className="flex flex-col justify-center-center px-10 gap-12 z-10"
           onSubmit={submitImage}
         >
           <div className="space-y-10">
@@ -132,7 +132,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
           </div>
         </form>
       ) : (
-        <div className="flex flex-col items-center justify-center gap-5 z-10 p-5 mr-2">
+        <div className="flex flex-col items-center justify-center gap-5 z-10 p-5">
           <p className="text-white/80 text-center text-xl tracking-wider leading-relaxed">
             {image?.legend}
           </p>

@@ -89,7 +89,7 @@ export const ImageHome = () => {
       </Modal>
       <div className="absolute top-1/2 right-10">
         <div
-          className="p-2 flex absolute cursor-pointer top-0 right-0 z-10 items-center justify-center shadow-xl shadow-black/40 bg-gray-50 rounded-full h-12 w-12"
+          className="p-3 flex absolute cursor-pointer top-0 right-0 z-10 items-center justify-center shadow-xl shadow-black/60 backdrop-blur-sm border-[1px] border-black/60 rounded-full h-16 w-16"
           onClick={handleCreateModal}
         >
           {isCreateOpen ? <IconMinus /> : <IconPlus />}
@@ -98,32 +98,24 @@ export const ImageHome = () => {
           onSubmit={submitImage}
           className={`${
             isCreateOpen ? "visible opacity-100" : "invisible  opacity-0"
-          }  duration-300 ease-in-out absolute shadow-2xl shadow-black/30 -top-16 right-20 py-8 rounded-2xl w-[500px] z-10 flex items-center justify-center flex-col backdrop-blur-sm border-[1px] border-black/30 gap-8`}
+          }  duration-300 ease-in-out absolute -top-16 right-20 py-8 px-4 rounded-2xl w-96 z-10 flex items-center justify-center flex-col bg-white gap-8`}
         >
-          <div className="space-y-6">
+          <div className="space-y-4">
             <TextArea
               showCount
               maxLength={150}
               name="legend"
               placeholder="Votre legend"
-              className="w-full"
-              style={{
-                height: 100,
-                resize: "none",
-
-                scrollbarWidth: "none",
-              }}
+              style={{ height: 100, resize: "none" }}
             />
-            <div className="flex gap-4 items-center justify-center">
-              <Input type="date" name="dataPhoto" />
+            <Input type="date" name="dataPhoto" />
 
-              <FileImages
-                handleImageUpload={handleImageUpload}
-                imgUrlKey="url"
-                initialImages={newImages}
-                multipleImage={false}
-              />
-            </div>
+            <FileImages
+              handleImageUpload={handleImageUpload}
+              imgUrlKey="url"
+              initialImages={newImages}
+              multipleImage={false}
+            />
           </div>
           <div
             className={cn(

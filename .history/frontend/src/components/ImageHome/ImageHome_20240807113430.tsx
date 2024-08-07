@@ -114,7 +114,7 @@ export const ImageHome = () => {
                 scrollbarWidth: "none",
               }}
             />
-            <div className="flex gap-4 items-center justify-center">
+            <div className="flex gap-4">
               <Input type="date" name="dataPhoto" />
 
               <FileImages
