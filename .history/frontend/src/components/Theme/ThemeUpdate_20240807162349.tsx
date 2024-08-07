@@ -77,7 +77,7 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
     >
       <TextArea
         showCount
-        maxLength={150}
+        maxLength={300}
         name="legend"
         defaultValue={data?.legend}
         placeholder="Votre légende"

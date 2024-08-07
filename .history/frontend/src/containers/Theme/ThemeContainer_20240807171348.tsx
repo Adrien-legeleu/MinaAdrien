@@ -194,7 +194,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                           translateX={-30}
                           className="px-4 py-2 rounded-xl   text-black/80  tracking-wider font-semibold"
                         >
-                          {img.photoDate ? img.photoDate : "../../.."}
+                          {img.datePhoto ? img.datePhoto : "../../.."}
                         </CardItem>
 
                         <CardItem

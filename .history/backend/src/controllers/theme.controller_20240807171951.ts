@@ -104,7 +104,7 @@ export class ThemeController {
       const { themeId } = req.params;
       const { groupId, images, title, bio, isLiked } = req.body;
 
-      console.log(images);
+      console.log(title);
 
       if (!groupId || !images || !themeId) {
         res.status(400).send({

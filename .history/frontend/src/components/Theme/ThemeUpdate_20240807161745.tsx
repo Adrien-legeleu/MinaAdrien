@@ -25,7 +25,7 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
   const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
 
   const [newImages, setNewImages] = useState<string[]>([]);
-
+  const [dataImage, setDataImage] = useState<string[]>([]);
   const groupId = localStorage.getItem("groupId") || undefined;
 
   const handleImageUpload = (imgUrlKey: string, fileList: UploadFile[]) => {
@@ -77,7 +77,7 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
     >
       <TextArea
         showCount
-        maxLength={150}
+        maxLength={300}
         name="legend"
         defaultValue={data?.legend}
         placeholder="Votre légende"

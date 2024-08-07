@@ -175,7 +175,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                         </div>
                       </CardItem>
                       <CardItem
-                        translateZ="110"
+                        translateZ="120"
                         className="text-xl w-full font-semibold text-center px-2 text-black/80 tracking-wider"
                       >
                         {img.legend ? img.legend : "no legend"}
@@ -194,7 +194,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                           translateX={-30}
                           className="px-4 py-2 rounded-xl   text-black/80  tracking-wider font-semibold"
                         >
-                          {img.photoDate ? img.photoDate : "../../.."}
+                          {img.datePhoto ? img.datePhoto : "../../.."}
                         </CardItem>
 
                         <CardItem

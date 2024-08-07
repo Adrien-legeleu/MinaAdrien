@@ -7,20 +7,19 @@ import { FileImages } from "../File";
 import { useEffect, useState } from "react";
 import { cn } from "@/utils/cn";
 import AnimatedShinyText from "../UI/ShinyText";
-import { IThemeFormUpdate, useThemeContext } from "@/context/ThemeContext";
+import {
+  IThemeForm,
+  IThemeFormUpdate,
+  useThemeContext,
+} from "@/context/ThemeContext";
 
-interface IThemeUpdate {
-  themeUpdateClose: () => void;
-  data: IImage | null;
+interface ThemeCreateprops {
+  themeCreateClose: () => void;
   themeId: string;
-  imgId: string;
 }
-
-export const ThemeUpdate: React.FC<IThemeUpdate> = ({
-  themeUpdateClose,
-  data,
+export const ThemeCreate: React.FC<ThemeCreateprops> = ({
+  themeCreateClose,
   themeId,
-  imgId,
 }) => {
   const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
 
@@ -33,29 +32,27 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
     setNewImages(uploadedImages);
   };
 
-  useEffect(() => {
-    if (data?.url) {
-      setNewImages(Array.isArray(data.url) ? data.url : [data.url]);
-    }
-  }, [data]);
-
   const { updateTheme, themes } = useThemeContext();
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitNewImage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const theme = themes.find((tme) => tme._id === themeId);
 
-    const updatedImages = theme?.images.map((img: any) =>
-      img._id === imgId
-        ? {
-            url: newImages,
-            legend: formData.get("legend") as string,
-            photoDate: formData.get("dataPhoto") as string,
-            groupId: groupId,
-          }
-        : img
-    );
+    const updatedImages = theme?.images.push({
+      url: newImages[0],
+      legend: formData.get("legend") as string,
+      dataPhoto: formData.get("dataPhoto")
+        ? new Date(formData.get("dataPhoto") as string).toLocaleDateString(
+            "fr-FR",
+            {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            }
+          )
+        : undefined,
+    });
 
     const values: IThemeFormUpdate = {
       images: updatedImages,
@@ -66,18 +63,18 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
     console.log("ezeze");
 
     console.log(values);
-    themeUpdateClose();
+    themeCreateClose();
     updateTheme(values);
   };
 
   return (
     <form
       className="flex flex-col gap-5 items-center justify-center"
-      onSubmit={onSubmit}
+      onSubmit={submitNewImage}
     >
       <TextArea
         showCount
-        maxLength={150}
+        maxLength={300}
         name="legend"
         defaultValue={data?.legend}
         placeholder="Votre légende"
@@ -91,14 +88,7 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
         multipleImage={false}
       />
 
-      <DatePicker
-        defaultValue={dayjs(
-          data?.photoDate ? data?.photoDate : "07/02/2024",
-          dateFormatList[0]
-        )}
-        name="dataPhoto"
-        format={dateFormatList}
-      />
+      <DatePicker name="dataPhoto" format={dateFormatList} />
       <div className="flex gap-8 items-center justify-center">
         <div
           className={cn(

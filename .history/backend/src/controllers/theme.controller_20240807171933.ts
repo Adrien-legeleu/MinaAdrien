@@ -102,9 +102,9 @@ export class ThemeController {
   async updateOneById(req: any, res: Response): Promise<void> {
     try {
       const { themeId } = req.params;
-      const { groupId, images, title, bio, isLiked } = req.body;
+      const { groupId, images, title, bio, isLiked, dataPhoto } = req.body;
 
-      console.log(images);
+      console.log(title);
 
       if (!groupId || !images || !themeId) {
         res.status(400).send({
@@ -119,6 +119,7 @@ export class ThemeController {
           ...(title ? { title } : {}),
           ...(bio ? { bio } : {}),
           ...(isLiked ? { isLiked } : {}),
+          ...(dataPhoto ? { dataPhoto } : {}),
         }
       );
       if (!theme) {

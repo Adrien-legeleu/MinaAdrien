@@ -16,7 +16,7 @@ type ThemeContainerDetailsProps = IThemeDetailsProps;
 
 import lottie from "lottie-web";
 import { defineElement } from "@lordicon/element";
-import { ThemeCreate, ThemeImg, ThemeUpdate } from "@/components/Theme";
+import { ThemeImg, ThemeUpdate } from "@/components/Theme";
 import { IImage } from "@/context/ImageContexts";
 import { IconDelete, IconEllipsis, IconUpdate } from "@/components/icons";
 
@@ -35,10 +35,10 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
   const [createThemeImgOpen, setCreateThemeImgOpen] = useState(false);
 
   const themeCreateClose = () => {
-    setCreateThemeImgOpen(false);
+    setIsThemeUpdateOpen(false);
   };
   const themeCreateOpen = () => {
-    setCreateThemeImgOpen(true);
+    setIsThemeUpdateOpen(true);
   };
   const themeUpdateClose = () => {
     setIsThemeUpdateOpen(false);
@@ -175,8 +175,8 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                         </div>
                       </CardItem>
                       <CardItem
-                        translateZ="110"
-                        className="text-xl w-full font-semibold text-center px-2 text-black/80 tracking-wider"
+                        translateZ="120"
+                        className="text-xl w-full font-semibold text-center  text-black/80 tracking-wider"
                       >
                         {img.legend ? img.legend : "no legend"}
                       </CardItem>
@@ -194,7 +194,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                           translateX={-30}
                           className="px-4 py-2 rounded-xl   text-black/80  tracking-wider font-semibold"
                         >
-                          {img.photoDate ? img.photoDate : "../../.."}
+                          {img.datePhoto ? img.datePhoto : "../../.."}
                         </CardItem>
 
                         <CardItem
@@ -226,21 +226,11 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
             </>
           );
         })}
-        {createThemeImgOpen ? (
-          <ThemeCreate
-            themeCreateClose={themeCreateClose}
-            themeId={theme?._id}
-          />
-        ) : (
-          <div className="items-center justify-center flex">
-            <button
-              className="py-2 px-4 rounded-xl bg-black/90 text-white tracking-wider "
-              onClick={themeCreateOpen}
-            >
-              Complétez votre Theme !
-            </button>
-          </div>
-        )}
+        <div className="items-center justify-center flex">
+          <button className="py-2 px-4 rounded-xl bg-black/90 text-white tracking-wider ">
+            Complétez votre Theme !
+          </button>
+        </div>
       </div>
     </div>
   );
