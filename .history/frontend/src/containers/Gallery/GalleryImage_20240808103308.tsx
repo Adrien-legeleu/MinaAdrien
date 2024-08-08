@@ -72,7 +72,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
     >
       <div
         className="z-20 absolute text-white/70 top-8 right-10 w-10 h-10 cursor-pointer hover:scale-110 duration-300 ease-in-out"
-        onClick={modalClose}
+        onClick={handleUpdateModal}
       >
         <IconClose />
       </div>

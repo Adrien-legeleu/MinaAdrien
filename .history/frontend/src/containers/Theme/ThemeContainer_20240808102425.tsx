@@ -19,7 +19,6 @@ import { defineElement } from "@lordicon/element";
 import { ThemeCreate, ThemeImg, ThemeUpdate } from "@/components/Theme";
 import { IImage } from "@/context/ImageContexts";
 import { IconDelete, IconEllipsis, IconUpdate } from "@/components/icons";
-import { BackHome } from "@/components/BackButton";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);

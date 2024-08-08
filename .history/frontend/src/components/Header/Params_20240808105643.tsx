@@ -8,9 +8,8 @@ import {
 
 import { useState } from "react";
 
-import { IconClose, IconLogout } from "../icons";
+import { IconClose } from "../icons";
 import { ParamsDescriptions } from "./ParamsDescriptions";
-import { Modal, ModalTrigger } from "../UI/AnimatedModal";
 
 interface IParamsProps {
   isParams: boolean;
@@ -91,35 +90,28 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
         <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
           Thèmes d'affichage
         </li>
-
-        <Modal>
-          <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
-            <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
-              Se déconnecter
-            </span>
-            <div className=" w-5 h-5-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
-              <IconLogout />
-            </div>
-          </ModalTrigger>
-        </Modal>
+        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
+          Sortir du groupe
+        </li>
+        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
+          Se Déconnecter
+        </li>
       </ul>
       <div
         className="space-y-12 py-20 px-12 overflow-y-scroll h-screen "
         style={{ scrollbarWidth: "none" }}
       >
-        <div id="2">
-          <ParamsDescriptions
-            description={description}
-            deleteDesc={deleteDesc}
-            updateSubmit={updateSubmit}
-            update={update}
-            isAddOpen={isAddOpen}
-            isUpdateOpen={isUpdateOpen}
-            submit={submit}
-            descId={descId}
-            openAddDesc={openAddDesc}
-          />
-        </div>
+        <ParamsDescriptions
+          description={description}
+          deleteDesc={deleteDesc}
+          updateSubmit={updateSubmit}
+          update={update}
+          isAddOpen={isAddOpen}
+          isUpdateOpen={isUpdateOpen}
+          submit={submit}
+          descId={descId}
+          openAddDesc={openAddDesc}
+        />
       </div>
     </div>
   );

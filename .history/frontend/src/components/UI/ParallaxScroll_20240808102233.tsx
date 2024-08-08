@@ -43,7 +43,7 @@ export const ParallaxScrollSecond = ({
       style={{ scrollbarWidth: "none" }}
     >
       <div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start mx-auto  px-20 gap-20 pt-12 pb-32"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start mx-auto  px-20 gap-20 pt-10 pb-32"
         ref={gridRef}
       >
         <div className="grid gap-10">

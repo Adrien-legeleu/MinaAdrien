@@ -97,8 +97,8 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
             <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
               Se déconnecter
             </span>
-            <div className=" w-5 h-5-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
-              <IconLogout />
+            <div className="-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
+              <IconLogout
             </div>
           </ModalTrigger>
         </Modal>

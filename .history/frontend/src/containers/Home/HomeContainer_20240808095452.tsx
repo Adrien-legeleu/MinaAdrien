@@ -1,7 +1,6 @@
 "use client";
 
 import { IGroupDetailsProps } from "@/app/home/[id]/page";
-import { BackGroup } from "@/components/BackButton";
 import { HeaderParams } from "@/components/Header";
 import { ImageHome } from "@/components/ImageHome";
 import { Logout } from "@/components/Logout";
@@ -29,17 +28,15 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
   };
   return (
     <div className="py-8 ">
-      <div className="absolute top-8 left-8">
-        <BackGroup />
-      </div>
+      <Logout />
       <HeaderParams
         isParams={isParams}
         closeParams={closeParams}
         openParams={openParams}
       />
-
+      ;
       {
-        <div className="w-1/2 mx-auto pb-48">
+        <div className="w-1/2 mx-auto">
           {description[0] ? (
             <p className="text-3xl text-[#d83c3c] text-center  leading-loose tracking-widest">
               {description[0]?.description}

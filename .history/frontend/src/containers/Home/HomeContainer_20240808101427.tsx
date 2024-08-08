@@ -39,7 +39,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
       />
 
       {
-        <div className="w-1/2 mx-auto pb-48">
+        <div className="w-1/2 mx-auto">
           {description[0] ? (
             <p className="text-3xl text-[#d83c3c] text-center  leading-loose tracking-widest">
               {description[0]?.description}
