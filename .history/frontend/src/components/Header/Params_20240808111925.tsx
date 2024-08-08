@@ -12,8 +12,6 @@ import { IconClose, IconLogout } from "../icons";
 import { ParamsDescriptions } from "./ParamsDescriptions";
 import { Modal, ModalTrigger } from "../UI/AnimatedModal";
 import { useUserContext } from "@/context/UserContexts";
-import Link from "next/link";
-import { ParamsGroup } from "./ParamsGroup";
 
 interface IParamsProps {
   isParams: boolean;
@@ -97,7 +95,7 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
         </li>
 
         <Modal>
-          <Link href="/" onClick={onLogout}>
+          <div onClick={onLogout}>
             <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white  flex justify-center group/modal-btn">
               <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
                 Se déconnecter
@@ -106,16 +104,13 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
                 ⬅
               </div>
             </ModalTrigger>
-          </Link>
+          </div>
         </Modal>
       </ul>
       <div
         className="space-y-12 py-20 px-12 overflow-y-scroll h-screen "
         style={{ scrollbarWidth: "none" }}
       >
-        <div id="1">
-          <ParamsGroup />
-        </div>
         <div id="2">
           <ParamsDescriptions
             description={description}

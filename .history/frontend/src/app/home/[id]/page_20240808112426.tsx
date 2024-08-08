@@ -2,7 +2,7 @@
 import { HomeContainer } from "@/containers/Home";
 import { useGroupContext } from "@/context/GroupContexts";
 import { useUserContext } from "@/context/UserContexts";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
 export interface IGroupDetailsProps {

@@ -17,7 +17,7 @@ export default function AuthPage() {
     if (isAuthentificatedUser) {
       router.push("/group");
     } else {
-      router.push("/");
+      router.push("/group");
     }
   }, [isAuthentificatedUser, isLoading, router]);
 

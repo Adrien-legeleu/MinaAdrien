@@ -13,7 +13,6 @@ import { ParamsDescriptions } from "./ParamsDescriptions";
 import { Modal, ModalTrigger } from "../UI/AnimatedModal";
 import { useUserContext } from "@/context/UserContexts";
 import Link from "next/link";
-import { ParamsGroup } from "./ParamsGroup";
 
 interface IParamsProps {
   isParams: boolean;
@@ -113,9 +112,6 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
         className="space-y-12 py-20 px-12 overflow-y-scroll h-screen "
         style={{ scrollbarWidth: "none" }}
       >
-        <div id="1">
-          <ParamsGroup />
-        </div>
         <div id="2">
           <ParamsDescriptions
             description={description}
