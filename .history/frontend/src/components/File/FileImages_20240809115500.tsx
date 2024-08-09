@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Image, Upload } from "antd";
-import type { UploadFile, UploadProps } from "antd";
+import type { UploadFile, UploadProps, UploadChangeParam } from "antd";
 import { useGroupContext } from "@/context/GroupContexts";
 
 interface IFileUploadProps {
@@ -11,6 +11,8 @@ interface IFileUploadProps {
   multipleImage: boolean;
   submitNewProfilGroup: (e: any) => void;
 }
+
+const { group, updateGroup } = useGroupContext();
 
 const getBase64 = (file: File): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -49,7 +51,9 @@ export const FileImages: React.FC<IFileUploadProps> = ({
     setPreviewOpen(true);
   };
 
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+  const handleChange: UploadProps["onChange"] = ({
+    fileList: newFileList,
+  }: UploadChangeParam<UploadFile>) => {
     const updatedFileList = newFileList.map((file) => {
       if (!file.url && file.originFileObj) {
         const reader = new FileReader();

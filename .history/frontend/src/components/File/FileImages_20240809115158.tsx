@@ -9,8 +9,10 @@ interface IFileUploadProps {
   imgUrlKey: string;
   initialImages?: string[];
   multipleImage: boolean;
-  submitNewProfilGroup: (e: any) => void;
+  submitNewProfilGroup: (e: React.FormEvent<HTMLFormElement>) => void;
 }
+
+ const { group, updateGroup } = useGroupContext();
 
 const getBase64 = (file: File): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -84,9 +86,9 @@ export const FileImages: React.FC<IFileUploadProps> = ({
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
-        onChange={(info) => {
-          handleChange(info);
-          submitNewProfilGroup(info);
+        onChange={(e) => {
+          handleChange();
+          submitNewProfilGroup();
         }}
         onRemove={handleRemove}
         maxCount={multipleImage ? 8 : 1}

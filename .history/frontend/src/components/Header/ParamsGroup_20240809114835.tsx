@@ -41,7 +41,6 @@ export const ParamsGroup = () => {
         <FileImages
           handleImageUpload={handleImageUpload}
           imgUrlKey="url"
-          submitNewProfilGroup={submitNewProfilGroup}
           initialImages={newImage}
           multipleImage={false}
         />

@@ -12,6 +12,8 @@ interface IFileUploadProps {
   submitNewProfilGroup: (e: any) => void;
 }
 
+const { group, updateGroup } = useGroupContext();
+
 const getBase64 = (file: File): Promise<string> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();

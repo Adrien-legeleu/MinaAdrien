@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Image, Upload } from "antd";
 import type { UploadFile, UploadProps } from "antd";
-import { useGroupContext } from "@/context/GroupContexts";
 
 interface IFileUploadProps {
   handleImageUpload: (imgUrlKey: string, fileList: UploadFile[]) => void;
   imgUrlKey: string;
   initialImages?: string[];
   multipleImage: boolean;
-  submitNewProfilGroup: (e: any) => void;
 }
 
 const getBase64 = (file: File): Promise<string> =>
@@ -25,7 +23,6 @@ export const FileImages: React.FC<IFileUploadProps> = ({
   imgUrlKey,
   initialImages = [],
   multipleImage,
-  submitNewProfilGroup,
 }) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
@@ -84,9 +81,8 @@ export const FileImages: React.FC<IFileUploadProps> = ({
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
-        onChange={(info) => {
-          handleChange(info);
-          submitNewProfilGroup(info);
+        onChange={()=> {
+          handleChange()  submitNewProfilGroup()
         }}
         onRemove={handleRemove}
         maxCount={multipleImage ? 8 : 1}

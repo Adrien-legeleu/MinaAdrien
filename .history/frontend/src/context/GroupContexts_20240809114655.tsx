@@ -28,9 +28,9 @@ export interface IJoinFormsValues {
   userId: string | undefined;
 }
 export interface IGroup {
-  groupId?: string;
-  groupname?: string;
-  profilPhoto?: string;
+  groupId: string;
+  groupname: string;
+  profilPhoto: string;
 }
 export interface IUser {
   _id: string;
@@ -89,11 +89,11 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       await api.patch(`/group/${groupId}`, newValues);
       setGroup((prev: any) => {
-        return prev.map((group: any) => {
-          if (group._id === groupId) {
-            return { ...group, ...newValues };
+        return prev.map((desc: any) => {
+          if (desc._id === groupId) {
+            return { ...desc, ...newValues };
           }
-          return group;
+          return desc;
         });
       });
     } catch (error: any) {

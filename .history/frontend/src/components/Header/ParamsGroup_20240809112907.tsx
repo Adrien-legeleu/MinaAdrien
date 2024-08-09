@@ -1,11 +1,11 @@
-import { IGroup, useGroupContext } from "@/context/GroupContexts";
+import { useGroupContext } from "@/context/GroupContexts";
 import { IconGroup } from "../icons";
 import { useState } from "react";
 import { UploadFile } from "antd";
 import { FileImages } from "../File";
 
 export const ParamsGroup = () => {
-  const { group, updateGroup } = useGroupContext();
+  const { group } = useGroupContext();
   const [newImage, setNewImages] = useState<string[]>([]);
 
   const handleImageUpload = (imgUrlKey: string, fileList: UploadFile[]) => {
@@ -15,15 +15,17 @@ export const ParamsGroup = () => {
 
   const submitNewProfilGroup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const theme = themes.find((tme) => tme._id === themeId);
 
-    const values: IGroup = {
+    const values: IThemeFormUpdate = {
       groupname: group?.groupname,
       groupId: group?._id,
-      profilPhoto: group?.profilPhoto ? group.profilPhoto : newImage[0],
+      profilPhoto: group?.profilPhoto ? group.profilPhoto : newImage,
     };
 
     console.log(values);
-    updateGroup(values);
+    updateTheme(values);
   };
   return (
     <div>
@@ -41,8 +43,7 @@ export const ParamsGroup = () => {
         <FileImages
           handleImageUpload={handleImageUpload}
           imgUrlKey="url"
-          submitNewProfilGroup={submitNewProfilGroup}
-          initialImages={newImage}
+          initialImages={newImages}
           multipleImage={false}
         />
         <h1>{group?.groupname}</h1>

@@ -28,9 +28,9 @@ export interface IJoinFormsValues {
   userId: string | undefined;
 }
 export interface IGroup {
-  groupId?: string;
-  groupname?: string;
-  profilPhoto?: string;
+  groupId: string;
+  groupname: string;
+  profilPhoto: string;
 }
 export interface IUser {
   _id: string;

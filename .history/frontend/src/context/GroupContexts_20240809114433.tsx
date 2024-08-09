@@ -28,9 +28,9 @@ export interface IJoinFormsValues {
   userId: string | undefined;
 }
 export interface IGroup {
-  groupId?: string;
-  groupname?: string;
-  profilPhoto?: string;
+  groupId: string;
+  groupname: string;
+  profilPhoto: string;
 }
 export interface IUser {
   _id: string;
@@ -50,7 +50,7 @@ export const GroupContext = createContext<{
   onRegister: (values: IGroupFormsValues) => Promise<void>;
   chosePseudo: (values: IPseudoFormValues) => Promise<void>;
   onDeleteGroup: ({ groupId, userId }: any) => Promise<void>;
-  updateGroup: (values: IGroup) => Promise<void>;
+  updateGroup: ({ values }: IGroup) => Promise<void>;
 }>({
   isAuthenticated: false,
   isLoading: false,
@@ -84,16 +84,16 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log(error);
     }
   };
-  const updateGroup = async (values: IGroup) => {
-    const { groupId, ...newValues } = values;
+  const updateGroup = async (values: IDescriptionFormUpdate) => {
+    const { descriptionId, ...newValues } = values;
     try {
-      await api.patch(`/group/${groupId}`, newValues);
-      setGroup((prev: any) => {
-        return prev.map((group: any) => {
-          if (group._id === groupId) {
-            return { ...group, ...newValues };
+      await api.patch(`/description/${descriptionId}`, newValues);
+      setDescription((prev: any) => {
+        return prev.map((desc: any) => {
+          if (desc._id === descriptionId) {
+            return { ...desc, ...newValues };
           }
-          return group;
+          return desc;
         });
       });
     } catch (error: any) {
@@ -107,7 +107,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
-    setUser((prevUser: any) => {
+    setUser((prevUser: IUser | undefined) => {
       if (!prevUser) {
         return prevUser;
       }
@@ -189,7 +189,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   return (
     <GroupContext.Provider
       value={{
-        updateGroup,
         onDeleteGroup,
         isLoading,
         isAuthenticated,

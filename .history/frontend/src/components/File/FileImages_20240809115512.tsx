@@ -12,6 +12,8 @@ interface IFileUploadProps {
   submitNewProfilGroup: (e: any) => void;
 }
 
+const { group, updateGroup } = useGroupContext();
+
 const getBase64 = (file: File): Promise<string> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -49,8 +51,10 @@ export const FileImages: React.FC<IFileUploadProps> = ({
     setPreviewOpen(true);
   };
 
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    const updatedFileList = newFileList.map((file) => {
+  const handleChange: UploadProps["onChange"] = ({
+    fileList: newFileList,
+  }: UploadChangeParam<UploadFile>) => {
+    const updatedFileList = newFileList.map((file: any) => {
       if (!file.url && file.originFileObj) {
         const reader = new FileReader();
         reader.readAsDataURL(file.originFileObj);
