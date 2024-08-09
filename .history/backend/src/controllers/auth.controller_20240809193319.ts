@@ -132,48 +132,6 @@ export class AuthController {
       });
     }
   }
-  async updateGroupOneById(req: Request, res: Response): Promise<void> {
-    try {
-      const { groupId, userId } = req.params;
-      const { groupname, urlProfil } = req.body;
-
-      // Trouver l'utilisateur par ID
-      const user = await UserModel.findOne({ _id: userId });
-
-      if (!user) {
-        res.status(404).send({ error: `User not found with ID ${userId}` });
-        return; // Arrêter l'exécution de la fonction après avoir envoyé la réponse
-      }
-
-      const group = user.groups.find((group) => group.groupId === groupId);
-      console.log(group);
-
-      if (!group) {
-        res.status(404).send({ error: `Group not found with ID ${groupId}` });
-        return;
-      }
-
-      if (groupname) {
-        group.groupName = groupname;
-      }
-
-      if (urlProfil) {
-        group.urlProfil = urlProfil;
-      }
-      console.log(group);
-
-      const updatedUser = await user.save();
-      console.log(updatedUser);
-
-      res.status(200).send(updatedUser);
-    } catch (err: any) {
-      console.error(err);
-      res.status(500).send({
-        error: err?.message,
-      });
-    }
-  }
-
   async deleteGroup(req: Request, res: Response): Promise<void> {
     try {
       const { groupId, userId } = req.params;

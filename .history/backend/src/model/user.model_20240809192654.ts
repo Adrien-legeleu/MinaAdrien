@@ -10,9 +10,6 @@ export interface IUser {
     groupCode: string;
     groupName: string;
     urlProfil: string;
-    members: {
-      userId: string;
-    }[];
   }[];
   profilPhoto: string;
 }

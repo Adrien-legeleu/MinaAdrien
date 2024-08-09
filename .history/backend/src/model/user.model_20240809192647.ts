@@ -10,9 +10,6 @@ export interface IUser {
     groupCode: string;
     groupName: string;
     urlProfil: string;
-    members: {
-      userId: string;
-    }[];
   }[];
   profilPhoto: string;
 }
@@ -54,12 +51,13 @@ const UserSchema = new mongoose.Schema<IUser>({
       },
       members: {
         type: [
-          {
+          
+           
             userId: {
               type: String,
               ref: "users",
             },
-          },
+          
         ],
         required: true,
       },

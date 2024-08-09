@@ -134,46 +134,33 @@ export class AuthController {
   }
   async updateGroupOneById(req: Request, res: Response): Promise<void> {
     try {
-      const { groupId, userId } = req.params;
+      const { groupId } = req.params;
+      console.log();
+
       const { groupname, urlProfil } = req.body;
-
-      // Trouver l'utilisateur par ID
-      const user = await UserModel.findOne({ _id: userId });
-
-      if (!user) {
-        res.status(404).send({ error: `User not found with ID ${userId}` });
-        return; // Arrêter l'exécution de la fonction après avoir envoyé la réponse
-      }
-
-      const group = user.groups.find((group) => group.groupId === groupId);
-      console.log(group);
-
+      const group = await GroupModel.findOneAndUpdate(
+        { _id: groupId },
+        {
+          ...(groupname ? { groupname } : {}),
+          ...(urlProfil ? { urlProfil } : {}),
+        }
+      );
       if (!group) {
-        res.status(404).send({ error: `Group not found with ID ${groupId}` });
+        res.status(404).send({
+          error: "group not found" + groupId,
+        });
+
         return;
       }
-
-      if (groupname) {
-        group.groupName = groupname;
-      }
-
-      if (urlProfil) {
-        group.urlProfil = urlProfil;
-      }
       console.log(group);
-
-      const updatedUser = await user.save();
-      console.log(updatedUser);
-
-      res.status(200).send(updatedUser);
+      res.status(200).send(group);
     } catch (err: any) {
-      console.error(err);
+      console.log(err);
       res.status(500).send({
         error: err?.message,
       });
     }
   }
-
   async deleteGroup(req: Request, res: Response): Promise<void> {
     try {
       const { groupId, userId } = req.params;

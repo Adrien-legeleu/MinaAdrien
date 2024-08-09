@@ -163,7 +163,6 @@ export class AuthController {
       console.log(group);
 
       const updatedUser = await user.save();
-      console.log(updatedUser);
 
       res.status(200).send(updatedUser);
     } catch (err: any) {
