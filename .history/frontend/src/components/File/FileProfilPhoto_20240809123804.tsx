@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Flex, message, Upload } from "antd";
 import type { GetProp, UploadProps } from "antd";
-import { IconPlus } from "../icons";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
 interface Fileprops {
-  imageUrl: string | undefined;
-  setImageUrl: any;
+    imageurl : string
 }
 
 const getBase64 = (img: FileType, callback: (url: string) => void) => {
@@ -17,11 +15,9 @@ const getBase64 = (img: FileType, callback: (url: string) => void) => {
   reader.readAsDataURL(img);
 };
 
-export const FileProfilPhoto: React.FC<Fileprops> = ({
-  imageUrl,
-  setImageUrl,
-}) => {
+export const FileProfilPhoto: React.FC<Fileprops> = ({imageUrl}) => {
   const [loading, setLoading] = useState(false);
+
 
   const handleChange: UploadProps["onChange"] = (info) => {
     if (info.file.status === "uploading") {
@@ -35,7 +31,6 @@ export const FileProfilPhoto: React.FC<Fileprops> = ({
         setImageUrl(url);
       });
     }
-    console.log(imagUrl);
   };
 
   const uploadButton = (
@@ -50,11 +45,16 @@ export const FileProfilPhoto: React.FC<Fileprops> = ({
       <Upload
         name="avatar"
         listType="picture-circle"
-        className="avatar-uploader w-12 h-12"
+        className="avatar-uploader"
         showUploadList={false}
+        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
         onChange={handleChange}
       >
-        <IconPlus />
+        {imageUrl ? (
+          <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
+        ) : (
+          uploadButton
+        )}
       </Upload>
     </>
   );

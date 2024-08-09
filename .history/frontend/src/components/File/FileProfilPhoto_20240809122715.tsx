@@ -78,26 +78,19 @@ export const FileImages: React.FC<IFileUploadProps> = ({
   return (
     <>
       <Upload
-        listType="picture-card"
-        fileList={fileList}
-        onPreview={handlePreview}
+        name="avatar"
+        listType="picture-circle"
+        className="avatar-uploader"
+        showUploadList={false}
+        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
         onChange={handleChange}
-        onRemove={handleRemove}
-        maxCount={multipleImage ? 8 : 1}
       >
-        {fileList.length >= 8 ? null : uploadButton}
+        {previewImage ? (
+          <img src={previewImage} alt="avatar" style={{ width: "100%" }} />
+        ) : (
+          uploadButton
+        )}
       </Upload>
-      {previewImage && (
-        <Image
-          wrapperStyle={{ display: "none" }}
-          preview={{
-            visible: previewOpen,
-            onVisibleChange: (visible) => setPreviewOpen(visible),
-            afterOpenChange: (visible) => !visible && setPreviewImage(""),
-          }}
-          src={previewImage}
-        />
-      )}
     </>
   );
 };

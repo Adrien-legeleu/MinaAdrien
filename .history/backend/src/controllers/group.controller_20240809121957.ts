@@ -1,5 +1,6 @@
 import { type Response, type Request } from "express";
 import { GroupModel } from "../model/group.model";
+import { log } from "console";
 
 export class GroupController {
   async findOneById(req: Request, res: Response): Promise<void> {

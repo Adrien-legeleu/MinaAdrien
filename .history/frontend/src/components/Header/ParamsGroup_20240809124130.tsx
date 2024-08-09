@@ -44,22 +44,17 @@ export const ParamsGroup = () => {
   return (
     <div>
       <div>
-        {group?.profilPhoto ? (
-          <div className="w-1/2 rounded-full border-[1px] relative border-black/50">
+        {/* {group?.profilPhoto ? (
+          <div className="w-1/2 rounded-full border-[1px] border-black/50">
             <img src={group.profilPhoto} alt={group.groupname} />
-            <div className="absolute rounded-full top-0 left-0 bg-black/20 flex items-center justify-center">
-              <FileProfilPhoto imageUrl={imageUrl} setImageUrl={setImageUrl} />
-            </div>
           </div>
         ) : (
-          <div className="w-1/2 rounded-full relative border-[1px] border-black/50 group">
+          <div className="w-1/2 rounded-full border-[1px] border-black/50">
             <IconGroup />
-            <div className="absolute group-hover:visible group-hover:opacity-100 duration-300 ease-in-out opcaity-0 invisible rounded-full top-0 left-0 bg-black/20 flex items-center justify-center">
-              <FileProfilPhoto imageUrl={imageUrl} setImageUrl={setImageUrl} />
-            </div>
           </div>
-        )}
+        )} */}
 
+        <FileProfilPhoto imageUrl={imageUrl} setImageUrl={setImageUrl} />
         <h1>{group?.groupname}</h1>
       </div>
       <div>

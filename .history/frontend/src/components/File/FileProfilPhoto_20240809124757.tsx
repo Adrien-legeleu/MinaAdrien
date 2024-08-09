@@ -35,7 +35,6 @@ export const FileProfilPhoto: React.FC<Fileprops> = ({
         setImageUrl(url);
       });
     }
-    console.log(imagUrl);
   };
 
   const uploadButton = (

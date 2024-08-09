@@ -89,7 +89,12 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       await api.patch(`/group/${groupId}`, newValues);
       setGroup((prev: any) => {
-        return { ...prev, ...newValues };
+        
+         
+            return { ...group, ...newValues };
+          
+          
+        });
       });
     } catch (error: any) {
       console.log(error);

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Flex, message, Upload } from "antd";
 import type { GetProp, UploadProps } from "antd";
-import { IconPlus } from "../icons";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -35,7 +34,6 @@ export const FileProfilPhoto: React.FC<Fileprops> = ({
         setImageUrl(url);
       });
     }
-    console.log(imagUrl);
   };
 
   const uploadButton = (
@@ -50,11 +48,15 @@ export const FileProfilPhoto: React.FC<Fileprops> = ({
       <Upload
         name="avatar"
         listType="picture-circle"
-        className="avatar-uploader w-12 h-12"
+        className="avatar-uploader"
         showUploadList={false}
         onChange={handleChange}
       >
-        <IconPlus />
+        {imageUrl ? (
+          <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
+        ) : (
+          uploadButton
+        )}
       </Upload>
     </>
   );
