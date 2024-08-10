@@ -7,6 +7,12 @@ export interface IUser {
   password: string;
   groups: {
     groupId: string;
+    groupCode: string;
+    groupName: string;
+    urlProfil: string;
+    members: {
+      userId: string;
+    }[];
   }[];
   profilPhoto: string;
 }

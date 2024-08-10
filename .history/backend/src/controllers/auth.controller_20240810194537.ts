@@ -32,16 +32,16 @@ export class AuthController {
 
   async login(req: Request, res: Response): Promise<void> {
     try {
-      const { groupCode, userId } = req.body;
+      const { password, userId } = req.body;
 
-      if (!groupCode || !userId) {
+      if (!password || !userId) {
         res.status(401).send({
-          error: "Groupname, groupCode are incorrect",
+          error: "Groupname, password are incorrect",
         });
         return;
       }
 
-      const group = await GroupModel.findOne({ groupCode });
+      const group = await GroupModel.findOne({ password });
 
       if (!group) {
         res.status(401).send({
@@ -59,6 +59,14 @@ export class AuthController {
         if (!isGroupsUser) {
           user.groups.push({
             groupId: group._id,
+            groupCode: password,
+            groupName: group.groupname,
+            urlProfil: group.profilPhoto,
+            members: [
+              {
+                userId: userId,
+              },
+            ],
           });
           await user.save();
         }
@@ -96,7 +104,6 @@ export class AuthController {
       const group = await GroupModel.create({
         groupName: groupname,
         urlProfil: "",
-        pseudo: pseudo,
         groupCode: crypto.randomBytes(5).toString("hex"),
         members: [
           {
@@ -110,6 +117,10 @@ export class AuthController {
       if (user) {
         user.groups.push({
           groupId: group._id,
+          groupCode: group.password,
+          groupName: groupname,
+          urlProfil: group.profilPhoto,
+         
         });
         await user.save();
       }

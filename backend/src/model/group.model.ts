@@ -2,31 +2,31 @@ import mongoose from "mongoose";
 
 export interface IGroup {
   _id: string;
-  groupname: string;
-  password: string;
-  profilPhoto: string;
+  groupName: string;
+  groupCode: string;
+  urlProfil: string;
   members: {
-    pseudoUser: string;
+    pseudo: string;
     userId: string;
   }[];
 }
 
 const GroupSchema = new mongoose.Schema<IGroup>({
-  groupname: {
+  groupName: {
     type: String,
     required: true,
   },
-  password: {
+  groupCode: {
     type: String,
     required: true,
   },
-  profilPhoto: {
+  urlProfil: {
     type: String,
   },
   members: {
     type: [
       {
-        pseudoUser: {
+        pseudo: {
           type: String,
         },
         userId: {
