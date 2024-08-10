@@ -1,10 +1,9 @@
 export interface IGroupComplete {
   _id: string;
-  groupname: string;
-  password: string;
-  profilPhoto: string;
+  groupName: string;
+  groupCode: string;
+  urlProfil: string;
   members: {
-    pseudoUser: string;
     userId: string;
   }[];
 }

@@ -29,8 +29,8 @@ export interface IJoinFormsValues {
 }
 export interface IGroup {
   groupId?: string;
-  groupName?: string;
-  urlProfil?: string;
+  groupname?: string;
+  profilPhoto?: string;
   userId?: string;
 }
 export interface IUser {
@@ -81,39 +81,21 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       const userId = localStorage.getItem("userId");
 
       if (!userId) {
-        throw new Error("User ID not found in local storage");
-      }
-
-      if (!groupId) {
-        throw new Error("Group ID not found in local storage");
+        throw new Error("Group name not found in local storage");
       }
 
       const response = await api.get(`/auth/user/${userId}`);
       console.log(response);
 
-      const group = response.data.groups.find(
-        (group: any) => group.groupId === groupId
-      );
-
-      if (!group) {
-        throw new Error(`Group with ID ${groupId} not found`);
-      }
-
-      setGroup(group);
-      console.log(group);
+      setGroup(response.data);
+      console.log(response);
     } catch (error: any) {
-      console.error(
-        "An error occurred while fetching the group:",
-        error.message
-      );
+      console.log(error);
     }
   };
-
   const updateGroup = async (values: IGroup) => {
     const { groupId, userId, ...newValues } = values;
     try {
-      console.log(values);
-
       await api.patch(`/auth/update/${userId}/${groupId}`, newValues);
       setUser((prev: any) => {
         if (!prev) return prev;
@@ -126,9 +108,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
             return group;
           }),
         };
-      });
-      setGroup((prev: any) => {
-        return { ...prev, newValues };
       });
     } catch (error: any) {
       console.log(error);

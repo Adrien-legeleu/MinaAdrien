@@ -29,7 +29,7 @@ export interface IJoinFormsValues {
 }
 export interface IGroup {
   groupId?: string;
-  groupName?: string;
+  groupname?: string;
   urlProfil?: string;
   userId?: string;
 }

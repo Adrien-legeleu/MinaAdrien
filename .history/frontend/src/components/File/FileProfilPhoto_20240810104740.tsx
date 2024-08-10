@@ -33,9 +33,10 @@ export const FileProfilPhoto: React.FC<Fileprops> = ({
       getBase64(info.file.originFileObj as FileType, (url) => {
         setLoading(false);
         setImageUrl(url);
+        console.log(url);
       });
     }
-    console.log(imagUrl);
+    console.log(imageUrl);
   };
 
   const uploadButton = (

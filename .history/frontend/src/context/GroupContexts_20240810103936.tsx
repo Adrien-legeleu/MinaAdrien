@@ -29,7 +29,7 @@ export interface IJoinFormsValues {
 }
 export interface IGroup {
   groupId?: string;
-  groupName?: string;
+  groupname?: string;
   urlProfil?: string;
   userId?: string;
 }
@@ -91,8 +91,9 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       const response = await api.get(`/auth/user/${userId}`);
       console.log(response);
 
+      // Recherche du groupe avec l'ID correspondant
       const group = response.data.groups.find(
-        (group: any) => group.groupId === groupId
+        (group) => group.groupId === groupId
       );
 
       if (!group) {
