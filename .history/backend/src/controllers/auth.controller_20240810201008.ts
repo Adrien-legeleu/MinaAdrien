@@ -127,20 +127,22 @@ export class AuthController {
       const { groupId } = req.params;
       const { groupname, urlProfil } = req.body;
 
-      const group = await GroupModel.findOneAndUpdate(
-        { _id: groupId },
-        {
-          ...(groupname ? { groupName: groupname } : {}),
-          ...(urlProfil ? { urlProfil } : {}),
-        }
-      );
+      
+
+      const group = await GroupModel.findOneAndUpdate({_id:groupId} , {
+        ...(groupname ? {groupName:groupname} : {} )
+        ...(urlProfil ? {urlProfil} : {} )
+      })
       if (!group) {
         res.status(401).send({
-          error: "groupId is incorrect",
-        });
-        return;
+          error : "groupId is incorrect"
+        })
+        return
       }
-      console.log(group);
+
+
+      
+      
 
       res.status(200).send(group);
     } catch (err: any) {
