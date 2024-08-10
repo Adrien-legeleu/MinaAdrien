@@ -44,8 +44,8 @@ export const Auth = () => {
   return (
     <BackgroundGradientAnimation>
       <div className="absolute inset-0 z-50 flex gap-16  flex-col items-center justify-center text-white font-montserrat ">
-        <h1 className="text-8xl mb-5 font-bold bg-clip-text text-transparent tracking-wider drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
-          Lovna
+        <h1 className="text-6xl font-bold bg-clip-text text-transparent tracking-wider drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
+          Découvrez Lovna maintenant !
         </h1>
         <form className="space-y-12" onSubmit={onSubmit}>
           {isLogin ? <Login /> : <Register />}
