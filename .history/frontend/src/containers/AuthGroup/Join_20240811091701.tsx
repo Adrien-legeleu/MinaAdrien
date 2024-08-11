@@ -34,7 +34,7 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
       password: data.get("password"),
     };
     console.log(values);
-    await onLogin(values as IJoinFormsValues);
+    onLogin(values as IJoinFormsValues);
   };
   const onSubmitPseudo = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,7 +46,7 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
       pseudoUser: data.get("pseudo"),
     };
     console.log(values);
-    await chosePseudo(values as IPseudoFormValues);
+    chosePseudo(values as IPseudoFormValues);
   };
 
   return (
@@ -66,7 +66,7 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
           <IconClose />
         </div>
         {joinPageRedirect === "choosePseudoPage" ? (
-          <form className="flex flex-col gap-12" onClick={onSubmitPseudo}>
+          <form className="flex flex-col gap-12" onSubmit={onSubmitPseudo}>
             <TextGenerateEffect
               words="Céer votre pseudo et c'est parti!"
               delay={0.2}
@@ -80,27 +80,26 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
                 type="text"
               />
             </div>
-            <div className="flex items-center justify-center">
-              <div
-                className={cn(
-                  "group rounded-full p-1 border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
-                )}
-              >
-                <AnimatedShinyText className=" text-xl  px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-                  <button
-                    className="flex items-center justify-center gap-3 "
-                    type="submit"
-                  >
-                    <span>c'est parti !</span> <ArrowRight />
-                  </button>
-                </AnimatedShinyText>
-              </div>
+
+            <div
+              className={cn(
+                "group rounded-full p-1 border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
+              )}
+            >
+              <AnimatedShinyText className=" text-xl  px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+                <button
+                  className="flex items-center justify-center gap-3 "
+                  type="submit"
+                >
+                  <span>c'est parti !</span> <ArrowRight />
+                </button>
+              </AnimatedShinyText>
             </div>
           </form>
         ) : (
           <form
-            className="flex flex-col items-center justify-center"
-            onClick={onSubmit}
+            className="flex flex-col items-center justify-center gap-12"
+            onSubmit={onSubmit}
           >
             <TextGenerateEffect
               words="Rejoignez un groupe maintenant!"
@@ -115,21 +114,20 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
                 type="text"
               />
             </div>
-            <div className="flex items-center justify-center">
-              <div
-                className={cn(
-                  "group rounded-full p-1 border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
-                )}
-              >
-                <AnimatedShinyText className=" text-xl  px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-                  <button
-                    className="flex items-center justify-center gap-3 "
-                    type="submit"
-                  >
-                    <span>login</span> <ArrowRight />
-                  </button>
-                </AnimatedShinyText>
-              </div>
+
+            <div
+              className={cn(
+                "group rounded-full p-1 border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
+              )}
+            >
+              <AnimatedShinyText className=" text-xl  px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+                <button
+                  className="flex items-center justify-center gap-3 "
+                  type="submit"
+                >
+                  <span>login</span> <ArrowRight />
+                </button>
+              </AnimatedShinyText>
             </div>
           </form>
         )}

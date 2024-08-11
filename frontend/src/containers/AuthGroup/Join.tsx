@@ -34,7 +34,7 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
       password: data.get("password"),
     };
     console.log(values);
-    await onLogin(values as IJoinFormsValues);
+    onLogin(values as IJoinFormsValues);
   };
   const onSubmitPseudo = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,7 +46,7 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
       pseudoUser: data.get("pseudo"),
     };
     console.log(values);
-    await chosePseudo(values as IPseudoFormValues);
+    chosePseudo(values as IPseudoFormValues);
   };
 
   return (
