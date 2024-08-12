@@ -29,7 +29,7 @@ export const ChoosePseudo = () => {
 
   return (
     <div className="h-screen bg-black/[0.96] w-full flex items-center justify-center">
-      <BackButton />
+      {/* <BackButton /> */}
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
         fill="white"

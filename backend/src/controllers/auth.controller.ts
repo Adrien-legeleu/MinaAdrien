@@ -321,9 +321,9 @@ export class AuthController {
         console.log("oieozieozieoi");
         return; // Arrêter l'exécution de la fonction
       }
-
+      const pseudo = pseudoUser;
       group.members.push({
-        pseudoUser,
+        pseudo,
         userId,
       });
 
