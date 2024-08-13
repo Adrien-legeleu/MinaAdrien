@@ -11,6 +11,7 @@ import {
 import { useCreateJoinContext } from "./CreateJoinContexts";
 import { IGroupComplete } from "@/types/group";
 import { AnyMxRecord } from "dns";
+import { toast } from "sonner";
 
 export interface IGroupFormsValues {
   groupname: string;
@@ -23,7 +24,7 @@ export interface IPseudoFormValues {
   pseudoUser: string;
 }
 export interface IJoinFormsValues {
-  password: string;
+  groupCode: string;
 
   userId: string | undefined;
 }
@@ -166,6 +167,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log(response);
       localStorage.setItem("groupId", response.data.group._id);
       setJoinPageRedicrect(response.data.redirect);
+      toast.success("Le groupe a été trouvé !");
     } catch (error: any) {
       console.log("Login error" + error);
     }
@@ -175,13 +177,13 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       setIsLoading(true);
       const response = await api.post("/auth/register", values);
-      console.log(response);
+
       localStorage.setItem("groupId", response?.data.group._id);
       changeUser({ group: response.data.group });
       setGroup(response.data.group);
-      console.log(response.data.group);
 
       setIsAuthenticated(true);
+      toast.success("Votre groupe a bien été créer !");
     } catch (error: any) {
       console.log("Register error" + error);
     }
@@ -190,8 +192,9 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const onDeleteGroup = async ({ groupId, userId }: any) => {
     try {
       const response = await api.patch(`/auth/${userId}/${groupId}`);
-      console.log(response);
+
       setUser(response.data);
+      toast.success("Groupe supprimer");
     } catch (error: any) {
       console.log(error);
     }
