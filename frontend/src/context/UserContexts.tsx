@@ -8,6 +8,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { toast } from "sonner";
 
 export interface ISignUpFormValues {
   email: string;
@@ -42,18 +43,18 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const onLogin = async (values: ISignInFormValues) => {
     setIsLoading(true);
     try {
-      console.log("Sending login request with values:", values);
       const response = await api.post("/auth/login-user", values, {
         headers: {
           "Content-Type": "application/json",
         },
         withCredentials: true,
       });
-      console.log("Response from login request:", response);
+
       localStorage.setItem("userId", response.data.user._id);
       localStorage.setItem("authToken", response?.data?.authToken);
       setIsAuthentificatedUser(true);
-      console.log("login successful");
+
+      toast.success("Bravo , vous êtes connectez !");
     } catch (error: any) {
       console.error("Login error:", error);
     } finally {
@@ -64,18 +65,17 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const onRegister = async (values: ISignUpFormValues) => {
     setIsLoading(true);
     try {
-      console.log("Sending register request with values:", values);
       const response = await api.post("/auth/register-user", values, {
         headers: {
           "Content-Type": "application/json",
         },
         withCredentials: true,
       });
-      console.log("Response from register request:", response);
+
       localStorage.setItem("userId", response.data.user._id);
       localStorage.setItem("authToken", response?.data?.authToken);
       setIsAuthentificatedUser(true);
-      console.log("register successful");
+      toast.success("Félicitations , votre compte a bien été créer !");
     } catch (error: any) {
       console.error("Register error:", error);
     } finally {
