@@ -37,7 +37,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userId");
     setIsAuthentificatedUser(false);
-    console.log("logout");
+    toast.success("Vous avez bien été déconnectez !");
   };
 
   const onLogin = async (values: ISignInFormValues) => {
@@ -57,8 +57,6 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       toast.success("Bravo , vous êtes connectez !");
     } catch (error: any) {
       console.error("Login error:", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
