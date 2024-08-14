@@ -47,6 +47,7 @@ export class AuthController {
         res.status(401).send({
           error: "groupCode are incorrect",
         });
+
         return;
       }
 
@@ -92,9 +93,10 @@ export class AuthController {
         });
         return;
       }
+      const groupName = groupname;
 
       const group = await GroupModel.create({
-        groupName: groupname,
+        groupName: groupName,
         urlProfil: "",
         pseudo: pseudo,
         groupCode: crypto.randomBytes(5).toString("hex"),
