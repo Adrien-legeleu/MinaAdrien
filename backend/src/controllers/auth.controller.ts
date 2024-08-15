@@ -98,10 +98,10 @@ export class AuthController {
       const group = await GroupModel.create({
         groupName: groupName,
         urlProfil: "",
-        pseudo: pseudo,
         groupCode: crypto.randomBytes(5).toString("hex"),
         members: [
           {
+            pseudo: pseudo,
             userId: userId,
           },
         ],
