@@ -25,7 +25,7 @@ export const AuthGroup = () => {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [groupId, setGroupId] = useState("");
   const { setUser, user } = useCreateJoinContext();
-  const { onDeleteGroup } = useGroupContext();
+  const { onDeleteGroup, allGroups } = useGroupContext();
 
   const openModalDelete = (id: string) => {
     setIsModalDeleteOpen(true);
@@ -79,18 +79,18 @@ export const AuthGroup = () => {
           <Logout />
         </div>
         <h1 className="text-5xl tracking-wider font-bold bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
-          Lovna
+          Heureux de te revoir, {user?.username} !
         </h1>
         {!isGroup ? (
           <DescriptionAuthGroup isGroupTrue={isGroupTrue} />
         ) : (
           <div
-            className="w-2/3 mx-auto overflow-y-scroll rounded-t-3xl pt-10 px-2 relative "
+            className="w-3/4 mx-auto pt-10 px-2 relative "
             style={{ scrollbarWidth: "none" }}
           >
             <div className="grid grid-cols-4 gap-12 ">
-              {user?.groups.map((group: any) => (
-                <div className="bg-white/90 relative py-5 px-2  rounded-3xl  cursor-pointer hover:bg-white/80 hover:scale-105 duration-300 ease-in-out">
+              {allGroups.map((group: any) => (
+                <div className="bg-white/10  space-y-3 border-black/20 border-[1px] relative py-7 px-2  rounded-3xl  cursor-pointer hover:bg-white/80 hover:scale-105 duration-300 ease-in-out">
                   <div
                     className="absolute top-2 right-0 h-8 w-8"
                     onClick={() => openModalDelete(group.groupId)}
