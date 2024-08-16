@@ -75,6 +75,21 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const [joinPageRedirect, setJoinPageRedicrect] = useState<string | undefined>(
     undefined
   );
+  const [allGroups, setAllGroups] = useState([]);
+
+  const getAllGroup = async () => {
+    try {
+      const userId = localStorage.getItem("userId");
+      const response = await api.get("group");
+      console.log("eizoeizoeizoeiozeiozieozieozieo");
+      console.log(response);
+      response.data.forEach((group: any) => {
+        group.members.forEach((member: any) => {});
+      });
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
 
   const getGroup = async () => {
     try {
@@ -103,10 +118,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       setGroup(group);
       console.log(group);
     } catch (error: any) {
-      console.error(
-        "An error occurred while fetching the group:",
-        error.message
-      );
+      console.log("An error occurred while fetching the group:", error.message);
     }
   };
 
@@ -152,9 +164,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
           ...prevUser.groups,
           {
             groupId: group._id,
-            groupCode: group.password,
-            groupName: group.groupname,
-            urlProfil: group.profilPhoto || "",
           },
         ],
       };
@@ -170,6 +179,9 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       toast.success("Le groupe a été trouvé !");
     } catch (error: any) {
       console.log("Login error" + error);
+      toast.error(
+        "Le code du groupe est incorrect. Assurez vous qu'il existe, puis réessayez"
+      );
     }
   };
 
@@ -181,11 +193,13 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem("groupId", response?.data.group._id);
       changeUser({ group: response.data.group });
       setGroup(response.data.group);
+      console.log(response);
 
       setIsAuthenticated(true);
       toast.success("Votre groupe a bien été créer !");
     } catch (error: any) {
       console.log("Register error" + error);
+      toast.error("Erreur lors de la création du groupe");
     }
   };
 
@@ -197,6 +211,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       toast.success("Groupe supprimer");
     } catch (error: any) {
       console.log(error);
+      toast.error("Erreur lors de la suppression du groupe");
     }
   };
 
@@ -207,8 +222,10 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log(response);
 
       setIsAuthenticated(true);
+      toast.success("Pseudo bien reçu. Bienvenue dans votre nouveau groupe !");
     } catch (error: any) {
       console.log("Register error" + error);
+      toast.error("Pseudo non reçcu");
     }
   };
 
@@ -221,6 +238,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     getGroup();
+    getAllGroup();
   }, []);
 
   return (
