@@ -47,7 +47,7 @@ export const GroupContext = createContext<{
   isLoading: boolean;
   joinPageRedirect: string | undefined;
   group: IGroupComplete | undefined;
-
+  allGroups: IGroup[];
   onLogin: (values: IJoinFormsValues) => Promise<void>;
   onRegister: (values: IGroupFormsValues) => Promise<void>;
   chosePseudo: (values: IPseudoFormValues) => Promise<void>;
@@ -56,6 +56,7 @@ export const GroupContext = createContext<{
 }>({
   isAuthenticated: false,
   isLoading: false,
+  allGroups: [],
   joinPageRedirect: undefined,
   group: undefined,
   onLogin: async () => {},
@@ -75,17 +76,26 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const [joinPageRedirect, setJoinPageRedicrect] = useState<string | undefined>(
     undefined
   );
-  const [allGroups, setAllGroups] = useState([]);
-
+  const [allGroups, setAllGroups] = useState<IGroupComplete[]>([]);
   const getAllGroup = async () => {
     try {
       const userId = localStorage.getItem("userId");
       const response = await api.get("group");
+
       console.log("eizoeizoeizoeiozeiozieozieozieo");
       console.log(response);
-      response.data.forEach((group: any) => {
-        group.members.forEach((member: any) => {});
+
+      const uniqueGroups = new Set<IGroupComplete>();
+
+      response.data.forEach((group: IGroupComplete) => {
+        group.members.forEach((member: any) => {
+          if (member.userId === userId) {
+            uniqueGroups.add(group);
+          }
+        });
       });
+
+      setAllGroups(Array.from(uniqueGroups));
     } catch (error: any) {
       console.log(error.message);
     }
@@ -180,7 +190,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     } catch (error: any) {
       console.log("Login error" + error);
       toast.error(
-        "Le code du groupe est incorrect. Assurez vous qu'il existe, puis réessayez"
+        "Le code du groupe est incorrect. Assurez vous qu'il existe, puis réessayez."
       );
     }
   };
@@ -248,6 +258,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         onDeleteGroup,
         isLoading,
         isAuthenticated,
+        allGroups,
         onLogin,
         onRegister,
         group,
