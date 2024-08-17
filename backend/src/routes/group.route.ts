@@ -9,6 +9,7 @@ groupRouter
     "/:groupId",
     isConnectedMiddleware.execute,
     groupController.updateOneById
-  );
+  )
+  .get("/", isConnectedMiddleware.execute, groupController.findAll);
 
 export default groupRouter;
