@@ -124,34 +124,6 @@ export class AuthController {
       });
     }
   }
-  async updateGroupOneById(req: Request, res: Response): Promise<void> {
-    try {
-      const { groupId } = req.params;
-      const { groupname, urlProfil } = req.body;
-
-      const group = await GroupModel.findOneAndUpdate(
-        { _id: groupId },
-        {
-          ...(groupname ? { groupName: groupname } : {}),
-          ...(urlProfil ? { urlProfil } : {}),
-        }
-      );
-      if (!group) {
-        res.status(401).send({
-          error: "groupId is incorrect",
-        });
-        return;
-      }
-      console.log(group);
-
-      res.status(200).send(group);
-    } catch (err: any) {
-      console.error(err);
-      res.status(500).send({
-        error: err?.message,
-      });
-    }
-  }
 
   async deleteGroup(req: Request, res: Response): Promise<void> {
     try {
@@ -262,29 +234,25 @@ export class AuthController {
     try {
       const { userId } = req.params;
 
-      console.log(userId);
-
       if (!userId) {
-        res.status(400).send({
-          error: "userId not found in request body",
+        res.status(404).send({
+          error: "UserId not found",
         });
         return;
       }
-
-      const user = await UserModel.findById(userId);
+      const user = await UserModel.findOne({ _id: userId });
 
       if (!user) {
         res.status(404).send({
-          error: "user not found",
+          error: "User not found",
         });
         return;
       }
-
       res.status(200).send(user);
-    } catch (error: any) {
-      console.log(error);
+    } catch (err: any) {
+      console.log(err);
       res.status(500).send({
-        error: error?.message || "Internal server error",
+        error: err?.message,
       });
     }
   }

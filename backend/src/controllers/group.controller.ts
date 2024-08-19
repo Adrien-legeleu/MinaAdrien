@@ -39,31 +39,54 @@ export class GroupController {
       });
     }
   }
-  async updateOneById(req: Request, res: Response): Promise<void> {
-    try {
-      const { groupId } = req.params;
-      const { groupname, profilPhoto } = req.body;
-      const group = await GroupModel.findOneAndUpdate(
-        { _id: groupId },
-        {
-          ...(groupname ? { groupname } : {}),
-          ...(profilPhoto ? { profilPhoto } : {}),
-        }
-      );
-      if (!group) {
-        res.status(404).send({
-          error: "group not found" + groupId,
-        });
 
-        return;
-      }
-      console.log(group);
-      res.status(200).send(group);
-    } catch (err: any) {
-      console.log(err);
-      res.status(500).send({
-        error: err?.message,
-      });
-    }
+  async updateGroupOneById(req: Request, res: Response): Promise<void> {
+     try {
+       const { groupId } = req.params;
+       const { groupName, urlProfil } = req.body;
+
+       // Vérifiez que le groupId est fourni
+       if (!groupId) {
+         res.status(400).send({ error: "Group ID is required" });
+         return;
+       }
+
+       // Vérifiez que le corps de la requête contient des données à mettre à jour
+       if (!groupName && !urlProfil) {
+         res.status(400).send({ error: "No update data provided" });
+         return;
+       }
+
+       // Affichez les paramètres et le corps de la requête pour le débogage
+       console.log("Request params:", req.params);
+       console.log("Request body:", req.body);
+
+       // Mettez à jour le groupe
+       const group = await GroupModel.findOneAndUpdate(
+         { _id: groupId },
+         {
+           ...(groupName ? { groupName } : {}),
+           ...(urlProfil ? { urlProfil } : {}),
+         },
+         { new: true } // Retourne le document mis à jour
+       );
+
+       // Vérifiez si le groupe a été trouvé et mis à jour
+       if (!group) {
+         res.status(404).send({ error: "Group not found" });
+         return;
+       }
+
+       // Affichez le groupe mis à jour pour le débogage
+       console.log("Updated group:", group);
+
+       // Envoyez le groupe mis à jour en réponse
+       res.status(200).send(group);
+     } catch (err: any) {
+       console.error(err);
+       res.status(500).send({
+         error: err?.message,
+       });
+     }
   }
 }
