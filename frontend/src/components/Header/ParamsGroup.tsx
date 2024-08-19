@@ -14,7 +14,7 @@ export const ParamsGroup = () => {
       </div>
       <div>
         <h2 className="text-center tracking-wider text-2xl">
-          Les membres de {group?.groupName}²
+          Les membres de {group?.groupName}
         </h2>
         {/* <ul className="w-full h-full space-y-2">
           {group?.members.map((member) => {
