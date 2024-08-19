@@ -9,7 +9,7 @@ import bodyParser from "body-parser";
 dotenv.config();
 
 const uri = process.env.MONGODB_KEY || "";
-const PORT = 5000;
+const PORT = 5050;
 
 if (uri) {
   mongoose
