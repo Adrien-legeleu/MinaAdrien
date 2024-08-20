@@ -32,7 +32,6 @@ export interface IGroup {
   groupId?: string;
   groupName?: string;
   urlProfil?: string;
-  userId?: string;
 }
 export interface IUser {
   _id: string;
@@ -104,40 +103,26 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const getGroup = async () => {
     try {
       const groupId = localStorage.getItem("groupId");
-      const userId = localStorage.getItem("userId");
-
-      if (!userId) {
-        throw new Error("User ID not found in local storage");
-      }
 
       if (!groupId) {
         throw new Error("Group ID not found in local storage");
       }
 
-      const response = await api.get(`/auth/user/${userId}`);
+      const response = await api.get(`/group/${groupId}`);
       console.log(response);
 
-      const group = response.data.groups.find(
-        (group: any) => group.groupId === groupId
-      );
-
-      if (!group) {
-        throw new Error(`Group with ID ${groupId} not found`);
-      }
-
-      setGroup(group);
-      console.log(group);
+      setGroup(response.data);
     } catch (error: any) {
       console.log("An error occurred while fetching the group:", error.message);
     }
   };
 
   const updateGroup = async (values: IGroup) => {
-    const { groupId, userId, ...newValues } = values;
+    const { groupId, ...newValues } = values;
     try {
-      console.log(values);
+      console.log(newValues);
 
-      await api.patch(`/auth/update/${userId}/${groupId}`, newValues);
+      await api.patch(`/group/${groupId}`, newValues);
       setUser((prev: any) => {
         if (!prev) return prev;
         return {
