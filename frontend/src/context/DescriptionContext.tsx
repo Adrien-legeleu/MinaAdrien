@@ -6,6 +6,7 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -94,18 +95,21 @@ export const DescriptionContextProvider = ({
     }
   };
 
-  const getDescription = async () => {
+  const getDescription = useCallback(async () => {
     try {
       const response = await api.get(`/description/all/${groupId}`);
       setDescription(response.data);
-    } catch (error: any) {
+    } catch (error) {
       console.log(error);
     }
-  };
+  }, [groupId]);
 
   useEffect(() => {
-    getDescription();
-  }, []);
+    const groupId = localStorage.getItem("groupId");
+    if (groupId) {
+      getDescription();
+    }
+  }, [groupId]);
 
   return (
     <DescriptionContext.Provider
