@@ -22,6 +22,8 @@ export const ParamsGroup = () => {
     const uploadedImages: string[] = fileList.map((file) => file.url || "");
 
     setNewImage(uploadedImages);
+    console.log(uploadedImages);
+
     groupUpdate();
   };
 
@@ -41,8 +43,12 @@ export const ParamsGroup = () => {
       }
     }
 
-    // setMembers((prevMembers) => [Array.from(membersSet)]);
+    setMembers(Array.from(membersSet));
   };
+
+  useEffect(() => {
+    getMembers(group);
+  }, []);
 
   const groupUpdate = () => {
     const values = {
@@ -56,7 +62,7 @@ export const ParamsGroup = () => {
   };
 
   return (
-    <div className=" font-montserrat space-y-16">
+    <div className=" font-montserrat space-y-12 ">
       <div className="flex items-center justify-center flex-col gap-8">
         <FileProfilPhotos
           handleImageUpload={handleImageUpload}
@@ -65,11 +71,11 @@ export const ParamsGroup = () => {
         />
         <h1 className="text-4xl tracking-wider">{group?.groupName}</h1>
       </div>
-      <div>
+      <div className="space-y-8 ">
         <h2 className="text-center tracking-wider text-2xl space-y-8">
           Les membres de {group?.groupName}
         </h2>
-        <ul className="w-full h-full space-y-2">
+        <ul className="w-full h-full space-y-2 px-28">
           {members.map((member) => {
             return (
               <li

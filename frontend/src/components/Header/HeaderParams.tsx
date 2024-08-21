@@ -16,13 +16,11 @@ export const HeaderParams: React.FC<IHeaderProps> = ({
 }) => {
   return (
     <div>
-      <div className="flex z-50   gap-10 py-5 fixed top-0 right-12">
-        <div className="h-10 w-10 text-black/80" onClick={openParams}>
-          <IconSetting />
-        </div>
-        <div className="h-10 w-10 text-black/80">
-          <IconGroup />
-        </div>
+      <div
+        className="z-50  h-14 w-14 text-black/80   fixed top-10 right-14"
+        onClick={openParams}
+      >
+        <IconSetting />
       </div>
       <Params isParams={isParams} closeParams={closeParams} />
     </div>

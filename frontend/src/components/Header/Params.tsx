@@ -6,14 +6,15 @@ import {
   useDescriptionContext,
 } from "@/context/DescriptionContext";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-import { IconClose, IconLogout } from "../icons";
+import { IconClose } from "../icons";
 import { ParamsDescriptions } from "./ParamsDescriptions";
 import { Modal, ModalTrigger } from "../UI/AnimatedModal";
 import { useUserContext } from "@/context/UserContexts";
 import Link from "next/link";
 import { ParamsGroup } from "./ParamsGroup";
+import { useGroupContext } from "@/context/GroupContexts";
 
 interface IParamsProps {
   isParams: boolean;
@@ -23,7 +24,9 @@ interface IParamsProps {
 export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(1);
   const [descId, setDescId] = useState<string | null>(null);
+
   const {
     createDescription,
     description,
@@ -55,6 +58,7 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
     setDescId(desc._id);
     setIsUpdateOpen(true);
   };
+
   const updateSubmit = (e: any) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
@@ -73,6 +77,18 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
     deleteDescription(descriptionId);
   };
 
+  const groupRef = useRef<HTMLDivElement>(null);
+  const descriptionRef = useRef<HTMLDivElement>(null);
+  const themeRef = useRef<HTMLDivElement>(null);
+
+  const scrollToSection = (
+    index: number,
+    ref: React.RefObject<HTMLDivElement>
+  ) => {
+    setSelectedIndex(index);
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div
       className={`grid grid-cols-40/60 fixed w-full h-screen bg-white px-32 top-0 left-0 z-50 ${
@@ -86,16 +102,36 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
         <IconClose />
       </div>
       <ul className="my-20 flex items-start justify-center gap-10 flex-col border-r-2 border-black/30">
-        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
-          Votre Groupe
+        <li
+          onClick={() => scrollToSection(1, groupRef)}
+          className={`pb-2 text-xl tracking-wider cursor-pointer ${
+            selectedIndex === 1
+              ? "border-b-2 border-black/80 text-black"
+              : "text-black/50"
+          }`}
+        >
+          Votre groupe
         </li>
-        <li className="pb-2 border-b-[2px]  border-black/80 text-xl tracking-wider text-black/80 cursor-pointer">
-          Vos Descriptions
+        <li
+          onClick={() => scrollToSection(2, descriptionRef)}
+          className={`pb-2 text-xl tracking-wider cursor-pointer ${
+            selectedIndex === 2
+              ? "border-b-2 border-black/80 text-black"
+              : "text-black/50"
+          }`}
+        >
+          Description
         </li>
-        <li className="pb-2  border-black/80 text-xl tracking-wider text-black/50 cursor-pointer">
-          Thèmes d'affichage
+        <li
+          onClick={() => scrollToSection(3, themeRef)}
+          className={`pb-2 text-xl tracking-wider cursor-pointer ${
+            selectedIndex === 3
+              ? "border-b-2 border-black/80 text-black"
+              : "text-black/50"
+          }`}
+        >
+          Theme d'affichage
         </li>
-
         <Modal>
           <Link href="/" onClick={onLogout}>
             <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white  flex justify-center group/modal-btn">
@@ -110,13 +146,13 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
         </Modal>
       </ul>
       <div
-        className="space-y-12 py-20 px-12 overflow-y-scroll h-screen "
+        className="space-y-28 py-20 px-12 overflow-y-scroll h-screen "
         style={{ scrollbarWidth: "none" }}
       >
-        <div id="1">
+        <div id="1" ref={groupRef}>
           <ParamsGroup />
         </div>
-        <div id="2">
+        <div id="2" ref={descriptionRef}>
           <ParamsDescriptions
             description={description}
             deleteDesc={deleteDesc}
@@ -128,6 +164,10 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
             descId={descId}
             openAddDesc={openAddDesc}
           />
+        </div>
+        <div id="3" ref={themeRef}>
+          {/* Ici, tu pourras ajouter ton composant pour "Theme d'affichage" */}
+          <p>Contenu du Theme d'affichage</p>
         </div>
       </div>
     </div>

@@ -6,8 +6,7 @@ import type { UploadFile, UploadProps } from "antd";
 interface IFileUploadProps {
   handleImageUpload: (imgUrlKey: string, fileList: UploadFile[]) => void;
   imgUrlKey: string;
-  initialImages?: string[];
-  multipleImage: boolean;
+  initialImage?: string[];
 }
 
 const getBase64 = (file: File): Promise<string> =>
@@ -21,22 +20,21 @@ const getBase64 = (file: File): Promise<string> =>
 export const FileProfilPhotos: React.FC<IFileUploadProps> = ({
   handleImageUpload,
   imgUrlKey,
-  initialImages = [],
-  multipleImage,
+  initialImage = [],
 }) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   useEffect(() => {
-    const initialFileList: UploadFile[] = initialImages.map((url, index) => ({
+    const initialFileList: UploadFile[] = initialImage.map((url, index) => ({
       uid: `-1-${index}`,
       name: `image${index}`,
       status: "done" as UploadFile["status"],
       url,
     }));
     setFileList(initialFileList);
-  }, [initialImages]);
+  }, [initialImage]);
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
@@ -83,7 +81,7 @@ export const FileProfilPhotos: React.FC<IFileUploadProps> = ({
         onPreview={handlePreview}
         onChange={handleChange}
         onRemove={handleRemove}
-        maxCount={multipleImage ? 8 : 1}
+        maxCount={1}
       >
         {fileList.length >= 8 ? null : uploadButton}
       </Upload>
