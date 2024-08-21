@@ -52,6 +52,7 @@ export const GroupContext = createContext<{
   chosePseudo: (values: IPseudoFormValues) => Promise<void>;
   onDeleteGroup: ({ groupId, userId }: any) => Promise<void>;
   updateGroup: (values: IGroup) => Promise<void>;
+  getGroup: () => Promise<void>;
 }>({
   isAuthenticated: false,
   isLoading: false,
@@ -63,6 +64,7 @@ export const GroupContext = createContext<{
   chosePseudo: async () => {},
   onDeleteGroup: async () => {},
   updateGroup: async () => {},
+  getGroup: async () => {},
 });
 
 export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
@@ -79,9 +81,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const getAllGroup = async () => {
     try {
       const userId = localStorage.getItem("userId");
-      const response = await api.get("group");
-
-      console.log("eizoeizoeizoeiozeiozieozieozieo");
+      const response = await api.get("/group");
       console.log(response);
 
       const uniqueGroups = new Set<IGroupComplete>();
@@ -97,23 +97,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       setAllGroups(Array.from(uniqueGroups));
     } catch (error: any) {
       console.log(error.message);
-    }
-  };
-
-  const getGroup = async () => {
-    try {
-      const groupId = localStorage.getItem("groupId");
-
-      if (!groupId) {
-        throw new Error("Group ID not found in local storage");
-      }
-
-      const response = await api.get(`/group/${groupId}`);
-      console.log(response);
-
-      setGroup(response.data);
-    } catch (error: any) {
-      console.log("An error occurred while fetching the group:", error.message);
     }
   };
 
@@ -230,9 +213,25 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       setIsAuthenticated(true);
     }
   }, [joinPageRedirect]);
+  const groupId = localStorage.getItem("groupId");
+
+  const getGroup = useCallback(async () => {
+    const groupId = localStorage.getItem("groupId");
+    if (!groupId) return;
+
+    try {
+      const response = await api.get(`/group/${groupId}`);
+      setGroup(response.data);
+    } catch (error) {
+      console.error("Erreur lors de la récupération du groupe", error);
+    }
+  }, [groupId]);
 
   useEffect(() => {
     getGroup();
+  }, [groupId]); // Recharger le groupe à chaque changement de groupId
+
+  useEffect(() => {
     getAllGroup();
   }, []);
 
@@ -241,6 +240,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       value={{
         updateGroup,
         onDeleteGroup,
+        getGroup,
         isLoading,
         isAuthenticated,
         allGroups,

@@ -11,6 +11,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useGroupContext } from "./GroupContexts";
 
 export interface IDescriptionForm {
   description: string;
@@ -37,6 +38,7 @@ interface DescriptionContextType {
   createDescription: (values: IDescriptionForm) => Promise<void>;
   updateDescription: (values: IDescriptionFormUpdate) => Promise<void>;
   deleteDescription: (descriptionId: string) => Promise<void>;
+  getDescription: (groupId: string) => Promise<void>;
 }
 
 export const DescriptionContext = createContext<DescriptionContextType>({
@@ -45,6 +47,7 @@ export const DescriptionContext = createContext<DescriptionContextType>({
   createDescription: async (values: IDescriptionForm) => {},
   updateDescription: async (values: IDescriptionFormUpdate) => {},
   deleteDescription: async (descriptionId: string) => {},
+  getDescription: async (groupId: string) => {},
 });
 
 export const DescriptionContextProvider = ({
@@ -53,7 +56,8 @@ export const DescriptionContextProvider = ({
   children: ReactNode;
 }) => {
   const [description, setDescription] = useState<any>([]);
-  const groupId = localStorage.getItem("groupId");
+
+  const { group } = useGroupContext();
 
   const createDescription = async (values: IDescriptionForm) => {
     try {
@@ -95,21 +99,18 @@ export const DescriptionContextProvider = ({
     }
   };
 
-  const getDescription = useCallback(async () => {
+  const getDescription = async (groupId: string) => {
     try {
       const response = await api.get(`/description/all/${groupId}`);
+      console.log(
+        "eizoeizoeizoeioziozeiozieozieozieozieoziezoieozieozieozieozieozi"
+      );
+      console.log(response);
       setDescription(response.data);
     } catch (error) {
       console.log(error);
     }
-  }, [groupId]);
-
-  useEffect(() => {
-    const groupId = localStorage.getItem("groupId");
-    if (groupId) {
-      getDescription();
-    }
-  }, [groupId]);
+  };
 
   return (
     <DescriptionContext.Provider
@@ -119,6 +120,7 @@ export const DescriptionContextProvider = ({
         createDescription,
         updateDescription,
         deleteDescription,
+        getDescription,
       }}
     >
       {children}
