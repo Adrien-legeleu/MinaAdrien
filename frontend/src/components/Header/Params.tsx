@@ -146,7 +146,7 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
         </Modal>
       </ul>
       <div
-        className="space-y-28 py-20 px-12 overflow-y-scroll h-screen "
+        className="space-y-20 py-20 px-12 overflow-y-scroll h-screen "
         style={{ scrollbarWidth: "none" }}
       >
         <div id="1" ref={groupRef}>

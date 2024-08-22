@@ -17,7 +17,7 @@ export const HeaderParams: React.FC<IHeaderProps> = ({
   return (
     <div>
       <div
-        className="z-50  h-14 w-14 text-black/80   fixed top-10 right-14"
+        className="z-50  h-12 w-12 text-black/80   fixed top-10 right-14"
         onClick={openParams}
       >
         <IconSetting />

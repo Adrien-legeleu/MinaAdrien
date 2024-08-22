@@ -8,6 +8,8 @@ import { FileImages, FileProfilPhotos } from "../File";
 import { IGroupComplete } from "@/types/group";
 import { api } from "@/config/api";
 import { IUser } from "@/types/user";
+import { cn } from "@/utils/cn";
+import AnimatedGradientText from "../UI/GradientText";
 
 export const ParamsGroup = () => {
   const { group, updateGroup } = useGroupContext();
@@ -62,14 +64,23 @@ export const ParamsGroup = () => {
   };
 
   return (
-    <div className=" font-montserrat space-y-12 ">
+    <div className=" font-montserrat space-y-12 pt-12 ">
       <div className="flex items-center justify-center flex-col gap-8">
         <FileProfilPhotos
           handleImageUpload={handleImageUpload}
           imgUrlKey="url"
           initialImage={newImage}
         />
-        <h1 className="text-4xl tracking-wider">{group?.groupName}</h1>
+
+        <AnimatedGradientText>
+          <span
+            className={cn(
+              `text-5xl tracking-wider inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
+            )}
+          >
+            {group?.groupName}
+          </span>
+        </AnimatedGradientText>
       </div>
       <div className="space-y-8 ">
         <h2 className="text-center tracking-wider text-2xl space-y-8">

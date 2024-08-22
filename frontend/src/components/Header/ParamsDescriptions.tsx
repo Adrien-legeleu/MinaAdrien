@@ -28,7 +28,7 @@ export const ParamsDescriptions: React.FC<ParamsDescriptionsProps> = ({
   descId,
 }) => {
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 pt-12">
       <h2 className="text-4xl tracking-wider text-center mb-8">
         Vos descriptions
       </h2>
