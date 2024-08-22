@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PlusOutlined } from "@ant-design/icons";
-import { Image, Upload } from "antd";
+import { Upload } from "antd";
 import type { UploadFile, UploadProps } from "antd";
 
 interface IFileUploadProps {
@@ -22,8 +22,6 @@ export const FileProfilPhotos: React.FC<IFileUploadProps> = ({
   imgUrlKey,
   initialImage = [],
 }) => {
-  const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   useEffect(() => {
@@ -36,14 +34,6 @@ export const FileProfilPhotos: React.FC<IFileUploadProps> = ({
     setFileList(initialFileList);
   }, [initialImage]);
 
-  const handlePreview = async (file: UploadFile) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj as File);
-    }
-    setPreviewImage(file.url || (file.preview as string));
-    setPreviewOpen(true);
-  };
-
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
     const updatedFileList = newFileList.map((file) => {
       if (!file.url && file.originFileObj) {
@@ -51,7 +41,7 @@ export const FileProfilPhotos: React.FC<IFileUploadProps> = ({
         reader.readAsDataURL(file.originFileObj);
         reader.onloadend = () => {
           file.url = reader.result as string;
-          handleImageUpload(imgUrlKey, newFileList);
+          handleImageUpload(imgUrlKey, newFileList); // Update state directly after URL is set
         };
       }
       return file;
@@ -74,28 +64,14 @@ export const FileProfilPhotos: React.FC<IFileUploadProps> = ({
   );
 
   return (
-    <>
-      <Upload
-        listType="picture-card"
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={handleChange}
-        onRemove={handleRemove}
-        maxCount={1}
-      >
-        {fileList.length >= 8 ? null : uploadButton}
-      </Upload>
-      {previewImage && (
-        <Image
-          wrapperStyle={{ display: "none" }}
-          preview={{
-            visible: previewOpen,
-            onVisibleChange: (visible) => setPreviewOpen(visible),
-            afterOpenChange: (visible) => !visible && setPreviewImage(""),
-          }}
-          src={previewImage}
-        />
-      )}
-    </>
+    <Upload
+      listType="picture-card"
+      fileList={fileList}
+      onChange={handleChange}
+      onRemove={handleRemove}
+      maxCount={1}
+    >
+      {fileList.length > 7 ? null : uploadButton}
+    </Upload>
   );
 };
