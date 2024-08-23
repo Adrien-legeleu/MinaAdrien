@@ -24,11 +24,7 @@ export const ParamsGroup = () => {
     await setNewImage(uploadedImages);
     groupUpdate(uploadedImages[0]); // Update group with new image
   };
-  // useEffect(() => {
-  //   if (newImage[0]) {
-  //     groupUpdate(newImage[0]);
-  //   }
-  // }, [newImage]);
+
   const getMembers = async (group: IGroupComplete | undefined) => {
     if (!group) return;
 

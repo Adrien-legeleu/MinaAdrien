@@ -35,19 +35,17 @@ export const FileProfilPhotos: React.FC<IFileUploadProps> = ({
   }, [initialImage]);
 
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    const updatedFileList = newFileList.map((file) => {
+    const updatedFileListPromises = newFileList.map(async (file) => {
       if (!file.url && file.originFileObj) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onloadend = () => {
-          file.url = reader.result as string;
-          handleImageUpload(imgUrlKey, newFileList); // Update state directly after URL is set
-        };
+        file.url = await getBase64(file.originFileObj);
       }
       return file;
     });
-    setFileList(updatedFileList);
-    handleImageUpload(imgUrlKey, updatedFileList);
+
+    Promise.all(updatedFileListPromises).then((finalFileList) => {
+      setFileList(finalFileList);
+      handleImageUpload(imgUrlKey, finalFileList);
+    });
   };
 
   const handleRemove = (file: UploadFile) => {
@@ -64,14 +62,16 @@ export const FileProfilPhotos: React.FC<IFileUploadProps> = ({
   );
 
   return (
-    <Upload
-      listType="picture-card"
-      fileList={fileList}
-      onChange={handleChange}
-      onRemove={handleRemove}
-      maxCount={1}
-    >
-      {fileList.length > 7 ? null : uploadButton}
-    </Upload>
+    <div>
+      <Upload
+        listType="picture-card"
+        fileList={fileList}
+        onChange={handleChange}
+        onRemove={handleRemove}
+        maxCount={1}
+      >
+        {fileList.length > 7 ? null : uploadButton}
+      </Upload>
+    </div>
   );
 };
