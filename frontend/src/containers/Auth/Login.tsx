@@ -9,6 +9,7 @@ export const Login = () => {
           placeholder="Username"
           id="username"
           name="username"
+          autoComplete="off"
           className="border-none rounded-3xl py-4 px-5 bg-gradient-to-b from-[#d8d6e0] to-[#beb9d4] text-gray-500 outline-none"
         />
       </div>
@@ -20,6 +21,7 @@ export const Login = () => {
             placeholder="Password"
             id="password"
             name="password"
+            autoComplete="off"
             className="border-none rounded-3xl py-4 px-5 bg-gradient-to-b from-[#d8d6e0] to-[#beb9d4] text-gray-500 outline-none"
           />
         </div>

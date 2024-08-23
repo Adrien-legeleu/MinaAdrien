@@ -11,13 +11,13 @@ export const DescriptionAuthGroup: React.FC<IGroupProps> = ({
   isGroupTrue,
 }) => {
   return (
-    <div className="flex flex-col gap-12  relative bottom-5 items-center w-2/3 ">
+    <div className="flex flex-col gap-12   relative bottom-5 items-center w-2/3 ">
       <TextGenerateEffect
         words={
           "Bienvenue ! Choisissez votre groupe et partagez vos expériences. 🌟 Connectez-vous ou créez un nouveau groupe pour commencer à explorer et partager vos passions! 🌍"
         }
         delay={0.3}
-        className="text-[#ffffff60] text-4xl text-center  tracking-wider"
+        className="text-[#ffffff60] text-4xl max-lg:text-2xl max-sm:text-lg max-[390px]:text-base text-center tracking-wider"
       />
       <div
         className={cn(
@@ -25,7 +25,7 @@ export const DescriptionAuthGroup: React.FC<IGroupProps> = ({
         )}
         onClick={isGroupTrue}
       >
-        <AnimatedShinyText className=" text-xl   px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+        <AnimatedShinyText className=" text-xl max-lg:text-lg max-sm:text-base   px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
           <button
             className="flex flex-row-reverse items-center justify-center gap-3"
             onClick={isGroupTrue}

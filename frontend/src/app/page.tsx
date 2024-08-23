@@ -24,13 +24,11 @@ export default function AuthPage() {
   return (
     <main>
       {isLoading && (
-        <BackgroundGradientAnimation className="items-center justify-center w-screen h-screen flex">
-          <lord-icon
-            src="https://cdn.lordicon.com/sjxamlmf.json"
-            trigger="loop"
-            colors="primary:#ffffff,secondary:#000000"
-            style={{ width: "150px", height: "150px" }}
-          ></lord-icon>
+        <BackgroundGradientAnimation className="items-center justify-center w-screen h-screen flex gap-8">
+          <span className="sr-only">Loading...</span>
+          <div className="h-8 w-8 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+          <div className="h-8 w-8 bg-green-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+          <div className="h-8 w-8 bg-red-600 rounded-full animate-bounce"></div>
         </BackgroundGradientAnimation>
       )}
       {!isLoading && <Auth />}

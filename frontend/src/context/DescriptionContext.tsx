@@ -57,8 +57,6 @@ export const DescriptionContextProvider = ({
 }) => {
   const [description, setDescription] = useState<any>([]);
 
-  const { group } = useGroupContext();
-
   const createDescription = async (values: IDescriptionForm) => {
     try {
       const response = await api.post("/description", values);

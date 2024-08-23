@@ -72,7 +72,7 @@ export const GalleryContainer = () => {
         closeParams={closeParams}
         openParams={openParams}
       />
-      <div className="grid grid-cols-4 gap-7 px-7 pt-20">
+      <div className="grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-7 max-sm:gap-4 max-sm:px-4 px-7 pt-20">
         {images.map((image: IImage) => {
           if (!image._id) return null;
 

@@ -13,6 +13,7 @@ import AnimatedShinyText from "@/components/UI/ShinyText";
 
 import { ArrowRight } from "@/components/icons";
 import { cn } from "@/utils/cn";
+import { toast, Toaster } from "sonner";
 
 export const Auth = () => {
   const { onLogin, onRegister } = useUserContext();
@@ -47,6 +48,7 @@ export const Auth = () => {
         <h1 className="text-8xl mb-5 font-bold bg-clip-text text-transparent tracking-wider drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
           Lovna
         </h1>
+
         <form className="space-y-12" onSubmit={onSubmit}>
           {isLogin ? <Login /> : <Register />}
 
@@ -71,7 +73,7 @@ export const Auth = () => {
         </form>
 
         <p
-          className="absolute right-5 bottom-5 cursor-pointer  bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20"
+          className="absolute right-5 bottom-5 cursor-pointer max-sm:text-center max-sm:text-sm  bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20"
           onClick={handleIsLogin}
         >
           {!isLogin

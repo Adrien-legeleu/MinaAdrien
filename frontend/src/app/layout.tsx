@@ -7,7 +7,7 @@ import { CreateJoinContextProvider } from "@/context/CreateJoinContexts";
 import { DescriptionContextProvider } from "@/context/DescriptionContext";
 import { ImageContextProvider } from "@/context/ImageContexts";
 import { ThemeContextProvider } from "@/context/ThemeContext";
-
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,21 +23,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-     
-        <ThemeContextProvider>
-          <ImageContextProvider>
-            <DescriptionContextProvider>
-              <CreateJoinContextProvider>
-                <GroupContextProvider>
-                  <UserContextProvider>
-                    <body className={inter.className}>{children}</body>
-                  </UserContextProvider>
-                </GroupContextProvider>
-              </CreateJoinContextProvider>
-            </DescriptionContextProvider>
-          </ImageContextProvider>
-        </ThemeContextProvider>
-      
+      <ThemeContextProvider>
+        <ImageContextProvider>
+          <DescriptionContextProvider>
+            <CreateJoinContextProvider>
+              <GroupContextProvider>
+                <UserContextProvider>
+                  <body className={inter.className}>
+                    <Toaster richColors closeButton />
+                    {children}
+                  </body>
+                </UserContextProvider>
+              </GroupContextProvider>
+            </CreateJoinContextProvider>
+          </DescriptionContextProvider>
+        </ImageContextProvider>
+      </ThemeContextProvider>
     </html>
   );
 }

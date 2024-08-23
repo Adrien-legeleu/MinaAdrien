@@ -66,7 +66,7 @@ export const ImageHome = () => {
       ) : (
         <p
           className={cn(
-            `text-4xl w-1/2 pt-10 pb-32 mx-auto tracking-widest text-center leading-loose font-semibold  animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
+            `text-4xl max-md:text-3xl max-sm:text-xl w-1/2 pt-10 pb-32 mx-auto tracking-widest text-center leading-loose font-semibold  animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
           )}
         >
           Ajoutez des photos pour donner plus de vie à votre groupe ! 📸
@@ -77,8 +77,8 @@ export const ImageHome = () => {
           href="/gallery"
           className="w-full pt-10 h-full flex  justify-center "
         >
-          <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
-            <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
+          <ModalTrigger className="bg-black dark:bg-white dark:text-black max-sm:text-sm text-white flex justify-center group/modal-btn">
+            <span className="group-hover/modal-btn:translate-x-40  text-center transition duration-500">
               Voir votre LovniaGallery
             </span>
             <div className="-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">

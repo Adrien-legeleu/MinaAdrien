@@ -29,7 +29,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
   };
   return (
     <div className="py-8 ">
-      <div className="absolute top-8 left-8">
+      <div className="absolute top-8 left-8   max-sm:left-4">
         <BackGroup />
       </div>
       <HeaderParams
@@ -39,16 +39,16 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
       />
 
       {
-        <div className="w-1/2 mx-auto pb-48">
+        <div className="w-1/2 mx-auto pb-48 max-sm:pt-16  max-sm:w-2/3 font-montserrat">
           {description[0] ? (
-            <p className="text-3xl text-[#d83c3c] text-center  leading-loose tracking-widest">
+            <p className="text-3xl max-sm:text-2xl max-[400px]:text-xl  text-[#d83c3c] text-center leading-tight  tracking-widest">
               {description[0]?.description}
             </p>
           ) : (
             <div className="flex items-center justify-center flex-col gap-8">
               <p
                 className={cn(
-                  `text-4xl tracking-widest text-center leading-loose font-semibold  animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
+                  `text-4xl max-md:text-3xl max-sm:text-xl tracking-widest text-center leading-loose font-semibold  animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
                 )}
               >
                 Décrivez votre groupe en ajoutant plusieurs descriptions !✨

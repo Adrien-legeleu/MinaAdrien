@@ -7,10 +7,10 @@ export const Logout = () => {
   const { onLogout } = useUserContext();
   return (
     <div
-      className="rounded-full cursor-pointer px-4 py-2 bg-white/90 shadow-2xl shadow-black text-black h-12 w-16"
+      className="rounded-full cursor-pointer   relative px-4 py-2   max-sm:py-3 bg-white/90 shadow-2xl shadow-black text-black h-12 w-16 max-sm:w-14 max-sm:h-10"
       onClick={onLogout}
     >
-      <Link href="/">
+      <Link href="/" className="flex items-center justify-center w-full h-full">
         <IconLogout />
       </Link>
     </div>

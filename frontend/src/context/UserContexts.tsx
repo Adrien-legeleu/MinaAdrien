@@ -58,7 +58,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     } catch (error: any) {
       console.error("Login error:", error);
       toast.error(
-        "Le nom d'utilisateur ou le mot de passe est incorrect. Si vous n'avez pas de compte veuillez en créer un"
+        "Le nom d'utilisateur ou le mot de passe est incorrect. Si vous n'avez pas de compte, veuillez en créer un"
       );
     }
   };

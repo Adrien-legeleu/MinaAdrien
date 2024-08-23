@@ -106,21 +106,11 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log(newValues);
 
       await api.patch(`/group/${groupId}`, newValues);
-      setUser((prev: any) => {
-        if (!prev) return prev;
-        return {
-          ...prev,
-          groups: prev.groups.map((group: any) => {
-            if (group.groupId === groupId) {
-              return { ...group, ...newValues };
-            }
-            return group;
-          }),
-        };
-      });
+
       setGroup((prev: any) => {
         return { ...prev, newValues };
       });
+      window.location.reload();
     } catch (error: any) {
       console.log(error);
     }

@@ -31,7 +31,7 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
     const data = new FormData(e.currentTarget);
     const values = {
       userId: user?._id,
-      password: data.get("password"),
+      groupCode: data.get("password"),
     };
     console.log(values);
     onLogin(values as IJoinFormsValues);

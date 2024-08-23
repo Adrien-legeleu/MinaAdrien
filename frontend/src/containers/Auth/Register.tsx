@@ -8,6 +8,7 @@ export const Register = () => {
           type="text"
           placeholder="Username"
           id="username"
+          autoComplete="off"
           name="username"
           className="border-none rounded-3xl py-4 px-5 bg-gradient-to-b from-[#d8d6e0] to-[#beb9d4] text-gray-500 outline-none"
         />
@@ -28,6 +29,7 @@ export const Register = () => {
             type="password"
             placeholder="Password"
             id="password"
+            autoComplete="off"
             name="password"
             className="border-none rounded-3xl py-4 px-5 bg-gradient-to-b from-[#d8d6e0] to-[#beb9d4] text-gray-500 outline-none"
           />
