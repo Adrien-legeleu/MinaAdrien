@@ -39,7 +39,7 @@ export const LovniaGame = () => {
   };
 
   return (
-    <div className="h-screen w-screen px-2">
+    <div className="">
       <motion.h1
         initial={{
           opacity: 0,
@@ -59,8 +59,8 @@ export const LovniaGame = () => {
           LovniaInspire
         </Highlight>
       </motion.h1>
-      {gameOn ? (
-        <div className="space-y-5">
+      {!gameOn ? (
+        <div className=" flex items-center justify-center flex-col gap-16">
           <TextGenerateEffect
             words={
               "🎉 Dans LovniaGame, deux photos apparaissent au hasard ! Choisissez celle que vous préférez et découvrez quelle est votre photo coup de cœur ! 📸💕"
@@ -68,23 +68,28 @@ export const LovniaGame = () => {
             delay={0.3}
             className="text-[#00000060] text-4xl max-lg:text-2xl max-sm:text-lg max-[390px]:text-base text-center tracking-wider"
           />
-          <button onClick={playGame} className="bg-blavk rounded-lg px-4 py-2">
+          <button
+            onClick={playGame}
+            className="bg-black text-white rounded-lg text-2xl px-4 py-2"
+          >
             Jouer !🎴
           </button>
         </div>
       ) : (
-        <div>
-          <div className="grid grid-cols-2 gap-16 justify-center items-center">
+        <div className="grid grid-cols-2  gap-16 bg-red-400 justify-center items-center">
+          <div className="w-2/3 h-full relative bg-blue-500">
             <img
               src={imagesGame[indexes[0]]}
               alt={"lovnia photo" + indexes[0]}
-              className="h-full w-2/3 object-contain rounded-3xl"
+              className="h-full w-full object-contain rounded-3xl"
               onClick={() => handleGamePhotos(indexes[1])}
             />
+          </div>
+          <div className="w-2/3 h-full relative bg-blue-500">
             <img
               src={imagesGame[indexes[1]]}
               alt={"lovnia photo" + indexes[1]}
-              className="h-full w-2/3 object-contain rounded-3xl"
+              className="h-full w-full object-contain rounded-3xl"
               onClick={() => handleGamePhotos(indexes[0])}
             />
           </div>
