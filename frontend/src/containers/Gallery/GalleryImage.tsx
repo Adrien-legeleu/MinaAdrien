@@ -64,7 +64,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
 
   return (
     <div
-      className={`fixed grid grid-cols-70/30 gap-10 p-8 inset-0 top-0 left-0 h-screen w-screen z-50 ${
+      className={`fixed grid grid-cols-70/30 max-md:flex max-md:flex-col max-md:items-center max-md:justify-center gap-10 p-8 inset-0 top-0 left-0 h-screen w-screen z-50 ${
         isOpenModal
           ? "visible opacity-100 scale-100"
           : "invisible opacity-0 scale-50"
@@ -80,19 +80,13 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
         className="absolute h-full w-full top-0 left-0 bg-black/30 backdrop-blur-sm"
         onClick={modalClose}
       ></div>
-      <div className="relative w-full h-full z-10  ">
+      <div className="relative w-full h-full z-10 flex items-center justify-center  ">
         <img
-          className="rounded-3xl object-cover w-full h-full"
+          className="rounded-3xl object-contain "
           src={image?.url}
           alt={`ìmg de lovnia src: ${image?.url}`}
           onClick={() => console.log(image)}
         />
-        <div
-          className="absolute text-black bg-white/80 rounded-full cursor-pointer z-10 p-2 w-8 h-8 rounde-3xl flex items-center justify-center top-4 right-4"
-          onClick={deleteImageGallery}
-        >
-          <IconDelete />
-        </div>
       </div>
       {updateOpen ? (
         <form
@@ -139,12 +133,20 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
           <p className="text-white/80 text-center text-lg tracking-wider">
             Le {image?.photoDate}
           </p>
-          <button
-            onClick={handleUpdateModal}
-            className="bg-black/80 text-white py-2 px-4 rounded-full cursor-pointer"
-          >
-            Modifier
-          </button>
+          <div className="flex items-center justify-center gap-4">
+            <div
+              className=" text-black bg-white/80 rounded-full cursor-pointer z-10 p-2 w-8 h-8  flex items-center justify-center "
+              onClick={deleteImageGallery}
+            >
+              <IconDelete />
+            </div>
+            <button
+              onClick={handleUpdateModal}
+              className="bg-black/80 text-white py-2 px-4 rounded-full cursor-pointer"
+            >
+              Modifier
+            </button>
+          </div>
         </div>
       )}
     </div>

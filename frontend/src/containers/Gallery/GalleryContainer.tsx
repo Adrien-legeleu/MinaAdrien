@@ -64,7 +64,7 @@ export const GalleryContainer = () => {
 
   return (
     <div className="py-8">
-      <div className="absolute top-8 left-8">
+      <div className="absolute top-8 left-8 max-sm:left-4">
         <BackHome />
       </div>
       <HeaderParams

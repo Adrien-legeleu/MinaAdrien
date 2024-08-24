@@ -11,6 +11,7 @@ import AnimatedShinyText from "@/components/UI/ShinyText";
 import { useDescriptionContext } from "@/context/DescriptionContext";
 import { cn } from "@/utils/cn";
 import { useState } from "react";
+import { LovniaGame } from "../Game";
 
 type GroupContainerDetailsProps = IGroupDetailsProps;
 
@@ -41,7 +42,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
       {
         <div className="w-1/2 mx-auto pb-48 max-sm:pt-16  max-sm:w-2/3 font-montserrat">
           {description[0] ? (
-            <p className="text-3xl max-sm:text-2xl max-[400px]:text-xl  text-[#d83c3c] text-center leading-tight  tracking-widest">
+            <p className="text-3xl max-sm:text-2xl max-[400px]:text-xl  text-[#d83c3c] text-center leading-loose  tracking-widest">
               {description[0]?.description}
             </p>
           ) : (
@@ -76,6 +77,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
       <ModalProvider>
         <ThemeHome />
       </ModalProvider>
+      <LovniaGame />
     </div>
   );
 };
