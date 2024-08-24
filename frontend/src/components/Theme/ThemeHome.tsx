@@ -45,7 +45,7 @@ export const ThemeHome = () => {
           </Highlight>
         </motion.h1>
       </div>
-      <div className="grid-cols-3 gap-8 grid pt-32 px-8">
+      <div className="grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:px-2 gap-8 grid pt-32 px-8">
         {themes.map((theme) => {
           return (
             <div

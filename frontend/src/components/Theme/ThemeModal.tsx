@@ -120,7 +120,7 @@ export function ThemeModal() {
                   </motion.div>
                 ))}
               </div>
-              <div className="grid-cols-2 grid gap-5 pt-5">
+              <div className="grid-cols-2 max-[425px]:flex max-[425px]:flex-col max-[425px]:px-10 max-[400px]:px-4 items-center justify-center grid gap-5 pt-5">
                 <div className="space-y-5">
                   <Input placeholder="Titre" name="title" id="title" />
                   <TextArea
