@@ -96,12 +96,12 @@ export const LovniaGame = () => {
           </div>
         )
       ) : loading ? (
-        <BackgroundGradientAnimation className="items-center justify-center flex w-screen h-screen gap-8">
+        <div className="items-center justify-center flex  gap-8">
           <span className="sr-only">Loading...</span>
           <div className="h-8 w-8 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
           <div className="h-8 w-8 bg-green-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
           <div className="h-8 w-8 bg-red-600 rounded-full animate-bounce"></div>
-        </BackgroundGradientAnimation>
+        </div>
       ) : (
         <div className="grid grid-cols-2  gap-16 ">
           <div className="w-2/3 h-full flex justify-center items-center relative ">
