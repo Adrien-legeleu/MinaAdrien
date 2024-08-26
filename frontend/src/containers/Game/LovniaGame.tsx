@@ -159,27 +159,31 @@ export const LovniaGame = () => {
       ) : (
         <div className="space-y-10">
           <button
-            className="bg-black rounded-xl ml-10 px-7 py-2 text-xl cursor-pointer hover:scale-105 duration-300 ease-in-out text-white"
+            className="bg-black max-sm:text-sm rounded-xl ml-10 px-7 py-2 text-xl cursor-pointer hover:scale-105 duration-300 ease-in-out text-white"
             onClick={restartGame}
           >
             retour
           </button>
-          <div className="grid grid-cols-2 gap-16 ">
-            <div className="w-2/3 mx-auto  h-full flex justify-center items-center relative ">
-              <img
-                src={imagesGame[indexes[0]]}
-                alt={"lovnia photo" + indexes[0]}
-                className="h-full  cursor-pointer w-full object-contain rounded-3xl"
-                onClick={() => handleGamePhotos(indexes[1])}
-              />
+          <div className="columns-2 gap-20 px-20 max-md:gap-10 max-md:px-10 max-sm:gap-5 max-sm:px-5">
+            <div className="w-full flex justify-center items-center">
+              <div className="flex justify-center items-center h-full">
+                <img
+                  src={imagesGame[indexes[0]]}
+                  alt={"lovnia photo" + indexes[0]}
+                  className="max-h-full max-w-full cursor-pointer rounded-2xl"
+                  onClick={() => handleGamePhotos(indexes[1])}
+                />
+              </div>
             </div>
-            <div className="w-2/3  h-full mx-auto flex justify-center items-center relative ">
-              <img
-                src={imagesGame[indexes[1]]}
-                alt={"lovnia photo" + indexes[1]}
-                className="h-full w-full cursor-pointer object-contain rounded-3xl"
-                onClick={() => handleGamePhotos(indexes[0])}
-              />
+            <div className="w-full flex justify-center items-center">
+              <div className="flex justify-center items-center h-full">
+                <img
+                  src={imagesGame[indexes[1]]}
+                  alt={"lovnia photo" + indexes[1]}
+                  className="max-h-full max-w-full cursor-pointer rounded-2xl"
+                  onClick={() => handleGamePhotos(indexes[0])}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -107,7 +107,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
     <div className=" py-4 w-full  dark:bg-black bg-white  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex flex-col items-center justify-center">
       {/* Radial gradient for the container to give a faded look */}
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-      <div className="absolute top-8 left-8">
+      <div className="absolute z-10 top-8 left-8">
         <BackHome />
       </div>
       <HeaderParams
@@ -116,25 +116,24 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
         openParams={openParams}
       />
       <div className="pt-12 pb-28 flex items-center justify-center flex-col gap-10">
-        <h1>
+        <div
+          className={cn(
+            "group inline-block relative mx-auto  max-w-fit flex-row items-center justify-center rounded-2xl bg-white/55 px-4 py-1.5 text-sm font-medium shadow-[inset_0_-8px_10px_#8fdfff1f] backdrop-blur-sm transition-shadow duration-500 ease-out [--bg-size:300%] hover:shadow-[inset_0_-5px_10px_#8fdfff3f] dark:bg-black/40"
+          )}
+        >
           <div
+            className={`absolute inset-0 block h-full w-full animate-gradient bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:var(--bg-size)_100%] p-[1px] ![mask-composite:subtract] [border-radius:inherit] [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]`}
+          />
+
+          <span
             className={cn(
-              "group inline-block relative mx-auto  max-w-fit flex-row items-center justify-center rounded-2xl bg-white/55 px-4 py-1.5 text-sm font-medium shadow-[inset_0_-8px_10px_#8fdfff1f] backdrop-blur-sm transition-shadow duration-500 ease-out [--bg-size:300%] hover:shadow-[inset_0_-5px_10px_#8fdfff3f] dark:bg-black/40"
+              `text-5xl max-lg:text-4xl tracking-widest max-md:text-3xl animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
             )}
           >
-            <div
-              className={`absolute inset-0 block h-full w-full animate-gradient bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:var(--bg-size)_100%] p-[1px] ![mask-composite:subtract] [border-radius:inherit] [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]`}
-            />
+            {theme?.title} !
+          </span>
+        </div>
 
-            <span
-              className={cn(
-                `text-5xl max-lg:text-4xl tracking-widest max-md:text-3xl animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
-              )}
-            >
-              {theme?.title} !
-            </span>
-          </div>
-        </h1>
         {/* <p className="text-[#000000cb] text-4xl max-lg:text-2xl max-sm:text-lg max-[390px]:text-base text-center tracking-wider">
           {theme?.bio}
         </p> */}
@@ -144,11 +143,11 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
           className="text-[#000000cb] text-4xl max-lg:text-2xl max-sm:text-lg max-[390px]:text-base text-center tracking-wider"
         />
       </div>
-      <div className="grid-cols-2 grid">
+      <div className="grid-cols-2 grid max-sm:grid-cols-1 max-xl:gap-6 max-lg:gap-5 gap-16 px-16 max-xl:px-6  max-lg:px-5 max-md:gap-4 max-md:px-4 max-sm:px-5  items-center justify-center">
         {theme?.images.map((img: any) => {
           return (
             <>
-              <div className="bg-gray-50 relative group/card flex flex-col gap-6 dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+              <div className="bg-gray-50 relative flex flex-col gap-6 /[0.2] border-black/[0.1]  rounded-xl p-6 border  ">
                 {isThemeUpdateOpen && img._id === imgId ? (
                   <ThemeUpdate
                     data={dataUpdate}
@@ -192,14 +191,15 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                         </p>
                       </div>
                     </div>
-                    <div className="text-xl w-full font-semibold text-center px-2 text-black/80 tracking-wider">
+                    <div className="text-xl font-semibold text-center px-2 text-black/80 tracking-wider">
                       {img.legend ? img.legend : "no legend"}
                     </div>
 
-                    <div className="w-full mt-2">
+                    <div className=" mt-2">
                       <img
                         src={img.url}
-                        className=" h-full w-full object-contain rounded-xl group-hover/card:shadow-xl"
+                        className=" 
+                       object-contain rounded-xl group-hover/card:shadow-xl"
                         alt="thumbnail"
                       />
                     </div>
@@ -241,7 +241,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
             themeId={theme?._id}
           />
         ) : (
-          <div className="items-center z-10 justify-center flex">
+          <div className="items-center z-20 py-20 justify-center flex">
             <button
               className="py-2 px-4 rounded-xl bg-black/90 text-white tracking-wider "
               onClick={themeCreateOpen}

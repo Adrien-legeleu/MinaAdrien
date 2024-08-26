@@ -63,8 +63,10 @@ export const GalleryContainer = () => {
   };
 
   return (
-    <div className="py-8">
-      <div className="absolute top-8 left-8 max-sm:left-4">
+    <div className=" py-8 w-full  dark:bg-black bg-white  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex flex-col items-center justify-center">
+      {/* Radial gradient for the container to give a faded look */}
+      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      <div className="absolute top-8 left-8 max-sm:left-4 z-10">
         <BackHome />
       </div>
       <HeaderParams
@@ -72,7 +74,24 @@ export const GalleryContainer = () => {
         closeParams={closeParams}
         openParams={openParams}
       />
-      <div className="grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-7 max-sm:gap-4 max-sm:px-4 px-7 pt-20">
+      <div
+        className={cn(
+          "group inline-block relative mx-auto  max-w-fit flex-row items-center justify-center rounded-2xl bg-white/55 px-4 py-1.5 text-sm font-medium shadow-[inset_0_-8px_10px_#8fdfff1f] backdrop-blur-sm transition-shadow duration-500 ease-out [--bg-size:300%] hover:shadow-[inset_0_-5px_10px_#8fdfff3f] dark:bg-black/40"
+        )}
+      >
+        <div
+          className={`absolute inset-0 block h-full w-full animate-gradient bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:var(--bg-size)_100%] p-[1px] ![mask-composite:subtract] [border-radius:inherit] [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]`}
+        />
+
+        <span
+          className={cn(
+            `text-5xl max-lg:text-4xl max-md:text-3xl animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
+          )}
+        >
+          LovniaGallery
+        </span>
+      </div>
+      <div className="columns-4 max-md:columns-3 max-sm:columns-2 gap-5 max-sm:px-4 px-7 pt-32">
         {images.map((image: IImage) => {
           if (!image._id) return null;
 
@@ -96,7 +115,7 @@ export const GalleryContainer = () => {
               )}
 
               <img
-                className="rounded-3xl object-cover group-hover:brightness-75 duration-300 ease-in-out cursor-pointer"
+                className="rounded-2xl mt-5 block h-auto w-full group-hover:brightness-75 duration-300 ease-in-out cursor-pointer"
                 src={image.url}
                 alt="LovniaGallery de Lovnia"
                 onClick={() => modalOpen(image)}
