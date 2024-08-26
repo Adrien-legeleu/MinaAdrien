@@ -2,7 +2,7 @@
 
 import { IThemeDetailsProps } from "@/app/theme/[id]/page";
 import { HeaderParams } from "@/components/Header";
-import { CardBody, CardContainer, CardItem } from "@/components/UI/3dCart";
+
 import {
   ITheme,
   IThemeFormUpdate,
@@ -20,7 +20,7 @@ import { ThemeCreate, ThemeImg, ThemeUpdate } from "@/components/Theme";
 import { IImage } from "@/context/ImageContexts";
 import { IconDelete, IconEllipsis, IconUpdate } from "@/components/icons";
 import { BackHome } from "@/components/BackButton";
-import DotPattern from "@/components/magicui/dot-pattern";
+import { TextGenerateEffect } from "@/components/UI/GenerateEffect";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -104,10 +104,9 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
   };
 
   return (
-    <div className=" w-full dark:bg-black bg-white  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex items-center justify-center">
+    <div className=" py-4 w-full  dark:bg-black bg-white  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex flex-col items-center justify-center">
       {/* Radial gradient for the container to give a faded look */}
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-
       <div className="absolute top-8 left-8">
         <BackHome />
       </div>
@@ -116,102 +115,117 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
         closeParams={closeParams}
         openParams={openParams}
       />
-      <div className="pt-12 flex items-center justify-center flex-col gap-5">
-        <h1
-          className={cn(
-            `text-4xl tracking-wider font-semibold inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
-          )}
-        >
-          {theme?.title}
-        </h1>
+      <div className="pt-12 pb-28 flex items-center justify-center flex-col gap-10">
+        <h1>
+          <div
+            className={cn(
+              "group inline-block relative mx-auto  max-w-fit flex-row items-center justify-center rounded-2xl bg-white/55 px-4 py-1.5 text-sm font-medium shadow-[inset_0_-8px_10px_#8fdfff1f] backdrop-blur-sm transition-shadow duration-500 ease-out [--bg-size:300%] hover:shadow-[inset_0_-5px_10px_#8fdfff3f] dark:bg-black/40"
+            )}
+          >
+            <div
+              className={`absolute inset-0 block h-full w-full animate-gradient bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:var(--bg-size)_100%] p-[1px] ![mask-composite:subtract] [border-radius:inherit] [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]`}
+            />
 
-        <p className="text-xl text-center tracking-wider leading-relaxed">
+            <span
+              className={cn(
+                `text-5xl max-lg:text-4xl tracking-widest max-md:text-3xl animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
+              )}
+            >
+              {theme?.title} !
+            </span>
+          </div>
+        </h1>
+        {/* <p className="text-[#000000cb] text-4xl max-lg:text-2xl max-sm:text-lg max-[390px]:text-base text-center tracking-wider">
           {theme?.bio}
-        </p>
+        </p> */}
+        <TextGenerateEffect
+          words={theme?.bio || ""}
+          delay={0.3}
+          className="text-[#000000cb] text-4xl max-lg:text-2xl max-sm:text-lg max-[390px]:text-base text-center tracking-wider"
+        />
       </div>
       <div className="grid-cols-2 grid">
         {theme?.images.map((img: any) => {
           return (
             <>
-              <CardContainer className="inter-var">
-                <CardBody className="bg-gray-50 relative group/card flex flex-col gap-6 dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
-                  {isThemeUpdateOpen && img._id === imgId ? (
-                    <ThemeUpdate
-                      data={dataUpdate}
-                      themeId={theme._id}
-                      themeUpdateClose={themeUpdateClose}
-                      imgId={imgId}
-                    />
-                  ) : (
-                    <>
-                      <div className="absolute top-6 z-20 right-0 text-black/80 h-10 w-10 ">
-                        <div
-                          onClick={() => handleUpdateDeleteModal(img._id)}
-                          className="cursor-pointer"
-                        >
-                          <IconEllipsis />
-                        </div>
-                        <div
-                          className={`absolute -top-24 z-20 right-0 flex items-end justify-center flex-col gap-2 ${
-                            updateDeleteOpen && img._id === imgId
-                              ? "visible opacity-100 "
-                              : "invisible opacity-0"
-                          } duration-200 ease-in-out`}
-                        >
-                          <p
-                            onClick={() => onDeleteImage(img._id)}
-                            className="flex cursor-pointer gap-4 items-center justify-center text-sm px-4 py-2 rounded-full text-black/80 bg-white/95 border-[1px] border-black/20"
-                          >
-                            supprimer{" "}
-                            <div className="h-4 w-4">
-                              <IconDelete />
-                            </div>{" "}
-                          </p>
-                          <p
-                            onClick={() => themeUpdateOpen(img)}
-                            className="flex gap-4 cursor-pointer text-sm items-center justify-center px-4 py-2 rounded-full text-black/80 bg-white/95 border-[1px] border-black/20"
-                          >
-                            modifier{" "}
-                            <div className="h-4 w-4">
-                              <IconUpdate />
-                            </div>{" "}
-                          </p>
-                        </div>
+              <div className="bg-gray-50 relative group/card flex flex-col gap-6 dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+                {isThemeUpdateOpen && img._id === imgId ? (
+                  <ThemeUpdate
+                    data={dataUpdate}
+                    themeId={theme._id}
+                    themeUpdateClose={themeUpdateClose}
+                    imgId={imgId}
+                  />
+                ) : (
+                  <>
+                    <div className="absolute top-6 z-20 right-0 text-black/80 h-10 w-10 ">
+                      <div
+                        onClick={() => handleUpdateDeleteModal(img._id)}
+                        className="cursor-pointer"
+                      >
+                        <IconEllipsis />
                       </div>
-                      <div className="text-xl w-full font-semibold text-center px-2 text-black/80 tracking-wider">
-                        {img.legend ? img.legend : "no legend"}
+                      <div
+                        className={`absolute -top-24 z-20 right-0 flex items-end justify-center flex-col gap-2 ${
+                          updateDeleteOpen && img._id === imgId
+                            ? "visible opacity-100 "
+                            : "invisible opacity-0"
+                        } duration-200 ease-in-out`}
+                      >
+                        <p
+                          onClick={() => onDeleteImage(img._id)}
+                          className="flex cursor-pointer gap-4 items-center justify-center text-sm px-4 py-2 rounded-full text-black/80 bg-white/95 border-[1px] border-black/20"
+                        >
+                          supprimer{" "}
+                          <div className="h-4 w-4">
+                            <IconDelete />
+                          </div>{" "}
+                        </p>
+                        <p
+                          onClick={() => themeUpdateOpen(img)}
+                          className="flex gap-4 cursor-pointer text-sm items-center justify-center px-4 py-2 rounded-full text-black/80 bg-white/95 border-[1px] border-black/20"
+                        >
+                          modifier{" "}
+                          <div className="h-4 w-4">
+                            <IconUpdate />
+                          </div>{" "}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-xl w-full font-semibold text-center px-2 text-black/80 tracking-wider">
+                      {img.legend ? img.legend : "no legend"}
+                    </div>
+
+                    <div className="w-full mt-2">
+                      <img
+                        src={img.url}
+                        className=" h-full w-full object-contain rounded-xl group-hover/card:shadow-xl"
+                        alt="thumbnail"
+                      />
+                    </div>
+                    <div className="flex justify-between items-center ">
+                      <div className="px-4 py-2 rounded-xl   text-black/80  tracking-wider font-semibold">
+                        {img.photoDate ? img.photoDate : "../../.."}
                       </div>
 
-                      <div className="w-full mt-2">
-                        <img
-                          src={img.url}
-                          className=" h-full w-full object-contain rounded-xl group-hover/card:shadow-xl"
-                          alt="thumbnail"
-                        />
+                      <div
+                        className="px-4 py-2 hover:scale-110 duration-300 ease-in-out cursor-pointer"
+                        onClick={() => themeModalImgOpen(img._id)}
+                      >
+                        <lord-icon
+                          src="https://cdn.lordicon.com/xwvkumdr.json"
+                          trigger="in"
+                          delay="100"
+                          state="in-reveal"
+                          colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#915110"
+                          className="w-12 h-12 "
+                        ></lord-icon>
                       </div>
-                      <div className="flex justify-between items-center ">
-                        <div className="px-4 py-2 rounded-xl   text-black/80  tracking-wider font-semibold">
-                          {img.photoDate ? img.photoDate : "../../.."}
-                        </div>
+                    </div>
+                  </>
+                )}
+              </div>
 
-                        <div
-                          className="px-4 py-2 hover:scale-110 duration-300 ease-in-out cursor-pointer"
-                          onClick={() => themeModalImgOpen(img._id)}
-                        >
-                          <lord-icon
-                            src="https://cdn.lordicon.com/xwvkumdr.json"
-                            trigger="in"
-                            delay="100"
-                            state="in-reveal"
-                            colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#915110"
-                            className="w-12 h-12 "
-                          ></lord-icon>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </CardBody>
-              </CardContainer>
               <ThemeImg
                 themeModalImgClose={themeModalImgClose}
                 isThemeImgModalOpen={isThemeImgModalOpen}
@@ -227,7 +241,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
             themeId={theme?._id}
           />
         ) : (
-          <div className="items-center justify-center flex">
+          <div className="items-center z-10 justify-center flex">
             <button
               className="py-2 px-4 rounded-xl bg-black/90 text-white tracking-wider "
               onClick={themeCreateOpen}
