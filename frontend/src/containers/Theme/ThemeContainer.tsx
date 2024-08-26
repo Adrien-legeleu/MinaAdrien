@@ -20,6 +20,7 @@ import { ThemeCreate, ThemeImg, ThemeUpdate } from "@/components/Theme";
 import { IImage } from "@/context/ImageContexts";
 import { IconDelete, IconEllipsis, IconUpdate } from "@/components/icons";
 import { BackHome } from "@/components/BackButton";
+import DotPattern from "@/components/magicui/dot-pattern";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -103,7 +104,10 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
   };
 
   return (
-    <div className="py-8">
+    <div className=" w-full dark:bg-black bg-white  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex items-center justify-center">
+      {/* Radial gradient for the container to give a faded look */}
+      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+
       <div className="absolute top-8 left-8">
         <BackHome />
       </div>
@@ -140,11 +144,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                     />
                   ) : (
                     <>
-                      <CardItem
-                        translateZ="120"
-                        translateX={-5}
-                        className="absolute top-6 z-20 right-0 text-black/80 h-10 w-10 "
-                      >
+                      <div className="absolute top-6 z-20 right-0 text-black/80 h-10 w-10 ">
                         <div
                           onClick={() => handleUpdateDeleteModal(img._id)}
                           className="cursor-pointer"
@@ -177,33 +177,24 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                             </div>{" "}
                           </p>
                         </div>
-                      </CardItem>
-                      <CardItem
-                        translateZ="110"
-                        className="text-xl w-full font-semibold text-center px-2 text-black/80 tracking-wider"
-                      >
+                      </div>
+                      <div className="text-xl w-full font-semibold text-center px-2 text-black/80 tracking-wider">
                         {img.legend ? img.legend : "no legend"}
-                      </CardItem>
+                      </div>
 
-                      <CardItem translateZ="150" className="w-full mt-2">
+                      <div className="w-full mt-2">
                         <img
                           src={img.url}
                           className=" h-full w-full object-contain rounded-xl group-hover/card:shadow-xl"
                           alt="thumbnail"
                         />
-                      </CardItem>
+                      </div>
                       <div className="flex justify-between items-center ">
-                        <CardItem
-                          translateZ={100}
-                          translateX={-30}
-                          className="px-4 py-2 rounded-xl   text-black/80  tracking-wider font-semibold"
-                        >
+                        <div className="px-4 py-2 rounded-xl   text-black/80  tracking-wider font-semibold">
                           {img.photoDate ? img.photoDate : "../../.."}
-                        </CardItem>
+                        </div>
 
-                        <CardItem
-                          translateZ={100}
-                          translateX={30}
+                        <div
                           className="px-4 py-2 hover:scale-110 duration-300 ease-in-out cursor-pointer"
                           onClick={() => themeModalImgOpen(img._id)}
                         >
@@ -215,7 +206,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#915110"
                             className="w-12 h-12 "
                           ></lord-icon>
-                        </CardItem>
+                        </div>
                       </div>
                     </>
                   )}
