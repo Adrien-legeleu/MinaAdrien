@@ -29,7 +29,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
     setIsParams(true);
   };
   return (
-    <div className="py-8 ">
+    <div className="pt-8 ">
       <div className="absolute top-8 left-8   max-sm:left-4">
         <BackGroup />
       </div>
