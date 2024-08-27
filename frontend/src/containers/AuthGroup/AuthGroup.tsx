@@ -89,7 +89,7 @@ export const AuthGroup = () => {
 
   return (
     <BackgroundGradientAnimation>
-      <div className="absolute inset-0 z-50 flex gap-16 max-md:gap-20  flex-col pt-10 items-center justify-center font-montserrat">
+      <div className="absolute inset-0 z-50 flex gap-16 max-md:gap-20 flex-col pt-10 items-center justify-center font-montserrat">
         {isGroup && <BackButton isGroupFalse={isGroupFalse} />}
         <div className="absolute top-10 right-14 max-sm:right-8 max-sm:top-6 z-50">
           <Logout />
@@ -98,7 +98,7 @@ export const AuthGroup = () => {
           Heureux de te revoir,{" "}
           <div
             className={cn(
-              "group inline-block relative mx-auto  max-w-fit flex-row items-center justify-center rounded-2xl bg-white/55 px-4 py-1.5 text-sm font-medium shadow-[inset_0_-8px_10px_#8fdfff1f] backdrop-blur-sm transition-shadow duration-500 ease-out [--bg-size:300%] hover:shadow-[inset_0_-5px_10px_#8fdfff3f] dark:bg-black/40"
+              "group inline-block relative mx-auto max-w-fit flex-row items-center justify-center rounded-2xl bg-white/55 px-4 py-1.5 text-sm font-medium shadow-[inset_0_-8px_10px_#8fdfff1f] backdrop-blur-sm transition-shadow duration-500 ease-out [--bg-size:300%] hover:shadow-[inset_0_-5px_10px_#8fdfff3f] dark:bg-black/40"
             )}
           >
             <div
@@ -110,7 +110,7 @@ export const AuthGroup = () => {
                 `text-5xl max-lg:text-4xl max-md:text-3xl animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
               )}
             >
-              {user?.username} !
+              {user?.username}!
             </span>
           </div>
         </h1>
@@ -121,49 +121,57 @@ export const AuthGroup = () => {
             className="w-3/4 mx-auto pt-10 px-2 relative max-md:w-2/3 max-[600px]:w-4/5 max-[460px]:w-5/6 max-[400px]:w-[90%] max-[340px]:w-[95%]"
             style={{ scrollbarWidth: "none" }}
           >
-            <div className="grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 gap-12 max-md:gap-9 max-[340px]:gap-4 ">
-              {allGroups.map((group: any) => (
-                <div className="bg-white  space-y-3 border-black/60 border-[1px] relative py-7 px-5  rounded-3xl  cursor-pointer hover:bg-white/90 hover:scale-105 duration-300 ease-in-out">
+            <div className="grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 gap-12 max-md:gap-9 max-[340px]:gap-4">
+              {allGroups ? (
+                allGroups.map((group: any) => (
                   <div
-                    className="absolute top-2 right-0 h-8 w-8"
-                    onClick={() => openModalDelete(group._id)}
+                    key={group._id}
+                    className={`bg-white space-y-3  border-black/60 border-[1px] relative py-5 px-5 rounded-3xl cursor-pointer hover:bg-white/90 hover:scale-105 duration-300 ease-in-out`}
                   >
-                    <IconEllipsis />
-                    {isModalDeleteOpen && groupId === group._id ? (
-                      <div
-                        onClick={() => deleteGroup(group._id)}
-                        className=" top-0 right-2 absolute h-full w-full p-1 z-10 text-black/80 bg-white/90 rounded-full flex items-center justify-center"
-                      >
-                        <IconDelete />
-                      </div>
-                    ) : (
-                      <div></div>
-                    )}
+                    <div
+                      className="absolute top-2 right-0 h-8 w-8"
+                      onClick={() => openModalDelete(group._id)}
+                    >
+                      <IconEllipsis />
+                      {isModalDeleteOpen && groupId === group._id ? (
+                        <div
+                          onClick={() => deleteGroup(group._id)}
+                          className="top-0 right-2 absolute h-full w-full p-1 z-10 text-black/80 bg-white/90 rounded-full flex items-center justify-center"
+                        >
+                          <IconDelete />
+                        </div>
+                      ) : null}
+                    </div>
+                    <Link
+                      href={`/home/${group._id}`}
+                      className="flex flex-col items-center justify-between gap-6"
+                      onClick={() => handleGroupClick(group._id)}
+                    >
+                      {group.urlProfil ? (
+                        <img
+                          className="rounded-3xl w-full h-auto"
+                          src={group.urlProfil}
+                          alt={group.groupName}
+                        />
+                      ) : (
+                        <div className="p-1 flex items-center justify-center w-24 h-24 border-black/50 rounded-full border-[2px] text-black/80">
+                          <IconPeopleGroup />
+                        </div>
+                      )}
+                      <h3 className="text-xl max-md:text-base text-center tracking-wider font-medium">
+                        {group.groupName}
+                      </h3>
+                    </Link>
                   </div>
-                  <Link
-                    href={`/home/${group._id}`}
-                    key={group.groupCode}
-                    className="flex flex-col items-center jusitfy-between   gap-6"
-                    onClick={() => handleGroupClick(group._id)} // Utilisez la fonction pour gérer le clic sur un groupe
-                  >
-                    {group.urlProfil ? (
-                      <img
-                        className="rounded-full"
-                        src={group.urlProfil}
-                        alt={group.groupName}
-                      />
-                    ) : (
-                      <div className="p-1 flex items-center justify-center w-24 h-24  border-black/50 rounded-full border-[2px] text-black/80">
-                        <IconPeopleGroup />
-                      </div>
-                    )}
-
-                    <h3 className="text-xl max-md:text-base text-center tracking-wider font-medium">
-                      {group.groupName}
-                    </h3>
-                  </Link>
+                ))
+              ) : (
+                <div className="bg-black w-32 h-32 ">
+                  <span className="sr-only">Loading...</span>
+                  <div className="h-8 w-8 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                  <div className="h-8 w-8 bg-green-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                  <div className="h-8 w-8 bg-red-600 rounded-full animate-bounce"></div>
                 </div>
-              ))}
+              )}
               <div
                 className="rounded-3xl py-10 px-10 border-[1px] bg-white/90 text-black/75 cursor-pointer hover:scale-95 hover:bg-white/80 ease-in-out duration-300 flex items-center justify-center"
                 onClick={() => setIsModalOpen(true)}
