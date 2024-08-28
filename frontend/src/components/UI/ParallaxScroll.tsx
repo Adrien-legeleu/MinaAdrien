@@ -43,7 +43,7 @@ export const ParallaxScrollSecond = ({
       style={{ scrollbarWidth: "none" }}
     >
       <div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start mx-auto  px-20 gap-20 pt-12 pb-32"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start mx-auto  px-20 max-sm:px-12 max-[400px]:px-6 max-[350px]:px-3 gap-20 pt-12 pb-32"
         ref={gridRef}
       >
         <div className="grid gap-10">
@@ -58,7 +58,7 @@ export const ParallaxScrollSecond = ({
             >
               <img
                 src={el.url}
-                className="h-80 w-full object-center object-cover  rounded-3xl shadow-xl shadow-black/30 gap-10 !m-0 !p-0"
+                className=" w-full h-auto  rounded-3xl shadow-xl max-sm:rounded-2xl max-[400px]:rounded-xl shadow-black/30 gap-10 !m-0 !p-0"
                 height="400"
                 width="400"
                 alt={el.url}
@@ -71,7 +71,7 @@ export const ParallaxScrollSecond = ({
             <motion.div key={"grid-2" + idx}>
               <img
                 src={el.url}
-                className="h-80 w-full object-cover object-center rounded-3xl shadow-xl shadow-black/30 gap-10 !m-0 !p-0"
+                className=" w-full h-auto rounded-3xl shadow-xl max-sm:rounded-2xl max-[400px]:rounded-xl shadow-black/30 gap-10 !m-0 !p-0"
                 height="400"
                 width="400"
                 alt="thumbnail"
@@ -91,7 +91,7 @@ export const ParallaxScrollSecond = ({
             >
               <img
                 src={el.url}
-                className="h-80 w-full object-cover object-center rounded-3xl shadow-xl shadow-black/30 gap-10 !m-0 !p-0"
+                className="h-auto w-full object-cover rounded-3xl max-sm:rounded-2xl max-[400px]:rounded-xl shadow-xl shadow-black/30 gap-10 !m-0 !p-0"
                 height="400"
                 width="400"
                 alt="thumbnail"

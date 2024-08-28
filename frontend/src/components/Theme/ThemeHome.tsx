@@ -16,9 +16,15 @@ export const ThemeHome = () => {
   const { themes } = useThemeContext();
 
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [themeIdToFonction, setThemeIdToFonction] = useState("");
 
   const modalDeleteClose = () => {
     setIsOpenDeleteModal(false);
+  };
+
+  const modalDeleteOpen = (id: string) => {
+    setThemeIdToFonction(id);
+    setIsOpenDeleteModal(!isOpenDeleteModal);
   };
 
   return (
@@ -54,7 +60,7 @@ export const ThemeHome = () => {
             >
               <div
                 className="absolute top-5 right-0 w-10 h-10 text-black/80 cursor-pointer "
-                onClick={() => setIsOpenDeleteModal(!isOpenDeleteModal)}
+                onClick={() => modalDeleteOpen(theme._id)}
               >
                 <IconEllipsis />
               </div>
@@ -62,6 +68,7 @@ export const ThemeHome = () => {
                 isOpenDeleteModal={isOpenDeleteModal}
                 modalDeleteClose={modalDeleteClose}
                 themeId={theme._id}
+                themeIdToFonction={themeIdToFonction}
               />
               <Link
                 href={`/theme/${theme._id}`}

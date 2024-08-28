@@ -65,7 +65,7 @@ export const ThemeCreate: React.FC<ThemeCreateprops> = ({
 
   return (
     <form
-      className="flex flex-col gap-5 w-2/3 mx-auto items-center justify-center"
+      className="flex flex-col z-10 gap-5 w-2/3 mx-auto items-center justify-center"
       onSubmit={submitNewImage}
     >
       <TextArea

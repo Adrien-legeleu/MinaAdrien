@@ -82,7 +82,7 @@ export const ParamsGroup = () => {
         >
           <span
             className={cn(
-              "relative text-5xl bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient"
+              "relative text-5xl max-[400px]:text-3xl bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient"
             )}
           >
             {group?.groupName}
@@ -90,10 +90,10 @@ export const ParamsGroup = () => {
         </div>
       </div>
       <div className="space-y-8">
-        <h2 className="text-center tracking-wider text-2xl">
+        <h2 className="text-center tracking-wider text-2xl max-[400px]:text-xl">
           Les membres de {group?.groupName}
         </h2>
-        <ul className="w-full h-full space-y-2 px-28">
+        <ul className="w-full h-full space-y-2 px-28 max-[400px]:px-20">
           {members.map((member) => (
             <li
               key={member._id}

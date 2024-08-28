@@ -29,7 +29,7 @@ export const ParamsDescriptions: React.FC<ParamsDescriptionsProps> = ({
 }) => {
   return (
     <div className="space-y-12 pt-12">
-      <h2 className="text-4xl tracking-wider text-center mb-8">
+      <h2 className="text-4xl tracking-wider max-[400px]:text-2xl text-center mb-8">
         Vos descriptions
       </h2>
       <div className="space-y-4">
@@ -37,9 +37,11 @@ export const ParamsDescriptions: React.FC<ParamsDescriptionsProps> = ({
           return (
             <div
               key={desc.id || index} // Assurez-vous que chaque description a un identifiant unique
-              className="bg-gray-50 shadow-xl shadow-black/10 py-5 px-8 rounded-3xl space-y-4"
+              className="bg-gray-50 shadow-xl shadow-black/10 py-5 px-8 max-[400px]:px-4 max-[400px]:py-4 rounded-3xl space-y-4"
             >
-              <h3 className="text-xl font-semibold text-center">{index + 1}</h3>
+              <h3 className="text-xl max-[400px]:text-lg font-semibold text-center">
+                {index + 1}
+              </h3>
               {isUpdateOpen && descId === desc._id ? (
                 <form onSubmit={updateSubmit}>
                   <TextArea
@@ -55,7 +57,7 @@ export const ParamsDescriptions: React.FC<ParamsDescriptionsProps> = ({
                       scrollbarWidth: "none",
                     }}
                     defaultValue={desc.description}
-                    className="tracking-wider leading-relaxed"
+                    className="tracking-wider max-[400px]:text-sm leading-relaxed"
                   />
                   <div className="flex items-center justify-end mt-12">
                     <div
@@ -71,7 +73,7 @@ export const ParamsDescriptions: React.FC<ParamsDescriptionsProps> = ({
                 </form>
               ) : (
                 <div>
-                  <p className="tracking-wider leading-relaxed">
+                  <p className="tracking-wider leading-relaxed max-[400px]:text-sm">
                     {desc.description}
                   </p>
                   <div className="flex items-center justify-end mt-8 gap-8">
@@ -108,7 +110,7 @@ export const ParamsDescriptions: React.FC<ParamsDescriptionsProps> = ({
               borderColor: "#00000060",
               scrollbarWidth: "none",
             }}
-            className="text-lg"
+            className="text-lg max-[400px]:text-sm"
           />
         )}
         <div className="flex items-center justify-center">

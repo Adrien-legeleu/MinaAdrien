@@ -21,13 +21,13 @@ export const ThemeImg: React.FC<IThemeImg> = ({
   }, [isThemeImgModalOpen]);
 
   return (
-    <>
+    <div>
       {theme?.images.map((img: any) => {
         if (img._id === imgId) {
           return (
             <div
               key={img._id}
-              className={`z-40  fixed top-0 left-0 py-4 dark:bg-black bg-white  dark:bg-dot-white/[0.2] bg-dot-black/[0.5]   w-screen h-screen flex items-center justify-center ${
+              className={`z-40 px-16 max-md:px-5 max-sm:px-3 fixed top-0 left-0 py-4 dark:bg-black bg-white  dark:bg-dot-white/[0.2] bg-dot-black/[0.5]   w-screen h-screen flex items-center justify-center ${
                 isThemeImgModalOpen
                   ? "visible opacity-100 scale-100"
                   : "opacity-0 invisible scale-0"
@@ -43,11 +43,11 @@ export const ThemeImg: React.FC<IThemeImg> = ({
               <img
                 src={img.url}
                 alt="img theme"
-                className="h-full z-10   object-contain rounded-3xl "
+                className="z-10   object-contain rounded-3xl "
               />
 
               <div
-                className="absolute top-5 cursor-pointer left-20 w-12 h-12 text-black/80 hover:scale-105 duration-200 ease-in-out"
+                className="absolute top-5  z-10 cursor-pointer left-20 w-12 h-12 max-sm:left-5 text-black/80 hover:scale-105 duration-200 ease-in-out"
                 onClick={themeModalImgClose}
               >
                 <IconClose />
@@ -57,6 +57,6 @@ export const ThemeImg: React.FC<IThemeImg> = ({
         }
         return null;
       })}
-    </>
+    </div>
   );
 };
