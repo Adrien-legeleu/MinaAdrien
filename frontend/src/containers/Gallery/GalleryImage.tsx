@@ -80,14 +80,16 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
         className="absolute h-full w-full top-0 left-0 bg-black/30 backdrop-blur-sm"
         onClick={modalClose}
       ></div>
-      <div className="relative w-full h-full z-10 flex items-center justify-center  ">
+
+      <div className="z-10 w-full h-full realtive">
         <img
-          className="rounded-3xl object-contain "
+          className="rounded-3xl block max-h-[95%] max-w-[95%] z-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain "
           src={image?.url}
-          alt={`ìmg de lovnia src: ${image?.url}`}
+          alt={`img de lovnia src: ${image?.url}`}
           onClick={() => console.log(image)}
         />
       </div>
+
       {updateOpen ? (
         <form
           className="flex flex-col justify-center-center px-16 gap-12 z-10"

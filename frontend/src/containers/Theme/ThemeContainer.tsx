@@ -140,13 +140,13 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
         <TextGenerateEffect
           words={theme?.bio || ""}
           delay={0.3}
-          className="text-[#000000cb] text-4xl max-lg:text-2xl max-sm:text-lg max-[390px]:text-base text-center tracking-wider"
+          className="text-[#000000cb] z-50) text-4xl max-lg:text-2xl max-sm:text-lg max-[390px]:text-base text-center tracking-wider"
         />
       </div>
       <div className="grid-cols-2 grid max-sm:grid-cols-1 max-xl:gap-6 max-lg:gap-5 gap-16 px-16 max-xl:px-6  max-lg:px-5 max-md:gap-4 max-md:px-4 max-sm:px-5  items-center justify-center">
         {theme?.images.map((img: any) => {
           return (
-            <>
+            <div>
               <div className="bg-gray-50 relative flex flex-col gap-6 /[0.2] border-black/[0.1]  rounded-xl p-6 border  ">
                 {isThemeUpdateOpen && img._id === imgId ? (
                   <ThemeUpdate
@@ -199,7 +199,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                       <img
                         src={img.url}
                         className=" 
-                       object-contain rounded-xl group-hover/card:shadow-xl"
+                       object-contain rounded-xl group-hover/card:shadow-xl max-h-[400px] mx-auto"
                         alt="thumbnail"
                       />
                     </div>
@@ -232,25 +232,22 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                 imgId={imgId}
                 theme={theme}
               />
-            </>
+            </div>
           );
         })}
-        {createThemeImgOpen ? (
-          <ThemeCreate
-            themeCreateClose={themeCreateClose}
-            themeId={theme?._id}
-          />
-        ) : (
-          <div className="items-center z-20 py-20 justify-center flex">
-            <button
-              className="py-2 px-4 rounded-xl bg-black/90 text-white tracking-wider "
-              onClick={themeCreateOpen}
-            >
-              Complétez votre Theme !
-            </button>
-          </div>
-        )}
       </div>
+      {createThemeImgOpen ? (
+        <ThemeCreate themeCreateClose={themeCreateClose} themeId={theme?._id} />
+      ) : (
+        <div className="items-center z-20 py-20 justify-center flex">
+          <button
+            className="py-2 px-4 rounded-xl bg-black/90 text-white tracking-wider "
+            onClick={themeCreateOpen}
+          >
+            Complétez votre Theme !
+          </button>
+        </div>
+      )}
     </div>
   );
 };
