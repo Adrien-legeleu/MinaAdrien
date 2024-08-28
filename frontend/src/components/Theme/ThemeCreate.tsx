@@ -65,7 +65,7 @@ export const ThemeCreate: React.FC<ThemeCreateprops> = ({
 
   return (
     <form
-      className="flex flex-col z-10 gap-5 w-2/3 mx-auto items-center justify-center"
+      className="flex flex-col z-10 gap-5 w-1/2  max-sm:w-2/3 mt-24 mx-auto items-center justify-center"
       onSubmit={submitNewImage}
     >
       <TextArea
@@ -73,7 +73,13 @@ export const ThemeCreate: React.FC<ThemeCreateprops> = ({
         maxLength={150}
         name="legend"
         placeholder="Votre légende"
-        style={{ height: 140, resize: "none", scrollbarWidth: "none" }}
+        style={{
+          height: 140,
+          resize: "none",
+          scrollbarWidth: "none",
+          maxWidth: "400px",
+          margin: "auto",
+        }}
       />
 
       <FileImages

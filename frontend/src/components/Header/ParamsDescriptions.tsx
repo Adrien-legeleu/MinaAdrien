@@ -3,6 +3,7 @@ import AnimatedShinyText from "../UI/ShinyText";
 import TextArea from "antd/es/input/TextArea";
 import { IconDelete, IconUpdate } from "../icons";
 import { IDescription } from "@/context/DescriptionContext";
+import { TextGenerateEffect } from "../UI/GenerateEffect";
 
 interface ParamsDescriptionsProps {
   description: IDescription[];
@@ -96,47 +97,57 @@ export const ParamsDescriptions: React.FC<ParamsDescriptionsProps> = ({
           );
         })}
       </div>
-      <form onSubmit={submit}>
-        {isAddOpen && (
-          <TextArea
-            showCount
-            maxLength={280}
-            id="description"
-            name="description"
-            placeholder="Votre description"
-            style={{
-              height: 160,
-              resize: "none",
-              borderColor: "#00000060",
-              scrollbarWidth: "none",
-            }}
-            className="text-lg max-[400px]:text-sm"
-          />
-        )}
-        <div className="flex items-center justify-center">
-          {isAddOpen ? (
-            <div
-              className={cn(
-                "group mt-10 rounded-full p-1 border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
-              )}
-            >
-              <AnimatedShinyText className="text-xl px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-                <button type="submit">Créer</button>
-              </AnimatedShinyText>
-            </div>
-          ) : (
-            <div
-              className={cn(
-                "group rounded-full p-1 border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
-              )}
-            >
-              <AnimatedShinyText className="text-xl px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-                <p onClick={openAddDesc}>Ajoutez en une</p>
-              </AnimatedShinyText>
-            </div>
+      {description.length > 10 ? (
+        <form onSubmit={submit}>
+          {isAddOpen && (
+            <TextArea
+              showCount
+              maxLength={280}
+              id="description"
+              name="description"
+              placeholder="Votre description"
+              style={{
+                height: 160,
+                resize: "none",
+                borderColor: "#00000060",
+                scrollbarWidth: "none",
+              }}
+              className="text-lg max-[400px]:text-sm"
+            />
           )}
-        </div>
-      </form>
+          <div className="flex items-center justify-center">
+            {isAddOpen ? (
+              <div
+                className={cn(
+                  "group mt-10 rounded-full p-1 border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
+                )}
+              >
+                <AnimatedShinyText className="text-xl px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+                  <button type="submit">Créer</button>
+                </AnimatedShinyText>
+              </div>
+            ) : (
+              <div
+                className={cn(
+                  "group rounded-full p-1 border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
+                )}
+              >
+                <AnimatedShinyText className="text-xl px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+                  <p onClick={openAddDesc}>Ajoutez en une</p>
+                </AnimatedShinyText>
+              </div>
+            )}
+          </div>
+        </form>
+      ) : (
+        <TextGenerateEffect
+          words={
+            "Vous avez atteint la limite de descriptions autorisées. Pour en ajouter de nouvelles, veuillez en supprimer certaines existantes.🗑️"
+          }
+          delay={0.1}
+          className="text-[#000000c4] text-xl px-4 text-center tracking-wider leading-relaxed"
+        />
+      )}
     </div>
   );
 };

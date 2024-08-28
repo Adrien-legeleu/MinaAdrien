@@ -6,15 +6,41 @@ import Image from "next/image";
 import AnimatedShinyText from "../UI/ShinyText";
 import { cn } from "@/utils/cn";
 import { ThemeModal } from "./ThemeModal";
-import { useThemeContext } from "@/context/ThemeContext";
+import { IImageTheme, useThemeContext } from "@/context/ThemeContext";
 import { IconEllipsis } from "../icons";
 import { useState } from "react";
 import { ThemeModalDelete } from "./ThemeModalDelete";
-
 import Link from "next/link";
+
+const parseDate = (dateString: any) => {
+  if (!dateString) return new Date();
+
+  const parts = dateString.split("/");
+  if (parts.length !== 3) return new Date();
+
+  const [day, month, year] = parts.map(Number);
+  return new Date(year, month - 1, day);
+};
+
+const formatDate = (date: any) => {
+  const options = { day: "numeric", month: "long", year: "numeric" };
+  return date.toLocaleDateString("fr-FR", options);
+};
+
+const findExtremesDatesToTheme = (themeImages: any) => {
+  let minDate = new Date();
+  let maxDate = new Date();
+  themeImages.forEach((image: any) => {
+    const date = parseDate(image.photoDate);
+    if (date < minDate) minDate = date;
+    if (date > maxDate) maxDate = date;
+  });
+
+  return [minDate, maxDate];
+};
+
 export const ThemeHome = () => {
   const { themes } = useThemeContext();
-
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [themeIdToFonction, setThemeIdToFonction] = useState("");
 
@@ -22,7 +48,7 @@ export const ThemeHome = () => {
     setIsOpenDeleteModal(false);
   };
 
-  const modalDeleteOpen = (id: string) => {
+  const modalDeleteOpen = (id: any) => {
     setThemeIdToFonction(id);
     setIsOpenDeleteModal(!isOpenDeleteModal);
   };
@@ -53,10 +79,14 @@ export const ThemeHome = () => {
       </div>
       <div className="grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:px-2 gap-8 grid pt-32 px-8">
         {themes.map((theme) => {
+          const [minDate, maxDate] = theme.images
+            ? findExtremesDatesToTheme(theme.images)
+            : [new Date("2017-07-23"), new Date("2018-07-17")];
+
           return (
             <div
               key={theme._id}
-              className=" relative bg-white/60  overflow-hidden py-7 rounded-3xl  border-[1px] border-black/10 shadow-2xl shadow-black/00001 "
+              className="relative bg-white/60 overflow-hidden py-7 rounded-3xl border-[1px] border-black/10 shadow-2xl shadow-black/00001 "
             >
               <div
                 className="absolute top-5 right-0 w-10 h-10 text-black/80 cursor-pointer "
@@ -72,7 +102,7 @@ export const ThemeHome = () => {
               />
               <Link
                 href={`/theme/${theme._id}`}
-                className=" flex items-center justify-center flex-col  gap-8"
+                className="flex items-center justify-center flex-col gap-8"
               >
                 <h1 className="text-2xl tracking-wider">{theme.title}</h1>
                 <div className="flex justify-center items-center">
@@ -104,10 +134,10 @@ export const ThemeHome = () => {
                 </div>
                 <div className="px-8 space-y-3 ">
                   <p className="text-center text-2xl font-semibold tracking-wider">
-                    Du 23 juillet 2017
+                    Du {formatDate(minDate)}
                   </p>
                   <p className="text-center text-2xl font-semibold tracking-wider">
-                    Au 16 mars 2023
+                    Au {formatDate(maxDate)}
                   </p>
                 </div>
                 <div
@@ -115,8 +145,8 @@ export const ThemeHome = () => {
                     "group rounded-full p-1 border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
                   )}
                 >
-                  <AnimatedShinyText className=" text-xl  px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-                    <button className="flex items-center justify-center gap-3 ">
+                  <AnimatedShinyText className="text-xl px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+                    <button className="flex items-center justify-center gap-3">
                       <span>Découvrir</span>
                     </button>
                   </AnimatedShinyText>
