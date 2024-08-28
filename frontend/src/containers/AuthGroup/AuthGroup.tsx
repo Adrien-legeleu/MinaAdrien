@@ -28,7 +28,8 @@ export const AuthGroup = () => {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [groupId, setGroupId] = useState<string | null>(null);
   const { setUser, user } = useCreateJoinContext();
-  const { onDeleteGroup, allGroups, getGroup } = useGroupContext();
+  const { onDeleteGroup, allGroups, getGroup, handleIsLoading } =
+    useGroupContext();
   const { getDescription } = useDescriptionContext();
 
   const openModalDelete = (id: string) => {
@@ -85,6 +86,7 @@ export const AuthGroup = () => {
     localStorage.setItem("groupId", id);
     setGroupId(id);
     getDescription(id);
+    handleIsLoading();
   };
 
   return (

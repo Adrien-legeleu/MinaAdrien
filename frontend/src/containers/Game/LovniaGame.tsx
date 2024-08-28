@@ -117,12 +117,12 @@ export const LovniaGame = () => {
           <div className="flex items-center justify-center flex-col gap-8 ">
             <TextGenerateEffect
               words={"🎉Bravo , voici votre photo coup de coeur ! 📸💕"}
-              delay={0.3}
+              delay={0.1}
               className="text-[#d42121c9] text-4xl w-2/3 max-lg:text-2xl max-sm:text-lg max-[390px]:text-base text-center tracking-wider"
             />
             <img
               src={imagesGame[0]}
-              className="w-1/2 object-contain rounded-3xl "
+              className="w-1/2 object-contain shadow-black/70 shadow-2xl rounded-3xl "
               alt="photo lovnia coup de coeur"
             />
             <button
@@ -149,28 +149,21 @@ export const LovniaGame = () => {
             </button>
           </div>
         )
-      ) : loading ? (
-        <div className="items-center justify-center flex  gap-8">
-          <span className="sr-only">Loading...</span>
-          <div className="h-8 w-8 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-          <div className="h-8 w-8 bg-green-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-          <div className="h-8 w-8 bg-red-600 rounded-full animate-bounce"></div>
-        </div>
       ) : (
-        <div className="space-y-10">
+        <div className="space-y-16">
           <button
             className="bg-black max-sm:text-sm rounded-xl ml-10 px-7 py-2 text-xl cursor-pointer hover:scale-105 duration-300 ease-in-out text-white"
             onClick={restartGame}
           >
             retour
           </button>
-          <div className="columns-2 gap-20 px-20 max-md:gap-10 max-md:px-10 max-sm:gap-5 max-sm:px-5">
+          <div className="columns-2 gap-20 px-20 max-md:gap-10 max-md:px-10 max-sm:gap-5 max-sm:px-5 min-h-[250px]">
             <div className="w-full flex justify-center items-center">
               <div className="flex justify-center items-center h-full">
                 <img
                   src={imagesGame[indexes[0]]}
                   alt={"lovnia photo" + indexes[0]}
-                  className="max-h-full max-w-full cursor-pointer rounded-2xl"
+                  className="max-h-full max-w-full cursor-pointer shadow-black/70 shadow-2xl rounded-2xl"
                   onClick={() => handleGamePhotos(indexes[1])}
                 />
               </div>
@@ -180,7 +173,7 @@ export const LovniaGame = () => {
                 <img
                   src={imagesGame[indexes[1]]}
                   alt={"lovnia photo" + indexes[1]}
-                  className="max-h-full max-w-full cursor-pointer rounded-2xl"
+                  className="max-h-full max-w-full cursor-pointer  shadow-black/70 shadow-2xl rounded-2xl"
                   onClick={() => handleGamePhotos(indexes[0])}
                 />
               </div>

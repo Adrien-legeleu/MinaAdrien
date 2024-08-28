@@ -41,7 +41,7 @@ export const Create: React.FC<ICreateProps> = ({ isCreateFalse, isCreate }) => {
         }`}
         onClick={isCreateFalse}
       ></div>
-      <div className=" z-50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-3xl  bg-white  py-12 px-20  shadow-white/70 shadow-2xl flex items-center justify-center">
+      <div className=" z-50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-3xl  bg-white  py-12 px-20 max-[400px]:px-16 max-[400px]:py-12 shadow-white/70 shadow-2xl flex items-center justify-center">
         <div
           className="absolute top-4 right-4 h-12 w-12 text-black/80 cursor-pointer hover:scale-105 duration-500 ease-in-out"
           onClick={isCreateFalse}
@@ -52,7 +52,7 @@ export const Create: React.FC<ICreateProps> = ({ isCreateFalse, isCreate }) => {
           <TextGenerateEffect
             words="Céer votre groupe maintenant !"
             delay={0.2}
-            className="text-black/70 text-3xl text-center  tracking-wider mb-10"
+            className="text-black/70 max-sm:text-xl max-[400px]:text-lg text-3xl text-center  tracking-wider mb-10"
           />
           <div className="flex flex-col gap-4 text-lg items-center justify-center">
             <Input
