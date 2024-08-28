@@ -10,7 +10,7 @@ import { ModalProvider } from "@/components/UI/AnimatedModal";
 import AnimatedShinyText from "@/components/UI/ShinyText";
 import { useDescriptionContext } from "@/context/DescriptionContext";
 import { cn } from "@/utils/cn";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LovniaGame } from "../Game";
 
 type GroupContainerDetailsProps = IGroupDetailsProps;
@@ -21,6 +21,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
   const { description } = useDescriptionContext();
 
   const [isParams, setIsParams] = useState(false);
+  const [descIndex, setDescIndex] = useState(0);
 
   const closeParams = () => {
     setIsParams(false);
@@ -28,6 +29,20 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
   const openParams = () => {
     setIsParams(true);
   };
+  const randomDescIndex = () => {
+    const index = Math.floor(Math.random() * description.length);
+    setDescIndex(index);
+  };
+  useEffect(() => {
+    randomDescIndex();
+
+    const intervalId = setInterval(() => {
+      randomDescIndex();
+    }, 45000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <div className="pt-8 ">
       <div className="absolute top-8 left-8   max-sm:left-4">
@@ -43,7 +58,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
         <div className="w-1/2 mx-auto pb-48 max-sm:pt-16  max-sm:w-2/3 font-montserrat">
           {description[0] ? (
             <p className="text-3xl max-sm:text-2xl max-[400px]:text-xl  text-[#d83c3c] text-center leading-loose  tracking-widest">
-              {description[0]?.description}
+              {description[descIndex]?.description}
             </p>
           ) : (
             <div className="flex items-center justify-center flex-col gap-8">
