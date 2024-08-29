@@ -11,7 +11,6 @@ import {
   useState,
 } from "react";
 import { toast } from "sonner";
-import addNotification from "react-push-notification"; // Import de react-push-notification
 
 export interface IImageForm {
   url: string[];
@@ -57,17 +56,6 @@ export const ImageContext = createContext<ImageContextType>({
 export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
   const [images, setImages] = useState<any>([]);
   const groupId = localStorage.getItem("groupId");
-
-  // Fonction de notification
-  const sendNotification = (title: string, message: string) => {
-    addNotification({
-      title: title,
-      message: message,
-      duration: 4000,
-      native: true, // Utilise la notification native du navigateur
-    });
-  };
-
   const createImage = async (values: IImageForm) => {
     try {
       const response = await api.post("/image", values);
@@ -75,16 +63,10 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
       setImages((prev: any) => {
         return [...prev, response.data];
       });
-      toast.success("Votre image a bien été créée !");
-
-      // Envoyer une notification à chaque membre du groupe
-      sendNotification(
-        "Nouvelle image ajoutée",
-        "Une nouvelle image a été ajoutée au groupe !"
-      );
+      toast.success("Votre image a bien été créer !");
     } catch (error: any) {
       console.log(error);
-      toast.error("Erreur lors de la création de l'image");
+      toast.error("erreur lors de la création de l'image");
     }
   };
 

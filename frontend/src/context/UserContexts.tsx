@@ -40,6 +40,68 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     toast.success("Vous avez bien été déconnectez !");
   };
 
+  // Fonction pour convertir la clé VAPID publique en Uint8Array
+  const urlBase64ToUint8Array = (base64url: string) => {
+    const base64 = base64url.replace(/-/g, "+").replace(/_/g, "/");
+    const padding = "=".repeat((4 - (base64.length % 4)) % 4);
+    const base64WithPadding = base64 + padding;
+    const rawData = window.atob(base64WithPadding);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+  };
+
+  const subscribeToNotifications = async (
+    userId: string,
+    groupId: string[]
+  ) => {
+    if ("serviceWorker" in navigator && "PushManager" in window) {
+      try {
+        // Demande de permission pour les notifications
+        const permission = await Notification.requestPermission();
+        if (permission !== "granted") {
+          console.log("Permission de notification refusée");
+          return;
+        }
+
+        // Inscription du Service Worker
+        const registration = await navigator.serviceWorker.register("/sw.js");
+
+        // Convertir la clé publique VAPID en Uint8Array
+        const applicationServerKey = urlBase64ToUint8Array(
+          "BPGBMl5l1FpyfndWdUX71M0bgEd0yBv6ollSofR9ygAn0YRGdtiWUBHyafQzYboH_uFCVsC-YbIMhItpNsBYg1Q"
+        );
+
+        // Abonnement aux notifications push
+        const subscription = await registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey,
+        });
+
+        // Envoi de l'abonnement au backend pour stockage
+        const values = {
+          userId,
+          groupId,
+          subscription,
+        };
+        console.log(values);
+
+        await api.post("/api/save-subscription", values, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        });
+
+        console.log("Inscription réussie:", subscription);
+      } catch (error) {
+        console.error("Erreur lors de l'inscription aux notifications:", error);
+      }
+    }
+  };
+
   const onLogin = async (values: ISignInFormValues) => {
     setIsLoading(true);
     try {
@@ -77,6 +139,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem("authToken", response?.data?.authToken);
       setIsAuthentificatedUser(true);
       toast.success("Félicitations , votre compte a bien été créer !");
+
+      subscribeToNotifications(response.data.user._id, []);
     } catch (error: any) {
       console.error("Register error:", error);
       toast.error("Le nom d'utilisateur ou le mot de passe est incorrect");
