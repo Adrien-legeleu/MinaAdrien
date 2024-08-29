@@ -5,11 +5,12 @@ import cors from "cors";
 import appRouter from "./src/routes";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import webpush from "web-push";
 
 dotenv.config();
 
 const uri = process.env.MONGODB_KEY || "";
-const PORT = 5000;
+const PORT = 5050;
 
 if (uri) {
   mongoose
@@ -23,6 +24,11 @@ if (uri) {
 } else {
   console.log("No URI to DB");
 }
+webpush.setVapidDetails(
+  "mailto:adrienlegeleu@gmail.com", // Remplace par ton email
+  process.env.PUBLIC_VAPID_KEY as string, // S'assurer que les clés sont des strings
+  process.env.PRIVATE_VAPID_KEY as string
+);
 
 const app = express();
 

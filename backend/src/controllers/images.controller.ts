@@ -1,6 +1,7 @@
 import { type Response } from "express";
-import { ImageModel } from "../model";
+import { ImageModel, SubscriptionModel } from "../model";
 import { cloudinary } from "../utils";
+import webpush from "web-push";
 
 export class ImageController {
   async findAll(req: any, res: Response): Promise<void> {
@@ -79,6 +80,26 @@ export class ImageController {
           isLiked,
         });
         console.log(image);
+
+        const subscriptions = await SubscriptionModel.find({
+          groupId: { $in: [groupId] }, // Recherche où `groupId` contient l'ID du groupe
+        });
+
+        // Envoyer des notifications push à chaque abonné trouvé
+        subscriptions.forEach((sub: any) => {
+          const pushSubscription = sub.subscription;
+          const payload = JSON.stringify({
+            title: "Nouvelle image ajoutée",
+            body: "Une nouvelle image a été ajoutée dans votre groupe !",
+            image: uploadedImageUrls[0], // Optionnel : première image comme illustration
+          });
+
+          webpush
+            .sendNotification(pushSubscription as any, payload)
+            .catch((error) => {
+              console.error("Erreur lors de l'envoi de la notification", error);
+            });
+        });
 
         res.status(200).send(image);
       }

@@ -4,3 +4,4 @@ export * from "./user.model";
 export * from "./letter.model";
 export * from "./description.model";
 export * from "./theme.model";
+export * from "./notificationsMemberships.model";
