@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 export default function GalleryPage() {
+  // Utilise un nom de composant qui commence par une majuscule
   const router = useRouter();
   const { isAuthenticated, group } = useGroupContext();
   const { isAuthentificatedUser } = useUserContext();
@@ -22,7 +23,7 @@ export default function GalleryPage() {
     } else {
       router.push("/");
     }
-  }, [isAuthenticated, group, router, isAuthentificatedUser]);
+  }, [isAuthenticated, group, router, isAuthentificatedUser]); // Ajoute `isAuthentificatedUser` aux dépendances
 
   return (
     <main>

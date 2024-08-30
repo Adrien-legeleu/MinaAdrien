@@ -1,32 +1,35 @@
 "use client";
-import { GalleryContainer } from "@/containers/Gallery";
+import { HomeContainer } from "@/containers/Home";
 import { useGroupContext } from "@/context/GroupContexts";
 import { useUserContext } from "@/context/UserContexts";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
-export default function GalleryPage() {
+export interface IGroupDetailsProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function page({ params }: IGroupDetailsProps) {
   const router = useRouter();
-  const { isAuthenticated, group } = useGroupContext();
+  const { isAuthenticated, group, isLoading } = useGroupContext();
   const { isAuthentificatedUser } = useUserContext();
+  console.log(group);
 
   useEffect(() => {
-    console.log("gallery");
-    console.log(isAuthenticated, group);
-    console.log(isAuthentificatedUser);
-
     if (isAuthentificatedUser) {
       if (isAuthenticated) {
-        router.push(`/gallery`);
+        router.push(`/home/${group?._id}`);
       }
     } else {
       router.push("/");
     }
-  }, [isAuthenticated, group, router, isAuthentificatedUser]);
+  }, [isAuthenticated, group, router]);
 
   return (
     <main>
-      <GalleryContainer />
+      <HomeContainer params={params} />
     </main>
   );
 }
