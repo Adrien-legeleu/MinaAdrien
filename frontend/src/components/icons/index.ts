@@ -13,4 +13,3 @@ export * from "./IconPlus";
 export * from "./IconMinus";
 export * from "./IconEllipsis";
 export * from "./IconLogout";
-export * from "./iconDeleteAll";
