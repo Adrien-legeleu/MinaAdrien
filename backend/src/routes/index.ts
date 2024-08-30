@@ -15,6 +15,6 @@ appRouter.use("/letter", letterRouter);
 appRouter.use("/description", descriptionRouter);
 appRouter.use("/group", groupRouter);
 appRouter.use("/theme", themeRouter);
-appRouter.use("api", subscriptionRouter);
+appRouter.use("/api", subscriptionRouter);
 
 export default appRouter;

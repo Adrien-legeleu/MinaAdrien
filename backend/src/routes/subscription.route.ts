@@ -1,13 +1,20 @@
 import express from "express";
-import { isConnectedMiddleware } from "../middlewares";
+
 import { subscriptionController } from "../controllers";
+import { isConnectedMiddleware } from "../middlewares";
 
 const subscriptionRouter = express.Router();
 
-subscriptionRouter.post(
-  "/save-subscription",
-  isConnectedMiddleware.execute,
-  subscriptionController.createSubscription
-);
+subscriptionRouter
+  .post(
+    "/save-subscription",
+
+    subscriptionController.createSubscription
+  )
+  .patch(
+    "./update-subscription/:userId",
+    isConnectedMiddleware.execute,
+    subscriptionController.updateSubscription
+  );
 
 export default subscriptionRouter;

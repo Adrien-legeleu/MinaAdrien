@@ -14,7 +14,6 @@ const subscriptionSchema = new mongoose.Schema<INotificationsMemberships>({
   },
   groupId: {
     type: [String],
-    required: true,
   },
   subscription: {
     type: Object,
