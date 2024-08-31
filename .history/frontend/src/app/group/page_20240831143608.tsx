@@ -5,13 +5,21 @@ import { AuthGroup } from "@/containers/AuthGroup";
 import { useGroupContext } from "@/context/GroupContexts";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-
+import lottie from "lottie-web";
+import { defineElement } from "@lordicon/element";
 import { useUserContext } from "@/context/UserContexts";
 
 export default function GroupPage() {
   const router = useRouter();
   const { isAuthenticated, group, isLoading } = useGroupContext();
   const { isAuthentificatedUser } = useUserContext();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Initialisation côté client seulement
+      defineElement(lottie.loadAnimation);
+    }
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {

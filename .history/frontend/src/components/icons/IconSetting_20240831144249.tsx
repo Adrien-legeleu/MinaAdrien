@@ -12,7 +12,7 @@ export const IconSetting = () => {
         d="M15.5699 18.5001V14.6001"
         stroke="currentColor"
         strokeWidth="1.5"
-        strokeMiterlimit="10"
+        strokMistrokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

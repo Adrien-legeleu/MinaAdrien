@@ -31,7 +31,7 @@ export const IconNewGroup = () => {
         height="0.5"
         rx="0.25"
         stroke="currentColor"
-        strokeWidth="0.5"
+        stroke-width="0.5"
         strokeLinecap="round"
       />
       <rect
@@ -42,7 +42,7 @@ export const IconNewGroup = () => {
         rx="0.25"
         transform="rotate(90 18.75 3.25)"
         stroke="currentColor"
-        strokeWidth="0.5"
+        stroke-width="0.5"
         strokeLinecap="round"
       />
     </svg>

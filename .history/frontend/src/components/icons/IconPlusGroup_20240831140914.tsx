@@ -7,7 +7,7 @@ export const IconPlusGroup = () => {
       <g
         id="Page-1"
         stroke="none"
-        strokeWidth="1"
+        stroke-width="1"
         fill="currentColor"
         fillRule="evenodd"
       >

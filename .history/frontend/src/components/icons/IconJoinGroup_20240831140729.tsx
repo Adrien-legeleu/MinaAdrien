@@ -7,15 +7,15 @@ export const IconJoinGroup = () => {
         stroke="none"
         strokeWidth="1"
         fill="none"
-        fillRule="evenodd"
+        fill-rule="evenodd"
       >
         <g id="Session-Join">
           <rect
             id="Rectangle"
-            fillRule="nonzero"
+            fill-rule="nonzero"
             x="0"
             y="0"
-            strokeWidth="24"
+            WistrokeWidth="24"
             height="24"
           ></rect>
           <path
@@ -23,7 +23,7 @@ export const IconJoinGroup = () => {
             id="Path"
             stroke="currentColor"
             strokeWidth="2"
-            strokeLinecap="round"
+            stroke-linecap="round"
           ></path>
           <line
             x1="4"
@@ -33,14 +33,14 @@ export const IconJoinGroup = () => {
             id="Path"
             stroke="currentColor"
             strokeWidth="2"
-            strokeLinecap="round"
+            stroke-linecap="round"
           ></line>
           <path
             d="M11,8 L13.5858,10.5858 C14.3668,11.3668 14.3668,12.6332 13.5858,13.4142 L11,16"
             id="Path"
             stroke="currentColor"
             strokeWidth="2"
-            strokeLinecap="round"
+            stroke-linecap="round"
           ></path>
         </g>
       </g>

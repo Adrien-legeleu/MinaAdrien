@@ -14,7 +14,7 @@ export interface IGroupDetailsProps {
 export default function HomePage({ params }: IGroupDetailsProps) {
   // Utilise un nom de composant qui commence par une majuscule
   const router = useRouter();
-  const { isAuthenticated, group } = useGroupContext();
+  const { isAuthenticated, group, isLoading } = useGroupContext();
   const { isAuthentificatedUser } = useUserContext();
   console.log(group);
 

@@ -23,7 +23,7 @@ export const IconJoinGroup = () => {
             id="Path"
             stroke="currentColor"
             strokeWidth="2"
-            strokeLinecap="round"
+            stroke-linecap="round"
           ></path>
           <line
             x1="4"
@@ -33,14 +33,14 @@ export const IconJoinGroup = () => {
             id="Path"
             stroke="currentColor"
             strokeWidth="2"
-            strokeLinecap="round"
+            stroke-linecap="round"
           ></line>
           <path
             d="M11,8 L13.5858,10.5858 C14.3668,11.3668 14.3668,12.6332 13.5858,13.4142 L11,16"
             id="Path"
             stroke="currentColor"
             strokeWidth="2"
-            strokeLinecap="round"
+            stroke-linecap="round"
           ></path>
         </g>
       </g>
