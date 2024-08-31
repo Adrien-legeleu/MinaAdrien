@@ -34,7 +34,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const onLogout = () => {
-    if (typeof window !== "undefined") {
+    if (typeof localStorage !== "undefined") {
       localStorage.removeItem("authToken");
       localStorage.removeItem("userId");
       setIsAuthentificatedUser(false);
@@ -115,7 +115,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         withCredentials: true,
       });
 
-      if (typeof window !== "undefined") {
+      if (typeof localStorage !== "undefined") {
         localStorage.setItem("userId", response.data.user._id);
         localStorage.setItem("authToken", response?.data?.authToken);
         setIsAuthentificatedUser(true);
@@ -140,7 +140,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         withCredentials: true,
       });
 
-      if (typeof window !== "undefined") {
+      if (typeof localStorage !== "undefined") {
         localStorage.setItem("userId", response.data.user._id);
         localStorage.setItem("authToken", response?.data?.authToken);
         setIsAuthentificatedUser(true);

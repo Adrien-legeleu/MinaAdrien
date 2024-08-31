@@ -61,8 +61,7 @@ export const ThemeContext = createContext<ThemeContextType>({
 
 export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   const [themes, setThemes] = useState<any>([]);
-  const groupId =
-    typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
+  const groupId = localStorage.getItem("groupId");
   const createTheme = async (values: IThemeForm) => {
     try {
       const response = await api.post("/theme", values);

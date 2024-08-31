@@ -82,7 +82,9 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const getAllGroup = async () => {
     try {
       const userId =
-        typeof window !== "undefined" ? localStorage.getItem("userId") : null;
+        typeof localStorage !== "undefined"
+          ? localStorage.getItem("userId")
+          : null;
       const response = await api.get(`/api/group`, {
         params: { userId },
       });

@@ -19,8 +19,8 @@ export interface IGroupFormsValues {
   userId: string | undefined;
 }
 export interface IPseudoFormValues {
-  userId: string | null;
-  groupId: string | null;
+  userId: string | undefined;
+  groupId: string | undefined;
   pseudoUser: string;
 }
 export interface IJoinFormsValues {
@@ -82,7 +82,9 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const getAllGroup = async () => {
     try {
       const userId =
-        typeof window !== "undefined" ? localStorage.getItem("userId") : null;
+        typeof localStorage !== "undefined"
+          ? localStorage.getItem("userId")
+          : null;
       const response = await api.get(`/api/group`, {
         params: { userId },
       });

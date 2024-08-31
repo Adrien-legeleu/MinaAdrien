@@ -85,7 +85,7 @@ export const AuthGroup = () => {
   };
 
   const handleGroupClick = (id: string) => {
-    typeof window !== "undefined" ? localStorage.setItem("groupId", id) : null;
+    localStorage.setItem("groupId", id);
     setGroupId(id);
     getDescription(id);
     handleIsLoading();

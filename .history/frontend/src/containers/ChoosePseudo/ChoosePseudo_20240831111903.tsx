@@ -12,9 +12,10 @@ import { cn } from "@/utils/cn";
 export const ChoosePseudo = () => {
   const { chosePseudo } = useGroupContext();
   const userId =
-    typeof window !== "undefined" ? localStorage.getItem("userId") : null;
-  const groupId =
-    typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
+    typeof window !== "undefined"
+      ? localStorage.getItem("userId") || undefined
+      : null;
+  const groupId = localStorage.getItem("groupId") || undefined;
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

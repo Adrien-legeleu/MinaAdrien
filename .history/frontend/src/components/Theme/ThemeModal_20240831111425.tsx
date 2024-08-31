@@ -33,7 +33,9 @@ export function ThemeModal() {
 
   const [newImages, setNewImages] = useState<string[]>([]);
   const groupId =
-    typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
+    typeof window !== "undefined"
+      ? localStorage.getItem("groupId") || undefined
+      : null;
   const [dataImages, setDataImages] = useState<string[]>([]);
   const { createTheme } = useThemeContext();
   const { setOpen } = useModal();
