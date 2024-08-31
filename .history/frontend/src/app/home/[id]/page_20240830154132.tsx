@@ -19,14 +19,12 @@ export default function HomePage({ params }: IGroupDetailsProps) {
   console.log(group);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (isAuthentificatedUser) {
-        if (isAuthenticated) {
-          router.push(`/home/${group?._id}`);
-        }
-      } else {
-        router.push("/");
+    if (isAuthentificatedUser) {
+      if (isAuthenticated) {
+        router.push(`/home/${group?._id}`);
       }
+    } else {
+      router.push("/");
     }
   }, [isAuthenticated, group, router, isAuthentificatedUser]); // Ajoute `isAuthentificatedUser` aux dépendances
 

@@ -12,24 +12,22 @@ import { useUserContext } from "@/context/UserContexts";
 defineElement(lottie.loadAnimation);
 
 export default function GroupPage() {
-  // Utilise un nom de composant qui commence par une majuscule
   const router = useRouter();
   const { isAuthenticated, group, isLoading } = useGroupContext();
   const { isAuthentificatedUser } = useUserContext();
-  console.log(group);
 
   useEffect(() => {
-    console.log("euizueizueiu");
-    console.log(isAuthentificatedUser);
-
-    if (isAuthentificatedUser) {
-      if (isAuthenticated) {
-        router.push(`/home/${group?._id}`);
+    if (typeof window !== "undefined") {
+      // Vérifie que l'on est en environnement client
+      if (isAuthentificatedUser) {
+        if (isAuthenticated) {
+          router.push(`/home/${group?._id}`);
+        }
+      } else {
+        router.push("/");
       }
-    } else {
-      router.push("/");
     }
-  }, [isAuthenticated, group, router, isAuthentificatedUser]); // Ajoute `isAuthentificatedUser` aux dépendances
+  }, [isAuthenticated, group, router, isAuthentificatedUser]);
 
   return (
     <main>
