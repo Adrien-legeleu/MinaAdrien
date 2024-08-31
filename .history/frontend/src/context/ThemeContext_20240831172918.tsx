@@ -78,7 +78,6 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const deleteTheme = async (themeId: string) => {
-    const groupId = group?._id;
     try {
       await api.delete(`/theme/${themeId}`, {
         data: { groupId },

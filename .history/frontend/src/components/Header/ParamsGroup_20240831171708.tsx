@@ -9,6 +9,10 @@ import { IGroupComplete } from "@/types/group";
 
 export const ParamsGroup = () => {
   const { group, updateGroup } = useGroupContext();
+  useEffect(() => {
+    const groupId =
+      typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
+  }, []);
 
   const [newImage, setNewImage] = useState<string[]>([
     group ? group.urlProfil : "",
@@ -20,7 +24,7 @@ export const ParamsGroup = () => {
     fileList: UploadFile[]
   ) => {
     const uploadedImages: string[] = fileList.map((file) => file.url || "");
-    setNewImage(uploadedImages);
+    await setNewImage(uploadedImages);
     groupUpdate(uploadedImages[0]); // Update group with new image
   };
 
@@ -47,7 +51,7 @@ export const ParamsGroup = () => {
 
   const groupUpdate = (newImageUrl: string) => {
     const values = {
-      groupId: group?._id || undefined,
+      groupId: groupId || undefined,
       urlProfil: newImageUrl,
       groupName: group?.groupName,
     };

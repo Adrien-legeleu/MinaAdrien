@@ -11,7 +11,6 @@ import {
   useState,
 } from "react";
 import { toast } from "sonner";
-import { useGroupContext } from "./GroupContexts";
 
 export interface IImageTheme {
   url: string;
@@ -62,7 +61,8 @@ export const ThemeContext = createContext<ThemeContextType>({
 
 export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   const [themes, setThemes] = useState<any>([]);
-  const { group } = useGroupContext();
+  const groupId =
+    typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
   const createTheme = async (values: IThemeForm) => {
     try {
       const response = await api.post("/theme", values);
@@ -78,7 +78,6 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const deleteTheme = async (themeId: string) => {
-    const groupId = group?._id;
     try {
       await api.delete(`/theme/${themeId}`, {
         data: { groupId },
@@ -117,7 +116,7 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
 
   const getTheme = async () => {
     try {
-      const response = await api.get(`/theme/all/${group?._id}`);
+      const response = await api.get(`/theme/all/${groupId}`);
       setThemes(response.data);
     } catch (error: any) {
       console.log(error);

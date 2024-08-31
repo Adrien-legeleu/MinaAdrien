@@ -20,7 +20,7 @@ export const ParamsGroup = () => {
     fileList: UploadFile[]
   ) => {
     const uploadedImages: string[] = fileList.map((file) => file.url || "");
-    setNewImage(uploadedImages);
+    await setNewImage(uploadedImages);
     groupUpdate(uploadedImages[0]); // Update group with new image
   };
 

@@ -55,7 +55,7 @@ export function ThemeModal() {
       legend: "",
       dataPhoto: "",
       url: img,
-      groupId: group?._id,
+      groupId: groupId,
     }));
 
     const values: IThemeForm = {

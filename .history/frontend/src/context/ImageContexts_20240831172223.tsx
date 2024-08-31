@@ -11,7 +11,6 @@ import {
   useState,
 } from "react";
 import { toast } from "sonner";
-import { useGroupContext } from "./GroupContexts";
 
 export interface IImageForm {
   url: string[];
@@ -56,7 +55,8 @@ export const ImageContext = createContext<ImageContextType>({
 
 export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
   const [images, setImages] = useState<any>([]);
-  const { group } = useGroupContext();
+  const groupId =
+    typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
   const createImage = async (values: IImageForm) => {
     try {
       const response = await api.post("/image", values);
@@ -101,7 +101,7 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
 
   const getImages = async () => {
     try {
-      const response = await api.get(`/image/all/${group?._id}`);
+      const response = await api.get(`/image/all/${groupId}`);
       setImages(response.data);
     } catch (error: any) {
       console.log(error);

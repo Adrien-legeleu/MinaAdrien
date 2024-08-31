@@ -55,14 +55,14 @@ export function ThemeModal() {
       legend: "",
       dataPhoto: "",
       url: img,
-      groupId: group?._id,
+      groupId: groupId,
     }));
 
     const values: IThemeForm = {
       title: data.get("title") as string,
       images: formDataImages,
       bio: data.get("bio") as string,
-      groupId: group?._id,
+      groupId: group.8ID,
       isLiked: false,
     };
 

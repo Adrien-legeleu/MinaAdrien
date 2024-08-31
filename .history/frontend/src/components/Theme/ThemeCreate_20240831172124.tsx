@@ -51,7 +51,7 @@ export const ThemeCreate: React.FC<ThemeCreateprops> = ({
 
       const values: IThemeFormUpdate = {
         images: updatedImages,
-        groupId: group?._id,
+        groupId: group._id,
         themeId: themeId || "",
         title: theme.title,
       };

@@ -44,7 +44,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
             }
           )
         : undefined,
-      groupId: group?._id,
+      groupId: group?._id",
       isLiked: image?.isLiked,
       imageId: image?._id || "",
     };

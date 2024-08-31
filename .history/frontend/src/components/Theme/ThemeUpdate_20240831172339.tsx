@@ -52,14 +52,14 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
             url: newImages,
             legend: formData.get("legend") as string,
             photoDate: formData.get("dataPhoto") as string,
-            groupId: group?._id,
+            groupId: groupId,
           }
         : img
     );
 
     const values: IThemeFormUpdate = {
       images: updatedImages,
-      groupId: group?._id,
+      groupId: groupId,
       themeId: themeId || "",
       title: theme?.title,
     };

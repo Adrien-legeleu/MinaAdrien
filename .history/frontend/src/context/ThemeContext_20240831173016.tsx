@@ -78,10 +78,10 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const deleteTheme = async (themeId: string) => {
-    const groupId = group?._id;
+    const groupId = group?._id
     try {
       await api.delete(`/theme/${themeId}`, {
-        data: { groupId },
+        data: { group._id }
       });
 
       // Après la suppression réussie, mettre à jour l'état des thèmes

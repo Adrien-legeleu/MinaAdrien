@@ -43,7 +43,7 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
     const data = new FormData(e.currentTarget);
     const values = {
       userId: user?._id,
-      groupId: group?._id,
+      groupId: group._id,
       pseudoUser: data.get("pseudo"),
     };
     console.log(values);

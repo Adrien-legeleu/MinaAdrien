@@ -50,7 +50,7 @@ export const ImageHome = () => {
             }
           )
         : undefined,
-      groupId: group?._id,
+      groupId: group ? group._id : null,
       isLiked: false,
     };
     console.log(values);

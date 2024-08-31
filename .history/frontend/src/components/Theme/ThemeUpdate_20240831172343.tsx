@@ -59,7 +59,7 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
 
     const values: IThemeFormUpdate = {
       images: updatedImages,
-      groupId: group?._id,
+      groupId: groupId,
       themeId: themeId || "",
       title: theme?.title,
     };
