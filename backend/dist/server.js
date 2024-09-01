@@ -13,7 +13,7 @@ var web_push_1 = __importDefault(require("web-push"));
 var routes_1 = __importDefault(require("./routes"));
 dotenv_1.default.config();
 var uri = process.env.MONGODB_KEY || "";
-var PORT = 5000;
+var PORT = 5050;
 if (uri) {
     mongoose_1.default
         .connect(uri)

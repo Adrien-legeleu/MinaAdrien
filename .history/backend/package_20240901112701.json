@@ -27,8 +27,8 @@
     "typescript": "^5.5.4"
   },
   "engines": {
-    "node": "20.x"
-  },
+  "node": "20.x"  // Spécifie la version de Node.js
+},
   "name": "backend",
   "version": "1.0.0",
   "description": "site pour mina et moi , c'est pour son anniversaire du 12 juillet 2024",
