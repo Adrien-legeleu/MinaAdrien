@@ -1,6 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.authController = void 0;
-const auth_controller_1 = require("./auth.controller");
-const authController = new auth_controller_1.AuthController();
+exports.subscriptionController = exports.themeController = exports.groupController = exports.descriptionController = exports.letterController = exports.imageController = exports.authController = void 0;
+var auth_controller_1 = require("./auth.controller");
+var description_controller_1 = require("./description.controller");
+var group_controller_1 = require("./group.controller");
+var images_controller_1 = require("./images.controller");
+var letter_controller_1 = require("./letter.controller");
+var subscription_controller_1 = require("./subscription.controller");
+var theme_controller_1 = require("./theme.controller");
+var authController = new auth_controller_1.AuthController();
 exports.authController = authController;
+var imageController = new images_controller_1.ImageController();
+exports.imageController = imageController;
+var letterController = new letter_controller_1.LetterController();
+exports.letterController = letterController;
+var descriptionController = new description_controller_1.DescriptionController();
+exports.descriptionController = descriptionController;
+var groupController = new group_controller_1.GroupController();
+exports.groupController = groupController;
+var themeController = new theme_controller_1.ThemeController();
+exports.themeController = themeController;
+var subscriptionController = new subscription_controller_1.SubscriptionController();
+exports.subscriptionController = subscriptionController;
+//# sourceMappingURL=index.js.map

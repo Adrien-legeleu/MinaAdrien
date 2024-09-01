@@ -1,0 +1,1 @@
+{"version":3,"file":"subscription.route.js","sourceRoot":"","sources":["../../src/routes/subscription.route.ts"],"names":[],"mappings":";;;;;AAAA,oDAA8B;AAE9B,8CAAwD;AAExD,IAAM,kBAAkB,GAAG,iBAAO,CAAC,MAAM,EAAE,CAAC;AAE5C,kBAAkB;KACf,IAAI,CACH,oBAAoB,EAEpB,oCAAsB,CAAC,kBAAkB,CAC1C;KACA,KAAK,CACJ,8BAA8B,EAC9B,oCAAsB,CAAC,kBAAkB,CAC1C,CAAC;AAEJ,kBAAe,kBAAkB,CAAC"}

@@ -3,34 +3,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserModel = void 0;
+exports.LetterModel = exports.LetterSchema = void 0;
 var mongoose_1 = __importDefault(require("mongoose"));
-var UserSchema = new mongoose_1.default.Schema({
-    username: {
+exports.LetterSchema = new mongoose_1.default.Schema({
+    title: {
         type: String,
         required: true,
     },
-    email: {
+    groupId: {
         type: String,
         required: true,
-        unique: true,
+        ref: "groups",
     },
-    password: {
+    text: {
         type: String,
         required: true,
     },
-    profilPhoto: {
+    url_image: {
         type: String,
+        required: true,
     },
-    groups: [
-        {
-            groupId: {
-                type: String,
-                required: true,
-                ref: "groups",
-            },
-        },
-    ],
+    isLiked: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+}, {
+    timestamps: true,
 });
-exports.UserModel = mongoose_1.default.model("users", UserSchema);
-//# sourceMappingURL=user.model.js.map
+exports.LetterModel = mongoose_1.default.model("letters", exports.LetterSchema);
+//# sourceMappingURL=letter.model.js.map
