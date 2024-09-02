@@ -1,10 +1,9 @@
 import { type Response, type Request } from "express";
-
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { GroupModel } from "../model/group.model";
 import { IUser, UserModel } from "../model/user.model";
 import crypto from "crypto";
-import bcrypt from "bcryptjs";
 
 export class AuthController {
   static getTokenUser(user: IUser) {
