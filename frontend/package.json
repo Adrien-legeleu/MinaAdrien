@@ -34,6 +34,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.7.0",
     "@types/canvas-confetti": "^1.6.4",
     "@types/cors": "^2.8.17",
     "@types/node": "^20",
