@@ -32,7 +32,6 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
     deleteDescription,
   } = useDescriptionContext();
   const { onLogout } = useUserContext();
-  const { group } = useGroupContext();
 
   const openAddDesc = () => {
     setIsAddOpen(true);
@@ -147,9 +146,6 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
             </ModalTrigger>
           </Link>
         </Modal>
-        <p className="text-black text-2xl tracking-wider text-left ">
-          {group?.groupCode}
-        </p>
       </ul>
       <div className="fixed bottom-8 right-8  hidden max-md:flex">
         <Modal>
@@ -165,9 +161,7 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
           </Link>
         </Modal>
       </div>
-      <div className="top-5 left-8 text-center text-black backdrop-blur-md rounded-full py-2 px-4 items-center jsutify-center hidden max-md:flex">
-        <p>{group?.groupCode}</p>
-      </div>
+      <div className="top-5 left-8 "></div>
 
       <div
         className="space-y-20 py-20 px-12 max-[600px]:px-6 overflow-y-scroll max-lg:h-full  h-screen "

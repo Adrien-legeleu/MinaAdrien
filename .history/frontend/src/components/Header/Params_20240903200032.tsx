@@ -165,7 +165,7 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
           </Link>
         </Modal>
       </div>
-      <div className="top-5 left-8 text-center text-black backdrop-blur-md rounded-full py-2 px-4 items-center jsutify-center hidden max-md:flex">
+      <div className="top-5 left-8 text-center text-black backdrop-blur-md rounded-full py-2 px-4 flex items-center jsutify-center">
         <p>{group?.groupCode}</p>
       </div>
 

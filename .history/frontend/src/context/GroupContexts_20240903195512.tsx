@@ -198,7 +198,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const handleIsLoading = () => setIsLoading((prev) => !prev);
   useEffect(() => {
     getGroup();
-  }, [group?._id]); // Recharger le groupe à chaque changement de groupId
+  }, [group._id]); // Recharger le groupe à chaque changement de groupId
 
   useEffect(() => {
     getAllGroup();
