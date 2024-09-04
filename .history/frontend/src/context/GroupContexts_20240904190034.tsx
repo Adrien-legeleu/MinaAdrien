@@ -201,8 +201,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
 
   const getGroup = async () => {
     try {
-      console.log(group?._id);
-
       const response = await api.get(`/group/${group?._id}`);
       setGroup(response.data.group);
     } catch (error) {
@@ -213,7 +211,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const handleIsLoading = () => setIsLoading((prev) => !prev);
   useEffect(() => {
     getGroup();
-    console.log(group?._id);
   }, [group?._id]); // Recharger le groupe à chaque changement de groupId
 
   useEffect(() => {
