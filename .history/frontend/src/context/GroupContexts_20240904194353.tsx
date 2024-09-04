@@ -203,13 +203,15 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const getGroup = async () => {
-    const groupId =
-      typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
+    if (!group?._id) {
+      console.error("group._id is undefined, skipping API call.");
+      return; // Ne pas faire l'appel API si l'ID du groupe est manquant
+    }
     try {
-      console.log(groupId);
+      console.log(group?._id);
       console.log("ezeze");
 
-      const response = await api.get(`/group/${groupId}`);
+      const response = await api.get(`/group/${group?._id}`);
       setGroup(response.data.group);
     } catch (error) {
       console.error("Erreur lors de la récupération du groupe :", error);

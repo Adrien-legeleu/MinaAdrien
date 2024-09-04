@@ -209,7 +209,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log(groupId);
       console.log("ezeze");
 
-      const response = await api.get(`/group/${groupId}`);
+      const response = await api.get(`/group/${grouppId}`);
       setGroup(response.data.group);
     } catch (error) {
       console.error("Erreur lors de la récupération du groupe :", error);
