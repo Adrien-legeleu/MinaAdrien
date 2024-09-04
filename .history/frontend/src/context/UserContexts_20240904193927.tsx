@@ -116,7 +116,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         withCredentials: true,
       });
 
-      console.log(response);
+      console.log(response.data);
 
       if (typeof window !== "undefined") {
         localStorage.setItem("userId", response.data.user._id);
