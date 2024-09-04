@@ -62,8 +62,7 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
 
     const values: IThemeFormUpdate = {
       images: updatedImages,
-      groupId:
-        typeof window !== "undefined" ? localStorage.getItem("groupId") : null,
+      groupId: group?._id,
       themeId: themeId || "",
       title: theme?.title,
     };
