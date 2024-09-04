@@ -83,7 +83,9 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       const userId =
         typeof window !== "undefined" ? localStorage.getItem("userId") : null;
-      const response = await api.get("/group");
+      const response = await api.get(`/api/group`, {
+        params: { userId },
+      });
       setAllGroups(response.data.groups);
     } catch (error) {
       console.error("Erreur lors de la récupération des groupes :", error);
@@ -164,8 +166,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
 
   const updateGroup = async (values: IGroup) => {
     try {
-      const { groupId } = values;
-      await api.patch(`/group/${groupId}`, values, {
+      await api.patch(`/api/update-group`, values, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -181,11 +182,11 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
 
   const getGroup = async () => {
     try {
-      const groupId =
+      const userId =
         typeof localStorage !== "undefined"
-          ? localStorage.getItem("groupd")
+          ? localStorage.getItem("userId")
           : null;
-      const response = await api.get(`/group/${groupId}`);
+      const response = await api.get(`/api/group/${userId}`);
       setGroup(response.data.group);
     } catch (error) {
       console.error("Erreur lors de la récupération du groupe :", error);
