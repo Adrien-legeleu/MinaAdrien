@@ -50,7 +50,8 @@ export const ImageHome = () => {
             }
           )
         : undefined,
-      groupId: group?._id,
+      groupId:
+        typeof window !== "undefined" ? localStorage.getItem("groupId") : null,
       isLiked: false,
     };
     console.log(values);

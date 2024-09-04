@@ -10,30 +10,32 @@ import {
   useEffect,
   useState,
 } from "react";
+import { toast } from "sonner";
+import { useGroupContext } from "./GroupContexts";
 
 export interface IImageForm {
   url: string[];
   legend?: string;
   groupId: string | null;
-  photoDate?: Date;
+  photoDate?: string;
   isLiked: boolean;
 }
 export interface IImageFormUpdate {
   url?: string;
   legend?: string;
   groupId?: string;
-  photoDate?: Date;
+  photoDate?: string;
   isLiked?: boolean;
   imageId: string;
 }
 
 export interface IImage {
   legend?: string;
-  dataPhoto?: string;
+  photoDate?: string;
   url?: string;
-  groupId: string | null;
-  isLiked: boolean;
-  _id: string;
+  groupId?: string;
+  isLiked?: boolean;
+  _id?: string;
 }
 
 interface ImageContextType {
@@ -54,7 +56,7 @@ export const ImageContext = createContext<ImageContextType>({
 
 export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
   const [images, setImages] = useState<any>([]);
-  const groupId = localStorage.getItem("groupId");
+  const { group } = useGroupContext();
   const createImage = async (values: IImageForm) => {
     try {
       const response = await api.post("/image", values);
@@ -62,8 +64,10 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
       setImages((prev: any) => {
         return [...prev, response.data];
       });
+      toast.success("Votre image a bien été créer !");
     } catch (error: any) {
       console.log(error);
+      toast.error("erreur lors de la création de l'image");
     }
   };
 
@@ -71,8 +75,10 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       await api.delete(`/image/${imageId}`);
       setImages((prev: any) => prev.filter((img: any) => img._id !== imageId));
+      toast.success("image supprimé");
     } catch (error: any) {
       console.log(error);
+      toast.error("erreur lors de la suppression de l'image");
     }
   };
 
@@ -95,7 +101,7 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
 
   const getImages = async () => {
     try {
-      const response = await api.get(`/image/all/${groupId}`);
+      const response = await api.get(`/image/all/${group?._id}`);
       setImages(response.data);
     } catch (error: any) {
       console.log(error);

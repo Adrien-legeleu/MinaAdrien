@@ -16,7 +16,7 @@ import { useGroupContext } from "./GroupContexts";
 export interface IImageForm {
   url: string[];
   legend?: string;
-  groupId: string | undefined;
+  groupId: string | null;
   photoDate?: string;
   isLiked: boolean;
 }
