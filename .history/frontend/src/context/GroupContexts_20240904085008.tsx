@@ -87,7 +87,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       const userGroups = response.data.groups.filter((group: any) =>
         group.members.some((member: any) => member.userId === userId)
       );
-      setAllGroups(userGroups);
+      setAllGroups(response.data.groups.map(group));
     } catch (error) {
       console.error("Erreur lors de la récupération des groupes :", error);
     }

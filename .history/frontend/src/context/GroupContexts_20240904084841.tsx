@@ -84,10 +84,11 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       const userId =
         typeof window !== "undefined" ? localStorage.getItem("userId") : null;
       const response = await api.get("/group");
-      const userGroups = response.data.groups.filter((group: any) =>
-        group.members.some((member: any) => member.userId === userId)
+      setAllGroups(
+        response.data.groups.map((group) =>
+          group.members.map((member) => member.userId == userId)
+        )
       );
-      setAllGroups(userGroups);
     } catch (error) {
       console.error("Erreur lors de la récupération des groupes :", error);
     }
