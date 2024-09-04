@@ -60,7 +60,7 @@ export const GroupContext = createContext<{
   allGroups: [],
   joinPageRedirect: undefined,
   group: undefined,
-  groupId: null,
+  groupId: undefined,
   onLogin: async () => {},
   onRegister: async () => {},
   chosePseudo: async () => {},
@@ -74,7 +74,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [group, setGroup] = useState<IGroupComplete | undefined>(undefined);
-  const [groupId, setGroupId] = useState<string | null>(null);
+  const [groupId, setGroupId] = useGroupContext();
 
   const { setUser } = useCreateJoinContext();
 
@@ -227,7 +227,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     const groupId =
       typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
     setGroupId(groupId);
-    console.log(groupId);
   }, [group]);
   return (
     <GroupContext.Provider

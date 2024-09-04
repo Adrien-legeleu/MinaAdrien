@@ -227,7 +227,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     const groupId =
       typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
     setGroupId(groupId);
-    console.log(groupId);
   }, [group]);
   return (
     <GroupContext.Provider
