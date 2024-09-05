@@ -42,7 +42,6 @@ interface ImageContextType {
   images: IImage[];
   setImages: Dispatch<SetStateAction<any>>;
   createImage: (values: IImageForm) => Promise<void>;
-  getImages: () => Promise<void>;
   updateImage: (values: IImageFormUpdate) => Promise<void>;
   deleteImage: (imageId: string) => Promise<void>;
 }

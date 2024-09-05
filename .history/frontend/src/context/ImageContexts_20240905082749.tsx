@@ -42,7 +42,6 @@ interface ImageContextType {
   images: IImage[];
   setImages: Dispatch<SetStateAction<any>>;
   createImage: (values: IImageForm) => Promise<void>;
-  getImages: () => Promise<void>;
   updateImage: (values: IImageFormUpdate) => Promise<void>;
   deleteImage: (imageId: string) => Promise<void>;
 }
@@ -51,7 +50,6 @@ export const ImageContext = createContext<ImageContextType>({
   images: [],
   setImages: () => {},
   createImage: async (values: IImageForm) => {},
-  getImages: async () => {},
   updateImage: async (values: IImageFormUpdate) => {},
   deleteImage: async (imageId: string) => {},
 });
@@ -124,7 +122,6 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
         createImage,
         updateImage,
         deleteImage,
-        getImages,
       }}
     >
       {children}

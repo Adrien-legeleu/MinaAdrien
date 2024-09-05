@@ -90,7 +90,6 @@ export const AuthGroup = () => {
     typeof window !== "undefined" ? localStorage.setItem("groupId", id) : null;
     setGroupId(id);
     getGroup();
-    getImages();
     getDescription(id);
     handleIsLoading();
   };
