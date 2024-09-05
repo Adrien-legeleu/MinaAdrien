@@ -197,7 +197,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
 
       toast.success("Groupe mis à jour avec succès");
       await getAllGroup();
-      window.location.reload();
     } catch (error) {
       console.error("Erreur lors de la mise à jour du groupe :", error);
       toast.error("Erreur lors de la mise à jour du groupe");
@@ -212,9 +211,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.log("ezeze");
 
       const response = await api.get(`/group/${groupId}`);
-      console.log(response.data, "eizoeizoeioieozieozieoziezoeizoiezoeiozeie");
-
-      setGroup(response.data);
+      setGroup(response.data.group);
     } catch (error) {
       console.error("Erreur lors de la récupération du groupe :", error);
     }
