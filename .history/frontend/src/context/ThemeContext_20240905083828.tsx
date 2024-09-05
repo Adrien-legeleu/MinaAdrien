@@ -23,7 +23,7 @@ export interface IThemeForm {
   title?: string;
   images: IImageTheme[];
   bio: string;
-  groupId: string | null;
+  groupId: string | undefined;
   isLiked: boolean;
 }
 export interface IThemeFormUpdate {
@@ -48,7 +48,6 @@ interface ThemeContextType {
   themes: ITheme[];
   setThemes: Dispatch<SetStateAction<any>>;
   createTheme: (values: IThemeForm) => Promise<void>;
-  getTheme: () => Promise<void>;
   updateTheme: (values: IThemeFormUpdate) => Promise<void>;
   deleteTheme: (themeId: string) => Promise<void>;
 }
@@ -57,7 +56,6 @@ export const ThemeContext = createContext<ThemeContextType>({
   themes: [],
   setThemes: () => {},
   createTheme: async (values: IThemeForm) => {},
-  getTheme: async () => {},
   updateTheme: async (values: IThemeFormUpdate) => {},
   deleteTheme: async (themeId: string) => {},
 });
@@ -122,7 +120,7 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       const groupId =
         typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
-      const response = await api.get(`/theme/all/${groupId}`);
+      const response = await api.get(`/theme/all/${groupid}`);
       setThemes(response.data);
     } catch (error: any) {
       console.log(error);
@@ -141,7 +139,6 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
         createTheme,
         updateTheme,
         deleteTheme,
-        getTheme,
       }}
     >
       {children}

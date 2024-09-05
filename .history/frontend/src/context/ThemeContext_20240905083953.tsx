@@ -23,7 +23,7 @@ export interface IThemeForm {
   title?: string;
   images: IImageTheme[];
   bio: string;
-  groupId: string | null;
+  groupId: string | undefined;
   isLiked: boolean;
 }
 export interface IThemeFormUpdate {

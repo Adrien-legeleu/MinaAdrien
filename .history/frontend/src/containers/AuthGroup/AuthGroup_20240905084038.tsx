@@ -93,7 +93,6 @@ export const AuthGroup = () => {
     setGroupId(id);
     getGroup();
     getImages();
-    getTheme();
     getDescription(id);
     handleIsLoading();
   };

@@ -23,7 +23,7 @@ export interface IThemeForm {
   title?: string;
   images: IImageTheme[];
   bio: string;
-  groupId: string | null;
+  groupId: string | undefined;
   isLiked: boolean;
 }
 export interface IThemeFormUpdate {
@@ -48,7 +48,7 @@ interface ThemeContextType {
   themes: ITheme[];
   setThemes: Dispatch<SetStateAction<any>>;
   createTheme: (values: IThemeForm) => Promise<void>;
-  getTheme: () => Promise<void>;
+  getThemes: () => Promise<void>;
   updateTheme: (values: IThemeFormUpdate) => Promise<void>;
   deleteTheme: (themeId: string) => Promise<void>;
 }
