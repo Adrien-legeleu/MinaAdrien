@@ -68,7 +68,7 @@ export const ImageHome = () => {
       ) : (
         <p
           className={cn(
-            `text-4xl max-md:text-3xl max-sm:text-xl w-1/2 pt-10 pb-32 mx-auto tracking-widest text-center leading-loose font-semibold  animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
+            `text-4xl max-md:text-3xl max-sm:text-xl w-1/2 pt-10 pb-64 mx-auto tracking-widest text-center leading-loose font-semibold  animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
           )}
         >
           Ajoutez des photos pour donner plus de vie à votre groupe ! 📸
@@ -100,7 +100,7 @@ export const ImageHome = () => {
           onSubmit={submitImage}
           className={`${
             isCreateOpen ? "visible opacity-100" : "invisible  opacity-0"
-          }  duration-300 ease-in-out absolute shadow-2xl shadow-black/30 -top-16 right-20 max-sm:right-0 max-sm:top-16 py-8 rounded-2xl w-[500px] max-md:w-2/3 max-sm:w-4/5 z-10 flex items-center justify-center flex-col backdrop-blur-sm max-sm:backdrop-blur-md border-[1px] border-black/30 gap-8`}
+          }  duration-300 ease-in-out absolute shadow-2xl shadow-black/30 -top-16 right-20 max-sm:right-0 max-sm:top-16 py-8 z-50 rounded-2xl w-[500px] max-md:w-2/3 max-sm:w-4/5  flex items-center justify-center flex-col backdrop-blur-sm max-sm:backdrop-blur-md border-[1px] border-black/30 gap-8`}
         >
           <div className="space-y-6">
             <TextArea

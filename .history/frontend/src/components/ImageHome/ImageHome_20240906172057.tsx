@@ -11,12 +11,13 @@ import { Input } from "../UI";
 import { Modal, ModalTrigger } from "../UI/AnimatedModal";
 import Link from "next/link";
 import TextArea from "antd/es/input/TextArea";
+import { useGroupContext } from "@/context/GroupContexts";
 
 export const ImageHome = () => {
   const [newImages, setNewImages] = useState<string[]>([]);
   const { images, createImage } = useImageContext();
 
-  const groupId = localStorage.getItem("groupId");
+  const { group } = useGroupContext();
 
   const [dataImage, setDataImage] = useState<string[]>([]);
 
@@ -49,7 +50,8 @@ export const ImageHome = () => {
             }
           )
         : undefined,
-      groupId: groupId,
+      groupId:
+        typeof window !== "undefined" ? localStorage.getItem("groupId") : null,
       isLiked: false,
     };
     console.log(values);
@@ -66,7 +68,7 @@ export const ImageHome = () => {
       ) : (
         <p
           className={cn(
-            `text-4xl w-1/2 pt-60 pb-32 mx-auto tracking-widest text-center leading-loose font-semibold  animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
+            `text-4xl max-md:text-3xl max-sm:text-xl w-1/2 pt-10 pb-64 mx-auto tracking-widest text-center leading-loose font-semibold  animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
           )}
         >
           Ajoutez des photos pour donner plus de vie à votre groupe ! 📸
@@ -77,8 +79,8 @@ export const ImageHome = () => {
           href="/gallery"
           className="w-full pt-10 h-full flex  justify-center "
         >
-          <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
-            <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
+          <ModalTrigger className="bg-black dark:bg-white dark:text-black max-sm:text-sm text-white flex justify-center group/modal-btn">
+            <span className="group-hover/modal-btn:translate-x-40  text-center transition duration-500">
               Voir votre LovniaGallery
             </span>
             <div className="-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
@@ -87,9 +89,9 @@ export const ImageHome = () => {
           </ModalTrigger>
         </Link>
       </Modal>
-      <div className="absolute top-1/2 right-10">
+      <div className="absolute top-1/2 right-10 w-screen">
         <div
-          className="p-2 flex absolute cursor-pointer top-0 right-0 z-10 items-center justify-center shadow-xl shadow-black/60 bg-gray-50 rounded-full h-12 w-12"
+          className="p-2 flex absolute cursor-pointer top-0 right-0 z-10 items-center justify-center shadow-xl shadow-black/40 bg-gray-50 rounded-full h-12 w-12"
           onClick={handleCreateModal}
         >
           {isCreateOpen ? <IconMinus /> : <IconPlus />}
@@ -98,31 +100,39 @@ export const ImageHome = () => {
           onSubmit={submitImage}
           className={`${
             isCreateOpen ? "visible opacity-100" : "invisible  opacity-0"
-          }  duration-300 ease-in-out absolute -top-16 right-20 py-8 px-4 rounded-2xl w-96 z-10 flex items-center justify-center flex-col backdrop-blur-sm border-[1px] border-black/60 gap-8`}
+          }  duration-300 ease-in-out absolute shadow-2xl shadow-black/30 -top-16 right-20 max-sm:right-0 max-sm:top-16 py-8 z-50 rounded-2xl w-[500px] max-md:w-2/3 max-sm:w-4/5 z-10 flex items-center justify-center flex-col backdrop-blur-sm max-sm:backdrop-blur-md border-[1px] border-black/30 gap-8`}
         >
-          <div className="space-y-4">
+          <div className="space-y-6">
             <TextArea
               showCount
               maxLength={150}
               name="legend"
               placeholder="Votre legend"
-              style={{ height: 100, resize: "none" }}
-            />
-            <Input type="date" name="dataPhoto" />
+              className="w-full"
+              style={{
+                height: 100,
+                resize: "none",
 
-            <FileImages
-              handleImageUpload={handleImageUpload}
-              imgUrlKey="url"
-              initialImages={newImages}
-              multipleImage={false}
+                scrollbarWidth: "none",
+              }}
             />
+            <div className="flex max-md:flex-col gap-4 items-center justify-center">
+              <Input type="date" name="dataPhoto" />
+
+              <FileImages
+                handleImageUpload={handleImageUpload}
+                imgUrlKey="url"
+                initialImages={newImages}
+                multipleImage={false}
+              />
+            </div>
           </div>
           <div
             className={cn(
               "group rounded-full p-1 border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
             )}
           >
-            <AnimatedShinyText className=" text-xl  px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+            <AnimatedShinyText className=" text-xl max-sm:text-base  px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
               <button
                 className="flex items-center justify-center gap-3 "
                 type="submit"
