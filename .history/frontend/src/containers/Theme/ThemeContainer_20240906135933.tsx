@@ -192,11 +192,9 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                   </div>
                   <div className="mt-2">
                     <Image
-                      src={img.url[0]} // L'URL semble correcte
-                      alt={img.legend || "thumbnail"} // Alternative text
-                      width={400} // Ajoutez une largeur appropriée
-                      height={400} // Ajoutez une hauteur appropriée
+                      src={img.url[0]}
                       className="object-contain rounded-xl group-hover/card:shadow-xl max-h-[400px] mx-auto"
+                      alt="thumbnail"
                     />
                   </div>
                   <div className="flex justify-between items-center">
