@@ -47,7 +47,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
 
   return (
     <div>
-      <div className="absolute top-8 left-8 z-10  max-sm:left-4">
+      <div className="absolute top-8 left-8   max-sm:left-4">
         <BackGroup />
       </div>
       <HeaderParams
