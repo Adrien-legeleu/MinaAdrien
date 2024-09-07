@@ -100,7 +100,7 @@ export const AuthGroup = () => {
 
   return (
     <BackgroundGradientAnimation>
-      <div className="absolute inset-0 z-50 flex gap-16 max-md:gap-20 flex-col pt-10 max-w-[1300px] items-center justify-center font-montserrat">
+      <div className="absolute inset-0 z-50 flex gap-16 max-md:gap-20 flex-col pt-10 items-center justify-center font-montserrat">
         {isGroup && <BackButton isGroupFalse={isGroupFalse} />}
         <div className="absolute top-10 right-14 max-sm:right-8 max-sm:top-6 z-50">
           <Logout />
