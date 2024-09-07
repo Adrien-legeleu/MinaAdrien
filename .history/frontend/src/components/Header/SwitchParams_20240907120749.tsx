@@ -76,11 +76,16 @@ const unsubscribeFromNotifications = async (userId: any, groupId: any) => {
       if (subscription) {
         await subscription.unsubscribe();
 
+        const values = {
+          userId,
+          groupId,
+        };
+
         await api.delete(`/api/remove-subscription/${userId}`, {
           headers: {
             "Content-Type": "application/json",
           },
-
+          data: values, // Utilisez `data` pour envoyer les données avec `DELETE`
           withCredentials: true,
         });
 
