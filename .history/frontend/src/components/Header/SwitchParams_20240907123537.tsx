@@ -99,7 +99,13 @@ const unsubscribeFromNotifications = async (
   }
 };
 
-const SwitchParams = ({ userId, groupId }: any) => {
+const SwitchParams = ({
+  userId,
+  groupId,
+}: {
+  userId: string | null;
+  groupId: string | null;
+}) => {
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   // Vérifiez l'état d'abonnement lors du chargement du composant

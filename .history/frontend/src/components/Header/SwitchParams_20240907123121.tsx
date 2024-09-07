@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Switch } from "antd";
-import { api } from "@/config/api"; // Assurez-vous que le chemin est correct
+import { Switch } from "@nextui-org/react";
+import { api } from "@/config/api";
 
 // Fonction utilitaire pour convertir une clé de serveur en Uint8Array
-const urlBase64ToUint8Array = (base64String: string) => {
+const urlBase64ToUint8Array = (base64String: any) => {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
   const rawData = window.atob(base64);
@@ -17,7 +17,7 @@ const urlBase64ToUint8Array = (base64String: string) => {
 };
 
 // Fonction pour s'abonner aux notifications
-const subscribeToNotifications = async (userId: string, groupId: string[]) => {
+const subscribeToNotifications = async (userId: any, groupId: any) => {
   if (
     typeof window !== "undefined" &&
     "serviceWorker" in navigator &&
@@ -30,7 +30,7 @@ const subscribeToNotifications = async (userId: string, groupId: string[]) => {
         return;
       }
 
-      const registration = await navigator.serviceWorker.ready;
+      const registration = await navigator.serviceWorker.register("/sw.js");
 
       const applicationServerKey = urlBase64ToUint8Array(
         "BPGBMl5l1FpyfndWdUX71M0bgEd0yBv6ollSofR9ygAn0YRGdtiWUBHyafQzYboH_uFCVsC-YbIMhItpNsBYg1Q"
@@ -48,7 +48,7 @@ const subscribeToNotifications = async (userId: string, groupId: string[]) => {
       };
       console.log(values);
 
-      await api.post("/api/save-subscription", values, {
+      await api.post("/api/save-subscription", JSON.stringify(values), {
         headers: {
           "Content-Type": "application/json",
         },
@@ -63,10 +63,7 @@ const subscribeToNotifications = async (userId: string, groupId: string[]) => {
 };
 
 // Fonction pour se désabonner des notifications
-const unsubscribeFromNotifications = async (
-  userId: string,
-  groupId: string[]
-) => {
+const unsubscribeFromNotifications = async (userId: any, groupId: any) => {
   if (
     typeof window !== "undefined" &&
     "serviceWorker" in navigator &&
@@ -83,6 +80,7 @@ const unsubscribeFromNotifications = async (
           headers: {
             "Content-Type": "application/json",
           },
+
           withCredentials: true,
         });
 
@@ -104,16 +102,16 @@ const SwitchParams = ({ userId, groupId }: any) => {
 
   // Vérifiez l'état d'abonnement lors du chargement du composant
   useEffect(() => {
-    if (!userId || !groupId) {
-      console.log("userId ou groupId manquant");
+    if (!userId && !groupId) {
+      window.location.reload;
       return;
     }
     const checkSubscriptionStatus = async () => {
       try {
-        const response = await api.get(`/api/check-subscription/${userId}`, {
-          params: { groupId },
-        });
-        const data = response.data;
+        const response = await fetch(
+          `/api/check-subscription/${userId}?groupId=${groupId}`
+        );
+        const data = await response.json();
         setIsSubscribed(data.isSubscribed);
       } catch (error) {
         console.error("Erreur lors de la vérification de l'abonnement:", error);
@@ -123,23 +121,23 @@ const SwitchParams = ({ userId, groupId }: any) => {
     checkSubscriptionStatus();
   }, [userId, groupId]);
 
-  const handleSwitchChange = async (checked: boolean) => {
-    if (checked) {
+  const handleSwitchChange = async (isChecked: any) => {
+    if (isChecked) {
       await subscribeToNotifications(userId, groupId);
     } else {
       await unsubscribeFromNotifications(userId, groupId);
     }
-    setIsSubscribed(checked);
+    setIsSubscribed(isChecked);
   };
 
   return (
     <div>
       <Switch
         checked={isSubscribed}
-        onChange={handleSwitchChange}
-        checkedChildren="Notif"
-        unCheckedChildren="Notif"
-      />
+        onChange={(e) => handleSwitchChange(e.target.checked)}
+      >
+        Notif
+      </Switch>
     </div>
   );
 };
