@@ -148,26 +148,7 @@ export class ThemeController {
         });
       }
       console.log(theme);
-      const subscriptions = await SubscriptionModel.find({
-        groupId: { $in: [groupId] }, // Recherche où `groupId` contient l'ID du groupe
-      });
 
-      console.log(subscriptions);
-
-      // Envoyer des notifications push à chaque abonné trouvé
-      subscriptions.forEach((sub: any) => {
-        const pushSubscription = sub.subscription;
-        const payload = JSON.stringify({
-          title: `Le thème ${title} a été modifié`,
-          body: `Votre thème ${title} a été modifier !!`,
-        });
-
-        webpush
-          .sendNotification(pushSubscription as any, payload)
-          .catch((error) => {
-            console.error("Erreur lors de l'envoi de la notification", error);
-          });
-      });
       res.status(200).send(theme);
     } catch (err: any) {
       console.log(err);

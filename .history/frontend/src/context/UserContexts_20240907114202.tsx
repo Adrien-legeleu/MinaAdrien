@@ -87,6 +87,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         setIsAuthentificatedUser(true);
       }
       toast.success("Félicitations , votre compte a bien été créer !");
+
+      subscribeToNotifications(response.data.user._id, []);
     } catch (error: any) {
       console.error("Register error:", error);
       toast.error("Le nom d'utilisateur ou le mot de passe est incorrect");

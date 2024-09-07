@@ -58,7 +58,7 @@ export const HomeContainer: React.FC<GroupContainerDetailsProps> = ({
 
       {
         <AuroraBackground>
-          <div className="w-1/2 mx-auto pt-10  pb-48 max-sm:pt-16  max-sm:w-full max-sm:px-3 font-montserrat ">
+          <div className="w-1/2 mx-auto pt-10  pb-48 max-sm:pt-16  max-sm:w-2/3 font-montserrat">
             {description[0] ? (
               <TextGenerateEffect
                 words={description[descIndex]?.description}

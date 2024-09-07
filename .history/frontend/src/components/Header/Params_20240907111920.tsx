@@ -14,7 +14,6 @@ import Link from "next/link";
 import { ParamsGroup } from "./ParamsGroup";
 import { useGroupContext } from "@/context/GroupContexts";
 import { Switch } from "@nextui-org/react";
-import SwitchParams from "./SwitchParams";
 
 interface IParamsProps {
   isParams: boolean;
@@ -152,18 +151,7 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
         <p className="text-black text-2xl tracking-wider text-left ">
           {group?.groupCode}
         </p>
-        <SwitchParams
-          userId={
-            typeof window !== "undefined"
-              ? localStorage.getItem("userId")
-              : null
-          }
-          groupId={
-            typeof window !== "undefined"
-              ? localStorage.getItem("groupId")
-              : null
-          }
-        />
+        <Switch>primary</Switch>
       </ul>
       <div className="fixed bottom-8 right-8  hidden max-md:flex">
         <Modal>

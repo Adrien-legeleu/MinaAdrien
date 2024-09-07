@@ -132,6 +132,7 @@ export const GalleryContainer = () => {
           >
             <IconDelete />
           </button>
+          <
 
           <button
             className="bg-black text-white rounded-full py-3 px-5"

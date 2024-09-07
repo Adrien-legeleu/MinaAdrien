@@ -67,8 +67,8 @@ export class DescriptionController {
       subscriptions.forEach((sub: any) => {
         const pushSubscription = sub.subscription;
         const payload = JSON.stringify({
-          title: "Nouvelle description ajoutée",
-          body: "Une nouvelle description a été ajoutée dans votre groupe !",
+          title: "Nouvelle image ajoutée",
+          body: "Une nouvelle image a été ajoutée dans votre groupe !",
         });
 
         webpush
