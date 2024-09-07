@@ -137,7 +137,7 @@ const SwitchParams = ({ userId, groupId }: any) => {
         checked={isSubscribed}
         onChange={(e) => handleSwitchChange(e.target.checked)}
       >
-        Notif
+        Notifications
       </Switch>
     </div>
   );
