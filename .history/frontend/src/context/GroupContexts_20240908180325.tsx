@@ -235,7 +235,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     if (groupId) {
       setIsAuthenticated(true);
       getGroup();
-      getDescription(groupId);
+      getDescription();
     }
   }, []);
 
