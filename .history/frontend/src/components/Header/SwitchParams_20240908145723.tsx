@@ -140,7 +140,7 @@ const SwitchParams = ({ userId, groupId }: any) => {
         checkedChildren="Notif"
         unCheckedChildren="Notif"
       />
-      <Switch defaultChecked />
+      <Switch defaultChecked onChange={onChange} />
     </div>
   );
 };
