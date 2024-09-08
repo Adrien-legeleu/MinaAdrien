@@ -231,7 +231,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     getAllGroup();
     const groupId =
       typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
-    if (groupId) {
+    if (groupiD) {
       setIsAuthenticated(true);
       getGroup();
     }

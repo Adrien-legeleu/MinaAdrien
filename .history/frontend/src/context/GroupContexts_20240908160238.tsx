@@ -223,7 +223,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const handleIsLoading = () => setIsLoading((prev) => !prev);
   useEffect(() => {
     getGroup();
-
+    
     console.log(group?._id);
   }, [group?._id]); // Recharger le groupe à chaque changement de groupId
 
@@ -231,12 +231,12 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     getAllGroup();
     const groupId =
       typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
-    if (groupId) {
-      setIsAuthenticated(true);
-      getGroup();
+    if (groupiD)) {
+      setIsAuthenticated(true)
+      getGroup()
     }
   }, []);
-
+  
   return (
     <GroupContext.Provider
       value={{
