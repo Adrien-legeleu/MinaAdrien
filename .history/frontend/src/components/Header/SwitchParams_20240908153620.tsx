@@ -133,10 +133,8 @@ const SwitchParams = ({ userId, groupId }: any) => {
   };
 
   return (
-    <div className="text-black flex gap-3 ">
-      <div className="text-black w-8 h-8">
-        <IconNotifications />
-      </div>
+    <div className="text-black flex gap-3 w-16 h-5">
+      <IconNotifications />
       <Switch checked={isSubscribed} onChange={handleSwitchChange} />
     </div>
   );
