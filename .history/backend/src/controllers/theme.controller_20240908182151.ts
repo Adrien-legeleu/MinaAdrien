@@ -1,7 +1,7 @@
 import { type Response } from "express";
 
 import { cloudinary } from "../utils";
-import { GroupModel, IImage, SubscriptionModel, ThemeModel } from "../model";
+import { IImage, SubscriptionModel, ThemeModel } from "../model";
 import webpush from "web-push";
 
 export class ThemeController {
@@ -91,25 +91,12 @@ export class ThemeController {
         });
 
         console.log(subscriptions);
-        const group = await GroupModel.findOne({ _id: groupId });
-        if (!group) {
-          res.status(404).send({
-            error: "group not found" + groupId,
-          });
-          return;
-        }
-
-        const logoUrl =
-          "https://res.cloudinary.com/lovnia/image/upload/v1725815072/Lovna-logo_ijfrd7.png";
-        const groupImageUrl = group.urlProfil; // Assurez-vous que ceci est une URL valide
 
         subscriptions.forEach((sub: any) => {
           const pushSubscription = sub.subscription;
           const payload = JSON.stringify({
             title: "Nouveau thème ajoutée",
             body: "Un nouveau thème a été ajoutée dans votre groupe !",
-            icon: logoUrl,
-            image: groupImageUrl,
           });
 
           webpush
@@ -118,6 +105,13 @@ export class ThemeController {
               console.error("Erreur lors de l'envoi de la notification", error);
             });
         });
+        const group = await GroupModel.findOne({ _id: groupId });
+        if (!group) {
+          res.status(404).send({
+            error: "group not found" + groupId,
+          });
+          return;
+        }
 
         res.status(200).send(theme);
       } else {

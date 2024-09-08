@@ -24,32 +24,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta charSet="UTF-8" />
+        {/* Ajouter la balise <link> pour la favicon ici */}
         <link rel="icon" href="/lovna-logo.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-          name="description"
-          content="Lovna is the app to share with those you love! ❤️"
-        />
-        <meta
-          name="keywords"
-          content="app, partage, amour, communauté , lovna"
-        />
-        <meta property="og:title" content="Lovna" />
-        <meta
-          property="og:description"
-          content="Lovna is the app to share with those you love! ❤️"
-        />
-        <meta property="og:image" content="/lovna-logo.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:title" content="Lovna" />
-        <meta name="twitter:image" content="/lovna-logo.png" />
-        <meta
-          name="twitter:description"
-          content="Lovna is the app to share with those you love! ❤️"
-        />
-        <meta name="robots" content="index, follow" />
-        <meta name="revisit-after" content="1 day" />
       </head>
       <ThemeContextProvider>
         <ImageContextProvider>

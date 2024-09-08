@@ -99,8 +99,7 @@ export class ThemeController {
           return;
         }
 
-        const logoUrl =
-          "https://res.cloudinary.com/lovnia/image/upload/v1725815072/Lovna-logo_ijfrd7.png";
+        const logoUrl = "https://your-cloudinary-url.com/path/to/your/logo.png"; // Remplacez ceci par l'URL de votre logo
         const groupImageUrl = group.urlProfil; // Assurez-vous que ceci est une URL valide
 
         subscriptions.forEach((sub: any) => {
@@ -108,7 +107,7 @@ export class ThemeController {
           const payload = JSON.stringify({
             title: "Nouveau thème ajoutée",
             body: "Un nouveau thème a été ajoutée dans votre groupe !",
-            icon: logoUrl,
+            icon: "https://your-server.com/path/to/your/icon.png",
             image: groupImageUrl,
           });
 

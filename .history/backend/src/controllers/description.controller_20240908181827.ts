@@ -63,16 +63,7 @@ export class DescriptionController {
 
       console.log(subscriptions);
 
-      const group = await GroupModel.findOne({ _id: groupId });
-      if (!group) {
-        res.status(404).send({
-          error: "group not found" + groupId,
-        });
-        return;
-      }
-      const logoUrl =
-        "https://res.cloudinary.com/lovnia/image/upload/v1725815072/Lovna-logo_ijfrd7.png";
-      const groupImageUrl = group.urlProfil; // Assurez-vous que ceci est une URL valide
+      const group = GroupModel.findOne({ _id: groupId });
 
       // Envoyer des notifications push à chaque abonné trouvé
       subscriptions.forEach((sub: any) => {
@@ -80,8 +71,8 @@ export class DescriptionController {
         const payload = JSON.stringify({
           title: "Nouvelle description ajoutée",
           body: "Une nouvelle description a été ajoutée dans votre groupe !",
-          icon: logoUrl,
-          image: groupImageUrl,
+          icon: "https://your-server.com/path/to/your/icon.png",
+          image: group.urlProfil,
         });
 
         webpush
