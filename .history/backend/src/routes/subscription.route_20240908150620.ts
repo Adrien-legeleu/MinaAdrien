@@ -14,9 +14,6 @@ subscriptionRouter
     "/remove-subscription/:userId",
     subscriptionController.removeSubscription
   )
-  .get(
-    "/check-subscription/:userId",
-    subscriptionController.checkSubscriptions
-  );
+  .get("/check-subscription/:userId");
 
 export default subscriptionRouter;

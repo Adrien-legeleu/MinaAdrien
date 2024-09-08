@@ -111,9 +111,8 @@ const SwitchParams = ({ userId, groupId }: any) => {
     const checkSubscriptionStatus = async () => {
       try {
         const response = await api.get(`/api/check-subscription/${userId}`);
-        console.log(response.data);
-
-        setIsSubscribed(response.data);
+        const data = response.data;
+        setIsSubscribed(data.isSubscribed);
       } catch (error) {
         console.error("Erreur lors de la vérification de l'abonnement:", error);
       }

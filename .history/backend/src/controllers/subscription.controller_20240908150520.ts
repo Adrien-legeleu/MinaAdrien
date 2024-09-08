@@ -38,7 +38,9 @@ export class SubscriptionController {
       const { userId } = req.params;
       const subscriptionUser = await SubscriptionModel.findOne(userId);
       if (!subscriptionUser) {
-        res.status(200).send(false);
+        res.status(404).send({
+          error: "le user n'existe pas:" + userId,
+        });
       }
       res.status(200).send(true);
     } catch (error: any) {

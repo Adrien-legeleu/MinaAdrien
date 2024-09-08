@@ -35,13 +35,7 @@ export class SubscriptionController {
   }
   async checkSubscriptions(req: any, res: Response): Promise<void> {
     try {
-      const { userId } = req.params;
-      const subscriptionUser = await SubscriptionModel.findOne(userId);
-      if (!subscriptionUser) {
-        res.status(200).send(false);
-      }
-      res.status(200).send(true);
-    } catch (error: any) {
+    } catch (error) {
       console.log(error);
       res.status(500).send({
         error: error?.mesage,
