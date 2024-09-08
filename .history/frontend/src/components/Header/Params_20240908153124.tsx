@@ -179,7 +179,7 @@ export const Params: React.FC<IParamsProps> = ({ closeParams, isParams }) => {
           </Link>
         </Modal>
       </div>
-      <div className="top-5 left-8 text-center text-black fixed backdrop-blur-md rounded-full py-2 px-4 flex-col gap-5 items-center jsutify-center hidden max-md:flex">
+      <div className="top-5 left-8 text-center text-black fixed backdrop-blur-md rounded-full py-2 px-4 flex-col items-center jsutify-center hidden max-md:flex">
         <p>{group?.groupCode}</p>
         <SwitchParams
           userId={
