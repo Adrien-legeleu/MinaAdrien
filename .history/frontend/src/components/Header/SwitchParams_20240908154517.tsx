@@ -138,7 +138,7 @@ const SwitchParams = ({ userId, groupId }: any) => {
         <IconNotifications />
       </div>
       <Switch
-        className="bg-black text-red-500"
+        className="bg-black text-red"
         checked={isSubscribed}
         onChange={handleSwitchChange}
       />
