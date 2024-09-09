@@ -59,6 +59,8 @@ export const ThemeCreate: React.FC<ThemeCreateprops> = ({
         title: theme.title,
       };
 
+      console.log("ezeze");
+
       themeCreateClose();
       updateTheme(values);
     }

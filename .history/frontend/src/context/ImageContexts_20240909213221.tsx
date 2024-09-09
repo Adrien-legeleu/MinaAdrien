@@ -67,7 +67,6 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
       });
       toast.success("Votre image a bien été créer !");
     } catch (error: any) {
-      console.log(error);
       toast.error("erreur lors de la création de l'image");
     }
   };
@@ -78,7 +77,6 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
       setImages((prev: any) => prev.filter((img: any) => img._id !== imageId));
       toast.success("image supprimé");
     } catch (error: any) {
-      console.log(error);
       toast.error("erreur lors de la suppression de l'image");
     }
   };
@@ -95,9 +93,7 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
           return img;
         });
       });
-    } catch (error: any) {
-      console.log(error);
-    }
+    } catch (error: any) {}
   };
 
   const getImages = async () => {
@@ -106,9 +102,7 @@ export const ImageContextProvider = ({ children }: { children: ReactNode }) => {
         typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
       const response = await api.get(`/image/all/${groupId}`);
       setImages(response.data);
-    } catch (error: any) {
-      console.log(error);
-    }
+    } catch (error: any) {}
   };
 
   useEffect(() => {

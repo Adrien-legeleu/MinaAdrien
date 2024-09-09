@@ -92,19 +92,18 @@ export const DescriptionContextProvider = ({
           return desc;
         });
       });
-    } catch (error: any) {
-      console.log(error);
-    }
+    } catch (error: any) {}
   };
 
   const getDescription = async (groupId: string) => {
     try {
       const response = await api.get(`/description/all/${groupId}`);
+      console.log(
+        "eizoeizoeizoeioziozeiozieozieozieozieoziezoieozieozieozieozieozi"
+      );
 
       setDescription(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (

@@ -67,6 +67,7 @@ export const ThemeUpdate: React.FC<IThemeUpdate> = ({
       themeId: themeId || "",
       title: theme?.title,
     };
+    console.log("ezeze");
 
     themeUpdateClose();
     updateTheme(values);

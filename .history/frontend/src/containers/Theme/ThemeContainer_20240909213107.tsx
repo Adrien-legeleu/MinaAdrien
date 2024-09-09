@@ -67,6 +67,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
   const { themes, updateTheme } = useThemeContext();
   const getTheme = useCallback(() => {
     const foundTheme = themes.find((tme) => tme._id === params.id);
+    console.log(themes);
 
     setTheme(foundTheme || null);
   }, [params.id, themes]); // Inclure 'params.id' et 'themes' dans les dépendances
@@ -87,6 +88,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
       themeId: theme?._id || "",
       title: theme?.title,
     };
+    console.log("ezeze");
 
     updateTheme(values);
   };

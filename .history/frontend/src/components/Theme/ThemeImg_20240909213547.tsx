@@ -15,6 +15,8 @@ export const ThemeImg: React.FC<IThemeImg> = ({
   theme,
   themeModalImgClose,
 }) => {
+  useEffect(() => {}, [isThemeImgModalOpen]);
+
   return (
     <div className="z-[60]">
       {theme?.images.map((img: any) => {

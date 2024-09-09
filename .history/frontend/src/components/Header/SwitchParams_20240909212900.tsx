@@ -98,11 +98,13 @@ const SwitchParams = ({ userId, groupId }: any) => {
   // Vérifiez l'état d'abonnement lors du chargement du composant
   useEffect(() => {
     if (!userId || !groupId) {
+      console.log("userId ou groupId manquant");
       return;
     }
     const checkSubscriptionStatus = async () => {
       try {
         const response = await api.get(`/api/check-subscription/${userId}`);
+        console.log(response.data);
 
         setIsSubscribed(response.data);
       } catch (error) {

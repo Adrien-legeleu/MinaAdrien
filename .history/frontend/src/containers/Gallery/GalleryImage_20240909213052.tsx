@@ -86,6 +86,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
           className="rounded-3xl block max-h-[95%] max-w-[95%] z-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain "
           src={image?.url}
           alt={`img de lovnia src: ${image?.url}`}
+          onClick={() => console.log(image)}
         />
       </div>
 
@@ -107,6 +108,7 @@ export const GalleryImage: React.FC<ImageGalleryProps> = ({
               type="date"
               name="dataPhoto"
               className="w-1/2"
+              onChange={(e) => console.log(e)}
               defaultValue={image?.photoDate}
             />
           </div>

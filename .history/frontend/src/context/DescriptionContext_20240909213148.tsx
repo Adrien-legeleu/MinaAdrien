@@ -92,9 +92,7 @@ export const DescriptionContextProvider = ({
           return desc;
         });
       });
-    } catch (error: any) {
-      console.log(error);
-    }
+    } catch (error: any) {}
   };
 
   const getDescription = async (groupId: string) => {
@@ -102,9 +100,7 @@ export const DescriptionContextProvider = ({
       const response = await api.get(`/description/all/${groupId}`);
 
       setDescription(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (

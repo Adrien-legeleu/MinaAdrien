@@ -67,6 +67,7 @@ export function ThemeModal() {
       isLiked: false,
     };
 
+    console.log("ezezzezzzezezezeze");
     openModalFalse();
     createTheme(values);
   };
