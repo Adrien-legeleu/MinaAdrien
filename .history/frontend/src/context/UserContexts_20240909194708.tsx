@@ -33,7 +33,7 @@ export const UserContext = createContext({
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthentificatedUser, setIsAuthentificatedUser] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { getAllGroup } = useGroupContext();
+  const {getAllGroup} = useGroupContext()
 
   const onLogout = () => {
     if (typeof window !== "undefined") {
@@ -62,7 +62,6 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         localStorage.setItem("authToken", response?.data?.authToken);
         setIsAuthentificatedUser(true);
       }
-      getAllGroup();
 
       toast.success("Bravo , vous êtes connectez !");
     } catch (error: any) {

@@ -69,7 +69,7 @@ export const GroupContext = createContext<{
   onDeleteGroup: async () => {},
   updateGroup: async () => {},
   getGroup: async () => {},
-  getAllGroup: async () => {},
+  getALLGroup: async () => {},
   handleIsLoading: () => {},
 });
 

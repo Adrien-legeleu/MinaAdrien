@@ -69,7 +69,7 @@ export const GroupContext = createContext<{
   onDeleteGroup: async () => {},
   updateGroup: async () => {},
   getGroup: async () => {},
-  getAllGroup: async () => {},
+  getALLGroup: async () => {},
   handleIsLoading: () => {},
 });
 
@@ -257,7 +257,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         updateGroup,
         getGroup,
         handleIsLoading,
-        getAllGroup,
+        getAllGroup
       }}
     >
       {children}
