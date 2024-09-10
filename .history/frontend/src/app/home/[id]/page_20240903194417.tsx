@@ -16,9 +16,12 @@ export default function HomePage({ params }: IGroupDetailsProps) {
   const router = useRouter();
   const { isAuthenticated, group } = useGroupContext();
   const { isAuthentificatedUser } = useUserContext();
+  console.log(group);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      console.log("windoooooow", isAuthenticated, isAuthentificatedUser);
+
       if (isAuthentificatedUser) {
         if (isAuthenticated) {
           router.push(`/home/${group?._id}`);

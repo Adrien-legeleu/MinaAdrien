@@ -89,11 +89,7 @@ export class DescriptionController {
           icon: logoUrl,
           image: groupImageUrl, // Optionnel : première image comme illustration
         });
-        console.log(
-          "Payload de la notification:",
-          payload,
-          Buffer.byteLength(JSON.stringify(payload), "utf8")
-        ); // Ajoutez cette ligne avant d'envoyer la notification
+        console.log("Payload de la notification:", payload ,  Buffer.byteLength(JSON.stringify(payload), 'utf8');); // Ajoutez cette ligne avant d'envoyer la notification
 
         webpush
           .sendNotification(pushSubscription as any, payload)
