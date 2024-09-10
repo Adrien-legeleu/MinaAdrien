@@ -84,7 +84,6 @@ export class DescriptionController {
         const payload = JSON.stringify({
           title: "Nouvelle image ajoutée",
           body: "Une nouvelle image a été ajoutée dans votre groupe !",
-          icon: "https://res.cloudinary.com/lovnia/image/upload/v1725815072/Lovna-logo_ijfrd7.png",
           image:
             "https://res.cloudinary.com/lovnia/image/upload/v1725815072/Lovna-logo_ijfrd7.png",
           // image: groupImageUrl, // Optionnel : première image comme illustration
