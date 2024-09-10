@@ -77,6 +77,9 @@ export class DescriptionController {
         return;
       }
 
+      const logoUrl = "";
+      // const groupImageUrl = group.urlProfil; // URL d'image de profil de groupe
+
       subscriptions.forEach((sub: any) => {
         const pushSubscription = sub.subscription;
         const payload = JSON.stringify({
