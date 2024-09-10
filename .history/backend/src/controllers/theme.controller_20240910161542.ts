@@ -157,10 +157,12 @@ export class ThemeController {
           error: "image not found" + themeId,
         });
       }
-
+      console.log(theme);
       const subscriptions = await SubscriptionModel.find({
         groupId: { $in: [groupId] }, // Recherche où `groupId` contient l'ID du groupe
       });
+
+      console.log(subscriptions);
 
       // Envoyer des notifications push à chaque abonné trouvé
       subscriptions.forEach((sub: any) => {

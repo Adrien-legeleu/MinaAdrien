@@ -61,8 +61,6 @@ export class DescriptionController {
       });
       console.log("Nouvelle description créée:", newDescription);
 
-      console.log(newDescription);
-
       // Récupération des abonnés
       const subscriptions = await SubscriptionModel.find({
         groupId: { $in: [groupId] },
@@ -153,8 +151,6 @@ export class DescriptionController {
   async delete(req: any, res: Response): Promise<void> {
     try {
       const { descriptionId } = req.params;
-      console.log(descriptionId);
-
       const description = await DescriptionModel.findOneAndDelete({
         _id: descriptionId,
       });

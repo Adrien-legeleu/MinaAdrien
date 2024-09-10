@@ -1,9 +1,10 @@
 import { type Response, type Request } from "express";
-import bcrypt from "bcrypt";
+
 import jwt from "jsonwebtoken";
 import { GroupModel } from "../model/group.model";
 import { IUser, UserModel } from "../model/user.model";
 import crypto from "crypto";
+import bcrypt from "bcryptjs";
 
 export class AuthController {
   static getTokenUser(user: IUser) {
@@ -32,21 +33,22 @@ export class AuthController {
 
   async login(req: Request, res: Response): Promise<void> {
     try {
-      const { password, userId } = req.body;
+      const { groupCode, userId } = req.body;
 
-      if (!password || !userId) {
+      if (!groupCode || !userId) {
         res.status(401).send({
-          error: "Groupname, password are incorrect",
+          error: "Groupname, groupCode are incorrect",
         });
         return;
       }
 
-      const group = await GroupModel.findOne({ password });
+      const group = await GroupModel.findOne({ groupCode });
 
       if (!group) {
         res.status(401).send({
-          error: "password are incorrect",
+          error: "groupCode are incorrect",
         });
+
         return;
       }
 
@@ -59,20 +61,10 @@ export class AuthController {
         if (!isGroupsUser) {
           user.groups.push({
             groupId: group._id,
-            groupCode: password,
-            groupName: group.groupname,
-            urlProfil: group.profilPhoto,
-            members: [
-              {
-                userId: userId,
-              },
-            ],
           });
           await user.save();
         }
       }
-
-      console.log(user);
 
       const isMember = group.members.some(
         (member) => member.userId.toString() === userId
@@ -100,13 +92,15 @@ export class AuthController {
         });
         return;
       }
+      const groupName = groupname;
 
       const group = await GroupModel.create({
-        groupName: groupname,
+        groupName: groupName,
         urlProfil: "",
         groupCode: crypto.randomBytes(5).toString("hex"),
         members: [
           {
+            pseudo: pseudo,
             userId: userId,
           },
         ],
@@ -117,10 +111,6 @@ export class AuthController {
       if (user) {
         user.groups.push({
           groupId: group._id,
-          groupCode: group.password,
-          groupName: groupname,
-          urlProfil: group.profilPhoto,
-         
         });
         await user.save();
       }
@@ -133,53 +123,10 @@ export class AuthController {
       });
     }
   }
-  async updateGroupOneById(req: Request, res: Response): Promise<void> {
-    try {
-      const { groupId, userId } = req.params;
-      const { groupname, urlProfil } = req.body;
-
-      // Trouver l'utilisateur par ID
-      const user = await UserModel.findOne({ _id: userId });
-
-      if (!user) {
-        res.status(404).send({ error: `User not found with ID ${userId}` });
-        return; // Arrêter l'exécution de la fonction après avoir envoyé la réponse
-      }
-
-      const group = user.groups.find((group) => group.groupId === groupId);
-      console.log(group);
-
-      if (!group) {
-        res.status(404).send({ error: `Group not found with ID ${groupId}` });
-        return;
-      }
-
-      if (groupname) {
-        group.groupName = groupname;
-      }
-
-      if (urlProfil) {
-        group.urlProfil = urlProfil;
-      }
-      console.log(group);
-
-      const updatedUser = await user.save();
-      console.log(updatedUser);
-
-      res.status(200).send(updatedUser);
-    } catch (err: any) {
-      console.error(err);
-      res.status(500).send({
-        error: err?.message,
-      });
-    }
-  }
 
   async deleteGroup(req: Request, res: Response): Promise<void> {
     try {
       const { groupId, userId } = req.params;
-
-      console.log(groupId, userId);
 
       if (!groupId || !userId) {
         res.status(404).send({
@@ -194,8 +141,15 @@ export class AuthController {
         user.groups = user.groups.filter((group) => group.groupId !== groupId);
         await user.save();
       }
+      const group = await GroupModel.findOneAndDelete({ _id: groupId });
+      if (!group) {
+        res.status(404).send({
+          error: "group not found " + groupId,
+        });
+        return;
+      }
 
-      res.status(200).send(user);
+      res.status(200).send(group);
     } catch (err: any) {
       console.log(err);
       res.status(500).send({
@@ -215,8 +169,6 @@ export class AuthController {
         return;
       }
 
-      console.log(username, password);
-
       const user = await UserModel.findOne({ username });
 
       if (!user) {
@@ -225,7 +177,6 @@ export class AuthController {
         });
         return;
       }
-      console.log(user);
 
       const isCorrectedPassword = bcrypt.compareSync(password, user.password);
       if (!isCorrectedPassword) {
@@ -284,29 +235,25 @@ export class AuthController {
     try {
       const { userId } = req.params;
 
-      console.log(userId);
-
       if (!userId) {
-        res.status(400).send({
-          error: "userId not found in request body",
+        res.status(404).send({
+          error: "UserId not found",
         });
         return;
       }
-
-      const user = await UserModel.findById(userId);
+      const user = await UserModel.findOne({ _id: userId });
 
       if (!user) {
         res.status(404).send({
-          error: "user not found",
+          error: "User not found",
         });
         return;
       }
-
       res.status(200).send(user);
-    } catch (error: any) {
-      console.log(error);
+    } catch (err: any) {
+      console.log(err);
       res.status(500).send({
-        error: error?.message || "Internal server error",
+        error: err?.message,
       });
     }
   }
@@ -314,7 +261,6 @@ export class AuthController {
   async choosePseudo(req: Request, res: Response): Promise<void> {
     try {
       const { pseudoUser, userId, groupId } = req.body;
-      console.log(pseudoUser, groupId, userId);
 
       if (!userId || !groupId || !pseudoUser) {
         res.status(404).send({
@@ -335,19 +281,17 @@ export class AuthController {
       const memberExists = group.members.some(
         (member) => member.userId === userId
       );
-      console.log(group);
-      console.log(memberExists);
 
       if (memberExists) {
         res.status(409).send({
           error: "userId already exists",
         });
-        console.log("oieozieozieoi");
+
         return; // Arrêter l'exécution de la fonction
       }
-
+      const pseudo = pseudoUser;
       group.members.push({
-        pseudoUser,
+        pseudo,
         userId,
       });
 

@@ -44,8 +44,6 @@ export class DescriptionController {
     try {
       const { groupId, description, images } = req.body;
 
-      console.log(groupId, description);
-
       if (!groupId || !description) {
         res.status(404).send({
           error: "properties not found (groupdId or description or images )",
@@ -60,8 +58,6 @@ export class DescriptionController {
         description,
       });
       console.log("Nouvelle description créée:", newDescription);
-
-      console.log(newDescription);
 
       // Récupération des abonnés
       const subscriptions = await SubscriptionModel.find({
@@ -153,8 +149,6 @@ export class DescriptionController {
   async delete(req: any, res: Response): Promise<void> {
     try {
       const { descriptionId } = req.params;
-      console.log(descriptionId);
-
       const description = await DescriptionModel.findOneAndDelete({
         _id: descriptionId,
       });

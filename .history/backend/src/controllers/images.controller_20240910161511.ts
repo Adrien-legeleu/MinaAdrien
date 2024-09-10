@@ -139,6 +139,8 @@ export class ImageController {
         });
       }
 
+      console.log(image);
+
       res.status(200).send(image);
     } catch (err: any) {
       console.log(err);
@@ -148,6 +150,7 @@ export class ImageController {
   async delete(req: any, res: Response): Promise<void> {
     try {
       const { imageId } = req.params;
+      console.log(imageId);
 
       const image = await ImageModel.findOneAndDelete({
         _id: imageId,
@@ -158,6 +161,7 @@ export class ImageController {
           error: "product not found :" + imageId,
         });
       }
+      console.log(image);
 
       res.status(200).send(image);
     } catch (err: any) {

@@ -66,8 +66,6 @@ export class AuthController {
         }
       }
 
-      console.log(user);
-
       const isMember = group.members.some(
         (member) => member.userId.toString() === userId
       );
@@ -130,8 +128,6 @@ export class AuthController {
     try {
       const { groupId, userId } = req.params;
 
-      console.log(groupId, userId);
-
       if (!groupId || !userId) {
         res.status(404).send({
           error: "Missing properties",
@@ -173,8 +169,6 @@ export class AuthController {
         return;
       }
 
-      console.log(username, password);
-
       const user = await UserModel.findOne({ username });
 
       if (!user) {
@@ -183,7 +177,6 @@ export class AuthController {
         });
         return;
       }
-      console.log(user);
 
       const isCorrectedPassword = bcrypt.compareSync(password, user.password);
       if (!isCorrectedPassword) {
@@ -268,7 +261,6 @@ export class AuthController {
   async choosePseudo(req: Request, res: Response): Promise<void> {
     try {
       const { pseudoUser, userId, groupId } = req.body;
-      console.log(pseudoUser, groupId, userId);
 
       if (!userId || !groupId || !pseudoUser) {
         res.status(404).send({
@@ -289,14 +281,12 @@ export class AuthController {
       const memberExists = group.members.some(
         (member) => member.userId === userId
       );
-      console.log(group);
-      console.log(memberExists);
 
       if (memberExists) {
         res.status(409).send({
           error: "userId already exists",
         });
-        console.log("oieozieozieoi");
+
         return; // Arrêter l'exécution de la fonction
       }
       const pseudo = pseudoUser;
