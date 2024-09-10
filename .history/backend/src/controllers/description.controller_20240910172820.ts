@@ -1,19 +1,11 @@
 import { type Response } from "express";
 import { DescriptionModel, GroupModel, SubscriptionModel } from "../model";
 import webpush from "web-push";
-const vapidKeys = {
-  publicKey: process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
-  privateKey: process.env.NEXT_PUBLIC_VAPID_PRIVATE_KEY,
-};
-
-if (!vapidKeys.publicKey || !vapidKeys.privateKey) {
-  throw new Error("VAPID keys are missing");
-}
 
 webpush.setVapidDetails(
-  "mailto:adrienlegeleu@gmail.com",
-  vapidKeys.publicKey,
-  vapidKeys.privateKey
+  "mailto:mail@example.com",
+  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
+  process.env.NEXT_PUBLIC_VAPID_PRIVATE_KEY
 );
 
 export class DescriptionController {

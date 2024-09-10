@@ -11,7 +11,7 @@ if (!vapidKeys.publicKey || !vapidKeys.privateKey) {
 }
 
 webpush.setVapidDetails(
-  "mailto:adrienlegeleu@gmail.com",
+  "mailto:mail@example.com",
   vapidKeys.publicKey,
   vapidKeys.privateKey
 );
