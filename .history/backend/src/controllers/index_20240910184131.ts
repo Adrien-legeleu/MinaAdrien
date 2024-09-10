@@ -24,5 +24,4 @@ export {
   groupController,
   themeController,
   subscriptionController,
-  dailyChallengeController,
 };
