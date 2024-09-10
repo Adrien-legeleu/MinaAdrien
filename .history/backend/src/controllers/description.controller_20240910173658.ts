@@ -1,8 +1,6 @@
 import { type Response } from "express";
 import { DescriptionModel, GroupModel, SubscriptionModel } from "../model";
 import webpush from "web-push";
-import dotenv from "dotenv";
-dotenv.config();
 const vapidKeys = {
   publicKey: process.env.PUBLIC_VAPID_KEY,
   privateKey: process.env.PRIVATE_VAPID_KEY,
