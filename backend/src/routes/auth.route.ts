@@ -9,7 +9,7 @@ authRouter
   .post("/register", authController.register)
   .post("/login-user", authController.loginUser)
   .post("/register-user", authController.registerUser)
-  .post("/choose-pseudo", authController.choosePseudo)
+
   .patch("/:userId/:groupId", authController.deleteGroup)
 
   .get(
