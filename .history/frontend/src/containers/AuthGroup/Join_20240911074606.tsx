@@ -20,8 +20,10 @@ interface IJoinProps {
 }
 
 export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
-  const { onLogin } = useGroupContext();
+  const { onLogin, joinPageRedirect, chosePseudo } = useGroupContext();
   const { user } = useCreateJoinContext();
+
+  const { group } = useGroupContext();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

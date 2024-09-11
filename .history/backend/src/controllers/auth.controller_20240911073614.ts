@@ -62,16 +62,7 @@ export class AuthController {
           user.groups.push({
             groupId: group._id,
           });
-          group.members.push({
-            userId: user._id,
-          });
           await user.save();
-          await group.save();
-        } else {
-          res.status(409).send({
-            error: "vous appartenez déja à ce groupe",
-          });
-          return;
         }
       }
 
@@ -79,13 +70,9 @@ export class AuthController {
         (member) => member.userId.toString() === userId
       );
       if (isMember) {
-        res.status(200).send({ group });
-        return;
+        res.status(200).send({ group, redirect: "HomePage", user });
       } else {
-        res.status(409).send({
-          error: "vous apppartenez déja à ce groupe",
-        });
-        return;
+        res.status(200).send({ group, redirect: "choosePseudoPage", user });
       }
     } catch (err: any) {
       console.log(err);

@@ -53,13 +53,14 @@ export const Create: React.FC<ICreateProps> = ({ isCreateFalse, isCreate }) => {
             delay={0.2}
             className="text-black/70 max-sm:text-xl max-[400px]:text-lg text-3xl text-center  tracking-wider mb-10"
           />
-          <div className="flex  text-lg items-center justify-center">
+          <div className="flex flex-col gap-4 text-lg items-center justify-center">
             <Input
               placeholder="groupname"
               id="groupname"
               name="groupname"
               type="text"
             />
+            <Input placeholder="pseudo" id="pseudo" name="pseudo" type="text" />
           </div>
           <div className="flex items-center justify-center">
             <div

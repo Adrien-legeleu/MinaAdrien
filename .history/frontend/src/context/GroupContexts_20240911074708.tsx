@@ -127,12 +127,10 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         withCredentials: true,
       });
 
-      console.log(response.data);
-
       setIsLoading(false);
       setIsAuthenticated(false);
       toast.success("Vous avez rejoins le groupe avec succès");
-      setUser(response.data);
+      setUser(response.data.user);
     } catch (error: any) {
       console.error("Erreur lors de l'inscription :", error);
       setIsLoading(false);

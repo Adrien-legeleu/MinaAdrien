@@ -20,8 +20,10 @@ interface IJoinProps {
 }
 
 export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
-  const { onLogin } = useGroupContext();
+  const { onLogin, joinPageRedirect, chosePseudo } = useGroupContext();
   const { user } = useCreateJoinContext();
+
+  const { group } = useGroupContext();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,6 +35,18 @@ export const Join: React.FC<IJoinProps> = ({ isJoinFalse, isJoin }) => {
     };
 
     onLogin(values as IJoinFormsValues);
+  };
+
+  const onSubmitPseudo = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const data = new FormData(e.currentTarget);
+    const values = {
+      userId: user?._id,
+      groupId: group?._id,
+    };
+
+    chosePseudo(values as IPseudoFormValues);
   };
 
   return (

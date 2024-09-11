@@ -16,7 +16,7 @@ import { useDescriptionContext } from "./DescriptionContext";
 
 export interface IGroupFormsValues {
   groupname: string;
-
+  pseudo: string;
   userId: string | undefined;
 }
 export interface IPseudoFormValues {
@@ -50,7 +50,7 @@ export const GroupContext = createContext<{
   allGroups: IGroup[];
   onLogin: (values: IJoinFormsValues) => Promise<void>;
   onRegister: (values: IGroupFormsValues) => Promise<void>;
-
+  chosePseudo: (values: IPseudoFormValues) => Promise<void>;
   onDeleteGroup: ({ groupId, userId }: any) => Promise<void>;
   updateGroup: (values: IGroup) => Promise<void>;
   getGroup: () => Promise<void>;
@@ -65,7 +65,7 @@ export const GroupContext = createContext<{
   groupId: null,
   onLogin: async () => {},
   onRegister: async () => {},
-
+  chosePseudo: async () => {},
   onDeleteGroup: async () => {},
   updateGroup: async () => {},
   getGroup: async () => {},
@@ -89,7 +89,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       const userId =
         typeof window !== "undefined" ? localStorage.getItem("userId") : null;
-      console.log(userId);
+      console.log(userid);
 
       if (!userId) {
         console.error("User ID is not found in local storage.");
@@ -126,13 +126,11 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         },
         withCredentials: true,
       });
-
-      console.log(response.data);
-
+      setJoinPageRedicrect(response.data.redirect);
       setIsLoading(false);
       setIsAuthenticated(false);
       toast.success("Vous avez rejoins le groupe avec succès");
-      setUser(response.data);
+      setUser(response.data.user);
     } catch (error: any) {
       console.error("Erreur lors de l'inscription :", error);
       setIsLoading(false);
@@ -159,6 +157,24 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       console.error("Erreur lors de la création du groupe :", error);
       setIsLoading(false);
       toast.error("Erreur lors de la création du groupe");
+    }
+  };
+
+  const chosePseudo = async (values: IPseudoFormValues) => {
+    setIsLoading(true);
+    try {
+      await api.post("/auth/choose-pseudo", values, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      setIsLoading(false);
+      toast.success("Pseudo mis à jour avec succès");
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du pseudo :", error);
+      setIsLoading(false);
+      toast.error("Erreur lors de la mise à jour du pseudo");
     }
   };
 
@@ -231,7 +247,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         allGroups,
         onLogin,
         onRegister,
-
+        chosePseudo,
         onDeleteGroup,
         updateGroup,
         getGroup,

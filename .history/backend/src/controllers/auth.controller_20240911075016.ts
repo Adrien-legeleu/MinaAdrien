@@ -62,11 +62,7 @@ export class AuthController {
           user.groups.push({
             groupId: group._id,
           });
-          group.members.push({
-            userId: user._id,
-          });
           await user.save();
-          await group.save();
         } else {
           res.status(409).send({
             error: "vous appartenez déja à ce groupe",

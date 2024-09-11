@@ -26,9 +26,6 @@ const GroupSchema = new mongoose.Schema<IGroup>({
   members: {
     type: [
       {
-        pseudo: {
-          type: String,
-        },
         userId: {
           type: String,
           ref: "users",
