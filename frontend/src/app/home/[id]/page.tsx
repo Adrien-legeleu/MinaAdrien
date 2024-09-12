@@ -23,6 +23,8 @@ export default function HomePage({ params }: IGroupDetailsProps) {
       if (isAuthentificatedUser) {
         if (isAuthenticated && storedGroupId) {
           router.push(`/home/${group?._id}`);
+        } else {
+          router.push("/group");
         }
       } else {
         router.push("/");
