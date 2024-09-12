@@ -12,7 +12,7 @@ dailyChallengeRouter
   )
 
   .get(
-    "/;userId",
+    "/:userId",
     isConnectedMiddleware.execute,
     dailyChallengeController.findDailyUserChallenge
   );

@@ -19,8 +19,9 @@ export default function HomePage({ params }: IGroupDetailsProps) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const storedGroupId = localStorage.getItem("groupId");
       if (isAuthentificatedUser) {
-        if (isAuthenticated) {
+        if (isAuthenticated && storedGroupId) {
           router.push(`/home/${group?._id}`);
         }
       } else {

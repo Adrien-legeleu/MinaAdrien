@@ -1,12 +1,19 @@
 import { type Response } from "express";
 import { DailyChallengeModel, SubscriptionModel } from "../model";
 import schedule from "node-schedule"; // Importez node-schedule pour la tâche CRON
+import webpush from "web-push";
 
 export class DailyChallengeController {
   static scheduleDailyChallenge() {
-    schedule.scheduleJob("0 0 * * *", async () => {
-      await DailyChallengeController.setRandomTimeForAllUsers();
-    });
+    schedule.scheduleJob(
+      { hour: 17, minute: 0, tz: "Europe/Paris" }, // Changez l'heure à 17h et ajoutez 'tz: "Europe/Paris"'
+      async () => {
+        console.log(
+          "Exécution de la tâche programmée à 17h, heure de Paris..."
+        );
+        await DailyChallengeController.setRandomTimeForAllUsers();
+      }
+    );
   }
 
   // Méthode pour définir une heure aléatoire pour tous les utilisateurs
@@ -44,7 +51,26 @@ export class DailyChallengeController {
         // Planifiez l'envoi de la notification à l'heure choisie
         schedule.scheduleJob(randomTime, async () => {
           if (userDailyChallenge) {
-            // Vérifiez à nouveau que 'userDailyChallenge' n'est pas null
+            const pushSubscription = user.subscription;
+            const payload = JSON.stringify({
+              title: "Nouvelle image ajoutée",
+              body: "Une nouvelle image a été ajoutée dans votre groupe !",
+            });
+            console.log(
+              "Payload de la notification:",
+
+              Buffer.byteLength(JSON.stringify(payload), "utf8")
+            ); // Ajoutez cette ligne avant d'envoyer la notification
+
+            webpush
+              .sendNotification(pushSubscription as any, payload)
+              .catch((error: any) => {
+                console.error(
+                  "Erreur lors de l'envoi de la notification",
+                  error
+                );
+              });
+
             userDailyChallenge.connectedThisDay = true;
             await userDailyChallenge.save(); // Sauvegardez le changement
           }
