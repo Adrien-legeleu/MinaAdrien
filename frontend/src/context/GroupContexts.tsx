@@ -14,25 +14,29 @@ import { IGroupComplete } from "@/types/group";
 import { toast } from "sonner";
 import { useDescriptionContext } from "./DescriptionContext";
 
+// Les interfaces et le contexte de groupe restent inchangés
 export interface IGroupFormsValues {
   groupname: string;
-
   userId: string | undefined;
 }
+
 export interface IPseudoFormValues {
   userId: string | null;
   groupId: string | null;
   pseudoUser: string;
 }
+
 export interface IJoinFormsValues {
   groupCode: string;
   userId: string | undefined;
 }
+
 export interface IGroup {
   groupId?: string | null;
   groupName?: string;
   urlProfil?: string;
 }
+
 export interface IUser {
   _id: string;
   username: string;
@@ -41,6 +45,7 @@ export interface IUser {
   groups: IGroup[];
   profilPhoto: string;
 }
+
 export const GroupContext = createContext<{
   isAuthenticated: boolean;
   isLoading: boolean;
@@ -74,23 +79,24 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [group, setGroup] = useState<IGroupComplete | undefined>(undefined);
   const [groupId, setGroupId] = useState<string | null>(null);
+  const [allGroups, setAllGroups] = useState<IGroupComplete[]>([]);
+  const [joinPageRedirect, setJoinPageRedirect] = useState<string | undefined>(
+    undefined
+  );
 
   const { setUser } = useCreateJoinContext();
   const { getDescription } = useDescriptionContext();
-  const [joinPageRedirect, setJoinPageRedicrect] = useState<string | undefined>(
-    undefined
-  );
-  const [allGroups, setAllGroups] = useState<IGroupComplete[]>([]);
 
   const getAllGroup = useCallback(async () => {
-    setIsLoading(true); // Active le chargement au début
+    if (isLoading) return; // Éviter les appels si déjà en chargement
+
+    setIsLoading(true);
     try {
       const userId =
         typeof window !== "undefined" ? localStorage.getItem("userId") : null;
 
       if (!userId) {
         console.error("User ID is not found in local storage.");
-        setIsLoading(false);
         return;
       }
 
@@ -103,11 +109,28 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error("Erreur lors de la récupération des groupes :", error);
     } finally {
-      setIsLoading(false); // Désactive le chargement à la fin
+      setIsLoading(false); // Assurez-vous que le chargement est terminé
     }
-  }, []); // Ajout de la dépendance vide pour éviter les répétitions
+  }, [isLoading]); // Ajout de `isLoading` pour éviter les répétitions d'appel
+
+  const getGroup = useCallback(async () => {
+    const storedGroupId =
+      typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
+    if (!storedGroupId || isLoading) return; // Ajout de vérification pour éviter les appels redondants
+
+    setIsLoading(true);
+    try {
+      const response = await api.get(`/group/${storedGroupId}`);
+      setGroup(response.data);
+    } catch (error) {
+      console.error("Erreur lors de la récupération du groupe :", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [isLoading]); // Ajout de `isLoading` pour gérer les appels simultanés
 
   const onLogin = async (values: any) => {
+    if (isLoading) return; // Éviter plusieurs appels simultanés
     setIsLoading(true);
     try {
       const response = await api.post("/auth/login", values, {
@@ -130,6 +153,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const onRegister = async (values: any) => {
+    if (isLoading) return; // Empêche l'appel simultané
     setIsLoading(true);
     try {
       const response = await api.post("/auth/register", values, {
@@ -151,6 +175,8 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const onDeleteGroup = async ({ groupId, userId }: any) => {
+    if (isLoading) return; // Empêche l'appel simultané
+    setIsLoading(true);
     try {
       await api.delete(`/auth/${userId}/${groupId}`);
       toast.success("Groupe supprimé avec succès");
@@ -158,10 +184,14 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error("Erreur lors de la suppression du groupe :", error);
       toast.error("Erreur lors de la suppression du groupe");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const updateGroup = async (values: any) => {
+    if (isLoading) return; // Empêche l'appel simultané
+    setIsLoading(true);
     try {
       const { groupId } = values;
       await api.patch(`/group/${groupId}`, values, {
@@ -176,38 +206,23 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error("Erreur lors de la mise à jour du groupe :", error);
       toast.error("Erreur lors de la mise à jour du groupe");
+    } finally {
+      setIsLoading(false);
     }
   };
-
   useEffect(() => {
     console.log(isLoading + "eozieoi");
   }, [isLoading]);
 
-  const getGroup = useCallback(async () => {
-    const groupId =
-      typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
-    if (!groupId) return;
-
-    setIsLoading(true);
-    try {
-      const response = await api.get(`/group/${groupId}`);
-      setGroup(response.data);
-    } catch (error) {
-      console.error("Erreur lors de la récupération du groupe :", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
   useEffect(() => {
-    const groupId =
+    const storedGroupId =
       typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
-    if (groupId) {
+    if (storedGroupId) {
       setIsAuthenticated(true);
-      getGroup();
-      getDescription(groupId);
+      getGroup(); // Appelle `getGroup` seulement si nécessaire
+      getDescription(storedGroupId); // Récupère la description en utilisant le contexte approprié
     }
-  }, [getGroup, getDescription]); // Garder ces dépendances ici
+  }, [getGroup, getDescription]);
 
   return (
     <GroupContext.Provider
