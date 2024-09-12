@@ -88,9 +88,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const { getDescription } = useDescriptionContext();
 
   const getAllGroup = useCallback(async () => {
-    if (isLoading) return; // Éviter les appels si déjà en chargement
-
-    setIsLoading(true);
     try {
       const userId =
         typeof window !== "undefined" ? localStorage.getItem("userId") : null;
@@ -108,15 +105,12 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       setAllGroups(userGroups);
     } catch (error) {
       console.error("Erreur lors de la récupération des groupes :", error);
-    } finally {
-      setIsLoading(false); // Assurez-vous que le chargement est terminé
     }
-  }, [isLoading]); // Ajout de `isLoading` pour éviter les répétitions d'appel
+  }, []); // Ajout de `isLoading` pour éviter les répétitions d'appel
 
   const getGroup = useCallback(async () => {
     const storedGroupId =
       typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
-    if (!storedGroupId || isLoading) return; // Ajout de vérification pour éviter les appels redondants
 
     setIsLoading(true);
     try {
@@ -127,11 +121,9 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [isLoading]); // Ajout de `isLoading` pour gérer les appels simultanés
+  }, []); // Ajout de `isLoading` pour gérer les appels simultanés
 
   const onLogin = async (values: any) => {
-    if (isLoading) return; // Éviter plusieurs appels simultanés
-    setIsLoading(true);
     try {
       const response = await api.post("/auth/login", values, {
         headers: {
@@ -140,21 +132,16 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         withCredentials: true,
       });
 
-      setIsAuthenticated(true);
       toast.success("Vous avez rejoint le groupe avec succès");
       await getAllGroup();
       setUser(response.data);
     } catch (error) {
       console.error("Erreur lors de l'inscription :", error);
       toast.error("Erreur lors de l'inscription");
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const onRegister = async (values: any) => {
-    if (isLoading) return; // Empêche l'appel simultané
-    setIsLoading(true);
     try {
       const response = await api.post("/auth/register", values, {
         headers: {
@@ -169,14 +156,10 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error("Erreur lors de la création du groupe :", error);
       toast.error("Erreur lors de la création du groupe");
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const onDeleteGroup = async ({ groupId, userId }: any) => {
-    if (isLoading) return; // Empêche l'appel simultané
-    setIsLoading(true);
     try {
       await api.delete(`/auth/${userId}/${groupId}`);
       toast.success("Groupe supprimé avec succès");
@@ -184,14 +167,10 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error("Erreur lors de la suppression du groupe :", error);
       toast.error("Erreur lors de la suppression du groupe");
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const updateGroup = async (values: any) => {
-    if (isLoading) return; // Empêche l'appel simultané
-    setIsLoading(true);
     try {
       const { groupId } = values;
       await api.patch(`/group/${groupId}`, values, {
@@ -206,8 +185,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error("Erreur lors de la mise à jour du groupe :", error);
       toast.error("Erreur lors de la mise à jour du groupe");
-    } finally {
-      setIsLoading(false);
     }
   };
   useEffect(() => {
