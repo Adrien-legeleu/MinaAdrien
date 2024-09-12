@@ -56,12 +56,6 @@ export const AuthGroup = () => {
     getUser();
   }, []);
 
-  useEffect(() => {
-    if (groupId) {
-      getGroup();
-    }
-  }, [groupId]);
-
   const getUser = async () => {
     try {
       const userId =

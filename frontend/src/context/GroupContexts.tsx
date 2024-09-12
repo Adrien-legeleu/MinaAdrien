@@ -49,7 +49,7 @@ export interface IUser {
 export const GroupContext = createContext<{
   isAuthenticated: boolean;
   isLoading: boolean;
-  joinPageRedirect: string | undefined;
+
   group: IGroupComplete | undefined;
   groupId: any;
   allGroups: IGroup[];
@@ -63,7 +63,7 @@ export const GroupContext = createContext<{
   isAuthenticated: false,
   isLoading: false,
   allGroups: [],
-  joinPageRedirect: undefined,
+
   group: undefined,
   groupId: null,
   onLogin: async () => {},
@@ -80,37 +80,34 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const [group, setGroup] = useState<IGroupComplete | undefined>(undefined);
   const [groupId, setGroupId] = useState<string | null>(null);
   const [allGroups, setAllGroups] = useState<IGroupComplete[]>([]);
-  const [joinPageRedirect, setJoinPageRedirect] = useState<string | undefined>(
-    undefined
-  );
 
   const { setUser } = useCreateJoinContext();
   const { getDescription } = useDescriptionContext();
 
-  const getAllGroup = useCallback(async () => {
+  // Fonction pour obtenir tous les groupes
+  const getAllGroup = async () => {
     try {
       const userId =
         typeof window !== "undefined" ? localStorage.getItem("userId") : null;
-
       if (!userId) {
         console.error("User ID is not found in local storage.");
         return;
       }
-
       const response = await api.get("/group");
       const userGroups = response.data.filter((group: any) =>
         group.members.some((member: any) => member.userId === userId)
       );
-
       setAllGroups(userGroups);
     } catch (error) {
       console.error("Erreur lors de la récupération des groupes :", error);
     }
-  }, []); // Ajout de `isLoading` pour éviter les répétitions d'appel
+  };
 
-  const getGroup = useCallback(async () => {
+  // Fonction pour obtenir un groupe spécifique
+  const getGroup = async () => {
     const storedGroupId =
       typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
+    if (!storedGroupId) return; // Assurez-vous que l'ID du groupe est présent
 
     setIsLoading(true);
     try {
@@ -121,17 +118,15 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setIsLoading(false);
     }
-  }, []); // Ajout de `isLoading` pour gérer les appels simultanés
+  };
 
+  // Fonction de connexion
   const onLogin = async (values: any) => {
     try {
       const response = await api.post("/auth/login", values, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-
       toast.success("Vous avez rejoint le groupe avec succès");
       await getAllGroup();
       setUser(response.data);
@@ -141,15 +136,13 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  // Fonction d'inscription
   const onRegister = async (values: any) => {
     try {
       const response = await api.post("/auth/register", values, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-
       setUser(response.data.user);
       toast.success("Vous avez créé le groupe avec succès");
       await getAllGroup();
@@ -159,6 +152,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  // Fonction de suppression de groupe
   const onDeleteGroup = async ({ groupId, userId }: any) => {
     try {
       await api.delete(`/auth/${userId}/${groupId}`);
@@ -170,16 +164,14 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  // Fonction de mise à jour de groupe
   const updateGroup = async (values: any) => {
     try {
       const { groupId } = values;
       await api.patch(`/group/${groupId}`, values, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-
       toast.success("Groupe mis à jour avec succès");
       await getAllGroup();
     } catch (error) {
@@ -187,19 +179,19 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       toast.error("Erreur lors de la mise à jour du groupe");
     }
   };
-  useEffect(() => {
-    console.log(isLoading + "eozieoi");
-  }, [isLoading]);
 
   useEffect(() => {
     const storedGroupId =
       typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
     if (storedGroupId) {
       setIsAuthenticated(true);
-      getGroup(); // Appelle `getGroup` seulement si nécessaire
-      getDescription(storedGroupId); // Récupère la description en utilisant le contexte approprié
+      getGroup();
+      getDescription(storedGroupId);
     }
-  }, [getGroup, getDescription]);
+  }, []); // Appelle `getGroup` et `getDescription` une seule fois au démarrage
+  useEffect(() => {
+    console.log(isLoading + "esss   ozieoi");
+  }, [isLoading]);
 
   return (
     <GroupContext.Provider
@@ -207,7 +199,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         groupId,
         isAuthenticated,
         isLoading,
-        joinPageRedirect,
+
         group,
         allGroups,
         onLogin,
