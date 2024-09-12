@@ -179,6 +179,10 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  useEffect(() => {
+    console.log(isLoading + "eozieoi");
+  }, [isLoading]);
+
   const getGroup = useCallback(async () => {
     const groupId =
       typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
