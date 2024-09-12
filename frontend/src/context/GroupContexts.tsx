@@ -81,7 +81,8 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     undefined
   );
   const [allGroups, setAllGroups] = useState<IGroupComplete[]>([]);
-  const getAllGroup = async () => {
+
+  const getAllGroup = useCallback(async () => {
     setIsLoading(true); // Active le chargement au début
     try {
       const userId =
@@ -89,6 +90,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
 
       if (!userId) {
         console.error("User ID is not found in local storage.");
+        setIsLoading(false);
         return;
       }
 
@@ -103,9 +105,9 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setIsLoading(false); // Désactive le chargement à la fin
     }
-  };
+  }, []); // Ajout de la dépendance vide pour éviter les répétitions
 
-  const onLogin = async (values: IJoinFormsValues) => {
+  const onLogin = async (values: any) => {
     setIsLoading(true);
     try {
       const response = await api.post("/auth/login", values, {
@@ -115,21 +117,19 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         withCredentials: true,
       });
 
-      console.log(response.data);
-
-      setIsLoading(false);
-      setIsAuthenticated(false);
-      toast.success("Vous avez rejoins le groupe avec succès");
-      getAllGroup();
+      setIsAuthenticated(true);
+      toast.success("Vous avez rejoint le groupe avec succès");
+      await getAllGroup();
       setUser(response.data);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Erreur lors de l'inscription :", error);
-      setIsLoading(false);
       toast.error("Erreur lors de l'inscription");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const onRegister = async (values: IGroupFormsValues) => {
+  const onRegister = async (values: any) => {
     setIsLoading(true);
     try {
       const response = await api.post("/auth/register", values, {
@@ -139,15 +139,14 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         withCredentials: true,
       });
 
-      setIsLoading(false);
-      setIsAuthenticated(false);
       setUser(response.data.user);
       toast.success("Vous avez créé le groupe avec succès");
-      getAllGroup();
+      await getAllGroup();
     } catch (error) {
       console.error("Erreur lors de la création du groupe :", error);
-      setIsLoading(false);
       toast.error("Erreur lors de la création du groupe");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -155,14 +154,14 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       await api.delete(`/auth/${userId}/${groupId}`);
       toast.success("Groupe supprimé avec succès");
-      getAllGroup();
+      await getAllGroup();
     } catch (error) {
       console.error("Erreur lors de la suppression du groupe :", error);
       toast.error("Erreur lors de la suppression du groupe");
     }
   };
 
-  const updateGroup = async (values: IGroup) => {
+  const updateGroup = async (values: any) => {
     try {
       const { groupId } = values;
       await api.patch(`/group/${groupId}`, values, {
@@ -174,7 +173,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
 
       toast.success("Groupe mis à jour avec succès");
       await getAllGroup();
-      window.location.reload();
     } catch (error) {
       console.error("Erreur lors de la mise à jour du groupe :", error);
       toast.error("Erreur lors de la mise à jour du groupe");
@@ -198,11 +196,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
-
-  useEffect(() => {
-    getAllGroup();
     const groupId =
       typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
     if (groupId) {
@@ -210,7 +203,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       getGroup();
       getDescription(groupId);
     }
-  }, [getGroup, getDescription]);
+  }, [getGroup, getDescription]); // Garder ces dépendances ici
 
   return (
     <GroupContext.Provider
@@ -223,11 +216,9 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         allGroups,
         onLogin,
         onRegister,
-
         onDeleteGroup,
         updateGroup,
         getGroup,
-
         getAllGroup,
       }}
     >

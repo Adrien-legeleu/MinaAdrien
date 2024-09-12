@@ -16,6 +16,7 @@ export const ParamsGroup = () => {
     group ? group.urlProfil : "",
   ]);
   const [members, setMembers] = useState<IUser[]>([]);
+  const [isMembersLoaded, setIsMembersLoaded] = useState(false); // État pour vérifier si les membres ont déjà été chargés
 
   const handleImageUpload = async (
     imgUrlKey: string,
@@ -35,17 +36,28 @@ export const ParamsGroup = () => {
       try {
         const response = await api.get(`/auth/user/${member.userId}`);
         membersSet.add(response.data);
-      } catch (error) {
-        console.error("Error fetching members:", error);
+      } catch (error: any) {
+        console.error("Error fetching member:", error);
+
+        // Gérer les erreurs spécifiques (comme les 404)
+        if (error.response && error.response.status === 404) {
+          console.warn(`User with ID ${member.userId} not found (404).`);
+        } else {
+          console.error("An unexpected error occurred:", error.message);
+        }
       }
     }
 
     setMembers(Array.from(membersSet));
+    setIsMembersLoaded(true); // Définir comme chargé
   };
 
   useEffect(() => {
-    getMembers(group);
-  }, [group]);
+    // Si les membres ne sont pas encore chargés et que le groupe est défini, charger les membres
+    if (!isMembersLoaded && group) {
+      getMembers(group);
+    }
+  }, [group, isMembersLoaded]);
 
   const groupUpdate = (newImageUrl: string) => {
     const values = {
