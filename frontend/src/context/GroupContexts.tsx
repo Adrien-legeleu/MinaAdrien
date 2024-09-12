@@ -84,27 +84,16 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   );
   const [allGroups, setAllGroups] = useState<IGroupComplete[]>([]);
   const getAllGroup = async () => {
+    setIsLoading(true); // Active le chargement au début
     try {
-      const userId =
-        typeof window !== "undefined" ? localStorage.getItem("userId") : null;
-      console.log(userId);
+      const userId = typeof window !== "undefined" ? localStorage.getItem("userId") : null;
 
       if (!userId) {
         console.error("User ID is not found in local storage.");
-        return; // Arrêter si l'userId est introuvable
-      }
-
-      const response = await api.get("/group");
-
-      // Vérifier la structure des données de la réponse
-      if (!response.data) {
-        console.error(
-          "La structure des données de réponse est incorrecte :",
-          response.data
-        );
         return;
       }
 
+      const response = await api.get("/group");
       const userGroups = response.data.filter((group: any) =>
         group.members.some((member: any) => member.userId === userId)
       );
@@ -112,6 +101,8 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       setAllGroups(userGroups);
     } catch (error) {
       console.error("Erreur lors de la récupération des groupes :", error);
+    } finally {
+      setIsLoading(false); // Désactive le chargement à la fin
     }
   };
 
@@ -191,33 +182,38 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const getGroup = async () => {
-    const groupId =
-      typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
+  const getGroup = useCallback(async () => {
+    const groupId = typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
+    if (!groupId) return;
+
+    setIsLoading(true);
     try {
       const response = await api.get(`/group/${groupId}`);
-
       setGroup(response.data);
     } catch (error) {
       console.error("Erreur lors de la récupération du groupe :", error);
+    } finally {
+      setIsLoading(false);
     }
-  };
+  }, []);
+        
 
-  const handleIsLoading = () => setIsLoading((prev) => !prev);
-  useEffect(() => {
-    getGroup();
-  }, [group?._id]); // Recharger le groupe à chaque changement de groupId
+  useEffect(()=> {
+console.log(isLoading)
+  },[isLoading])
+
+  
+ 
 
   useEffect(() => {
     getAllGroup();
-    const groupId =
-      typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
+    const groupId = typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
     if (groupId) {
       setIsAuthenticated(true);
       getGroup();
       getDescription(groupId);
     }
-  }, []);
+  }, [getGroup, getDescription]);
 
   return (
     <GroupContext.Provider
