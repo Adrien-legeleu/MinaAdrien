@@ -30,7 +30,8 @@ export const AuthGroup = () => {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [groupId, setGroupId] = useState<string | null>(null);
   const { setUser, user } = useCreateJoinContext();
-  const { onDeleteGroup, allGroups, getGroup } = useGroupContext();
+  const { onDeleteGroup, allGroups, getGroup, handleIsLoading } =
+    useGroupContext();
   const { getImages } = useImageContext();
   const { getTheme } = useThemeContext();
   const { getDescription } = useDescriptionContext();
@@ -91,6 +92,7 @@ export const AuthGroup = () => {
     getImages();
     getTheme();
     getDescription(id);
+    handleIsLoading();
   };
 
   return (
