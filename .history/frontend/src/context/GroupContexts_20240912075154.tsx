@@ -54,6 +54,7 @@ export const GroupContext = createContext<{
   updateGroup: (values: IGroup) => Promise<void>;
   getGroup: () => Promise<void>;
   getAllGroup: () => Promise<void>;
+  handleIsLoading: () => void;
 }>({
   isAuthenticated: false,
   isLoading: false,
@@ -67,6 +68,7 @@ export const GroupContext = createContext<{
   updateGroup: async () => {},
   getGroup: async () => {},
   getAllGroup: async () => {},
+  handleIsLoading: () => {},
 });
 
 export const GroupContextProvider = ({ children }: { children: ReactNode }) => {

@@ -54,6 +54,7 @@ export const GroupContext = createContext<{
   updateGroup: (values: IGroup) => Promise<void>;
   getGroup: () => Promise<void>;
   getAllGroup: () => Promise<void>;
+  handleIsLoading: () => void;
 }>({
   isAuthenticated: false,
   isLoading: false,
@@ -67,6 +68,7 @@ export const GroupContext = createContext<{
   updateGroup: async () => {},
   getGroup: async () => {},
   getAllGroup: async () => {},
+  handleIsLoading: () => {},
 });
 
 export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
@@ -84,8 +86,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const getAllGroup = async () => {
     setIsLoading(true); // Active le chargement au début
     try {
-      const userId =
-        typeof window !== "undefined" ? localStorage.getItem("userId") : null;
+      const userId = typeof window !== "undefined" ? localStorage.getItem("userId") : null;
 
       if (!userId) {
         console.error("User ID is not found in local storage.");
@@ -182,8 +183,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const getGroup = useCallback(async () => {
-    const groupId =
-      typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
+    const groupId = typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
     if (!groupId) return;
 
     setIsLoading(true);
@@ -196,15 +196,18 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       setIsLoading(false);
     }
   }, []);
+        
 
-  useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
+  useEffect(()=> {
+console.log(isLoading)
+  },[isLoading])
+
+  
+ 
 
   useEffect(() => {
     getAllGroup();
-    const groupId =
-      typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
+    const groupId = typeof window !== "undefined" ? localStorage.getItem("groupId") : null;
     if (groupId) {
       setIsAuthenticated(true);
       getGroup();
@@ -227,7 +230,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         onDeleteGroup,
         updateGroup,
         getGroup,
-
+        handleIsLoading,
         getAllGroup,
       }}
     >
