@@ -13,17 +13,17 @@ import { useEffect, useState, useCallback } from "react";
 
 type ThemeContainerDetailsProps = IThemeDetailsProps;
 
-import lottie from "lottie-web";
-import { defineElement } from "@lordicon/element";
 import { ThemeCreate, ThemeImg, ThemeUpdate } from "@/components/Theme";
 import { IImage } from "@/context/ImageContexts";
-import { IconDelete, IconEllipsis, IconUpdate } from "@/components/icons";
+import {
+  IconDelete,
+  IconEllipsis,
+  IconLoop,
+  IconUpdate,
+} from "@/components/icons";
 import { BackHome } from "@/components/BackButton";
 import { TextGenerateEffect } from "@/components/UI/GenerateEffect";
 import { useGroupContext } from "@/context/GroupContexts";
-
-// define "lord-icon" custom element with default properties
-defineElement(lottie.loadAnimation);
 
 export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
   params,
@@ -69,11 +69,11 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
     const foundTheme = themes.find((tme) => tme._id === params.id);
 
     setTheme(foundTheme || null);
-  }, [params.id, themes]); // Inclure 'params.id' et 'themes' dans les dépendances
+  }, [params.id, themes]);
 
   useEffect(() => {
     getTheme();
-  }, [getTheme]); // Utiliser 'getTheme' ici
+  }, [getTheme]);
 
   const { group } = useGroupContext();
 
@@ -138,8 +138,6 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
       <div className="grid-cols-2 grid max-sm:grid-cols-1 max-xl:gap-6 max-lg:gap-5 gap-16 px-16 max-xl:px-6 max-lg:px-5 max-md:gap-4 max-md:px-4 max-sm:px-5 items-center justify-center">
         {theme?.images.map((img: any, index) => (
           <div key={index}>
-            {" "}
-            {/* Ajoutez la prop 'key' ici */}
             <div className="bg-gray-50 relative flex flex-col gap-6 /[0.2] border-black/[0.1] rounded-xl p-6 border">
               {isThemeUpdateOpen && img._id === imgId ? (
                 <ThemeUpdate
@@ -202,17 +200,10 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
                       {img.photoDate ? img.photoDate : "../../.."}
                     </div>
                     <div
-                      className="px-4 py-2 hover:scale-110 duration-300 ease-in-out cursor-pointer"
+                      className="px-4 py-2 max-h-10 max-w-10 hover:scale-110 duration-300 ease-in-out cursor-pointer"
                       onClick={() => themeModalImgOpen(img._id)}
                     >
-                      <lord-icon
-                        src="https://cdn.lordicon.com/xwvkumdr.json"
-                        trigger="in"
-                        delay="100"
-                        state="in-reveal"
-                        colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#915110"
-                        className="w-12 h-12"
-                      ></lord-icon>
+                      <IconLoop />
                     </div>
                   </div>
                 </>

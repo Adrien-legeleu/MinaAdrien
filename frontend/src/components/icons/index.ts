@@ -19,3 +19,4 @@ export * from "./IconEmoji1";
 export * from "./IconEmoji2";
 export * from "./IconEmoji3";
 export * from "./IconEmoji4";
+export * from "./IconLoop";
