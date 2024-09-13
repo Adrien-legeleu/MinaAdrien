@@ -47,12 +47,7 @@ const subscribeToNotifications = async (userId: string, groupId: string[]) => {
         subscription,
       };
 
-      await api.post("/api/save-subscription", values, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
+      await api.post("/api/save-subscription", values);
     } catch (error) {
       console.error("Erreur lors de l'inscription aux notifications:", error);
     }
@@ -76,12 +71,7 @@ const unsubscribeFromNotifications = async (
       if (subscription) {
         await subscription.unsubscribe();
 
-        await api.delete(`/api/remove-subscription/${userId}`, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        });
+        await api.delete(`/api/remove-subscription/${userId}`);
       }
     } catch (error) {
       console.error(
@@ -102,12 +92,7 @@ const SwitchParams = ({ userId, groupId }: any) => {
     }
     const checkSubscriptionStatus = async () => {
       try {
-        const response = await api.get(`/api/check-subscription/${userId}`, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        });
+        const response = await api.get(`/api/check-subscription/${userId}`);
         console.log(response.data + "ieozieozieozieoziezoie");
 
         setIsSubscribed(response.data);

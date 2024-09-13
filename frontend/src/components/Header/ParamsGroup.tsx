@@ -34,12 +34,7 @@ export const ParamsGroup = () => {
 
     for (const member of group.members) {
       try {
-        const response = await api.get(`/auth/user/${member.userId}`, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        });
+        const response = await api.get(`/auth/user/${member.userId}`);
         membersSet.add(response.data);
       } catch (error: any) {
         console.error("Error fetching member:", error);

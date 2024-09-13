@@ -49,12 +49,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const onLogin = async (values: ISignInFormValues) => {
     setIsLoading(true);
     try {
-      const response = await api.post("/auth/login-user", values, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
+      const response = await api.post("/auth/login-user", values);
 
       if (typeof window !== "undefined") {
         localStorage.setItem("userId", response.data.user._id);
@@ -76,12 +71,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const onRegister = async (values: ISignUpFormValues) => {
     setIsLoading(true);
     try {
-      const response = await api.post("/auth/register-user", values, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
+      const response = await api.post("/auth/register-user", values);
 
       if (typeof window !== "undefined") {
         localStorage.setItem("userId", response.data.user._id);

@@ -123,10 +123,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   // Fonction de connexion
   const onLogin = async (values: any) => {
     try {
-      const response = await api.post("/auth/login", values, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
+      const response = await api.post("/auth/login", values);
       toast.success("Vous avez rejoint le groupe avec succès");
       await getAllGroup();
       setUser(response.data);
@@ -139,10 +136,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   // Fonction d'inscription
   const onRegister = async (values: any) => {
     try {
-      const response = await api.post("/auth/register", values, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
+      const response = await api.post("/auth/register", values);
       setUser(response.data.user);
       toast.success("Vous avez créé le groupe avec succès");
       await getAllGroup();
@@ -168,10 +162,7 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
   const updateGroup = async (values: any) => {
     try {
       const { groupId } = values;
-      await api.patch(`/group/${groupId}`, values, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
+      await api.patch(`/group/${groupId}`, values);
       toast.success("Groupe mis à jour avec succès");
       await getAllGroup();
     } catch (error) {

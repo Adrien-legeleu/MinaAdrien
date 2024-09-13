@@ -38,14 +38,7 @@ const app = express();
 app.use(
   cors({
     origin: "https://lovna.netlify.app", // Définir l'origine de votre client
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-      "group-authorization",
-      "user-authorization",
-    ],
-    credentials: true,
+
     optionsSuccessStatus: 200, // Pour que les navigateurs plus anciens puissent réussir les requêtes preflight
   })
 );
