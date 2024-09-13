@@ -39,6 +39,7 @@ export class SubscriptionController {
       const subscriptionUser = await SubscriptionModel.findOne({ userId });
       if (!subscriptionUser) {
         res.status(200).send(false);
+        return;
       }
       res.status(200).send(true);
     } catch (error: any) {

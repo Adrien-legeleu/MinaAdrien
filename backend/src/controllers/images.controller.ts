@@ -137,6 +137,7 @@ export class ImageController {
         res.status(404).send({
           error: "image not found" + imageId,
         });
+        return;
       }
 
       res.status(200).send(image);
@@ -157,6 +158,7 @@ export class ImageController {
         res.status(404).send({
           error: "product not found :" + imageId,
         });
+        return;
       }
 
       res.status(200).send(image);
