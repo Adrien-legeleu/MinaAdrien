@@ -41,7 +41,10 @@ app.use(
     optionsSuccessStatus: 200, // Pour que les navigateurs plus anciens puissent réussir les requêtes preflight
   })
 );
-
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json({ limit: "50mb" }));
