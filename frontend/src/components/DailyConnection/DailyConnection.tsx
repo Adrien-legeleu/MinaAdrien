@@ -11,7 +11,7 @@ export const DailyConnection = () => {
       typeof window !== "undefined" ? localStorage.getItem("userId") : null;
     if (userId) {
       getUserDailyChallenge(userId);
-      console.log("daily Connectionnnnn");
+      console.log("daily Connectionnnnnnn");
     }
   }, []);
 
