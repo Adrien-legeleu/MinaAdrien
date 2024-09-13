@@ -42,9 +42,11 @@ app.use(
   })
 );
 app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://lovna.netlify.app/"); // Correction ici
   res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
+
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json({ limit: "50mb" }));
