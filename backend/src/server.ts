@@ -2,7 +2,6 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import webpush from "web-push";
@@ -26,6 +25,7 @@ if (uri) {
 } else {
   console.log("No URI to DB");
 }
+
 webpush.setVapidDetails(
   "mailto:adrienlegeleu@gmail.com",
   process.env.PUBLIC_VAPID_KEY as string,
@@ -34,27 +34,27 @@ webpush.setVapidDetails(
 
 const app = express();
 
-app.use(bodyParser.json({ limit: "50mb" }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
-app.use(cookieParser());
-
+// Utilisation du middleware CORS
 app.use(
   cors({
-    origin: "https://lovna.netlify.app", // Définissez l'origine de votre client (ou utilisez "*" pour tester)
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Ajout de OPTIONS
+    origin: "https://lovna.netlify.app", // Définir l'origine de votre client
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     allowedHeaders: [
       "Content-Type",
       "Authorization",
       "group-authorization",
       "user-authorization",
-    ], // Corrigez les espaces dans les en-têtes autorisés
+    ],
     credentials: true,
     optionsSuccessStatus: 200, // Pour que les navigateurs plus anciens puissent réussir les requêtes preflight
-    preflightContinue: false, // Gardez ce paramètre si vous ne souhaitez pas passer aux middlewares suivants
   })
 );
+
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(cookieParser());
 
 app.use("", appRouter);
 DailyChallengeController.scheduleDailyChallenge();
