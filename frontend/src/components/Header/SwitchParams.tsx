@@ -19,7 +19,11 @@ const urlBase64ToUint8Array = (base64String: string) => {
 
 // Fonction pour s'abonner aux notifications
 const subscribeToNotifications = async (userId: string, groupId: string[]) => {
+  console.log("suscribeeee");
+
   if (typeof window !== "undefined") {
+    console.log("suscribeeezez eze eze ");
+
     try {
       const permission = await Notification.requestPermission();
       if (permission !== "granted") {
@@ -113,7 +117,7 @@ const SwitchParams = ({ userId, groupId }: any) => {
     try {
       if (checked) {
         console.log("S'abonner aux notifications...");
-        await subscribeToNotifications(userId, groupId);
+        subscribeToNotifications(userId, groupId);
       } else {
         console.log("Se désabonner des notifications...");
         await unsubscribeFromNotifications(userId);
