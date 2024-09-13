@@ -102,7 +102,12 @@ const SwitchParams = ({ userId, groupId }: any) => {
     }
     const checkSubscriptionStatus = async () => {
       try {
-        const response = await api.get(`/api/check-subscription/${userId}`);
+        const response = await api.get(`/api/check-subscription/${userId}`, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        });
         console.log(response.data + "ieozieozieozieoziezoie");
 
         setIsSubscribed(response.data);
