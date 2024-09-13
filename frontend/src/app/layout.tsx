@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import { useEffect } from "react";
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "./globals.css"; // Si tu n'utilises pas de styles globaux, tu peux enlever cette ligne
 import { UserContextProvider } from "@/context/UserContexts";
 import { GroupContextProvider } from "@/context/GroupContexts";
 import { CreateJoinContextProvider } from "@/context/CreateJoinContexts";
@@ -13,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Lovna",
-  description: "Lovna is the app to share with thoe you love !❤️",
+  description: "Lovna is the app to share with those you love! ❤️",
 };
 
 export default function RootLayout({
@@ -21,6 +22,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then((registration) => {
+          console.log("Service Worker enregistré avec succès:", registration);
+        })
+        .catch((error) => {
+          console.error(
+            "Erreur lors de l'enregistrement du Service Worker:",
+            error
+          );
+        });
+    }
+  }, []);
+
   return (
     <html lang="en">
       <head>
