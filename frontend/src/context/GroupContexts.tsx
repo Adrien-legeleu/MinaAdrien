@@ -188,7 +188,10 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
       getGroup();
       getDescription(storedGroupId);
     }
-  }, []); // Appelle `getGroup` et `getDescription` une seule fois au démarrage
+  }, []);
+  useEffect(() => {
+    getAllGroup();
+  }, []);
   useEffect(() => {
     console.log(isLoading + "esss   ozieoi");
   }, [isLoading]);
@@ -199,7 +202,6 @@ export const GroupContextProvider = ({ children }: { children: ReactNode }) => {
         groupId,
         isAuthenticated,
         isLoading,
-
         group,
         allGroups,
         onLogin,

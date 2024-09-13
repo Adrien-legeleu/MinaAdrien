@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { ArrowRight } from "../icons";
-import { useDescriptionContext } from "@/context/DescriptionContext";
+import { useGroupContext } from "@/context/GroupContexts";
 
 export const BackGroup = () => {
+  const { getAllGroup } = useGroupContext();
   const backGroup = () => {
     typeof window !== "undefined" ? localStorage.removeItem("groupId") : null;
+    getAllGroup();
   };
   return (
     <Link href="/group" onClick={backGroup}>
