@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import webpush from "web-push";
 import appRouter from "./routes";
+import { DailyChallengeController } from "./controllers/dailyChallenge.controller";
 
 dotenv.config();
 
@@ -56,6 +57,7 @@ app.use(
 );
 
 app.use("", appRouter);
+DailyChallengeController.scheduleDailyChallenge();
 
 app.listen(PORT, () => {
   console.log(

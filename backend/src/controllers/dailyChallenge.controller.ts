@@ -6,10 +6,10 @@ import webpush from "web-push";
 export class DailyChallengeController {
   static scheduleDailyChallenge() {
     schedule.scheduleJob(
-      { hour: 17, minute: 0, tz: "Europe/Paris" }, // Changez l'heure à 17h et ajoutez 'tz: "Europe/Paris"'
+      { hour: 15, minute: 0, tz: "Europe/Paris" }, // Changez l'heure à 15h et ajoutez 'tz: "Europe/Paris"'
       async () => {
         console.log(
-          "Exécution de la tâche programmée à 17h, heure de Paris..."
+          "Exécution de la tâche programmée à 15h, heure de Paris..."
         );
         await DailyChallengeController.setRandomTimeForAllUsers();
       }
@@ -53,14 +53,13 @@ export class DailyChallengeController {
           if (userDailyChallenge) {
             const pushSubscription = user.subscription;
             const payload = JSON.stringify({
-              title: "Nouvelle image ajoutée",
-              body: "Une nouvelle image a été ajoutée dans votre groupe !",
+              title: "C'est l'heure de votre Daily Connection !!",
+              body: "Faites savoir comment s'est passer votre journée!!",
             });
             console.log(
               "Payload de la notification:",
-
               Buffer.byteLength(JSON.stringify(payload), "utf8")
-            ); // Ajoutez cette ligne avant d'envoyer la notification
+            );
 
             webpush
               .sendNotification(pushSubscription as any, payload)
@@ -89,9 +88,10 @@ export class DailyChallengeController {
       const { userId } = req.params;
       const { emoji } = req.body;
 
-      if (!userId || !emoji) {
+      if (!userId || emoji === undefined) {
+        // Ajout de vérification pour emoji
         res.status(400).send({
-          error: "userId or emoji not found or invalid",
+          error: "userId ou emoji non trouvé ou invalide",
         });
         return;
       }
@@ -100,7 +100,7 @@ export class DailyChallengeController {
 
       if (!userDailyChallenge) {
         res.status(404).send({
-          error: "userDailyChallenge not found",
+          error: "userDailyChallenge non trouvé",
         });
         return;
       }
