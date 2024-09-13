@@ -34,18 +34,12 @@ webpush.setVapidDetails(
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "https://lovna.netlify.app", // Définir l'origine de votre client
-    credentials: true, // Permettre l'envoi de cookies et autres informations d'identification
-    optionsSuccessStatus: 200, // Pour que les navigateurs plus anciens puissent réussir les requêtes preflight
-  })
-);
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://lovna.netlify.app/"); // Correction ici
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+const corsOptions = {
+  origin: "https://lovna.netlify.app",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
