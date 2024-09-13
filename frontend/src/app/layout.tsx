@@ -13,11 +13,6 @@ import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Lovna",
-  description: "Lovna is the app to share with those you love! ❤️",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
