@@ -55,10 +55,7 @@ const subscribeToNotifications = async (userId: string, groupId: string[]) => {
 };
 
 // Fonction pour se désabonner des notifications
-const unsubscribeFromNotifications = async (
-  userId: string,
-  groupId: string[]
-) => {
+const unsubscribeFromNotifications = async (userId: string) => {
   if (
     typeof window !== "undefined" &&
     "serviceWorker" in navigator &&
@@ -87,9 +84,12 @@ const SwitchParams = ({ userId, groupId }: any) => {
 
   // Vérifiez l'état d'abonnement lors du chargement du composant
   useEffect(() => {
-    if (!userId || !groupId) {
+    if (!userId) {
+      console.log("swtich userId not found");
+
       return;
     }
+    console.log("swtich userId  found");
     const checkSubscriptionStatus = async () => {
       try {
         const response = await api.get(`/api/check-subscription/${userId}`);
@@ -108,7 +108,7 @@ const SwitchParams = ({ userId, groupId }: any) => {
     if (checked) {
       await subscribeToNotifications(userId, groupId);
     } else {
-      await unsubscribeFromNotifications(userId, groupId);
+      await unsubscribeFromNotifications(userId);
     }
     setIsSubscribed(checked);
   };
@@ -118,11 +118,7 @@ const SwitchParams = ({ userId, groupId }: any) => {
       <div className="text-black w-6 h-6 flex items-center justify-center">
         <IconNotifications />
       </div>
-      <Switch
-        className="bg-black text-red-500"
-        checked={isSubscribed}
-        onChange={handleSwitchChange}
-      />
+      <Switch checked={isSubscribed} onChange={handleSwitchChange} />;
     </div>
   );
 };
