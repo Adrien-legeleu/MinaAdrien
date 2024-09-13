@@ -19,18 +19,16 @@ const urlBase64ToUint8Array = (base64String: string) => {
 
 // Fonction pour s'abonner aux notifications
 const subscribeToNotifications = async (userId: string, groupId: string[]) => {
-  if (
-    typeof window !== "undefined" &&
-    "serviceWorker" in navigator &&
-    "PushManager" in window
-  ) {
+  if (typeof window !== "undefined") {
     try {
       const permission = await Notification.requestPermission();
       if (permission !== "granted") {
+        console.log("Permission de notification non accordée");
         return;
       }
 
       const registration = await navigator.serviceWorker.ready;
+      console.log("Service Worker prêt", registration);
 
       const applicationServerKey = urlBase64ToUint8Array(
         "BPGBMl5l1FpyfndWdUX71M0bgEd0yBv6ollSofR9ygAn0YRGdtiWUBHyafQzYboH_uFCVsC-YbIMhItpNsBYg1Q"
@@ -41,13 +39,16 @@ const subscribeToNotifications = async (userId: string, groupId: string[]) => {
         applicationServerKey,
       });
 
+      console.log("Inscription aux notifications réussie", subscription);
+
       const values = {
         userId,
         groupId,
         subscription,
       };
 
-      await api.post("/api/save-subscription", values);
+      const response = await api.post("/api/save-subscription", values);
+      console.log("Abonnement sauvegardé avec succès" + response.data);
     } catch (error) {
       console.error("Erreur lors de l'inscription aux notifications:", error);
     }
@@ -67,8 +68,10 @@ const unsubscribeFromNotifications = async (userId: string) => {
 
       if (subscription) {
         await subscription.unsubscribe();
+        console.log("Désinscription aux notifications réussie");
 
         await api.delete(`/api/remove-subscription/${userId}`);
+        console.log("Abonnement supprimé du backend avec succès");
       }
     } catch (error) {
       console.error(
@@ -85,15 +88,15 @@ const SwitchParams = ({ userId, groupId }: any) => {
   // Vérifiez l'état d'abonnement lors du chargement du composant
   useEffect(() => {
     if (!userId) {
-      console.log("swtich userId not found");
-
+      console.log("Switch: userId non trouvé");
       return;
     }
-    console.log("swtich userId  found");
+    console.log("Switch: userId trouvé");
+
     const checkSubscriptionStatus = async () => {
       try {
         const response = await api.get(`/api/check-subscription/${userId}`);
-        console.log(response.data + " ie  ozieozieozieoziezoie");
+        console.log("Status de l'abonnement:", response.data);
 
         setIsSubscribed(response.data);
       } catch (error) {
@@ -105,22 +108,29 @@ const SwitchParams = ({ userId, groupId }: any) => {
   }, [userId, groupId]);
 
   const handleSwitchChange = async (checked: boolean) => {
-    console.log(checked + " ieoz  eizoie");
+    console.log("Switch toggle:", checked);
 
-    if (checked) {
-      await subscribeToNotifications(userId, groupId);
-    } else {
-      await unsubscribeFromNotifications(userId);
+    try {
+      if (checked) {
+        console.log("S'abonner aux notifications...");
+        await subscribeToNotifications(userId, groupId);
+      } else {
+        console.log("Se désabonner des notifications...");
+        await unsubscribeFromNotifications(userId);
+      }
+
+      setIsSubscribed(checked); // Met à jour l'état du switch
+    } catch (error) {
+      console.error("Erreur lors du changement de l'état du switch:", error);
     }
-    setIsSubscribed(checked);
   };
 
   return (
-    <div className="text-black flex gap-3 items-center justify-center ">
+    <div className="text-black flex gap-3 items-center justify-center">
       <div className="text-black w-6 h-6 flex items-center justify-center">
         <IconNotifications />
       </div>
-      <Switch checked={isSubscribed} onChange={handleSwitchChange} />;
+      <Switch checked={isSubscribed} onChange={handleSwitchChange} />
     </div>
   );
 };
