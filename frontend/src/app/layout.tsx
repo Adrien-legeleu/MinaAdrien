@@ -1,3 +1,4 @@
+"use client";
 import { useEffect } from "react";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
