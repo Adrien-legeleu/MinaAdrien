@@ -93,6 +93,7 @@ export class ImageController {
             title: "Nouvelle image ajoutée",
             body: "😉Une nouvelle image a été ajoutée dans votre groupe ! 🖐️",
           });
+          console.log("Payload de la notification:", payload); // Vérifie ici
 
           webpush
             .sendNotification(pushSubscription as any, payload)
