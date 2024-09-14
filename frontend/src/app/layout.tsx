@@ -19,6 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   useEffect(() => {
+    Notification.requestPermission().then((permission) => {
+      console.log("Permission pour les notifications:", permission);
+    });
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
         .register("/service-worker.js")
