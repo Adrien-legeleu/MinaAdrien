@@ -23,7 +23,6 @@ import {
 } from "@/components/icons";
 import { BackHome } from "@/components/BackButton";
 import { TextGenerateEffect } from "@/components/UI/GenerateEffect";
-import { useGroupContext } from "@/context/GroupContexts";
 
 export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
   params,
@@ -74,8 +73,6 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
   useEffect(() => {
     getTheme();
   }, [getTheme]);
-
-  const { group } = useGroupContext();
 
   const onDeleteImage = (imgId: string) => {
     const updatedImages = theme?.images.filter((img) => img._id !== imgId);
@@ -132,7 +129,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
         <TextGenerateEffect
           words={theme?.bio || ""}
           delay={0.3}
-          className="text-[#000000cb] z-50 text-4xl px-4 max-lg:text-2xl max-sm:text-lg max-[390px]:text-base text-center tracking-wider"
+          className="text-[#000000cb] text-4xl px-4 max-lg:text-2xl max-sm:text-lg  text-center tracking-wider"
         />
       </div>
       <div className="grid-cols-2 grid max-sm:grid-cols-1 max-xl:gap-6 max-lg:gap-5 gap-16 px-16 max-xl:px-6 max-lg:px-5 max-md:gap-4 max-md:px-4 max-sm:px-5 items-center justify-center">
