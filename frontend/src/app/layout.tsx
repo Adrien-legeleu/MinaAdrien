@@ -19,15 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   useEffect(() => {
-    Notification.requestPermission().then((permission) => {
-      console.log("Permission pour les notifications:", permission);
-    });
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
         .register("/service-worker.js")
-        .then((registration) => {
-          console.log("Service Worker enregistré avec succès:", registration);
-        })
+
         .catch((error) => {
           console.error(
             "Erreur lors de l'enregistrement du Service Worker:",

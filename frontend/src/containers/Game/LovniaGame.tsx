@@ -2,9 +2,8 @@ import { motion } from "framer-motion";
 
 import { useImageContext } from "@/context/ImageContexts";
 import { useEffect, useState } from "react";
-import { HeroHighlight, Highlight } from "@/components/UI/HeroHighlight";
+import { Highlight } from "@/components/UI/HeroHighlight";
 import { TextGenerateEffect } from "@/components/UI/GenerateEffect";
-import { BackgroundGradientAnimation } from "@/components/UI/GradientBackground";
 import confetti from "canvas-confetti";
 import { BackgroundBeamsWithCollision } from "@/components/UI/BackgroundBeamsCollisions";
 
@@ -15,10 +14,8 @@ export const LovniaGame = () => {
   );
   const [gameOn, setGameOn] = useState(false);
   const [indexes, setIndexes] = useState([0, 1]);
-  const [loading, setLoading] = useState(false);
   const [isFinish, setIsFinish] = useState(false);
   const playGame = () => {
-    setGameOn(true);
     generateRandomIndexes();
   };
 
@@ -33,25 +30,22 @@ export const LovniaGame = () => {
       } while (index2 === index1);
 
       setIndexes([index1, index2]);
-    } else {
+    } else if (imagesGame.length === 1) {
       setGameOn(false);
       setIsFinish(true);
       handleClick();
     }
   };
   useEffect(() => {
-    setLoading(false);
     generateRandomIndexes();
   }, [imagesGame]);
 
   const handleGamePhotos = (index: number) => {
-    setLoading(true);
     if (imagesGame.length > 1) {
       const newImagesGame = imagesGame.filter((_, i) => i !== index);
       setImagesGame(newImagesGame);
     } else {
       setIsFinish(true);
-      setLoading(false);
     }
   };
 
