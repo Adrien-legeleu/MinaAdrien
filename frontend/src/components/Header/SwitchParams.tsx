@@ -117,7 +117,7 @@ const SwitchParams = ({ userId, groupId }: any) => {
     try {
       if (checked) {
         console.log("S'abonner aux notifications...");
-        subscribeToNotifications(userId, groupId);
+        await subscribeToNotifications(userId, groupId);
       } else {
         console.log("Se désabonner des notifications...");
         await unsubscribeFromNotifications(userId);

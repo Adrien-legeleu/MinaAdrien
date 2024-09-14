@@ -115,7 +115,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
       <div className="pt-12 pb-28 flex items-center justify-center flex-col gap-10">
         <div
           className={cn(
-            "group inline-block relative mx-auto max-w-fit flex-row items-center justify-center rounded-2xl bg-white/55 px-4 py-1.5 text-sm font-medium shadow-[inset_0_-8px_10px_#8fdfff1f] backdrop-blur-sm transition-shadow duration-500 ease-out [--bg-size:300%] hover:shadow-[inset_0_-5px_10px_#8fdfff3f] dark:bg-black/40"
+            "group inline-block relative mx-auto max-w-fit flex-row items-center  justify-center rounded-2xl bg-white/55 px-4 py-1.5 text-sm font-medium shadow-[inset_0_-8px_10px_#8fdfff1f] backdrop-blur-sm transition-shadow duration-500 ease-out [--bg-size:300%] hover:shadow-[inset_0_-5px_10px_#8fdfff3f] dark:bg-black/40"
           )}
         >
           <div
@@ -123,7 +123,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
           />
           <span
             className={cn(
-              `text-5xl max-lg:text-4xl tracking-widest max-md:text-3xl animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
+              `text-5xl max-lg:text-4xl tracking-widest max-md:text-3xl  animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
             )}
           >
             {theme?.title} !
@@ -132,7 +132,7 @@ export const ThemeContainer: React.FC<ThemeContainerDetailsProps> = ({
         <TextGenerateEffect
           words={theme?.bio || ""}
           delay={0.3}
-          className="text-[#000000cb] z-50 text-4xl max-lg:text-2xl max-sm:text-lg max-[390px]:text-base text-center tracking-wider"
+          className="text-[#000000cb] z-50 text-4xl px-4 max-lg:text-2xl max-sm:text-lg max-[390px]:text-base text-center tracking-wider"
         />
       </div>
       <div className="grid-cols-2 grid max-sm:grid-cols-1 max-xl:gap-6 max-lg:gap-5 gap-16 px-16 max-xl:px-6 max-lg:px-5 max-md:gap-4 max-md:px-4 max-sm:px-5 items-center justify-center">

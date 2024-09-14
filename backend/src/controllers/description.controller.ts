@@ -81,7 +81,7 @@ export class DescriptionController {
         const pushSubscription = sub.subscription;
         const payload = JSON.stringify({
           title: "Nouvelle image ajoutée",
-          body: "Une nouvelle image a été ajoutée dans votre groupe !",
+          body: "😉 Une nouvelle image a été ajoutée dans votre groupe ! 🖐️",
         });
         console.log(
           "Payload de la notification:",

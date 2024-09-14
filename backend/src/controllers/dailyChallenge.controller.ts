@@ -6,7 +6,7 @@ import webpush from "web-push";
 export class DailyChallengeController {
   static scheduleDailyChallenge() {
     schedule.scheduleJob(
-      { hour: 15, minute: 0, tz: "Europe/Paris" }, // Changez l'heure à 15h et ajoutez 'tz: "Europe/Paris"'
+      { hour: 12, minute: 0, tz: "Europe/Paris" }, // Changez l'heure à 15h et ajoutez 'tz: "Europe/Paris"'
       async () => {
         console.log(
           "Exécution de la tâche programmée à 15h, heure de Paris..."
